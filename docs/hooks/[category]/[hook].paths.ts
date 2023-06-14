@@ -141,11 +141,14 @@ function getUsageReturn(hookData) {
 
 
 function getLocationMarkdown(hooks) {
-  var thing =  `${hooks.map((hook) => `- ${hook.TargetType}::${hook.MethodData.MethodName}(${ generateArgumentString(hook.MethodData.Arguments) })`).join("\n")}
+  var thing =  `${hooks.map((hook) => `- ${hook.TargetType}::${hook.MethodData.MethodName}(${ generateArgumentString(hook.MethodData.Arguments) })`).join("\n")}`;
 
+  thing = thing.escapeBrackets();
+
+thing+= `
 ::: code-group
 
-${hooks.map((hook) => `\`\`\`csharp{${getHookLineIndex(hook)}} [${hook.TargetType}]
+${hooks.map((hook) => `\`\`\`csharp{${getHookLineIndex(hook)}} [${hook.TargetType.escapeBrackets()}]
 ${hook.CodeAfterInjection}
 \`\`\``).join("\n")}
 
@@ -195,3 +198,13 @@ function getHookLineIndex(hookData) {
 
   return -1;
 }
+
+declare global {
+  interface String {
+    escapeBrackets(): string;
+  }
+}
+
+String.prototype.escapeBrackets = function (): string {
+  return this.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+};
