@@ -6,13 +6,19 @@ hero:
   name: "OxideMod"
   text: "Documentation"
   tagline: "Unlock unlimited possibilities with comprehensive documentation for customizing and enhancing server experiences."
+  image:
+    src: /OxideInner.svg
+    alt: OxideMod
   actions:
     - theme: brand
-      text: Getting Started
-      link: /getting-started
+      text: Server Owners
+      link: /guides/owners/getting-started
+    - theme: brand
+      text: Plugin Developers
+      link: /guides/developers/getting-started
     - theme: alt
       text: Hook Documentation
-      link: /hook-documentation
+      link: /hooks/index
 
 features:
   - icon: 📚
