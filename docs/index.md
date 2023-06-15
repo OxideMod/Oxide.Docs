@@ -7,7 +7,7 @@ hero:
   text: "Documentation"
   tagline: "Unlock unlimited possibilities with comprehensive documentation for customizing and enhancing server experiences."
   image:
-    src: /OxideInner.svg
+    src: OxideInner.svg
     alt: OxideMod
   actions:
     - theme: brand
