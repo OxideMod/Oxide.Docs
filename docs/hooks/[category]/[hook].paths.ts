@@ -31,12 +31,12 @@ export default {
 
         const hookOverwrite = `docs/hooks/${category}/${hookName}.md`;
         // console.log(hookOverwrite);
-        if( existsSync(hookOverwrite) ){
-          const hookData = readFileSync(`docs/hooks/${category}/${hookName}.md`).toString();
+        // if( existsSync(hookOverwrite) ){
+        //   const hookData = readFileSync(`docs/hooks/overwrites/${category}/${hookName}.md`).toString();
         
-          const markdown = md.parse(hookData, {});
-          // console.log(markdown);
-        }
+        //   const markdown = md.parse(hookData, {});
+        //   // console.log(markdown);
+        // }
 
 
 
