@@ -55,7 +55,6 @@ function buildMarkdownFile(hooks: IHook[]) {
   // Replace the template with the hook data
   const hookMarkdown = template
     .replace("{title}", hooks[0].Name)
-    .replace("{category}", hooks[0].Category)
     .replace("{description}", description)
     .replace("{usage}", usage)
     .replace("{examples}", examples)

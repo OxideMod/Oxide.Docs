@@ -1,7 +1,5 @@
 # {title}
 
-**Category:** {category}  
-
 {description}
 
 ## Usage
