@@ -8,7 +8,7 @@
 
 {usage}
 
-## Example(s)
+## Example
 
 {examples}
 

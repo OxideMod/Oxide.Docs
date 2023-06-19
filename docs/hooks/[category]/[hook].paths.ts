@@ -5,7 +5,7 @@ import ReturnBehaviour from "../../../entities/hooks/returnBehaviour";
 
 enum HookSection {
   Usage = "Usage",
-  Examples = "Example(s)",
+  Example = "Example",
   Location = "Location",
   Description = "Description",
 }
@@ -21,8 +21,6 @@ export default {
     var out = Object.keys(groupedHooks).map((category) => {
       return Object.keys(groupedHooks[category]).map((hookName) => {
         const hooks = groupedHooks[category][hookName];
-
-        console.log(buildMarkdownFile(hooks));
 
         return {
           params: {
@@ -49,7 +47,7 @@ function buildMarkdownFile(hooks: IHook[]) {
 
   // Use the overwrite if it exists otherwise generate default markdown
   const usage = getSection(overwrite, HookSection.Usage) ?? getUsageReturn(hooks[0]);
-  const examples = getSection(overwrite, HookSection.Examples) ?? getExamplesMarkdown(hooks);
+  const examples = getSection(overwrite, HookSection.Example) ?? getExamplesMarkdown(hooks);
   const location = getSection(overwrite, HookSection.Location) ?? getLocationMarkdown(hooks);
   const description = getSection(overwrite, HookSection.Description) ?? getHookDescription(hooks);
 

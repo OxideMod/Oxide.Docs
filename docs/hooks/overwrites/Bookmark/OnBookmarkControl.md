@@ -2,6 +2,6 @@
 
 - Just a test
 
-## Example(s)
+## Example
 
 testetsets
