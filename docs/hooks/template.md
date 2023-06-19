@@ -8,7 +8,7 @@
 
 {usage}
 
-## Example
+## Example {examples-badge}
 
 {examples}
 
