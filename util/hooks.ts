@@ -1,14 +1,16 @@
 import { readFileSync } from "fs";
+import IDocs from "../entities/hooks/docs";
+import IHook from "../entities/hooks/hook";
 
 export function getHookJson() {
   const hookData = readFileSync("docs.json").toString();
-  return JSON.parse(hookData);
+  return JSON.parse(hookData) as IDocs;
 }
 
 export function getGroupedHooks() {
   const hooksJson = getHookJson();
 
-  var out = {};
+  var out = {} as { [key: string]: { [key: string]: IHook[] } };
 
   hooksJson.Hooks.forEach((hook) => {
     if (!out[hook.Category]) {
@@ -29,9 +31,7 @@ export function getGroupedHooks() {
       .reduce((obj, key) => {
         obj[key] = out[category][key].sort((a, b) => {
           if (a.TargetType === b.TargetType) {
-            return a.MethodData.MethodName.localeCompare(
-              b.MethodData.MethodName
-            );
+            return a.MethodData.MethodName.localeCompare(b.MethodData.MethodName);
           }
           return a.TargetType.localeCompare(b.TargetType);
         });
@@ -45,16 +45,18 @@ export function getGroupedHooks() {
 export function getHooksSidebar() {
   let data = getGroupedHooks();
 
-  return Object.keys(data).sort().map((category) => {
-    return {
-      text: category + " (" + Object.keys(data[category]).length + ")",
-      collapsed: true,
-      items: Object.keys(data[category]).map((hookName) => {
-        return {
-          text: hookName,
-          link: `/hooks/${category.toLowerCase()}/${hookName}`,
-        };
-      }),
-    };
-  });
+  return Object.keys(data)
+    .sort()
+    .map((category) => {
+      return {
+        text: category + " (" + Object.keys(data[category]).length + ")",
+        collapsed: true,
+        items: Object.keys(data[category]).map((hookName) => {
+          return {
+            text: hookName,
+            link: `/hooks/${category.toLowerCase()}/${hookName}`,
+          };
+        }),
+      };
+    });
 }

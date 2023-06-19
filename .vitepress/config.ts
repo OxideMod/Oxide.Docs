@@ -14,7 +14,13 @@ export default defineConfig({
     logo: "/logo.png",
     
     editLink: {
-      pattern: 'https://github.com/oxidemod/oxide.docs/edit/master/docs/:path',
+      // pattern: 'https://github.com/oxidemod/oxide.docs/edit/master/docs/:path',
+      pattern: ({ filePath }) => {
+        if (filePath.startsWith('hooks/')) {
+          filePath = filePath.replace('hooks/', 'hooks/overwrites/')
+        }
+        return `https://github.com/oxidemod/oxide.docs/edit/master/docs/${filePath}`
+      },
       text: 'Edit this page on GitHub'
     },
 

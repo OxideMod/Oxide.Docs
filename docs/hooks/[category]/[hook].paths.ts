@@ -1,188 +1,162 @@
 import { existsSync, readFileSync } from "fs";
 import { getGroupedHooks } from "../../../util/hooks";
-import markdownIt from "markdown-it";
-const md = new markdownIt();
+import IHook from "../../../entities/hooks/hook";
+import ReturnBehaviour from "../../../entities/hooks/returnBehaviour";
 
-// {
-//   "Type": 0,
-//   "Name": "OnPlayerDisconnected",
-//   "HookName": "OnPlayerDisconnected",
-//   "ReturnBehavior": 0,
-//   "TargetType": "ServerMgr",
-//   "Category": "Player",
-//   "MethodData": {
-//     "MethodName": "OnDisconnected",
-//     "ReturnType": "void",
-//     "Arguments": {
-//       "strReason": "string",
-//       "connection": "Network.Connection"
-//     }
-//   },
-//   "CodeAfterInjection": "...\r\n\tPlatformService.Instance.EndPlayerSession(connection.userid);\r\n\tglobal::EACServer.OnLeaveGame(connection);\r\n\tglobal::BasePlayer basePlayer = connection.player as global::BasePlayer;\r\n\tif (basePlayer)\r\n\t{\r\n\t\tInterface.CallHook(\"OnPlayerDisconnected\", basePlayer, strReason);\r\n\t\tInterface.CallHook(\"OnPlayerDisconnected\", basePlayer, strReason);\r\n\t\tbasePlayer.OnDisconnected();\r\n\t}\r\n}\r\n\r\n"
-// },
+enum HookSection {
+  Usage = "Usage",
+  Examples = "Example(s)",
+  Location = "Location",
+  Description = "Description",
+}
+
+// Read and cache the template file
+const template = readFileSync("docs/hooks/template.md").toString();
 
 export default {
   paths() {
     const groupedHooks = getGroupedHooks();
-    
+
+    //TODO: Make this a bit more readable
     var out = Object.keys(groupedHooks).map((category) => {
       return Object.keys(groupedHooks[category]).map((hookName) => {
         const hooks = groupedHooks[category][hookName];
 
-        const hookOverwrite = `docs/hooks/${category}/${hookName}.md`;
-        // console.log(hookOverwrite);
-        // if( existsSync(hookOverwrite) ){
-        //   const hookData = readFileSync(`docs/hooks/overwrites/${category}/${hookName}.md`).toString();
-        
-        //   const markdown = md.parse(hookData, {});
-        //   // console.log(markdown);
-        // }
-
-
+        console.log(buildMarkdownFile(hooks));
 
         return {
           params: {
             category: category.toLowerCase(),
             hook: hookName,
           },
-          content: getHookContent(hooks),
+          content: buildMarkdownFile(hooks),
         };
       });
     });
 
     return out.flat();
-
-//     console.log(groupedHooks);
-//     var hookJson = getHookJson();
-
-//     var out = hookJson.Hooks.map((hook) => {
-//       return {
-//         params: {
-//           title: hook.Name,
-//           hook: hook.HookName,
-//           category: hook.Category.toLowerCase(),
-//           data: hook,
-//           argString: generateArgumentString(hook.MethodData.Arguments),
-//         },
-//         content: `# ${hook.Name}
-// **Category:** ${hook.Category}
-
-// ## Usage
-
-// ${getUsageReturn(hook)}
-
-// ## Example(s)
-
-// \`\`\`csharp
-// private ${hook.ReturnType} ${hook.HookName}( ??? )
-// {
-//     Puts( "${hook.MethodData.MethodName} works!" );
-// }
-// \`\`\`
-
-// ## Location
-// Called in \`${hook.TargetType}::${hook.MethodData.MethodName}(${ generateArgumentString(hook.MethodData.Arguments) })\`
-
-// \`\`\`csharp
-// ${hook.CodeAfterInjection}
-// \`\`\`
-// `,
-//       };
-//     });
-
-//     return out;
   },
 };
 
-function getHookContent(hooks){
-  return `# ${hooks[0].Name}
-**Category:** ${hooks[0].Category}
+function buildMarkdownFile(hooks: IHook[]) {
+  let overwrite = null;
 
-## Usage
+  // Check if the hook has an overwrite
+  const hookOverwrite = `docs/hooks/overwrites/${hooks[0].Category}/${hooks[0].Name}.md`;
+  if (existsSync(hookOverwrite)) {
+    overwrite = readFileSync(hookOverwrite, "utf-8").toString();
+  }
 
-${getUsageReturn(hooks[0])}
+  // Use the overwrite if it exists otherwise generate default markdown
+  const usage = getSection(overwrite, HookSection.Usage) ?? getUsageReturn(hooks[0]);
+  const examples = getSection(overwrite, HookSection.Examples) ?? getExamplesMarkdown(hooks);
+  const location = getSection(overwrite, HookSection.Location) ?? getLocationMarkdown(hooks);
+  const description = getSection(overwrite, HookSection.Description) ?? getHookDescription(hooks);
 
-## Example(s)
-${getExamplesMarkdown(hooks)}
+  // Replace the template with the hook data
+  const hookMarkdown = template
+    .replace("{title}", hooks[0].Name)
+    .replace("{category}", hooks[0].Category)
+    .replace("{description}", description)
+    .replace("{usage}", usage)
+    .replace("{examples}", examples)
+    .replace("{location}", location);
 
-## Location
-${getLocationMarkdown(hooks)}
-`
+  return hookMarkdown;
 }
 
-function generateArgumentString(args) {
-  let argArray = [];
+// Get section of markdown file by section title
+function getSection(fileContent: string, sectionName: string) {
+  fileContent += "#"; //TODO: Fix this hack
+  const escapedSectionName = sectionName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const regex = new RegExp(`# ${escapedSectionName}([\\s\\S]*?)(?=^#|\Z)`, "gm");
+  const match = regex.exec(fileContent);
 
-  for (const key in args) {
-    if (args.hasOwnProperty(key)) {
-      const element = args[key].replace("/", ".");
-      argArray.push(`${element} ${key}`);
+  if (match) {
+    return match[1].trim();
+  }
+
+  return null;
+}
+
+// Loop through all hooks and get all unique descriptions
+function getHookDescription(hooks: IHook[]) {
+  const output = [];
+
+  for (const hook of hooks) {
+    if (hook.HookDescription && !output.includes(hook.HookDescription)) {
+      output.push(hook.HookDescription);
     }
   }
 
-  return argArray.join(", ");
+  return output.join("\n");
 }
 
-function getUsageReturn(hookData) {
-  if (hookData.MethodData.ReturnType.includes("void")) {
+// Get the return behavior of the hook by return behavior type
+function getUsageReturn(hookData: IHook) {
+  if (hookData.ReturnBehavior === ReturnBehaviour.Continue) {
     return "* No return behavior";
   }
 
-  if (hookData.MethodData.ReturnType.includes("bool")) {
-    return "* Returning true or false overrides default behavior";
+  if (hookData.ReturnBehavior === ReturnBehaviour.ExitWhenValidType) {
+    return "* Return a non-null value to override default behavior";
   }
 
-  if (hookData.MethodData.ReturnType.includes("Item")) {
-    return "* Return an Item to prevent default behavior & override the received Item";
+  if (hookData.ReturnBehavior === ReturnBehaviour.ExitWhenNonNull) {
+    return "* Return a non-null value or bool to override default behavior";
   }
 
-  return "* Return a non-null value to override default behavior";
+  //TODO: Get the return type of the hook
+  if (hookData.ReturnBehavior === ReturnBehaviour.UseArgumentString) {
+    return "* Return TYPE to prevent default behavior";
+  }
+
+  return "* No return behavior";
 }
 
+// Generate example code for the hook
+function getExamplesMarkdown(hooks: IHook[]) {
+  let output = "";
 
-function getLocationMarkdown(hooks) {
-  var thing =  `${hooks.map((hook) => `- ${hook.TargetType}::${hook.MethodData.MethodName}(${ generateArgumentString(hook.MethodData.Arguments) })`).join("\n")}`;
+  for (const hook of hooks) {
+    output += `\`\`\`csharp`;
+    //TODO: Use proper return type instead of void
+    output += `\nprivate void ${hook.HookName}( ${getArgumentString(hook.HookParameters)} )`;
+    output += `\n{`;
+    output += `\n    Puts( "${hook.HookName} works!" );`;
+    output += `\n}`;
+    output += `\n\`\`\`\n`;
+  }
 
-  thing = thing.escapeBrackets();
-
-thing+= `
-::: code-group
-
-${hooks.map((hook) => `\`\`\`csharp{${getHookLineIndex(hook)}} [${hook.TargetType.escapeBrackets()}]
-${hook.CodeAfterInjection}
-\`\`\``).join("\n")}
-
-:::
-`;
-
-return thing;
+  return output;
 }
 
-function getExamplesMarkdown(hooks) {
- let thing = hooks.map((hook) => `\`\`\`csharp
-private ${hook.ReturnType} ${hook.HookName}( ??? )
-{
-    Puts( "${hook.MethodData.MethodName} works!" );
+// Generate the location of the hook in the games source code
+function getLocationMarkdown(hooks: IHook[]) {
+  let output = "";
+
+  for (const hook of hooks) {
+    output += escapeBrackets(
+      `- ${hook.TargetType}::${hook.MethodData.MethodName}(${getArgumentString(hook.MethodData.Arguments)})\n`
+    );
+  }
+
+  output += "::: code-group\n";
+
+  for (const hook of hooks) {
+    output += `\`\`\`csharp{${getHookLineIndex(hook)}} [${escapeBrackets(hook.TargetType)}]\n`;
+    output += `${hook.CodeAfterInjection}\n`;
+    output += "```\n";
+  }
+
+  output += ":::";
+
+  return output;
 }
-\`\`\`
-`).join("\n");
 
-return thing;
-}
-
-
-
-//   return `## Location
-// Called in \`${hookData.TargetType}::${hookData.MethodData.MethodName}(${ generateArgumentString(hookData.MethodData.Arguments) })\`
-
-// \`\`\`csharp
-// ${hookData.CodeAfterInjection}
-// \`\`\`
-// `;
-// }
-
-function getHookLineIndex(hookData) {
-  if(!hookData.CodeAfterInjection){
+// Get the line index of the hook in the games source code (for highlighting)
+function getHookLineIndex(hookData: IHook) {
+  if (!hookData.CodeAfterInjection) {
     return -1;
   }
 
@@ -199,12 +173,21 @@ function getHookLineIndex(hookData) {
   return -1;
 }
 
-declare global {
-  interface String {
-    escapeBrackets(): string;
+// Get the argument string from key value pairs
+function getArgumentString(args: { [key: string]: string }) {
+  if (!args) {
+    return "";
   }
+
+  let argArray = [];
+
+  for (const object of Object.entries(args)) {
+    argArray.push(`${object[1]} ${object[0]}`);
+  }
+
+  return argArray.join(", ");
 }
 
-String.prototype.escapeBrackets = function (): string {
-  return this.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-};
+function escapeBrackets(input: string): string {
+  return input.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
