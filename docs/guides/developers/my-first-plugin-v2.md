@@ -13,6 +13,7 @@ Before you start, ensure you have the following:
 
 1. A configured development environment. If you haven't set up your development environment yet, please follow our guide [here](link-to-your-development-environment-guide).
 2. Oxide and Rust libraries added to your project as described in the [Development Environment section](link-to-your-adding-libraries-guide).
+3. The .NET Framework 4.8 SDK (Developer Bundle) from [Microsoft .NET](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48). Make sure when creating your project to choose .NET Framework 4.8 or set the version manually in your .csproj file.
 
 ## Understanding Plugins and Extensions
 

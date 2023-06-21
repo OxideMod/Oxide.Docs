@@ -18,6 +18,7 @@ Before you begin modding with Oxide, there are a few prerequisites that you need
 - **A basic understanding of programming in C#**: Oxide uses C# for scripting. If you're not yet familiar with C#, there are many online resources where you can learn, like [Microsoft's C# Guide](https://docs.microsoft.com/en-us/dotnet/csharp/).
 - **Familiarity with Unity game development**: Rust is built using the Unity game engine, so understanding how Unity works will be a great advantage. You can find resources on Unity's official [Learning page](https://learn.unity.com/).
 - **The latest version of Rust installed locally**: You'll need this to test your mods. Instructions for installing the Staging Branch of Rust can be found on the [Facepunch Forum](https://forum.facepunch.com/t/what-is-rust-staging-branch-and-why-should-i-use-it/228224).
+- **.NET Framework 4.8 Developer Pack**: You'll need the .NET SDK(Developer Pack) for developing plugins and extensions which can be found from [Microsoft .NET](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48)
 
 ## Setting Up Your Development Environment
 
