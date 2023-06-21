@@ -5,6 +5,8 @@ after: my-first-plugin-v2
 
 # Plugin Guidelines
 
+Here, we will guide you through key practices and conventions that will set you up for success in developing plugins for Rust using the Oxide Mod framework. Whether you're a seasoned developer or just starting your journey in plugin development, adhering to these guidelines can help you create clean, maintainable, and efficient plugins. This guide will cover a range of topics, from naming conventions and error handling, to versioning, documentation, and respectfulness in coding practices. So let's dive in!
+
 ## 1. Naming Conventions
 ### 1.1 Plugin Files, Classes, Namespaces
 The filename of your plugin should be clear, concise and indicative of its functionality. It should match the name of your main class and use PascalCase (e.g., `MyFirstPlugin.cs`). The class and file name should be encapsulated in a namespace - `Oxide.Plugins` is a common choice.
