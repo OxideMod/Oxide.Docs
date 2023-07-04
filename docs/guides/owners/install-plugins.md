@@ -1,11 +1,11 @@
 ---
-title: Install Plugins
-after: install-oxide
+title: Installing Plugins
+after: localization
 ---
 
 # Installing Plugins
 
-Before getting started, it's important to note that some plugins may depend on additional extensions that are not covered in this page's documentation. More information on installing extensions can be found on the ["Install Extensions"](todo_link_to_extensions_page) page.
+Before getting started, it's important to note that some plugins may depend on additional extensions that are not covered in this page's documentation. More information on extensions can be found on the ["Extensions"](todo_link_to_extensions_page) page.
 
 ## 1. Prerequisites
 
