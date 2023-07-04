@@ -9,7 +9,7 @@ export function getSidebarByPath(dirPath: string): any[] {
   console.log(unsortedFiles);
 
   // Sort the files using the after property
-  const navbar = sortNavbar(unsortedFiles).reverse();
+  const navbar = sortNavbar(unsortedFiles);
 
   // Format the files for vitepress
   return formatNavbar(navbar);
@@ -19,7 +19,7 @@ function getNavbarDataFromFolder(path: string) {
   // Get all files in the directory
   const files = readdirSync(path);
 
-  const unsortedFiles = [];
+  const unsortedFiles: any[] = [];
 
   // Loop through all files
   for (const file of files) {
@@ -62,31 +62,27 @@ function getNavbarDataFromFolder(path: string) {
 }
 
 function sortNavbar(files: any[]) {
-  for (let i = 0; i < files.length; i++) {
-    const file = files[i];
+  let sortedFiles: any[] = [];
 
-    if (file.after !== undefined) {
-      const index = files.findIndex((f) => f.link.endsWith(file.after));
-
-      if (index !== -1 && index < i) {
-        files.splice(i, 1);
-        files.splice(index, 0, file);
-        i--;
-      }
-    }
+  let currentItem = files.find(item => item.after === 0);
+  while (currentItem !== undefined) {
+    sortedFiles.push(currentItem);
+    
+    let nextItemName = currentItem.link.split('/').pop();
+    currentItem = files.find(item => item.after === nextItemName);
   }
 
-  for (const file of files) {
+  for (const file of sortedFiles) {
     if (file.children) {
       file.children = sortNavbar(file.children);
     }
   }
 
-  return files;
+  return sortedFiles;
 }
 
 function formatNavbar(sortedFiles: any[]) {
-  const navbar = [];
+  const navbar: any[] = [];
 
   // Loop through all files
   for (const file of sortedFiles) {
