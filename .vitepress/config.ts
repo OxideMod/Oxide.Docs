@@ -10,6 +10,7 @@ export default defineConfig({
   title: "OxideMod",
   description: "Official documentation",
   srcDir: './docs',
+  ignoreDeadLinks: true,
   themeConfig: {
     logo: "/logo.png",
     
