@@ -1,6 +1,6 @@
 ---
 title: Development Enviroment
-after: getting-started
+after: getting-started-v2
 ---
 
 # Setting up your development enviroment

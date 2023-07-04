@@ -1,5 +1,5 @@
 ---
-title: Setup Server
+title: Server Setup
 after: getting-started
 ---
 

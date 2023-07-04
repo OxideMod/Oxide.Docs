@@ -10,7 +10,7 @@ export default defineConfig({
   title: "OxideMod",
   description: "Official documentation",
   srcDir: './docs',
-  ignoreDeadLinks: true,
+  ignoreDeadLinks: true, //TODO: Remove for PR
   themeConfig: {
     logo: "/logo.png",
     

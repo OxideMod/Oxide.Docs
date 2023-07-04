@@ -1,5 +1,5 @@
 ---
-title: Install Oxide
+title: Installing Oxide
 after: setup-server
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Commands
-after: configuring-plugins
+after: install-oxide
 ---
 
 # Commands
