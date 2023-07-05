@@ -43,7 +43,7 @@ While this guide is primarily focused on Oxide and plugin commands, it's essenti
 To execute these commands, you must have admin or moderator permissions on the server.
 :::
 
-# Oxide Commands
+## Oxide Commands
 
 Oxide commands are specific to the Oxide plugin system. They allow you to control various aspects of Oxide and the plugins you have installed. Oxide commands are executed in the same way as server commands - either through the in-game F1 console or the server console.
 
