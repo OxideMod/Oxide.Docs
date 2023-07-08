@@ -1,3 +1,4 @@
+import MarkdownItFootnote from 'markdown-it-footnote';
 import { defineConfig } from "vitepress";
 import { getHooksSidebar } from "../util/hooks";
 import { getSidebarByPath } from "../util/nav";
@@ -58,6 +59,12 @@ export default defineConfig({
           items: getSidebarByPath("docs/guides/owners/"),
         },
       ],
+      "/guides/reviewers/": [
+        {
+          text: "Plugin Reviewer Guides",
+          items: getSidebarByPath("docs/guides/reviewers/"),
+        },
+      ],
       "/core/": [
         {
           text: "Core Documentation",
@@ -96,4 +103,9 @@ export default defineConfig({
       copyright: "Copyright © 2023-present OxideMod",
     },
   },
+  markdown: {
+    config(md) {
+        md.use(MarkdownItFootnote);
+    }
+  }
 });

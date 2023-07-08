@@ -6,8 +6,6 @@ export function getSidebarByPath(dirPath: string): any[] {
   // Get all files in the directory
   const unsortedFiles = getNavbarDataFromFolder(dirPath);
 
-  console.log(unsortedFiles);
-
   // Sort the files using the after property
   const navbar = sortNavbar(unsortedFiles);
 
@@ -64,11 +62,11 @@ function getNavbarDataFromFolder(path: string) {
 function sortNavbar(files: any[]) {
   let sortedFiles: any[] = [];
 
-  let currentItem = files.find(item => item.after === 0);
+  let currentItem = files.find(item => item.after === 0 || item.after === 'index' );
   while (currentItem !== undefined) {
     sortedFiles.push(currentItem);
     
-    let nextItemName = currentItem.link.split('/').pop();
+    let nextItemName = currentItem.link.replace(/\/$/, "").split('/').pop();
     currentItem = files.find(item => item.after === nextItemName);
   }
 
