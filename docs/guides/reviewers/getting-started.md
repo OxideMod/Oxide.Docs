@@ -36,6 +36,14 @@ Here are some general points:
 
 Our main goal is to build and manage a flourishing community of developers and server owners that are passionate about modding Unity games. We as Oxide should put our community first. We would be nothing if it were not for the hundreds of developers and server owners that put their trust in us and show their support.
 
+### Quality over quantity
+
+While it is important to push plugins through the review process at a reasonable pace, it is more valuable to us to perform in-depth and thorough reviews despite the fact that this might mean a plugin sits in the queue for a little longer. This is for two reasons. 
+
+The first is to build and maintain our reputation as a place for quality plugins. We want to avoid being known as a place full of poorly coded plugins. 
+
+Secondly, if we are more thorough with our reviews, we are able to provide more and better feedback to the author.
+
 ## Important Things to Remember
 
 ### Personality conflicts

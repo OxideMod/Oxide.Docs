@@ -7,6 +7,8 @@ after: guidelines
 
 Issues are the current name given to suggestions and feedback that the reviewer gives. This feedback can be related to anything about the plugin, though it is most commonly code related.
 
+There is no "quota" for issues, however, we believe that the majority of major issues should be caught and raised in order to maintain code quality.
+
 There are three severity ratings you can assign to an "issue".
 
 ## May fix
