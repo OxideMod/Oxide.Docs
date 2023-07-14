@@ -40,9 +40,23 @@ Our main goal is to build and manage a flourishing community of developers and s
 
 While it is important to push plugins through the review process at a reasonable pace, it is more valuable to us to perform in-depth and thorough reviews despite the fact that this might mean a plugin sits in the queue for a little longer. This is for two reasons. 
 
-The first is to build and maintain our reputation as a place for quality plugins. We want to avoid being known as a place full of poorly coded plugins. 
+The first is to build and maintain our reputation as a place for quality plugins. We take pride in the plugins on our site and we want to avoid being known as a cesspool of poorly coded plugins. 
 
 Secondly, if we are more thorough with our reviews, we are able to provide more and better feedback to the author.
+
+We would like to build a reputation as a place for high quality resources. The downside to this is that we may also gain a reputation for being slow. However, that is much easier to shake than the other way around.
+
+#### How do we measure quality?
+
+To us, quality is being consistent with what we allow and don't allow, providing useful feedback to the author, and ensuring each plugin that passes through is of an acceptable quality.
+
+A high quality review would be a review that does not miss any guideline violations and notices and brings up the majority of code quality issues, while providing in-depth and useful feedback about those issues.
+
+#### Making mistakes
+
+To be clear, this does not mean that you cannot make mistakes. We expect that over the course of doing a review, it is possible that you might miss something that would violate a guideline or miss a major issue, or forget to check something off. This is why we require two reviewers to approve a plugin before it can be released. So don't worry about getting something wrong.
+
+We are not looking for perfection, that is impossible. All we ask is that you try your best and that if you make a mistake, you do not shy away from it but instead learn from it to make your next review even better.
 
 ## Important Things to Remember
 
