@@ -16,7 +16,7 @@ This guideline requires that the documentation is filled out to an acceptable st
 
 The documentation **must** include:
 
-- A small description about the plugin's functionality.
+- A small description about the plugin's functionality and features.
 - All Oxide permissions used by the plugin and ideally a brief description about what each of these permissions do, under a `## Permissions` heading.
 - All available Oxide chat and console commands (not including console commands used for UI) and what these do.
 - If the plugin is configurable, should include a description about what each config option does and ideally a default config under a `## Configuration` heading.

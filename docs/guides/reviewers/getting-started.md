@@ -101,3 +101,4 @@ There are also some general rules we have for what can be included in the code.
 - No advertising, even in comments.
 - Avoid walls of using statements at the top of the plugin. Should only be the ones that are in use.
 - Avoid large chunks of commented out code. If it's not being used then it should be removed for cleanliness and maintainability. Keeping track of old and future code is for version control tools.
+- License terms or any other random terms type stuff should not be pasted in the code.
