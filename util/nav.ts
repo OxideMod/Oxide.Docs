@@ -1,6 +1,6 @@
 import { readdirSync, statSync } from "fs";
 import { extname, join } from "path";
-import * as matter from "gray-matter";
+import matter from 'gray-matter'
 
 export function getSidebarByPath(dirPath: string): any[] {
   // Get all files in the directory
