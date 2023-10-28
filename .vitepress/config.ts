@@ -93,7 +93,7 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: "discord", link: "https://discord.gg/HdhSD8aBXD" },
+      { icon: "discord", link: "https://discord.gg/oxide" },
       { icon: "github", link: "https://github.com/oxidemod" },
       { icon: "twitter", link: "https://twitter.com/oxidemod" },
     ],
