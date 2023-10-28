@@ -68,20 +68,21 @@ export default defineConfig({
       "/core/": [
         {
           text: "Core Documentation",
-          items: [
-            {
-              text: "Libraries",
-              collapsed: false,
-              link: "/core/libraries/",
-              items: [
-                { text: "Permissions", link: "/core/libraries/permissions" },
-                { text: "Webrequests", link: "/core/libraries/webrequests" },
-                { text: "Databases", link: "/core/libraries/databases" },
-                { text: "Covalence", link: "/core/libraries/covalence" },
-                { text: "Rust Cui", link: "/core/libraries/rust-cui" },
-              ],
-            },
-          ],
+          items: getSidebarByPath("docs/core/"),
+          // items: [
+          //   {
+          //     text: "Libraries",
+          //     collapsed: false,
+          //     link: "/core/libraries/",
+          //     items: [
+          //       { text: "Permissions", link: "/core/libraries/permissions" },
+          //       { text: "Webrequests", link: "/core/libraries/webrequests" },
+          //       { text: "Databases", link: "/core/libraries/databases" },
+          //       { text: "Covalence", link: "/core/libraries/covalence" },
+          //       { text: "Rust Cui", link: "/core/libraries/rust-cui" },
+          //     ],
+          //   },
+          // ],
         },
       ],
       "/hooks/": [
