@@ -86,7 +86,7 @@ Here are some common settings that you might want to configure:
 
 Here's an example of what a `server.cfg` file might look like:
 
-```text
+```txt
 server.hostname "My Awesome Rust Server"
 server.description "Welcome to my awesome Rust server! Enjoy your stay."
 server.headerimage "http://example.com/myheaderimage.jpg"

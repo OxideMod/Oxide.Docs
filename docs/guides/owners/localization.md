@@ -22,7 +22,7 @@ Language files are the backbone of the localization process in Oxide. They are t
 Language files for Oxide plugins are typically located within your server's installation directory in the `oxide/lang` folder. Each language has its own subdirectory in the `lang` folder, which contains the language files for different plugins supporting that language.
 
 Here is a sample directory structure showing where you might find a language file for a plugin called SamplePlugin:
-```plaintext
+```txt
 └── server
     └── rustserver
         └── oxide
