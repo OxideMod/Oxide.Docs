@@ -48,7 +48,7 @@ Rust plugin developers can use GitHub to host their projects, track issues, and 
 A .gitignore file is a must-have for any Git repository. It specifies intentionally untracked files that Git should ignore. For a Rust plugin project, this usually includes compiled binaries, log files, and local configuration files.
 
 Example of a basic .gitignore for a Rust plugin project:
-```plaintext
+```txt
 # Ignore .dll and .pdb files
 *.dll
 *.pdb
