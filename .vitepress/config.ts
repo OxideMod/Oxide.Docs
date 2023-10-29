@@ -42,7 +42,7 @@ export default defineConfig({
           },
         ],
       },
-      { text: "a", link: "/guides/"},
+      //{ text: "a", link: "/guides/"},
       { text: "Core", link: "/core/" },
       { text: "Hooks", link: "/hooks/" },
     ],
@@ -50,8 +50,29 @@ export default defineConfig({
     sidebar: {
       "/guides/developers/": [
         {
-          text: "Developer Guides",
-          items: getSidebarByPath("docs/guides/developers/")
+          items: [
+            {
+              text: "Development Guides",
+              collapsed: false,
+              items: [
+                {text: "Getting Started", link: "/guides/developers/getting-started"},
+                {text: "Getting Started V2", link: "/guides/developers/getting-started-v2"},
+                {text: "Development Enviroment", link: "/guides/developers/development-enviroment"},
+                {text: "My First Plugin", link: "/guides/developers/my-first-plugin"},
+                {text: "My First Plugin V2", link: "/guides/developers/my-first-plugin-v2"},
+                {text: "Plugin Guidelines", link: "/guides/developers/plugin-guidelines"},
+                {text: "Best Practices", link: "/guides/developers/best-practices"},
+                { 
+                  text: "Using Oxide Libraries", 
+                  collapsed: true,
+                  items: [
+                    {text: "Permissions", link: "/guides/developers/libraries/permissions"}
+                  ]
+                },
+              ],
+            },
+          ]
+          //items: getSidebarByPath("docs/guides/developers/")
         },
       ],
       "/guides/owners/": [
@@ -82,17 +103,25 @@ export default defineConfig({
               ],
             },
             {
-              text: "Libraries",
+              text: "Oxide Libraries",
               collapsed: false,
               link: "/core/libraries/",
               items: [
-                { text: "Permissions", link: "/core/libraries/permissions" },
+                { text: "Permissions", link: "/core/libraries/oxide/permissions" },
                 //{ text: "Webrequests", link: "/core/libraries/webrequests" },
                 //{ text: "Databases", link: "/core/libraries/databases" },
                 //{ text: "Covalence", link: "/core/libraries/covalence" },
                 //{ text: "Rust Cui", link: "/core/libraries/rust-cui" },
               ],
             },
+            // {
+            //   text: "Rust Libraries",
+            //   collapsed: false,
+            //   link: "/core/libraries/",
+            //   items: [
+            //     { text: "BasePlayer", link: "/core/libraries/rust/baseplayer" },
+            //   ],
+            // },
           ],
         },
       ],
