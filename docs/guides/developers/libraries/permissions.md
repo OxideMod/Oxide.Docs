@@ -7,7 +7,7 @@ after: index
 
 ## Registering a permission
 
-Before you're able to use a permission for your plugin, you first need to register the permission so that you're able to assign it to users or groups. When registering there is one condition that always must be met, the start of the permission name must include the plugins exact name.
+Before you're able to use a permission for your plugin, you first need to register the permission so that you're able to assign it to players or groups. When registering there is one condition that always must be met, the start of the permission name must include the plugins exact name.
 
 ```csharp
 namespace Oxide.Plugins
@@ -46,3 +46,5 @@ namespace Oxide.Plugins
     }
 }
 ```
+
+## Checking a group for a permission
