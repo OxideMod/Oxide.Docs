@@ -13,7 +13,6 @@ The `AddUserGroup` method will assign `playerId` the specified `groupName`
 [`AddUserGroup`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L683)
 :::
 
-
 ::: details Source Code
 ```csharp
 public void AddUserGroup(string playerId, string groupName)
