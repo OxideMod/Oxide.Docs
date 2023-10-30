@@ -38,7 +38,6 @@ The `CreateGroup` method will create a group with the specified `groupName` and 
 [`CreateGroup`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L1085)
 :::
 
-
 ::: details Source Code
 ```csharp
 public bool CreateGroup(string groupName, string groupTitle, int groupRank)
