@@ -108,6 +108,7 @@ export default defineConfig({
               link: "/core/libraries/",
               items: [
                 { text: "Permissions", link: "/core/libraries/oxide/permissions" },
+                { text: "Timers", link: "/core/libraries/oxide/timers" },
                 //{ text: "Webrequests", link: "/core/libraries/webrequests" },
                 //{ text: "Databases", link: "/core/libraries/databases" },
                 //{ text: "Covalence", link: "/core/libraries/covalence" },
