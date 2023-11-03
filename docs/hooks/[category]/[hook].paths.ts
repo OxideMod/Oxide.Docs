@@ -21,7 +21,6 @@ export default {
     var out = Object.keys(groupedHooks).map((category) => {
       return Object.keys(groupedHooks[category]).map((hookName) => {
         const hooks = groupedHooks[category][hookName];
-
         return {
           params: {
             category: category.toLowerCase(),
