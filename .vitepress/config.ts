@@ -2,7 +2,9 @@ import MarkdownItFootnote from 'markdown-it-footnote';
 import { defineConfig } from "vitepress";
 import { getHooksSidebar } from "../util/hooks";
 import { getSidebarByPath } from "../util/nav";
+import { getItems } from "../util/items"
 
+var playerItems = getItems();
 var hooks = getHooksSidebar();
 
 // https://vitepress.dev/reference/site-config
@@ -42,7 +44,6 @@ export default defineConfig({
           },
         ],
       },
-      //{ text: "a", link: "/guides/"},
       { text: "Core", link: "/core/" },
       { text: "Hooks", link: "/hooks/" },
     ],
@@ -109,20 +110,13 @@ export default defineConfig({
               items: [
                 { text: "Permissions", link: "/core/libraries/oxide/permissions" },
                 { text: "Timers", link: "/core/libraries/oxide/timers" },
-                //{ text: "Webrequests", link: "/core/libraries/webrequests" },
-                //{ text: "Databases", link: "/core/libraries/databases" },
-                //{ text: "Covalence", link: "/core/libraries/covalence" },
-                //{ text: "Rust Cui", link: "/core/libraries/rust-cui" },
               ],
             },
-            // {
-            //   text: "Rust Libraries",
-            //   collapsed: false,
-            //   link: "/core/libraries/",
-            //   items: [
-            //     { text: "BasePlayer", link: "/core/libraries/rust/baseplayer" },
-            //   ],
-            // },
+            {
+              text: "Items",
+              link: "/core/items/",
+              items: playerItems
+            }
           ],
         },
       ],
