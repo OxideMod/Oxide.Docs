@@ -26,19 +26,19 @@ export default {
 };
 
 function buildMarkdownFile(skin: ISkin) {
-
-    const isMarketable = ("**Item Marketable**: " + "`" + skin.IsMarketable + "`")
-    const workshopId = ("\n**Workshop Id**: " + "`" + (skin.WorkshopId == "0" ? "null" : skin.WorkshopId) + "`")
+    let returnFile: string = ``;
+  
     const icon = `![Image](${skin.IconUrl.replace("large", "small")})`
 
-    let returnFile = template
-    .replace("{Title}", skin.Name)
-    .replace("{IsMarketable}", isMarketable)
-    .replace("{WorkshopId}", workshopId)
-    .replace("{Icon}", icon)
+    returnFile += template
+    .replace("{skinName}", skin.Name)
+    .replace("{skinId}", (skin.WorkshopId == "0" ? "null" : skin.WorkshopId))
+    .replace("{type}", skin.Type)
+    .replace("{skinIcon}", icon)
 
     return returnFile;
 }
+
 
 // /*
 // {IsMarketable}
