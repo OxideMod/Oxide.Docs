@@ -1,8 +1,9 @@
-# {Title}
+## {skinName}
 
-{IsMarketable}
-{WorkshopId}
+**Skin ID**: `{skinId}`
+
+**Type**: `{type}`
 
 **Image**
-{Icon}
+{skinIcon}
 
