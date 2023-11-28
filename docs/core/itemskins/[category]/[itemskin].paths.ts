@@ -1,8 +1,8 @@
 import * as fs from "fs";
-import { ISkin } from "../../../../entities/items/item";
+import { ISkin } from "../../../../entities/items/itemskin";
 
 // Read and cache the template file
-const template = fs.readFileSync("docs/core/items/template.md").toString();
+const template = fs.readFileSync("docs/core/itemskins/template.md").toString();
 
 export default {
   paths() {
@@ -14,13 +14,12 @@ export default {
         return {
           params: {
             category: data.toLowerCase(),
-            item: skin.DefinitionId,
+            itemskin: skin.DefinitionId,
           },
           content: buildMarkdownFile(skin),
         };
       });
     });
-
     return out.flat();
   },
 };
@@ -38,10 +37,3 @@ function buildMarkdownFile(skin: ISkin) {
 
     return returnFile;
 }
-
-
-// /*
-// {IsMarketable}
-// {WorkshopDownload}
-// {WorkshopId}
-// */

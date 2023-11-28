@@ -1,9 +1,9 @@
 import * as fs from "fs";
 
-import { ISkin } from "../../../entities/items/item";
+import { ISkin } from "../../../entities/items/itemskin";
 import { replaceAll } from "../../../util/items"
 // Read and cache the template file
-const template = fs.readFileSync("docs/core/items/template.md").toString();
+const template = fs.readFileSync("docs/core/itemskins/template.md").toString();
 
 export default {
   paths() {
@@ -12,7 +12,7 @@ export default {
     var out = Object.keys(skinData).map((data) => {
         return {
           params: {
-            items: replaceAll(data, ".", "_"),
+            itemskins: replaceAll(data, ".", "_"),
           },
           content: buildFile(skinData[data]),
         };

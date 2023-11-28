@@ -2,9 +2,9 @@ import MarkdownItFootnote from 'markdown-it-footnote';
 import { defineConfig } from "vitepress";
 import { getHooksSidebar } from "../util/hooks";
 import { getSidebarByPath } from "../util/nav";
-import { getItems } from "../util/items"
+import { getItemSkins } from "../util/items"
 
-var playerItems = getItems();
+var itemSkins = getItemSkins();
 var hooks = getHooksSidebar();
 
 // https://vitepress.dev/reference/site-config
@@ -113,9 +113,10 @@ export default defineConfig({
               ],
             },
             {
-              text: "Items",
-              link: "/core/items/",
-              items: playerItems
+              text: "Item Skins",
+              link: "/core/itemskins/",
+              collapsed: true,
+              items: itemSkins
             }
           ],
         },

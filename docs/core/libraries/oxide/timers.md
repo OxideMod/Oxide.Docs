@@ -7,40 +7,68 @@ after: Permissions
 
 ## `Once`
 
-The `Once` method will run the `callback` once after the `delay` has passed in seconds.
+The `Once` method will run the `callback` once after the `interval` has passed in seconds.
 
 ::: details Github Location 
-[`Once`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Timer.cs#L466)
+[`Once`](https://github.com/OxideMod/Oxide.CSharp/blob/develop/src/PluginTimers.cs#L74)
 :::
 
 ::: details Source Code
 ```csharp
-public TimerInstance Once(float delay, Action callback, Plugin owner = null) {
-    AddTimer(1, delay, callback, owner);
+public Timer Once(float seconds, Action callback)
+{
+    return new Timer(timer.Once(seconds, callback, plugin));
+}
+```
+:::
+
+## `In`
+
+The `In` method will run the `callback` once after the `interval` has passed in seconds.
+
+::: details Github Location 
+[`In`](https://github.com/OxideMod/Oxide.CSharp/blob/develop/src/PluginTimers.cs#L84)
+:::
+
+::: details Source Code
+```csharp
+public Timer In(float seconds, Action callback)
+{
+    return new Timer(timer.Once(seconds, callback, plugin));
+}
+```
+:::
+
+## `Every`
+
+The `Every` method will continuously run the `callback` every `interval` milliseconds
+
+::: details Github Location 
+[`Every`](https://github.com/OxideMod/Oxide.CSharp/blob/develop/src/PluginTimers.cs#L94)
+:::
+
+::: details Source Code
+```csharp
+public Timer Every(float interval, Action callback)
+{
+    return new Timer(timer.Repeat(interval, -1, callback, plugin));
 }
 ```
 :::
 
 ## `Repeat`
 
-The `Repeat` method will run the `callback`
+The `Repeat` method will run the `callback` every `interval` milliseconds for a set number of `repeats`
 
 ::: details Github Location 
-[`Repeat`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Timer.cs#L477)
+[`Repeat`](https://github.com/OxideMod/Oxide.CSharp/blob/develop/src/PluginTimers.cs#L105)
 :::
 
 ::: details Source Code
-
-:::
-
-## `NextFrame`
-
-The `NextFrame` method will 
-
-::: details Github Location 
-[`NextFrame`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Timer.cs#L485)
-:::
-
-::: details Source Code
-
+```csharp
+public Timer Repeat(float interval, int repeats, Action callback)
+{
+    return new Timer(timer.Repeat(interval, repeats, callback, plugin));
+}
+```
 :::
