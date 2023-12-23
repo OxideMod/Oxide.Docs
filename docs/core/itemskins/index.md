@@ -5,4 +5,4 @@ after: 0
 
 # Item Skins
 
-The Items section allows people to see every Item Skin in Rust.
+The Item Skins section allows people to see every Item Skin in Rust.

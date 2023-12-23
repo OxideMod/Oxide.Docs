@@ -27,9 +27,11 @@ function buildFile(entry: ISkin[]) {
 
   for (let Idx = 0; Idx < entry.length; Idx++) {
       const skin: ISkin = entry[Idx];
-      
-      const icon = `![Image](${skin.IconUrl.replace("large", "small")})`
 
+      if (skin.WorkshopId == "0")
+        return;
+
+      const icon = `![Image](${skin.IconUrl.replace("large", "small")})`
       builtFile += template
       .replace("{skinName}", skin.Name)
       .replace("{skinId}", (skin.WorkshopId == "0" ? "null" : skin.WorkshopId))

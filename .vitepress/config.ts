@@ -67,7 +67,9 @@ export default defineConfig({
                   text: "Using Oxide Libraries", 
                   collapsed: true,
                   items: [
-                    {text: "Permissions", link: "/guides/developers/libraries/permissions"}
+                    {text: "Permissions", link: "/guides/developers/libraries/permissions"},
+                    {text: "Timers", link: "/guides/developers/libraries/timers"},
+                    {text: "Web Requests", link: "/guides/developers/libraries/webrequests"}
                   ]
                 },
               ],
@@ -110,6 +112,7 @@ export default defineConfig({
               items: [
                 { text: "Permissions", link: "/core/libraries/oxide/permissions" },
                 { text: "Timers", link: "/core/libraries/oxide/timers" },
+                { text: "Web Requests", link: "/core/libraries/oxide/webrequests" }
               ],
             },
             {

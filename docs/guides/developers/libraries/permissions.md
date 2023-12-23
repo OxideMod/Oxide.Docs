@@ -22,7 +22,7 @@ namespace Oxide.Plugins
 
 ## Checking a player for a permission
 
-To check if a player has a specific permission, you must first make sure the permission was registered, and both the registered and permission you're checking for are the same.
+To check if a player has a specific permission, you must first make sure the permission is registered, and both the registered permission and permission you're checking for are the same.
 
 ```csharp
 namespace Oxide.Plugins
@@ -46,5 +46,3 @@ namespace Oxide.Plugins
     }
 }
 ```
-
-## Checking a group for a permission

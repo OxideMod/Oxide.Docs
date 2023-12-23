@@ -18,14 +18,6 @@ export function getItemSkins() {
         return {
           text: category[0].toUpperCase() + category.substring(1) + (`(${skinData[category].length})`),
           link: `/core/itemskins/${replaceAll(category, ".", "_")}`,
-          collapsed: true,
-          items: Object.keys(skinData[category]).map( (skins) => {
-            let skin: ISkin = (skinData[category][skins] as ISkin);
-            return {
-                text: skin.Name,
-                link: `/core/itemskins/${category.toLowerCase()}/${skin.DefinitionId}`,
-            }
-          })
         };
       });
   }
