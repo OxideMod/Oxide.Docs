@@ -4,7 +4,7 @@
     "@types/markdown-it": "^12.2.3",
     "@types/node": "^20.6.1",
     "gray-matter": "^4.0.3",
-    "markdown-it": "^13.0.1",
+    "markdown-it": "^13.0.2",
     "markdown-it-footnote": "^3.0.3",
     "vitepress": "^1.0.0-rc.24",
     "vue": "^3.3.4"
