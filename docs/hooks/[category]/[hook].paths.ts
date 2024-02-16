@@ -143,7 +143,7 @@ function getLocationMarkdown(hooks: IHook[]) {
 
   for (const hook of hooks) {
     output += `\`\`\`csharp{${getHookLineIndex(hook)}} [${escapeBrackets(hook.TargetType)}]\n`;
-    output += `${hook.CodeAfterInjection}\n`;
+    output += `${hook.CodeAfterInjection?.replace(/\.\.\./g, '//...')}\n`;
     output += "```\n";
   }
 
