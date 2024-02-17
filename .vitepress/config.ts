@@ -14,6 +14,7 @@ export default defineConfig({
   description: "Official documentation",
   srcDir: './docs',
   ignoreDeadLinks: true, //TODO: Remove for PR
+  cleanUrls: true,
   themeConfig: {
     logo: "/logo.png",
     
