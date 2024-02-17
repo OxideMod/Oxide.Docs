@@ -1,6 +1,6 @@
 ---
 title: Server Setup
-after: getting-started-v2
+after: getting-started
 ---
 
 # Setting up a modded server

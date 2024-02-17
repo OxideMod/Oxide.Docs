@@ -18,7 +18,6 @@ export default defineConfig({
     logo: "/logo.png",
     
     editLink: {
-      // pattern: 'https://github.com/oxidemod/oxide.docs/edit/master/docs/:path',
       pattern: ({ filePath }) => {
         if (filePath.startsWith('hooks/')) {
           filePath = filePath.replace('hooks/', 'hooks/overwrites/')
@@ -51,31 +50,8 @@ export default defineConfig({
     sidebar: {
       "/guides/developers/": [
         {
-          items: [
-            {
-              text: "Development Guides",
-              collapsed: false,
-              items: [
-                {text: "Getting Started", link: "/guides/developers/getting-started"},
-                {text: "Getting Started V2", link: "/guides/developers/getting-started-v2"},
-                {text: "Development Enviroment", link: "/guides/developers/development-enviroment"},
-                {text: "My First Plugin", link: "/guides/developers/my-first-plugin"},
-                {text: "My First Plugin V2", link: "/guides/developers/my-first-plugin-v2"},
-                {text: "Plugin Guidelines", link: "/guides/developers/plugin-guidelines"},
-                {text: "Best Practices", link: "/guides/developers/best-practices"},
-                { 
-                  text: "Using Oxide Libraries", 
-                  collapsed: true,
-                  items: [
-                    {text: "Permissions", link: "/guides/developers/libraries/permissions"},
-                    {text: "Timers", link: "/guides/developers/libraries/timers"},
-                    {text: "Web Requests", link: "/guides/developers/libraries/webrequests"}
-                  ]
-                },
-              ],
-            },
-          ]
-          //items: getSidebarByPath("docs/guides/developers/")
+          text: "Developer Guides",
+          items: getSidebarByPath("docs/guides/developers/")
         },
       ],
       "/guides/owners/": [
@@ -93,35 +69,7 @@ export default defineConfig({
       "/core/": [
         {
           text: "Core Documentation",
-          //items: getSidebarByPath("docs/core/"),
-          items: [
-            {
-              text: "Commands",
-              collapsed: false,
-              link: "/core/commands/",
-              items: [
-                { text: "Plugin Commands", link: "/core/commands/pluginCommands"},
-                { text: "Permission Commands", link: "/core/commands/permissionCommands"},
-                { text: "Miscellaneous Commands", link: "/core/commands/miscellaneousCommands"}
-              ],
-            },
-            {
-              text: "Oxide Libraries",
-              collapsed: false,
-              link: "/core/libraries/",
-              items: [
-                { text: "Permissions", link: "/core/libraries/oxide/permissions" },
-                { text: "Timers", link: "/core/libraries/oxide/timers" },
-                { text: "Web Requests", link: "/core/libraries/oxide/webrequests" }
-              ],
-            },
-            {
-              text: "Item Skins",
-              link: "/core/itemskins/",
-              collapsed: true,
-              items: itemSkins
-            }
-          ],
+          items: getSidebarByPath("docs/core/"),
         },
       ],
       "/hooks/": [

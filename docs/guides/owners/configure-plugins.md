@@ -1,6 +1,6 @@
 ---
 title: Configuring Plugins
-after: 'install-plugins'
+after: install-plugins
 ---
 
 # Configuring Plugins

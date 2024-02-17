@@ -25,24 +25,23 @@ namespace Oxide.Plugins
 To check if a player has a specific permission, you must first make sure the permission is registered, and both the registered permission and permission you're checking for are the same.
 
 ```csharp
-namespace Oxide.Plugins
+namespace Oxide.Plugins;
+
+[Info("MyFirstPlugin", "Author Name", "1.0.0")]
+public class MyFirstPlugin : RustPlugin
 {
-    [Info("MyFirstPlugin", "Author Name", "1.0.0")]
-    public class MyFirstPlugin : RustPlugin
+    void Init() => permission.RegisterPermission("myfirstplugin.use", this);
+
+    [ChatCommand("hello")]
+    private void HelloCommand(BasePlayer player, string command, string[] args)
     {
-        void Init() => permission.RegisterPermission("myfirstplugin.use", this);
-
-        [ChatCommand("hello")]
-        private void HelloCommand(BasePlayer player, string command, string[] args)
+        if(!permission.UserHasPermission(player.UserIDString, "myfirstplugin.use"))
         {
-            if(!permission.UserHasPermission(player.UserIDString, "myfirstplugin.use"))
-            {
-                PrintToChat(player, "You don't have permission to use this command!");
-                return;
-            }
-
-            PrintToChat(player, "Hello, you have permission to use this command!");
+            PrintToChat(player, "You don't have permission to use this command!");
+            return;
         }
+
+        PrintToChat(player, "Hello, you have permission to use this command!");
     }
 }
 ```

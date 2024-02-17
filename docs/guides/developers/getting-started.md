@@ -5,55 +5,21 @@ after: 0
 
 # Getting started with plugin development
 
-Welcome to the Oxide Modding Framework for Rust! This guide will help you get started with developing your own plugins using this powerful framework.
+Welcome to the exciting world of Rust modding using the Oxide framework! If you're a fan of the game Rust, and you love to code, you're in for a treat. This guide is the first step on your journey towards creating unique and immersive mods that can add new layers of fun and complexity to the game.
 
-### What is Oxide?
+## Introduction to Rust and Oxide Modding
 
-Oxide is a powerful modding framework for the game Rust, allowing developers to create custom gameplay mechanics, features, and systems. With Oxide, the possibilities for enhancing Rust are nearly limitless.
+Rust is a popular multiplayer survival game where players contend with challenges such as hunger, thirst, and exposure, not to mention other players! With the Oxide modding framework, you can build upon this base game, introducing new features, tweaking gameplay elements, and fundamentally transforming the Rust experience.
 
-### Prerequisites
+## Key Concepts
 
-Before we begin, make sure you have the following:
+Before you dive in, there are a few key concepts to understand:
 
-- A basic understanding of programming in C#. If you're new to C#, consider checking out [Microsoft's C# Guide](https://docs.microsoft.com/en-us/dotnet/csharp/) for learning resources.
-- Familiarity with Unity game development. Unity's [Learning Resources](https://learn.unity.com/) can help you get up to speed.
-- A copy of the latest version of the game Rust installed on your system. If you're interested in using the staging branch of Rust, you can follow [these instructions](https://rust.facepunch.com/blog/using-the-staging-branch) to set it up.
+- **Plugins**: These are the scripts you'll be writing, which add new functionality to the game or modify existing features.
+- **Hooks**: These are functions that get called by the game or by Oxide. By using hooks in your plugins, you can define what happens when certain game events occur.
+- **Data storage**: Oxide provides several ways to store data, such as player scores or configuration settings. Understanding the different data storage options and knowing when to use each is essential to creating efficient and effective mods.
+- **Testing and Debugging**: A significant part of mod development is testing your creations and fixing any bugs that arise. Familiarizing yourself with the debugging tools available in your chosen IDE will save you a lot of time and headache.
 
-### Setting Up Your Development Environment
+With these basic concepts under your belt, you're ready to embark on your journey as a Rust mod developer!
 
-To start developing plugins for Oxide, you'll need a development environment. We recommend using an Integrated Development Environment (IDE) like Visual Studio, VS Code, or Rider. These IDEs provide useful features like code completion, syntax highlighting, and debugging tools that will make your development process much smoother.
-
-#### Visual Studio
-
-1. Download and install [Visual Studio](https://visualstudio.microsoft.com/downloads/).
-2. During installation, make sure to select the ".NET desktop development" workload.
-3. Once installed, you can open your plugin's .cs file with Visual Studio.
-
-#### VS Code
-
-1. Download and install [VS Code](https://code.visualstudio.com/download).
-2. Install the [C# extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) for VS Code.
-3. Open your plugin's .cs file with VS Code.
-
-#### Rider
-
-1. Download and install [Rider](https://www.jetbrains.com/rider/download/).
-2. Open your plugin's .cs file with Rider.
-
-### Downloading Oxide
-
-To start developing, you'll need to download the Oxide modding framework. You can find the latest release on the [Oxide GitHub repository](https://github.com/OxideMod/Oxide.Rust). Download the source code zip file and extract it to a location of your choice.
-
-### Creating Your First Plugin
-
-Now that you have your development environment set up and Oxide downloaded, you're ready to create your first plugin! In the next section, we'll guide you through the process of creating a simple plugin.
-
-### Joining the Community
-
-The Rust gaming and Oxide modding communities are vibrant and welcoming places. Whether you're looking for help, want to share your work, or just want to connect with other developers, there are plenty of resources available. Remember to always respect community guidelines and norms.
-
-### What's Next?
-
-In the upcoming sections, we'll dive deeper into setting up your development environment, including adding commonly used dependencies. We'll also guide you through creating your first plugin, and exploring the various libraries and components of Oxide. Best practices for Oxide plugin development and solutions to common issues you might encounter will also be covered.
-
-Stay tuned!
+In the next sections, we'll delve into the specifics of setting up your development environment, crafting your first plugin, and following best practices. Don't worry, we'll guide you through it every step of the way.

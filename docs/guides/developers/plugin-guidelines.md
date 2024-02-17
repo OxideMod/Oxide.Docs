@@ -1,6 +1,6 @@
 ---
 title: Plugin Guidelines
-after: my-first-plugin-v2
+after: my-first-plugin
 ---
 
 # Plugin Guidelines
@@ -13,13 +13,12 @@ The filename of your plugin should be clear, concise and indicative of its funct
 
 For example:
 ```csharp
-namespace Oxide.Plugins
+namespace Oxide.Plugins;
+
+[Info("MyFirstPlugin", "Author Name", "1.0.0")]
+public class MyFirstPlugin : RustPlugin
 {
-    [Info("MyFirstPlugin", "Author Name", "1.0.0")]
-    public class MyFirstPlugin : RustPlugin
-    {
-        // Your code here
-    }
+    // Your code here
 }
 ```
 ### 1.2 Commands

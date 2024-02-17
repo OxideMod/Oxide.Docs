@@ -1,9 +1,9 @@
 ---
-title: Development Enviroment
-after: getting-started-v2
+title: Development Environment
+after: getting-started
 ---
 
-# Setting up your development enviroment
+# Setting up your development Environment
 
 Building mods for Rust using the Oxide framework requires a robust development environment. This section guides you through setting up your development environment and introduces the tools you'll be using frequently.
 
