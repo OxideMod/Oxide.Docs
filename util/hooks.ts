@@ -4,7 +4,8 @@ import IHook from "../entities/hooks/hook";
 
 export function getHookJson() {
   const hookData = readFileSync("docs.json").toString();
-  return JSON.parse(hookData) as IDocs;
+  const hooks = JSON.parse(hookData) as IDocs;
+  return hooks.Hooks.filter(hook => hook.Category !== "_Patches");
 }
 
 export function getGroupedHooks() {
@@ -12,7 +13,7 @@ export function getGroupedHooks() {
 
   var out = {} as { [key: string]: { [key: string]: IHook[] } };
 
-  hooksJson.Hooks.forEach((hook) => {
+  hooksJson.forEach((hook) => {
     if (!out[hook.Category]) {
       out[hook.Category] = {};
     }
