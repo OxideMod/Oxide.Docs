@@ -139,11 +139,17 @@ function getLocationMarkdown(hooks: IHook[]) {
     );
   }
 
+  hooks = hooks.filter(hook => hook.CodeAfterInjection && hook.CodeAfterInjection !== "")
+
+  if (hooks.length === 0) {
+    return output;
+  }
+
   output += "::: code-group\n";
 
   for (const hook of hooks) {
     output += `\`\`\`csharp{${getHookLineIndex(hook)}} [${escapeBrackets(hook.TargetType)}]\n`;
-    output += `${hook.CodeAfterInjection?.replace(/\.\.\./g, '//...')}\n`;
+    output += `${hook.CodeAfterInjection?.replace(/global::/g, '')}\n`;
     output += "```\n";
   }
 
