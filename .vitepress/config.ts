@@ -18,6 +18,7 @@ export default defineConfig({
   lastUpdated: true,
   themeConfig: {
     logo: "/logo.png",
+    externalLinkIcon: true,
     
     editLink: {
       pattern: ({ filePath }) => {
