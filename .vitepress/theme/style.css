@@ -150,3 +150,44 @@
 .footnote-item > p{
   line-height: 21px !important;
 }
+
+/**
+ * Component: Pager
+ * -------------------------------------------------------------------------- */
+
+.overview-pager {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 5px;
+}
+
+.overview-pager.column{
+  flex-direction: column;
+}
+
+.overview-pager.wrap{
+  flex-wrap: wrap;
+}
+
+.overview-pager .pager-link {
+  flex: 1 1 auto;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  padding: 11px 16px;
+  transition: border-color 0.25s;
+  text-decoration: none !important;
+}
+
+.overview-pager .pager-link:hover {
+  border-color: var(--vp-c-brand);
+}
+
+.overview-pager .pager-link .title {
+  display: block;
+  line-height: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--vp-c-brand);
+  transition: color 0.25s;
+}
