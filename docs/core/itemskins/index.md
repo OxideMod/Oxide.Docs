@@ -1,6 +1,6 @@
 ---
 title: Item Skins
-after: 0
+after: index
 ---
 
 # Item Skins

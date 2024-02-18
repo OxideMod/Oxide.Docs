@@ -1,6 +1,6 @@
 ---
 title: Timers
-after: Permissions
+after: permissions
 ---
 
 # Timers

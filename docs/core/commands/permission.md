@@ -1,5 +1,5 @@
 ---
-title: Permission Commands
+title: Permission
 after: index
 ---
 # Permission Commands

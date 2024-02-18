@@ -1,6 +1,6 @@
 ---
-title: Miscellaneous Commands
-after: permissions
+title: Miscellaneous
+after: permission
 ---
 # Miscellaneous Commands
 

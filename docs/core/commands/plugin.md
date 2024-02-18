@@ -1,6 +1,6 @@
 ---
-title: Plugin Commands
-after: plugins
+title: Plugin
+after: miscellaneous
 ---
 
 # Plugin Commands

@@ -41,6 +41,13 @@ function getNavbarDataFromFolder(path: string) {
           link: index.link.replace("index", ""),
           children: files.filter((f) => f.link !== index.link),
         });
+      } else {
+        const niceName = file.replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase());
+        unsortedFiles.push({
+          title: niceName,
+          after: 0,
+          children: files,
+        });
       }
       // If there isn't, add all files in the directory to the navbar
     } else if (extname(file) === ".md") {
@@ -63,10 +70,11 @@ function sortNavbar(files: any[]) {
   let sortedFiles: any[] = [];
 
   let currentItem = files.find(item => item.after === 0 || item.after === 'index' );
+
   while (currentItem !== undefined) {
     sortedFiles.push(currentItem);
     
-    let nextItemName = currentItem.link.replace(/\/$/, "").split('/').pop();
+    let nextItemName = currentItem.link?.replace(/\/$/, "").split('/').pop();
     currentItem = files.find(item => item.after === nextItemName);
   }
 

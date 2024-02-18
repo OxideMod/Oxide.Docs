@@ -1,9 +1,9 @@
 ---
 title: Web Requests
-after: Timers
+after: timers
 ---
 
-# Web Requests
+# Web Requests Library
 
 ## `Enqueue`
 

@@ -16,7 +16,7 @@ export default defineConfig({
   ignoreDeadLinks: true, //TODO: Remove for PR
   cleanUrls: true,
   lastUpdated: true,
-  themeConfig: {
+  themeConfig: {    
     logo: "/logo.png",
     externalLinkIcon: true,
     
@@ -35,32 +35,22 @@ export default defineConfig({
     },
     
     nav: [
-      { text: "Home", link: "/" },
-      {
-        text: "Guides",
-        items: [
-          { text: "Server Owners", link: "/guides/owners/getting-started" },
-          {
-            text: "Plugin Developers",
-            link: "/guides/developers/getting-started",
-          },
-        ],
-      },
+      { text: "Guides", link: "/guides/" },
       { text: "Core", link: "/core/" },
       { text: "Hooks", link: "/hooks/" },
     ],
 
     sidebar: {
-      "/guides/developers/": [
+      "/guides/": [
         {
-          text: "Developer Guides",
-          items: getSidebarByPath("docs/guides/developers/")
-        },
-      ],
-      "/guides/owners/": [
-        {
-          text: "Server Owner Guides",
+          text: "Server Owners",
+          collapsed: false,
           items: getSidebarByPath("docs/guides/owners/"),
+        },
+        {
+          text: "Developers",
+          collapsed: false,
+          items: getSidebarByPath("docs/guides/developers/")
         },
       ],
       "/guides/reviewers/": [
@@ -71,9 +61,15 @@ export default defineConfig({
       ],
       "/core/": [
         {
-          text: "Core Documentation",
-          items: getSidebarByPath("docs/core/"),
+          text: "Commands",
+          collapsed: false,
+          items: getSidebarByPath("docs/core/commands/"),
         },
+        {
+          text: "Libraries",
+          collapsed: false,
+          items: getSidebarByPath("docs/core/libraries/"),
+        }
       ],
       "/hooks/": [
         {
