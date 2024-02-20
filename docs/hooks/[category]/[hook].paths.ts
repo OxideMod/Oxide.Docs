@@ -135,7 +135,7 @@ function getLocationMarkdown(hooks: IHook[]) {
 
   for (const hook of hooks) {
     output += escapeBrackets(
-      `- ${hook.TargetType}::${hook.MethodData.MethodName}(${getArgumentString(hook.MethodData.Arguments)})\n`
+      `- ${hook.TargetType.replace(/`1/g, '&lt;T&gt;')}::${hook.MethodData.MethodName}(${getArgumentString(hook.MethodData.Arguments)})\n`
     );
   }
 
@@ -148,8 +148,8 @@ function getLocationMarkdown(hooks: IHook[]) {
   output += "::: code-group\n";
 
   for (const hook of hooks) {
-    output += `\`\`\`csharp{${getHookLineIndex(hook)}} [${escapeBrackets(hook.TargetType)}]\n`;
-    output += `${hook.CodeAfterInjection?.replace(/global::/g, '')}\n`;
+    output += `\`\`\`csharp{${getHookLineIndex(hook)}} [${escapeBrackets(hook.TargetType).replace(/`1/g, '&lt;T&gt;')}]\n`;
+    output += `${hook.CodeAfterInjection?.replace(/global::/g, '').replace(/`1/g, '&lt;T&gt;')}\n`;
     output += "```\n";
   }
 
