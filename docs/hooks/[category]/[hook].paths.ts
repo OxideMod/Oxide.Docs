@@ -116,6 +116,19 @@ function getUsageReturn(hookData: IHook) {
 function getExamplesMarkdown(hooks: IHook[]) {
   let output = "";
 
+  // Filter out hooks that have same parameters types preventing duplicate examples
+  hooks = hooks.reduce((acc, hook) => {
+    if (!acc.some((h) => {
+      if (h.HookParameters && hook.HookParameters) {
+        return Object.keys(h.HookParameters).every((key) => h.HookParameters[key] === hook.HookParameters[key]);
+      }
+      return false;
+    })) {
+      acc.push(hook);
+    }
+    return acc;
+  }, [] as IHook[]);
+
   for (const hook of hooks) {
     output += `\`\`\`csharp`;
     //TODO: Use proper return type instead of void
