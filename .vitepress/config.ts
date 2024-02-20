@@ -31,9 +31,14 @@ export default defineConfig({
     },
 
     search: {
-      provider: 'local'
-    },
-    
+      provider: 'algolia',
+      options: {
+        appId: 'BMU00HK1M4',
+        apiKey: '7089bd6cc05b7151c6ed5741f86203b3',
+        indexName: 'oxidemod',
+      }
+    }, 
+
     nav: [
       { text: "Guides", link: "/guides/" },
       { text: "Core", link: "/core/" },
