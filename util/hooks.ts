@@ -5,7 +5,7 @@ import IHook from "../entities/hooks/hook";
 export function getHookJson() {
   const hookData = readFileSync("docs.json").toString();
   const hooks = JSON.parse(hookData) as IDocs;
-  return hooks.Hooks.filter(hook => hook.Category !== "_Patches");
+  return hooks.Hooks.filter(hook => hook.Category !== "_Patches" && !hook.HookName.includes("["));
 }
 
 export function getGroupedHooks() {
