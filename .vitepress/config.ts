@@ -16,7 +16,7 @@ export default defineConfig({
   ignoreDeadLinks: true, //TODO: Remove for PR
   cleanUrls: true,
   lastUpdated: true,
-  themeConfig: {    
+  themeConfig: {
     logo: "/logo.png",
     externalLinkIcon: true,
     
@@ -78,7 +78,7 @@ export default defineConfig({
       ],
       "/hooks/": [
         {
-          text: "Hooks",
+          // text: "Hooks",
           items: hooks
         }
       ],
