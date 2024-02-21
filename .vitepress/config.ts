@@ -25,7 +25,7 @@ export default defineConfig({
         if (filePath.startsWith('hooks/')) {
           filePath = filePath.replace('hooks/', 'hooks/overwrites/')
         }
-        return `https://github.com/oxidemod/oxide.docs/edit/master/docs/${filePath}`
+        return `https://github.com/oxidemod/oxide.docs/edit/main/docs/${filePath}`
       },
       text: 'Edit this page on GitHub'
     },
