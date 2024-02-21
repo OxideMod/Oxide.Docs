@@ -1,5 +1,7 @@
 # {title}
 
+{alerts}
+
 {description}
 
 ## Usage
