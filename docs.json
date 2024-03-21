@@ -13634,7 +13634,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tif (!global::EggHuntEvent.serverEvent.IsEventActive())\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tif (Interface.CallHook(\"OnEventCollectablePickup\", msg.player, this) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tglobal::EggHuntEvent.serverEvent.EggCollected(msg.player);\r\n\t\tint iAmount = 1;\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tif (!global::EggHuntEvent.serverEvent.IsEventActive())\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tif (Interface.CallHook(\"OnEventCollectablePickup\", msg.player, this) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tglobal::EggHuntEvent.serverEvent.OnEggCollected(msg.player, this);\r\n\t\tint iAmount = 1;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -13651,7 +13651,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "public void StartEvent()\r\n{\r\n\tif (Interface.CallHook(\"OnHuntEventStart\", this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.SpawnEggs();\r\n}\r\n"
+      "CodeAfterInjection": "private void StartEvent()\r\n{\r\n\tif (Interface.CallHook(\"OnHuntEventStart\", this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (this.initialSpawnIndex <= global::BasePlayer.activePlayerList.Count)\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
