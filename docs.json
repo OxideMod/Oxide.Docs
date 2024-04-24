@@ -9752,7 +9752,7 @@
           "player": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "private void CollectIngredients(global::ItemBlueprint bp, global::ItemCraftTask task, int amount = 1, global::BasePlayer player = null)\r\n{\r\n\tif (Interface.CallHook(\"OnIngredientsCollect\", this, bp, task, amount, player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tSystem.Collections.Generic.List<global::Item> list = new System.Collections.Generic.List<global::Item>();\r\n\tforeach (global::ItemAmount current in bp.ingredients)\r\n//---\r\n"
+      "CodeAfterInjection": "private void CollectIngredients(global::ItemBlueprint bp, global::ItemCraftTask task, int amount = 1, global::BasePlayer player = null)\r\n{\r\n\tif (Interface.CallHook(\"OnIngredientsCollect\", this, bp, task, amount, player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tList<global::Item> list = new List<global::Item>();\r\n\tforeach (global::ItemAmount current in bp.ingredients)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -9770,7 +9770,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\tthis.<SendRespawnOptions>g__CollectExternalAndSend|379_0();\r\n\t\treturn;\r\n\t}\r\n\tSystem.Collections.Generic.List<RespawnInformation.SpawnOptions> list = Pool.GetList<RespawnInformation.SpawnOptions>();\r\n\tglobal::BasePlayer.GetRespawnOptionsForPlayer(list, this.userID);\r\n\tInterface.CallHook(\"OnRespawnInformationGiven\", this, list);\r\n\tthis.<SendRespawnOptions>g__SendToPlayer|379_1(list, false);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tthis.<SendRespawnOptions>g__CollectExternalAndSend|379_0();\r\n\t\treturn;\r\n\t}\r\n\tList<RespawnInformation.SpawnOptions> list = Pool.GetList<RespawnInformation.SpawnOptions>();\r\n\tglobal::BasePlayer.GetRespawnOptionsForPlayer(list, this.userID);\r\n\tInterface.CallHook(\"OnRespawnInformationGiven\", this, list);\r\n\tthis.<SendRespawnOptions>g__SendToPlayer|379_1(list, false);\r\n}\r\n\r\n"
     },
     {
       "Type": 1,
@@ -9784,7 +9784,7 @@
         "ReturnType": "bool",
         "Arguments": {}
       },
-      "CodeAfterInjection": "bool System.Collections.IEnumerator.MoveNext()\r\n{\r\n\tobject OxideGen_3 = Interface.CallHook(\"OnCentralizedBanCheck\", this.connection);\r\n\tif (OxideGen_3 != null)\r\n\t{\r\n\t\treturn false;\r\n\t}\r\n\tswitch (this.<>1__state)\r\n//---\r\n"
+      "CodeAfterInjection": "bool IEnumerator.MoveNext()\r\n{\r\n\tobject OxideGen_3 = Interface.CallHook(\"OnCentralizedBanCheck\", this.connection);\r\n\tif (OxideGen_3 != null)\r\n\t{\r\n\t\treturn false;\r\n\t}\r\n\tswitch (this.<>1__state)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -9804,7 +9804,7 @@
           "packet": "Network.Message"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tif (packet.connection == null || !packet.connection.connected)\r\n\t{\r\n\t\tDebug.LogWarning(\"Client without connection tried to run command: \" + text);\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnClientCommand\", packet.connection, text) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tstring text2 = ConsoleSystem.Run(ConsoleSystem.Option.Server.FromConnection(packet.connection).Quiet(), text, System.Array.Empty<object>());\r\n\tif (!string.IsNullOrEmpty(text2))\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tif (packet.connection == null || !packet.connection.connected)\r\n\t{\r\n\t\tDebug.LogWarning(\"Client without connection tried to run command: \" + text);\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnClientCommand\", packet.connection, text) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tstring text2 = ConsoleSystem.Run(ConsoleSystem.Option.Server.FromConnection(packet.connection).Quiet(), text, Array.Empty<object>());\r\n\tif (!string.IsNullOrEmpty(text2))\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -10116,7 +10116,7 @@
           "n": "int"
         }
       },
-      "CodeAfterInjection": "[System.Runtime.CompilerServices.CompilerGenerated]\r\nprivate bool <GetDeliveryEligibleVendingMachines>g__IsEligible|42_0(global::VendingMachine vendingMachine, Vector3 offset, int n)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"CanAccessVendingMachine\", this.config, vendingMachine);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\tRaycastHit raycastHit;\r\n//---\r\n"
+      "CodeAfterInjection": "[CompilerGenerated]\r\nprivate bool <GetDeliveryEligibleVendingMachines>g__IsEligible|42_0(global::VendingMachine vendingMachine, Vector3 offset, int n)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"CanAccessVendingMachine\", this.config, vendingMachine);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\tRaycastHit raycastHit;\r\n//---\r\n"
     },
     {
       "Type": 1,
@@ -10283,7 +10283,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t\tfor (int i = 0; i < 5; i++)\r\n\t\t\t{\r\n\t\t\t\tglobal::Item slot2 = current.inventory.GetSlot(i);\r\n\t\t\t\tif (slot2 != null && Interface.CallHook(\"OnBigWheelLoss\", this, slot2, current) == null)\r\n\t\t\t\t{\r\n\t\t\t\t\tFacepunch.Rust.Analytics.Azure.OnGamblingResult(current.lastPlayer, current, slot2.amount, 0, new System.Guid?(value));\r\n\t\t\t\t\tslot2.Remove(0f);\r\n\t\t\t\t\tflag2 = true;\r\n\t\t\t\t}\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t\tfor (int i = 0; i < 5; i++)\r\n\t\t\t{\r\n\t\t\t\tglobal::Item slot2 = current.inventory.GetSlot(i);\r\n\t\t\t\tif (slot2 != null && Interface.CallHook(\"OnBigWheelLoss\", this, slot2, current) == null)\r\n\t\t\t\t{\r\n\t\t\t\t\tFacepunch.Rust.Analytics.Azure.OnGamblingResult(current.lastPlayer, current, slot2.amount, 0, new Guid?(value));\r\n\t\t\t\t\tslot2.Remove(0f);\r\n\t\t\t\t\tflag2 = true;\r\n\t\t\t\t}\r\n//---\r\n"
     },
     {
       "Type": 1,
@@ -10486,7 +10486,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tthis.playerStartPosition = ownerPlayer.transform.position;\r\n\tbase.SetFlag(global::BaseEntity.Flags.Busy, true, false, true);\r\n\tthis.CurrentState = global::BaseFishingRod.CatchState.Waiting;\r\n\tbase.InvokeRepeating(new System.Action(this.CatchProcess), 0f, 0f);\r\n\tthis.inQueue = false;\r\n\tInterface.CallHook(\"OnFishingRodCast\", this, ownerPlayer, currentLure);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\tthis.playerStartPosition = ownerPlayer.transform.position;\r\n\tbase.SetFlag(global::BaseEntity.Flags.Busy, true, false, true);\r\n\tthis.CurrentState = global::BaseFishingRod.CatchState.Waiting;\r\n\tbase.InvokeRepeating(new Action(this.CatchProcess), 0f, 0f);\r\n\tthis.inQueue = false;\r\n\tInterface.CallHook(\"OnFishingRodCast\", this, ownerPlayer, currentLure);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -10539,7 +10539,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\townerPlayer.SignalBroadcast(global::BaseEntity.Signal.Alt_Attack, null);\r\n\t\tbase.Invoke(new System.Action(this.ResetLine), 6f);\r\n\t\tfishingBobber.Kill(global::BaseNetworkable.DestroyMode.None);\r\n\t\tthis.currentBobber.Set(null);\r\n\t\tbase.CancelInvoke(new System.Action(this.CatchProcess));\r\n\t\tInterface.CallHook(\"OnFishCaught\", this.currentFishTarget, this, ownerPlayer);\r\n\t\treturn;\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\townerPlayer.SignalBroadcast(global::BaseEntity.Signal.Alt_Attack, null);\r\n\t\tbase.Invoke(new Action(this.ResetLine), 6f);\r\n\t\tfishingBobber.Kill(global::BaseNetworkable.DestroyMode.None);\r\n\t\tthis.currentBobber.Set(null);\r\n\t\tbase.CancelInvoke(new Action(this.CatchProcess));\r\n\t\tInterface.CallHook(\"OnFishCaught\", this.currentFishTarget, this, ownerPlayer);\r\n\t\treturn;\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -10762,7 +10762,7 @@
           "mission": "BaseMission"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (!mission.IsEligableForMission(assignee, provider))\r\n\t{\r\n\t\treturn false;\r\n\t}\r\n\tobject returnvar = Interface.CallHook(\"CanAssignMission\", assignee, mission, provider);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\tSystem.Collections.Generic.IReadOnlyList<global::BaseMission.MissionInstance> arg_62_0 = assignee.missions;\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (!mission.IsEligableForMission(assignee, provider))\r\n\t{\r\n\t\treturn false;\r\n\t}\r\n\tobject returnvar = Interface.CallHook(\"CanAssignMission\", assignee, mission, provider);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\tIReadOnlyList<global::BaseMission.MissionInstance> arg_62_0 = assignee.missions;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -10922,7 +10922,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\tif (this.IsDead())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tSystem.Collections.Generic.List<global::SamSite.ISamSiteTarget> list = Pool.GetList<global::SamSite.ISamSiteTarget>();\r\n\tif (Interface.CallHook(\"OnSamSiteTargetScan\", this, list) == null)\r\n\t{\r\n\t\tif (!this.IsInDefenderMode())\r\n\t\t{\r\n\t\t\tthis.<TargetScan>g__AddTargetSet|55_0(list, 32768, global::SamSite.targetTypeVehicle.scanRadius);\r\n\t\t}\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tif (this.IsDead())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tList<global::SamSite.ISamSiteTarget> list = Pool.GetList<global::SamSite.ISamSiteTarget>();\r\n\tif (Interface.CallHook(\"OnSamSiteTargetScan\", this, list) == null)\r\n\t{\r\n\t\tif (!this.IsInDefenderMode())\r\n\t\t{\r\n\t\t\tthis.<TargetScan>g__AddTargetSet|55_0(list, 32768, global::SamSite.targetTypeVehicle.scanRadius);\r\n\t\t}\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -10993,7 +10993,7 @@
           "player": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\treturn;\r\n\t}\r\n\tthis.owner.SetFlag(this.engineStartingFlag, true, false, true);\r\n\tthis.owner.SetFlag(global::BaseEntity.Flags.On, false, false, true);\r\n\tthis.owner.Invoke(new System.Action(this.FinishStartingEngine), this.engineStartupTime);\r\n\tInterface.CallHook(\"OnEngineStarted\", this.owner, player);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\treturn;\r\n\t}\r\n\tthis.owner.SetFlag(this.engineStartingFlag, true, false, true);\r\n\tthis.owner.SetFlag(global::BaseEntity.Flags.On, false, false, true);\r\n\tthis.owner.Invoke(new Action(this.FinishStartingEngine), this.engineStartupTime);\r\n\tInterface.CallHook(\"OnEngineStarted\", this.owner, player);\r\n}\r\n\r\n"
     },
     {
       "Type": 1,
@@ -11121,7 +11121,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\treturn;\r\n\t}\r\n\tthis.goodKids = ((global::BasePlayer.activePlayerList != null) ? new System.Collections.Generic.List<global::BasePlayer>(global::BasePlayer.activePlayerList) : new System.Collections.Generic.List<global::BasePlayer>());\r\n\tthis.stockings = ((global::Stocking.stockings != null) ? new System.Collections.Generic.List<global::Stocking>(global::Stocking.stockings.Values) : new System.Collections.Generic.List<global::Stocking>());\r\n\tbase.Invoke(new System.Action(this.RemoveMe), 60f);\r\n\tif (Interface.CallHook(\"OnXmasLootDistribute\", this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tbase.InvokeRepeating(new System.Action(this.DistributeLoot), 3f, 0.02f);\r\n\tbase.Invoke(new System.Action(this.SendBells), 0.5f);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\treturn;\r\n\t}\r\n\tthis.goodKids = ((global::BasePlayer.activePlayerList != null) ? new List<global::BasePlayer>(global::BasePlayer.activePlayerList) : new List<global::BasePlayer>());\r\n\tthis.stockings = ((global::Stocking.stockings != null) ? new List<global::Stocking>(global::Stocking.stockings.Values) : new List<global::Stocking>());\r\n\tbase.Invoke(new Action(this.RemoveMe), 60f);\r\n\tif (Interface.CallHook(\"OnXmasLootDistribute\", this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tbase.InvokeRepeating(new Action(this.DistributeLoot), 3f, 0.02f);\r\n\tbase.Invoke(new Action(this.SendBells), 0.5f);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -11331,7 +11331,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "public virtual void Begin()\r\n{\r\n\tbase.SetFlag(global::BaseEntity.Flags.OnFire, false, false, true);\r\n\tbase.SetFlag(global::BaseEntity.Flags.On, true, false, false);\r\n\tbase.SendNetworkUpdate_Flags();\r\n\tInterface.CallHook(\"OnFireworkStarted\", this);\r\n\tbase.Invoke(new System.Action(this.OnExhausted), this.activityLength);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "public virtual void Begin()\r\n{\r\n\tbase.SetFlag(global::BaseEntity.Flags.OnFire, false, false, true);\r\n\tbase.SetFlag(global::BaseEntity.Flags.On, true, false, false);\r\n\tbase.SendNetworkUpdate_Flags();\r\n\tInterface.CallHook(\"OnFireworkStarted\", this);\r\n\tbase.Invoke(new Action(this.OnExhausted), this.activityLength);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -11348,7 +11348,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\tbase.SetFlag(global::BaseEntity.Flags.Reserved8, true, false, false);\r\n\tbase.SetFlag(global::BaseEntity.Flags.OnFire, false, false, false);\r\n\tbase.SetFlag(global::BaseEntity.Flags.On, false, false, false);\r\n\tbase.EnableGlobalBroadcast(false);\r\n\tbase.SendNetworkUpdate_Flags();\r\n\tInterface.CallHook(\"OnFireworkExhausted\", this);\r\n\tbase.Invoke(new System.Action(this.Cleanup), this.corpseDuration);\r\n\tglobal::BaseFirework._activeFireworks.Remove(this);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\tbase.SetFlag(global::BaseEntity.Flags.Reserved8, true, false, false);\r\n\tbase.SetFlag(global::BaseEntity.Flags.OnFire, false, false, false);\r\n\tbase.SetFlag(global::BaseEntity.Flags.On, false, false, false);\r\n\tbase.EnableGlobalBroadcast(false);\r\n\tbase.SendNetworkUpdate_Flags();\r\n\tInterface.CallHook(\"OnFireworkExhausted\", this);\r\n\tbase.Invoke(new Action(this.Cleanup), this.corpseDuration);\r\n\tglobal::BaseFirework._activeFireworks.Remove(this);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -11485,7 +11485,7 @@
           "owner": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tbase.SetFlag(global::BaseEntity.Flags.Reserved6, true, false, true);\r\n\tthis.radiusModIndex = 0;\r\n\tthis.nextRocketIndex = Mathf.Min(this.RocketAmmoCount - 1, this.rocketTubes.Length - 1);\r\n\tthis.rocketOwnerRef.Set(owner);\r\n\tbase.InvokeRepeating(new System.Action(this.FireNextRocket), 0f, 0.5f);\r\n\tInterface.CallHook(\"OnMlrsFired\", this, owner);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\tbase.SetFlag(global::BaseEntity.Flags.Reserved6, true, false, true);\r\n\tthis.radiusModIndex = 0;\r\n\tthis.nextRocketIndex = Mathf.Min(this.RocketAmmoCount - 1, this.rocketTubes.Length - 1);\r\n\tthis.rocketOwnerRef.Set(owner);\r\n\tbase.InvokeRepeating(new Action(this.FireNextRocket), 0f, 0.5f);\r\n\tInterface.CallHook(\"OnMlrsFired\", this, owner);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -11750,7 +11750,7 @@
           "amount": "int"
         }
       },
-      "CodeAfterInjection": "public static bool DoSplash(Vector3 position, float radius, global::ItemDefinition liquidDef, int amount)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"CanWaterBallSplash\", liquidDef, position, radius, amount);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\tSystem.Collections.Generic.List<global::BaseEntity> list = Pool.GetList<global::BaseEntity>();\r\n//---\r\n"
+      "CodeAfterInjection": "public static bool DoSplash(Vector3 position, float radius, global::ItemDefinition liquidDef, int amount)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"CanWaterBallSplash\", liquidDef, position, radius, amount);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\tList<global::BaseEntity> list = Pool.GetList<global::BaseEntity>();\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -11952,7 +11952,7 @@
           "radius": "int"
         }
       },
-      "CodeAfterInjection": "private void GetVisibleFrom(Group group, System.Collections.Generic.List<Group> groups, int radius)\r\n{\r\n\tif (Interface.CallHook(\"OnNetworkSubscriptionsGather\", this, group, groups, radius) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tglobal::NetworkVisibilityGrid.<>c__DisplayClass35_0 <>c__DisplayClass35_;\r\n\t<>c__DisplayClass35_.groups = groups;\r\n//---\r\n"
+      "CodeAfterInjection": "private void GetVisibleFrom(Group group, List<Group> groups, int radius)\r\n{\r\n\tif (Interface.CallHook(\"OnNetworkSubscriptionsGather\", this, group, groups, radius) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tglobal::NetworkVisibilityGrid.<>c__DisplayClass35_0 <>c__DisplayClass35_;\r\n\t<>c__DisplayClass35_.groups = groups;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -12013,7 +12013,7 @@
           "player": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "public void AwardGift(global::BasePlayer player)\r\n{\r\n\tif (Interface.CallHook(\"OnAdventGiftAward\", this, player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tSystem.DateTime now = System.DateTime.Now;\r\n\tint num = ((global::AdventCalendar.overrideAdventCalendarDay > 0) ? global::AdventCalendar.overrideAdventCalendarDay : now.Day) - this.startDay;\r\n//---\r\n"
+      "CodeAfterInjection": "public void AwardGift(global::BasePlayer player)\r\n{\r\n\tif (Interface.CallHook(\"OnAdventGiftAward\", this, player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tDateTime now = DateTime.Now;\r\n\tint num = ((global::AdventCalendar.overrideAdventCalendarDay > 0) ? global::AdventCalendar.overrideAdventCalendarDay : now.Day) - this.startDay;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -12212,7 +12212,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "public void DelayedModsChanged()\r\n{\r\n\tif (Interface.CallHook(\"OnWeaponModChange\", this, this.GetOwnerPlayer()) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tSystem.Func<global::ProjectileWeaponMod, global::ProjectileWeaponMod.Modifier> arg_59_1;\r\n\tif ((arg_59_1 = global::BaseProjectile.<>c.<>9__94_0) == null)\r\n//---\r\n"
+      "CodeAfterInjection": "public void DelayedModsChanged()\r\n{\r\n\tif (Interface.CallHook(\"OnWeaponModChange\", this, this.GetOwnerPlayer()) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tFunc<global::ProjectileWeaponMod, global::ProjectileWeaponMod.Modifier> arg_59_1;\r\n\tif ((arg_59_1 = global::BaseProjectile.<>c.<>9__94_0) == null)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -12309,7 +12309,7 @@
           "amount": "int"
         }
       },
-      "CodeAfterInjection": "public int Take(System.Collections.Generic.List<global::Item> collect, int itemid, int amount)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"OnInventoryItemsTake\", this, collect, itemid, amount);\r\n\tif (returnvar is int)\r\n\t{\r\n\t\treturn (int)returnvar;\r\n\t}\r\n\tint num = 0;\r\n//---\r\n"
+      "CodeAfterInjection": "public int Take(List<global::Item> collect, int itemid, int amount)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"OnInventoryItemsTake\", this, collect, itemid, amount);\r\n\tif (returnvar is int)\r\n\t{\r\n\t\treturn (int)returnvar;\r\n\t}\r\n\tint num = 0;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -12329,7 +12329,7 @@
           "id": "int"
         }
       },
-      "CodeAfterInjection": "public System.Collections.Generic.List<global::Item> FindItemsByItemID(int id)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"OnInventoryItemsFind\", this, id);\r\n\tif (returnvar is System.Collections.Generic.List<global::Item>)\r\n\t{\r\n\t\treturn (System.Collections.Generic.List<global::Item>)returnvar;\r\n\t}\r\n\tSystem.Collections.Generic.List<global::Item> list = new System.Collections.Generic.List<global::Item>();\r\n//---\r\n"
+      "CodeAfterInjection": "public List<global::Item> FindItemsByItemID(int id)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"OnInventoryItemsFind\", this, id);\r\n\tif (returnvar is List<global::Item>)\r\n\t{\r\n\t\treturn (List<global::Item>)returnvar;\r\n\t}\r\n\tList<global::Item> list = new List<global::Item>();\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -12351,7 +12351,7 @@
           "ammoType": "Rust.AmmoTypes"
         }
       },
-      "CodeAfterInjection": "public void FindAmmo(System.Collections.Generic.List<global::Item> list, AmmoTypes ammoType)\r\n{\r\n\tif (Interface.CallHook(\"OnInventoryAmmoFind\", this, list, ammoType) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (this.containerMain != null)\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "public void FindAmmo(List<global::Item> list, AmmoTypes ammoType)\r\n{\r\n\tif (Interface.CallHook(\"OnInventoryAmmoFind\", this, list, ammoType) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (this.containerMain != null)\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -12388,7 +12388,7 @@
           "di": "DroppedItem"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tdi.DestroyItem();\r\n\tdi.Kill(global::BaseNetworkable.DestroyMode.None);\r\n\tint arg_26D_0 = this.item.info.GetWorldModelIndex(this.item.amount);\r\n\tthis.item.amount = num2;\r\n\tInterface.CallHook(\"OnDroppedItemCombined\", this);\r\n\tthis.item.MarkDirty();\r\n\tif (this.GetDespawnDuration() < float.PositiveInfinity)\r\n\t{\r\n\t\tbase.Invoke(new System.Action(this.IdleDestroy), this.GetDespawnDuration());\r\n\t}\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tdi.DestroyItem();\r\n\tdi.Kill(global::BaseNetworkable.DestroyMode.None);\r\n\tint arg_26D_0 = this.item.info.GetWorldModelIndex(this.item.amount);\r\n\tthis.item.amount = num2;\r\n\tInterface.CallHook(\"OnDroppedItemCombined\", this);\r\n\tthis.item.MarkDirty();\r\n\tif (this.GetDespawnDuration() < float.PositiveInfinity)\r\n\t{\r\n\t\tbase.Invoke(new Action(this.IdleDestroy), this.GetDespawnDuration());\r\n\t}\r\n//---\r\n"
     },
     {
       "Type": 1,
@@ -12461,7 +12461,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tbase.inventory.temperature = this.cookingTemperature;\r\n\tthis.UpdateAttachmentTemperature();\r\n\tbase.InvokeRepeating(new System.Action(this.Cook), 0.5f, 0.5f);\r\n\tbase.SetFlag(global::BaseEntity.Flags.On, true, false, true);\r\n\tInterface.CallHook(\"OnOvenStarted\", this);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tbase.inventory.temperature = this.cookingTemperature;\r\n\tthis.UpdateAttachmentTemperature();\r\n\tbase.InvokeRepeating(new Action(this.Cook), 0.5f, 0.5f);\r\n\tbase.SetFlag(global::BaseEntity.Flags.On, true, false, true);\r\n\tInterface.CallHook(\"OnOvenStarted\", this);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -13613,7 +13613,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\t{\r\n\t\t\tbase.SetFlag(global::BaseEntity.Flags.Reserved1, true, false, true);\r\n\t\t}\r\n\t\tif (this.timeAlive - this.warmupTime > global::EggHuntEvent.durationSeconds && !base.IsInvoking(new System.Action(this.Cooldown)))\r\n\t\t{\r\n\t\t\tif (Interface.CallHook(\"OnHuntEventEnd\", this) != null)\r\n\t\t\t{\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\tbase.SetFlag(global::BaseEntity.Flags.Reserved2, true, false, true);\r\n\t\t\tthis.CleanupEggs();\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t{\r\n\t\t\tbase.SetFlag(global::BaseEntity.Flags.Reserved1, true, false, true);\r\n\t\t}\r\n\t\tif (this.timeAlive - this.warmupTime > global::EggHuntEvent.durationSeconds && !base.IsInvoking(new Action(this.Cooldown)))\r\n\t\t{\r\n\t\t\tif (Interface.CallHook(\"OnHuntEventEnd\", this) != null)\r\n\t\t\t{\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\tbase.SetFlag(global::BaseEntity.Flags.Reserved2, true, false, true);\r\n\t\t\tthis.CleanupEggs();\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -13789,7 +13789,7 @@
           "created": "bool"
         }
       },
-      "CodeAfterInjection": "private void UpdateNearbyTurrets(bool created)\r\n{\r\n\tSystem.Collections.Generic.List<global::AutoTurret> list = Facepunch.Pool.GetList<global::AutoTurret>();\r\n\tif (Interface.CallHook(\"OnNearbyTurretsScan\", this, list, created) == null)\r\n\t{\r\n\t\tglobal::Vis.Entities<global::AutoTurret>(base.transform.position, ConVar.Sentry.interferenceradius, list, 256, QueryTriggerInteraction.Ignore);\r\n\t}\r\n\tforeach (global::AutoTurret current in list)\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "private void UpdateNearbyTurrets(bool created)\r\n{\r\n\tList<global::AutoTurret> list = Facepunch.Pool.GetList<global::AutoTurret>();\r\n\tif (Interface.CallHook(\"OnNearbyTurretsScan\", this, list, created) == null)\r\n\t{\r\n\t\tglobal::Vis.Entities<global::AutoTurret>(base.transform.position, ConVar.Sentry.interferenceradius, list, 256, QueryTriggerInteraction.Ignore);\r\n\t}\r\n\tforeach (global::AutoTurret current in list)\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
