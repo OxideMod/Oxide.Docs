@@ -60,7 +60,7 @@ In addition to plugin management, Oxide provides an additional permissions syste
 - `oxide.usergroup add "Username" "Group Name"`: This command adds the specified user to the specified group.
 
 :::tip NOTE
-More information on Oxide Permissions can be found in the "Permissions" page.
+More information on Oxide Permissions can be found in the [Oxide Permissions Docs](/core/commands/permission).
 :::
 
 Each plugin can come with its own set of commands. For instance, if you have a plugin called "MyPlugin", it might have a command called "myplugin.mycommand". To allow a user to run this command, you would need to give them the necessary permission using the Oxide permissions system:

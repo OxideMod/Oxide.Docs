@@ -3,7 +3,7 @@ title: Permissions
 after: index
 ---
 
-# Permissions
+# Permissions Library
 
 ## `AddUserGroup`
 

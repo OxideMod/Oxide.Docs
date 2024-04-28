@@ -3,7 +3,7 @@ title: Timers
 after: permissions
 ---
 
-# Timers
+# Timers Library
 
 ## `Once`
 
