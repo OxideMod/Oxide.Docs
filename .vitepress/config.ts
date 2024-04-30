@@ -2,9 +2,7 @@ import MarkdownItFootnote from 'markdown-it-footnote';
 import { defineConfig } from "vitepress";
 import { getHooksSidebar } from "../util/hooks";
 import { getSidebarByPath } from "../util/nav";
-import { getItemSkins } from "../util/items"
 
-var itemSkins = getItemSkins();
 var hooks = getHooksSidebar();
 
 // https://vitepress.dev/reference/site-config
@@ -18,7 +16,7 @@ export default defineConfig({
   lastUpdated: true,
   themeConfig: {
     logo: "/logo.png",
-    externalLinkIcon: true,
+    externalLinkIcon: false,
     
     editLink: {
       pattern: ({ filePath }) => {
