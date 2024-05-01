@@ -145,33 +145,90 @@ public class MyFirstPlugin : RustPlugin
 ```
 After saving and reuploading your plugin to your server, every time a player sends a chat message, a message will be printed to the server console indicating who sent the message and what the message was.
 
-### Step 6: Loading Configurations
-Oxide supports loading plugin configurations from a file. This is useful for settings that you want to be adjustable without modifying the code. Let's implement the `LoadDefaultConfig` method and define a simple configuration that controls the message of our `hello` command.
+### Step 6: Implementing Configuration
+Oxide supports loading plugin configurations from a file. This is useful for settings that you want to be adjustable without modifying the code.
 
-First, add a reference to the `Oxide.Core.Configuration` namespace at the start of your `MyFirstPlugin.cs` file:
+First, add a reference to the `Newtonsoft.Json` namespace at the start of your `MyFirstPlugin.cs` file:
 
 ```csharp
-using Oxide.Core.Configuration;
+using Newtonsoft.Json;
 ```
 
-Next, define a new string variable `helloMessage` and override the method `LoadDefaultConfig` in your MyFirstPlugin class:
+Next, make sure to define your configuration class with the appropriate configuration settings, after doing so you'll need to define a field which will be the reference to your configuration class.
+
+
 ```csharp
+using Newtonsoft.Json;
+
 namespace Oxide.Plugins;
 
 [Info("MyFirstPlugin", "Author Name", "1.0.0")]
 public class MyFirstPlugin : RustPlugin
 {
-    private string helloMessage;
+    private Configuration _configuration;
 
-    protected override void LoadDefaultConfig()
+    private class Configuration
     {
-        Config["HelloMessage"] = helloMessage = "Hello, welcome to the world of Rust modding!";
+        public string ReplyMessage;
     }
-
-        // Existing code...
+    
+    // Existing code...
 }
 ```
-Finally, modify your `HelloCommand` method to use the `helloMessage` variable:
+
+After defining your configuration class and the reference pointing to the configuration class, you'll need to define the following methods:
+
+- ```GetDefaultConfig```
+  - *For creating a new plugin configuration with default configuration values.*
+
+- ```LoadConfig```
+  - *Will load an existing plugin configuration file, if a configuration file isnt found, one will be made by calling the **LoadDefaultConfig** method*
+
+- ```LoadDefaultConfig```
+  - *For avoiding duplicate code, and calls the **GetDefaultConfig** method*
+
+- ```SaveConfig```
+  - *Writes the plugin configuration to a Json File in **oxide/config** directory*
+
+```csharp
+    // Existing Code...
+
+    private Configuration GetDefaultConfig()
+    {
+        return new Configuration
+        {
+            ReplyMessage = "Hello"
+        };
+    }
+
+    protected override void LoadConfig()
+    {
+        base.LoadConfig();
+
+        try
+        {
+            _configuration = Config.ReadObject<Configuration>();
+
+            if (_configuration == null)
+                LoadDefaultConfig();
+        }
+        catch
+        {
+            PrintError("Configuration file is corrupt! Check your config file at https://jsonlint.com/");
+            LoadDefaultConfig();
+            return;
+        }
+
+        SaveConfig();
+    }
+
+    protected override void LoadDefaultConfig() => _configuration = GetDefaultConfig();
+    protected override void SaveConfig() => Config.WriteObject(_configuration);
+
+    // Existing code...
+```
+
+Finally, modify your `HelloCommand` method to access the `ReplyMessage` field in the reference to our plugin configuration class `_configuration`.
 ```csharp
 //Existing code..
     [ChatCommand("hello")]
@@ -186,11 +243,11 @@ Finally, modify your `HelloCommand` method to use the `helloMessage` variable:
     }
 //Existing code..
 ```
-Now, when your plugin is loaded, it will check for a configuration file. If it doesn't exist, a new one will be created with the default `HelloMessage` value. If it does exist, the `HelloMessage` value will be loaded from the file. You can change the `HelloMessage` value in the configuration file to change the message of the `/hello` chat command without modifying the code.
+Now, when your plugin is loaded, it will check for a configuration file. If it doesn't exist, a new one will be created using `LoadDefaultConfig` which creates a new instance of Configuration with the field `ReplyMessage` having it's value as "**hello**". If it does exist, the `ReplyMessage` value will be loaded from the file. You can change the `ReplyMessage` value in the configuration file to change the message of the `/hello` chat command without modifying the code.
 
-After making these changes, save and reupload your plugin to your server. Try changing the `HelloMessage` value in the configuration file and use the `/hello` command in chat. You'll see the updated message!
+After making these changes, save and reupload your plugin to your server. Try changing the `ReplyMessage` value in the configuration file and use the `/hello` command in chat. You'll see the updated message!
 
 ### Summary
-Congratulations, you've created your first Oxide plugin for Rust! You've learned how to create a chat command, implement permissions, use hooks, and load configurations. This is just the beginning - the Oxide modding framework offers many more functionalities to explore.
+Congratulations, you've created your first Oxide plugin for Rust! You've learned how to create a chat command, implement permissions, use hooks, and implement plugin configuration. This is just the beginning - the Oxide modding framework offers many more functionalities to explore.
 
 To continue improving your plugin, consider adding more commands, implementing more hooks, and making more use of the configuration file. Always test your changes by deploying the updated plugin to your server and verifying its behavior. 
