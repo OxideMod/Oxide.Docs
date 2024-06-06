@@ -692,7 +692,7 @@
           "rpc": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tif (this.checkPhysBoxesOnOpen)\r\n\t{\r\n\t\tthis.StartCheckingForBlockages(true);\r\n\t}\r\n\tthis.OnPlayerOpenedDoor(rpc.player);\r\n\tInterface.CallHook(\"OnDoorOpened\", this, rpc.player);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tthis.StartCheckingForBlockages(true);\r\n\t}\r\n\tFacepunch.Rust.Analytics.Azure.OnBaseInteract(rpc.player, this);\r\n\tthis.OnPlayerOpenedDoor(rpc.player);\r\n\tInterface.CallHook(\"OnDoorOpened\", this, rpc.player);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -712,7 +712,7 @@
           "rpc": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tif (this.isSecurityDoor && this.NavMeshLink != null)\r\n\t{\r\n\t\tthis.SetNavMeshLinkEnabled(false);\r\n\t}\r\n\tthis.StartCheckingForBlockages(false);\r\n\tInterface.CallHook(\"OnDoorClosed\", this, rpc.player);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tthis.SetNavMeshLinkEnabled(false);\r\n\t}\r\n\tFacepunch.Rust.Analytics.Azure.OnBaseInteract(rpc.player, this);\r\n\tthis.StartCheckingForBlockages(false);\r\n\tInterface.CallHook(\"OnDoorClosed\", this, rpc.player);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -1468,7 +1468,7 @@
           "targetPos": "int"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\tif (!flag)\r\n\t\t{\r\n\t\t\treturn ItemContainer.CanAcceptResult.CannotAccept;\r\n\t\t}\r\n\t}\r\n\tobject returnvar = Interface.CallHook(\"CanAcceptItem\", this, item, targetPos);\r\n\tif (returnvar is ItemContainer.CanAcceptResult)\r\n\t{\r\n\t\treturn (ItemContainer.CanAcceptResult)returnvar;\r\n\t}\r\n\tif (item.GetItemVolume() > this.containerVolume)\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tif (!flag)\r\n\t\t{\r\n\t\t\treturn ItemContainer.CanAcceptResult.CannotAccept;\r\n\t\t}\r\n\t}\r\n\tobject returnvar = Interface.CallHook(\"CanAcceptItem\", this, item, targetPos);\r\n\tif (returnvar is ItemContainer.CanAcceptResult)\r\n\t{\r\n\t\treturn (ItemContainer.CanAcceptResult)returnvar;\r\n\t}\r\n\tif (this.blockedItems != null && this.blockedItems.Contains(item.info))\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -1668,7 +1668,7 @@
           "mode": "BaseNetworkable/DestroyMode"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tif (this.IsDestroyed)\r\n\t{\r\n\t\tDebug.LogWarning(\"Calling kill - but already IsDestroyed!? \" + ((this != null) ? this.ToString() : null));\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnEntityKill\", this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tbase.gameObject.BroadcastOnParentDestroying();\r\n\tthis.DoEntityDestroy();\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tif (this.IsDestroyed)\r\n\t{\r\n\t\tDebug.LogWarning(\"Calling kill - but already IsDestroyed!? \" + ((this != null) ? this.ToString() : null));\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnEntityKill\", this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tEntityProfiler.killed++;\r\n\tif (EntityProfiler.enabled)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -2240,7 +2240,7 @@
           "itemDef": "ItemDefinition"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\tFunc<global::Item, int> arg_80_1;\r\n\t\t\t\tif ((arg_80_1 = global::VendingMachine.<>c.<>9__19_0) == null)\r\n\t\t\t\t{\r\n\t\t\t\t\targ_80_1 = (global::VendingMachine.<>c.<>9__19_0 = new Func<global::Item, int>(global::VendingMachine.<>c.<>9.<RefreshSellOrderStockLevel>b__19_0));\r\n\t\t\t\t}\r\n\t\t\t\tInterface.CallHook(\"OnRefreshVendingStock\", this, itemDef);\r\n\t\t\t\targ_8C_1 = arg_80_0.Sum(arg_80_1) / current.itemToSellAmount;\r\n\t\t\t}\r\n\t\t\targ_8C_0.inStock = arg_8C_1;\r\n\t\t\tfloat itemCondition = 0f;\r\n\t\t\tfloat itemConditionMax = 0f;\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\tFunc<global::Item, int> arg_80_1;\r\n\t\t\t\tif ((arg_80_1 = global::VendingMachine.<>c.<>9__20_0) == null)\r\n\t\t\t\t{\r\n\t\t\t\t\targ_80_1 = (global::VendingMachine.<>c.<>9__20_0 = new Func<global::Item, int>(global::VendingMachine.<>c.<>9.<RefreshSellOrderStockLevel>b__20_0));\r\n\t\t\t\t}\r\n\t\t\t\tInterface.CallHook(\"OnRefreshVendingStock\", this, itemDef);\r\n\t\t\t\targ_8C_1 = arg_80_0.Sum(arg_80_1) / current.itemToSellAmount;\r\n\t\t\t}\r\n\t\t\targ_8C_0.inStock = arg_8C_1;\r\n\t\t\tfloat itemCondition = 0f;\r\n\t\t\tfloat itemConditionMax = 0f;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -5760,11 +5760,12 @@
       "HookName": "OnWireConnect",
       "HookParameters": {
         "player": "BasePlayer",
-        "baseNetworkable": "BaseNetworkable",
+        "iOEntity": "IOEntity",
         "inputIndex": "int",
-        "baseNetworkable2": "BaseNetworkable",
+        "iOEntity2": "IOEntity",
         "outputIndex": "int",
-        "linePoints": "List`1"
+        "linePoints": "List`1",
+        "slackLevels": "List`1"
       },
       "ReturnBehavior": 1,
       "TargetType": "WireTool",
@@ -5776,7 +5777,7 @@
           "rpc": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\tarray[i].boneName = wireLineAnchorInfo.boneName;\r\n\t\tarray[i].index = (int)wireLineAnchorInfo.index;\r\n\t\tarray[i].position = wireLineAnchorInfo.position;\r\n\t}\r\n\tglobal::WireTool.WireColour colour = this.IntToColour(wireConnectionMessage.wireColor);\r\n\tif (Interface.CallHook(\"OnWireConnect\", player, baseNetworkable, inputIndex, baseNetworkable2, outputIndex, wireConnectionMessage.linePoints) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tiOEntity2.ConnectTo(iOEntity, outputIndex, inputIndex, linePoints, array, colour);\r\n\tif (this.wireType == global::IOEntity.IOType.Industrial)\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tarray[i].boneName = wireLineAnchorInfo.boneName;\r\n\t\tarray[i].index = (int)wireLineAnchorInfo.index;\r\n\t\tarray[i].position = wireLineAnchorInfo.position;\r\n\t}\r\n\tglobal::WireTool.WireColour colour = this.IntToColour(wireConnectionMessage.wireColor);\r\n\tif (Interface.CallHook(\"OnWireConnect\", player, iOEntity, inputIndex, iOEntity2, outputIndex, wireConnectionMessage.linePoints, slackLevels) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tiOEntity2.ConnectTo(iOEntity, outputIndex, inputIndex, linePoints, slackLevels, array, colour);\r\n\tif (this.wireType == global::IOEntity.IOType.Industrial)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -6448,7 +6449,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tthis.<TargetScan>g__AddTargetSet|55_0(list, 1048576, global::SamSite.targetTypeMissile.scanRadius);\r\n\tglobal::SamSite.ISamSiteTarget samSiteTarget = null;\r\n\tforeach (global::SamSite.ISamSiteTarget current in list)\r\n\t{\r\n\t\tif (!current.isClient && current.CenterPoint().y >= this.eyePoint.transform.position.y && current.IsVisible(this.eyePoint.transform.position, current.SAMTargetType.scanRadius * 2f) && current.IsValidSAMTarget(this.staticRespawn) && Interface.CallHook(\"OnSamSiteTarget\", this, current) == null)\r\n\t\t{\r\n\t\t\tsamSiteTarget = current;\r\n\t\t\tbreak;\r\n\t\t}\r\n\t}\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tthis.AddMLRSRockets(list, global::SamSite.targetTypeMissile.scanRadius);\r\n\tglobal::SamSite.ISamSiteTarget samSiteTarget = null;\r\n\tforeach (global::SamSite.ISamSiteTarget current in list)\r\n\t{\r\n\t\tif (!current.isClient && current.CenterPoint().y >= this.eyePoint.transform.position.y && current.IsVisible(this.eyePoint.transform.position, current.SAMTargetType.scanRadius * 2f) && current.IsValidSAMTarget(this.staticRespawn) && Interface.CallHook(\"OnSamSiteTarget\", this, current) == null)\r\n\t\t{\r\n\t\t\tsamSiteTarget = current;\r\n\t\t\tbreak;\r\n\t\t}\r\n\t}\r\n//---\r\n"
     },
     {
       "Type": 1,
@@ -8730,7 +8731,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "public void Cook()\r\n{\r\n\tglobal::Item item = this.FindBurnable();\r\n\tif (Interface.CallHook(\"OnOvenCook\", this, item) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (item == null && !this.CanRunWithNoFuel)\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tif (base.HasFlag(global::BaseEntity.Flags.Reserved8))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tglobal::Item item = this.FindBurnable();\r\n\tif (Interface.CallHook(\"OnOvenCook\", this, item) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (item == null && !this.CanRunWithNoFuel)\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -8966,7 +8967,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\tDebug.Log(\"Player unlocked group :\" + byID.groupName);\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tif (byID.itemDef != null)\r\n\t\t{\r\n\t\t\tif (Interface.CallHook(\"OnTechTreeNodeUnlock\", this, byID, player) != null)\r\n\t\t\t{\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\tint num2;\r\n\t\t\tint num = global::Workbench.ScrapForResearch(byID.itemDef, this.Workbenchlevel, out num2);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\tDebug.Log(\"Player unlocked group :\" + byID.groupName);\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tif (byID.itemDef != null)\r\n\t\t{\r\n\t\t\tif (Interface.CallHook(\"OnTechTreeNodeUnlock\", this, byID, player) != null)\r\n\t\t\t{\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\tint num2;\r\n\t\t\tint num = global::Workbench.ScrapForResearch(byID.itemDef, techTreeForLevel.techTreeLevel, out num2);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -9747,7 +9748,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\tthis.<SendRespawnOptions>g__CollectExternalAndSend|389_0();\r\n\t\treturn;\r\n\t}\r\n\tList<RespawnInformation.SpawnOptions> list = Pool.GetList<RespawnInformation.SpawnOptions>();\r\n\tglobal::BasePlayer.GetRespawnOptionsForPlayer(list, this.userID);\r\n\tInterface.CallHook(\"OnRespawnInformationGiven\", this, list);\r\n\tthis.<SendRespawnOptions>g__SendToPlayer|389_1(list, false);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tthis.<SendRespawnOptions>g__CollectExternalAndSend|390_0();\r\n\t\treturn;\r\n\t}\r\n\tList<RespawnInformation.SpawnOptions> list = Pool.GetList<RespawnInformation.SpawnOptions>();\r\n\tglobal::BasePlayer.GetRespawnOptionsForPlayer(list, this.userID);\r\n\tInterface.CallHook(\"OnRespawnInformationGiven\", this, list);\r\n\tthis.<SendRespawnOptions>g__SendToPlayer|390_1(list, false);\r\n}\r\n\r\n"
     },
     {
       "Type": 1,
@@ -10136,7 +10137,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\t}\r\n\t\tif (this.upkeepTimer < 1f)\r\n\t\t{\r\n\t\t\tif (base.healthFraction < 1f && ConVar.Decay.upkeep_heal_scale > 0f && base.SecondsSinceAttacked > 600f)\r\n\t\t\t{\r\n\t\t\t\tif (Interface.CallHook(\"OnDecayHeal\", this) != null)\r\n\t\t\t\t{\r\n\t\t\t\t\treturn;\r\n\t\t\t\t}\r\n\t\t\t\tfloat num3 = num / this.GetEntityDecayDuration() * ConVar.Decay.upkeep_heal_scale;\r\n\t\t\t\tthis.Heal(this.MaxHealth() * num3);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t}\r\n\t\tif (this.upkeepTimer < 1f)\r\n\t\t{\r\n\t\t\tif (base.healthFraction < 1f && this.GetEntityHealScale() > 0f && base.SecondsSinceAttacked > 600f)\r\n\t\t\t{\r\n\t\t\t\tif (Interface.CallHook(\"OnDecayHeal\", this) != null)\r\n\t\t\t\t{\r\n\t\t\t\t\treturn;\r\n\t\t\t\t}\r\n\t\t\t\tfloat num4 = num2 / this.GetEntityDecayDuration() * this.GetEntityHealScale();\r\n\t\t\t\tthis.Heal(this.MaxHealth() * num4);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -10153,7 +10154,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t\tif (num4 > 0f)\r\n\t\t{\r\n\t\t\tif (Interface.CallHook(\"OnDecayDamage\", this) != null)\r\n\t\t\t{\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\tfloat num5 = num2 / this.GetEntityDecayDuration() * this.MaxHealth();\r\n\t\t\tbase.Hurt(num5 * num4 * this.decayVariance, Rust.DamageType.Decay, null, true);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\t{\r\n\t\t\t\t\tnum5 -= decayPoint.protection;\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t\tif (Interface.CallHook(\"OnDecayDamage\", this) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tif (num5 > 0f)\r\n\t\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -10428,7 +10429,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tif (!this.EvaluateFishingPosition(ref vector, ownerPlayer, out reason, out this.surfaceBody))\r\n\t{\r\n\t\tthis.FailedCast(reason);\r\n\t\treturn;\r\n\t}\r\n\tobject OxideGen_7 = Interface.CallHook(\"CanCastFishingRod\", ownerPlayer, this, currentLure, vector);\r\n\tif (OxideGen_7 is bool && !(bool)OxideGen_7)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tglobal::FishingBobber component = base.gameManager.CreateEntity(this.FishingBobberRef.resourcePath, base.transform.position + Vector3.up * 2.8f + ownerPlayer.eyes.BodyForward() * 1.8f, base.GetOwnerPlayer().ServerRotation, true).GetComponent<global::FishingBobber>();\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tif (!this.EvaluateFishingPosition(ref vector, ownerPlayer, out reason, out this.surfaceBody))\r\n\t{\r\n\t\tthis.FailedCast(reason);\r\n\t\treturn;\r\n\t}\r\n\tglobal::ItemModCompostable itemModCompostable = Interface.CallHook(\"CanCastFishingRod\", ownerPlayer, this, currentLure, vector);\r\n\tif (itemModCompostable is bool && !(bool)itemModCompostable)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tglobal::FishingBobber component = base.gameManager.CreateEntity(this.FishingBobberRef.resourcePath, base.transform.position + Vector3.up * 2.8f + ownerPlayer.eyes.BodyForward() * 1.8f, base.GetOwnerPlayer().ServerRotation, true).GetComponent<global::FishingBobber>();\r\n//---\r\n"
     },
     {
       "Type": 1,
@@ -10516,7 +10517,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\townerPlayer.SignalBroadcast(global::BaseEntity.Signal.Alt_Attack, null);\r\n\t\tbase.Invoke(new Action(this.ResetLine), 6f);\r\n\t\tfishingBobber.Kill(global::BaseNetworkable.DestroyMode.None);\r\n\t\tthis.currentBobber.Set(null);\r\n\t\tbase.CancelInvoke(new Action(this.CatchProcess));\r\n\t\tInterface.CallHook(\"OnFishCaught\", this.currentFishTarget, this, ownerPlayer);\r\n\t\treturn;\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tfishingBobber.Kill(global::BaseNetworkable.DestroyMode.None);\r\n\t\tthis.currentBobber.Set(null);\r\n\t\tbase.CancelInvoke(new Action(this.CatchProcess));\r\n\t\treturn;\r\n\t}\r\n\tInterface.CallHook(\"OnFishCaught\", this.currentFishTarget, this, ownerPlayer);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -10899,7 +10900,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\tif (this.IsDead())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tList<global::SamSite.ISamSiteTarget> list = Pool.GetList<global::SamSite.ISamSiteTarget>();\r\n\tif (Interface.CallHook(\"OnSamSiteTargetScan\", this, list) == null)\r\n\t{\r\n\t\tif (!this.IsInDefenderMode())\r\n\t\t{\r\n\t\t\tthis.<TargetScan>g__AddTargetSet|55_0(list, 32768, global::SamSite.targetTypeVehicle.scanRadius);\r\n\t\t}\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tif (this.IsDead())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tList<global::SamSite.ISamSiteTarget> list = Pool.GetList<global::SamSite.ISamSiteTarget>();\r\n\tif (Interface.CallHook(\"OnSamSiteTargetScan\", this, list) == null)\r\n\t{\r\n\t\tif (!this.IsInDefenderMode())\r\n\t\t{\r\n\t\t\tthis.AddTargetSet(list, global::SamSite.targetTypeVehicle.scanRadius);\r\n\t\t}\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -12129,7 +12130,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tbool flag = msg.read.Bit();\r\n\tif (flag == this.IsInDefenderMode())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnSamSiteModeToggle\", this, player, flag) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tbase.SetFlag(this.Flag_DefenderMode, flag, false, true);\r\n}\r\n"
+      "CodeAfterInjection": "//---\r\n\tbool flag = msg.read.Bit();\r\n\tif (flag == this.IsInDefenderMode())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnSamSiteModeToggle\", this, player, flag) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tbase.SetFlag(this.Flag_ManuallySetMode, flag, false, true);\r\n\tbase.SetFlag(this.Flag_TargetMode, flag, false, true);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -12697,7 +12698,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tProtoBuf.IndustrialConveyor.ItemFilterList itemFilterList = ProtoBuf.IndustrialConveyor.ItemFilterList.Deserialize(msg.read);\r\n\tif (itemFilterList.filters == null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnConveyorFiltersChange\", this, msg.player, itemFilterList) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tint num = Mathf.Min(itemFilterList.filters.Count, 24);\r\n\tint num2 = 0;\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tProtoBuf.IndustrialConveyor.ItemFilterList itemFilterList = ProtoBuf.IndustrialConveyor.ItemFilterList.Deserialize(msg.read);\r\n\tif (itemFilterList.filters == null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnConveyorFiltersChange\", this, msg.player, itemFilterList) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tint num = Mathf.Min(itemFilterList.filters.Count, 60);\r\n\tint num2 = 0;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -14307,7 +14308,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tDebug.Log(\"Respawning loot on cargo ship arrival...\");\r\n\t\tthis.RespawnLoot();\r\n\t}\r\n\tbase.Invoke(new Action(this.LeaveHarbor), global::CargoShip.dock_time);\r\n\tInterface.CallHook(\"OnCargoShipHarborArrived\", this);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\telse if (this.harborIndex == 1)\r\n\t{\r\n\t\tbase.SetFlag(global::BaseEntity.Flags.Reserved4, true, false, true);\r\n\t}\r\n\tbase.Invoke(new Action(this.LeaveHarbor), global::CargoShip.dock_time);\r\n\tInterface.CallHook(\"OnCargoShipHarborArrived\", this);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
