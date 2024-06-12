@@ -11589,7 +11589,7 @@
       "Name": "OnItemStacked [2]",
       "HookName": "OnItemStacked",
       "HookParameters": {
-        "num3": "Item",
+        "item": "Item",
         "instance": "Item",
         "newcontainer": "ItemContainer"
       },
