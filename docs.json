@@ -2240,7 +2240,7 @@
           "itemDef": "ItemDefinition"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\tFunc<global::Item, int> arg_82_1;\r\n\t\t\t\tif ((arg_82_1 = global::VendingMachine.<>c.<>9__22_0) == null)\r\n\t\t\t\t{\r\n\t\t\t\t\targ_82_1 = (global::VendingMachine.<>c.<>9__22_0 = new Func<global::Item, int>(global::VendingMachine.<>c.<>9.<RefreshSellOrderStockLevel>b__22_0));\r\n\t\t\t\t}\r\n\t\t\t\tInterface.CallHook(\"OnRefreshVendingStock\", this, itemDef);\r\n\t\t\t\targ_8E_1 = arg_82_0.Sum(arg_82_1) / current.itemToSellAmount;\r\n\t\t\t}\r\n\t\t\targ_8E_0.inStock = arg_8E_1;\r\n\t\t\tfloat itemCondition = 0f;\r\n\t\t\tfloat itemConditionMax = 0f;\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\tFunc<global::Item, int> arg_82_1;\r\n\t\t\t\tif ((arg_82_1 = global::VendingMachine.<>c.<>9__23_0) == null)\r\n\t\t\t\t{\r\n\t\t\t\t\targ_82_1 = (global::VendingMachine.<>c.<>9__23_0 = new Func<global::Item, int>(global::VendingMachine.<>c.<>9.<RefreshSellOrderStockLevel>b__23_0));\r\n\t\t\t\t}\r\n\t\t\t\tInterface.CallHook(\"OnRefreshVendingStock\", this, itemDef);\r\n\t\t\t\targ_8E_1 = arg_82_0.Sum(arg_82_1) / current.itemToSellAmount;\r\n\t\t\t}\r\n\t\t\targ_8E_0.inStock = arg_8E_1;\r\n\t\t\tfloat itemCondition = 0f;\r\n\t\t\tfloat itemConditionMax = 0f;\r\n//---\r\n"
     },
     {
       "Type": 0,
