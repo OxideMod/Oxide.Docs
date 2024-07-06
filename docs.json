@@ -1281,7 +1281,7 @@
           "rpc": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (!this.CanAdministrate(rpc.player))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnCupboardDeauthorize\", this, rpc2.player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.authorizedPlayers.RemoveWhere((PlayerNameID x) => x.userid == rpc.player.userID);\r\n\tglobal::BasePlayer arg_AC_1 = rpc.player;\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (!this.CanAdministrate(rpc.player))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnCupboardDeauthorize\", this, rpc2.player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.authorizedPlayers.RemoveWhere((PlayerNameID x) => x.userid == rpc.player.userID);\r\n\tglobal::BasePlayer arg_B1_1 = rpc.player;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -6102,7 +6102,7 @@
           "skipDeployDelay": "bool"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tif (this.inventory == null || this.inventory.containerBelt == null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tglobal::Item slot = this.inventory.containerBelt.GetSlot(0);\r\n\tif (Interface.CallHook(\"OnNpcEquipWeapon\", this, slot) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (slot != null)\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tif (base.inventory == null || base.inventory.containerBelt == null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tglobal::Item slot = base.inventory.containerBelt.GetSlot(0);\r\n\tif (Interface.CallHook(\"OnNpcEquipWeapon\", this, slot) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (slot != null)\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -7168,7 +7168,7 @@
           "triggersOnDeath": "System.Collections.Generic.List`1<TriggerBase>"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\tif (this.lifeStory != null)\r\n\t\t\t{\r\n\t\t\t\tnum += Mathf.Clamp(Mathf.FloorToInt(this.lifeStory.secondsAlive / 180f), 0, 20);\r\n\t\t\t}\r\n\t\t\targ_1F8_0.containedItems.Add(new global::ItemAmount(global::ItemManager.FindItemDefinition(\"fat.animal\"), (float)num));\r\n\t\t\tInterface.CallHook(\"OnPlayerCorpseSpawned\", this, playerCorpse);\r\n\t\t\treturn playerCorpse;\r\n\t\t}\r\n\t}\r\n\treturn null;\r\n}\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\tif (this.lifeStory != null)\r\n\t\t\t{\r\n\t\t\t\tnum += Mathf.Clamp(Mathf.FloorToInt(this.lifeStory.secondsAlive / 180f), 0, 20);\r\n\t\t\t}\r\n\t\t\targ_207_0.containedItems.Add(new global::ItemAmount(global::ItemManager.FindItemDefinition(\"fat.animal\"), (float)num));\r\n\t\t\tInterface.CallHook(\"OnPlayerCorpseSpawned\", this, playerCorpse);\r\n\t\t\treturn playerCorpse;\r\n\t\t}\r\n\t}\r\n\treturn null;\r\n}\r\n"
     },
     {
       "Type": 0,
@@ -9715,7 +9715,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\tthis.<SendRespawnOptions>g__CollectExternalAndSend|400_0();\r\n\t\treturn;\r\n\t}\r\n\tList<RespawnInformation.SpawnOptions> list = Pool.GetList<RespawnInformation.SpawnOptions>();\r\n\tglobal::BasePlayer.GetRespawnOptionsForPlayer(list, this.userID);\r\n\tInterface.CallHook(\"OnRespawnInformationGiven\", this, list);\r\n\tthis.<SendRespawnOptions>g__SendToPlayer|400_1(list, false);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\treturn;\r\n\t}\r\n\tList<RespawnInformation.SpawnOptions> list = Pool.GetList<RespawnInformation.SpawnOptions>();\r\n\tList<RespawnInformation.SpawnOptions> arg_3A_0 = list;\r\n\tulong arg_3A_1 = this.userID;\r\n\tInterface.CallHook(\"OnRespawnInformationGiven\", this, list);\r\n\tglobal::BasePlayer.GetRespawnOptionsForPlayer(arg_3A_0, arg_3A_1);\r\n\tthis.<SendRespawnOptions>g__SendToPlayer|400_1(list, false);\r\n}\r\n\r\n"
     },
     {
       "Type": 1,
@@ -9933,7 +9933,7 @@
           "sendImmediate": "bool"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (otherPlayer != null && otherPlayer.IsNpc)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"CanSetRelationship\", player, otherPlayer, type, weight) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tglobal::RelationshipManager.PlayerRelationships playerRelationships = this.GetRelationships(userID);\r\n\tif (!this.CleanupOldContacts(playerRelationships, userID, global::RelationshipManager.RelationshipType.Acquaintance))\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (otherPlayer != null && otherPlayer.IsNpc)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"CanSetRelationship\", player, otherPlayer, type, weight) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tglobal::RelationshipManager.PlayerRelationships playerRelationships = this.GetRelationships(num);\r\n\tif (!this.CleanupOldContacts(playerRelationships, num, global::RelationshipManager.RelationshipType.Acquaintance))\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -11049,7 +11049,7 @@
         "ReturnType": "BaseEntity",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n{\r\n\tglobal::BaseEntity result = null;\r\n\tfloat num = -1f;\r\n\tforeach (global::BaseEntity current in this.Brain.Senses.Players)\r\n\t{\r\n\t\tif (!(current == null) && current.Health() > 0f && Interface.CallHook(\"OnNpcTarget\", this, current) == null)\r\n\t\t{\r\n\t\t\tfloat value = Vector3.Distance(current.transform.position, base.transform.position);\r\n\t\t\tfloat num2 = 1f - Mathf.InverseLerp(1f, this.Brain.SenseRange, value);\r\n\t\t\tfloat value2 = Vector3.Dot((current.transform.position - this.eyes.position).normalized, this.eyes.BodyForward());\r\n\t\t\tnum2 += Mathf.InverseLerp(this.Brain.VisionCone, 1f, value2) / 2f;\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n{\r\n\tglobal::BaseEntity result = null;\r\n\tfloat num = -1f;\r\n\tforeach (global::BaseEntity current in this.Brain.Senses.Players)\r\n\t{\r\n\t\tif (!(current == null) && current.Health() > 0f && Interface.CallHook(\"OnNpcTarget\", this, current) == null)\r\n\t\t{\r\n\t\t\tfloat value = Vector3.Distance(current.transform.position, base.transform.position);\r\n\t\t\tfloat num2 = 1f - Mathf.InverseLerp(1f, this.Brain.SenseRange, value);\r\n\t\t\tfloat value2 = Vector3.Dot((current.transform.position - base.eyes.position).normalized, base.eyes.BodyForward());\r\n\t\t\tnum2 += Mathf.InverseLerp(this.Brain.VisionCone, 1f, value2) / 2f;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -11355,7 +11355,7 @@
           "rpc": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tif (expr_14D != null)\r\n\t{\r\n\t\texpr_14D.Dispose();\r\n\t}\r\n\tthis.Design = design;\r\n\tInterface.CallHook(\"OnFireworkDesignChanged\", this, design, rpc.player);\r\n\tbase.SendNetworkUpdateImmediate(false);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\tif (expr_152 != null)\r\n\t{\r\n\t\texpr_152.Dispose();\r\n\t}\r\n\tthis.Design = design;\r\n\tInterface.CallHook(\"OnFireworkDesignChanged\", this, design, rpc.player);\r\n\tbase.SendNetworkUpdateImmediate(false);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -12118,7 +12118,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tif (num != 0 && !flag && !msg.player.blueprints.CheckSkinOwnership(num, msg.player.userID))\r\n\t{\r\n\t\tDebug.Log(string.Format(\"SprayCan.ChangeItemSkin player does not have item :{0}:\", num));\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnSprayCreate\", this, vector, quaternion) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tulong skinID = global::ItemDefinition.FindSkin(this.SprayDecalItem.itemid, num);\r\n\tglobal::BaseEntity expr_164 = global::GameManager.server.CreateEntity(this.SprayDecalEntityRef.resourcePath, vector, quaternion, true);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tif (num != 0 && !flag && !msg.player.blueprints.CheckSkinOwnership(num, msg.player.userID))\r\n\t{\r\n\t\tDebug.Log(string.Format(\"SprayCan.ChangeItemSkin player does not have item :{0}:\", num));\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnSprayCreate\", this, vector, quaternion) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tulong skinID = global::ItemDefinition.FindSkin(this.SprayDecalItem.itemid, num);\r\n\tglobal::BaseEntity expr_169 = global::GameManager.server.CreateEntity(this.SprayDecalEntityRef.resourcePath, vector, quaternion, true);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -12510,7 +12510,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\tSubject = text\r\n\t\t};\r\n\t\tfeedback.AppInfo.Image = image;\r\n\t\tFacepunch.Feedback.ServerReport(ConVar.Server.reportsServerEndpoint, this.userID, ConVar.Server.reportsServerEndpointKey, feedback);\r\n\t}\r\n\tInterface.CallHook(\"OnFeedbackReported\", this, text, text2, reportType);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\tMessage = text2,\r\n\t\t\tSubject = text\r\n\t\t};\r\n\t\tfeedback.AppInfo.Image = image;\r\n\t\tFacepunch.Feedback.ServerReport(ConVar.Server.reportsServerEndpoint, this.userID, ConVar.Server.reportsServerEndpointKey, feedback);\r\n\t\tInterface.CallHook(\"OnFeedbackReported\", this, text, text2, reportType);\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 1,
@@ -12526,7 +12526,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\tSubject = text\r\n\t\t};\r\n\t\tfeedback.AppInfo.Image = image;\r\n\t\tFacepunch.Feedback.ServerReport(ConVar.Server.reportsServerEndpoint, this.userID, ConVar.Server.reportsServerEndpointKey, feedback);\r\n\t}\r\n\tInterface.CallHook(\"OnFeedbackReported\", this, text, text2, reportType);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\tMessage = text2,\r\n\t\t\tSubject = text\r\n\t\t};\r\n\t\tfeedback.AppInfo.Image = image;\r\n\t\tFacepunch.Feedback.ServerReport(ConVar.Server.reportsServerEndpoint, this.userID, ConVar.Server.reportsServerEndpointKey, feedback);\r\n\t\tInterface.CallHook(\"OnFeedbackReported\", this, text, text2, reportType);\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -12786,7 +12786,7 @@
     },
     {
       "Type": 0,
-      "Name": "OnInventoryAmmoItemFind",
+      "Name": "OnInventoryAmmoItemFind [FlameThrower]",
       "HookName": "OnInventoryAmmoItemFind",
       "HookParameters": {
         "inventory": "PlayerInventory",
@@ -12937,7 +12937,7 @@
           "rpc": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (!this.IsDriver(rpc.player))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnCupboardDeauthorize\", this, rpc2.player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.authorizedPlayers.RemoveAll((PlayerNameID x) => x.userid == rpc.player.userID);\r\n\tglobal::BasePlayer arg_AC_1 = rpc.player;\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (!this.IsDriver(rpc.player))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnCupboardDeauthorize\", this, rpc2.player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.authorizedPlayers.RemoveAll((PlayerNameID x) => x.userid == rpc.player.userID);\r\n\tglobal::BasePlayer arg_B1_1 = rpc.player;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -12977,7 +12977,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tthis.deployerUserID = msg.player.userID;\r\n\tthis.NotifyPlayer(num);\r\n\tthis.NotifyPlayer(this.deployerUserID);\r\n\tglobal::SleepingBag.OnBagChangedOwnership(this, num);\r\n\tbase.SendNetworkUpdate(global::BasePlayer.NetworkQueue.Update);\r\n\tInterface.CallHook(\"OnBedMade\", this, msg.player);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\tulong num = this.deployerUserID;\r\n\tthis.deployerUserID = msg.player.userID;\r\n\tthis.NotifyPlayer(num);\r\n\tthis.NotifyPlayer(this.deployerUserID);\r\n\tglobal::SleepingBag.OnBagChangedOwnership(this, num);\r\n\tInterface.CallHook(\"OnBedMade\", this, msg.player);\r\n\tbase.SendNetworkUpdate(global::BasePlayer.NetworkQueue.Update);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -14117,7 +14117,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\tulong userID = msg.player.userID;\r\n\t\t\tthis.AssignedRadioBy = userID;\r\n\t\t}\r\n\t\tthis.CurrentRadioIp = text;\r\n\t\tbase.baseEntity.ClientRPC<string>(global::RpcTarget.NetworkGroup(\"OnRadioIPChanged\"), this.CurrentRadioIp);\r\n\t\tInterface.CallHook(\"OnBoomboxStationUpdated\", this, text, msg.player);\r\n\t\tif (this.IsOn())\r\n\t\t{\r\n\t\t\tthis.ServerTogglePlay(false);\r\n\t\t}\r\n\t}\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\tulong assignedRadioBy = msg.player.userID.Get();\r\n\t\t\tthis.AssignedRadioBy = assignedRadioBy;\r\n\t\t}\r\n\t\tthis.CurrentRadioIp = text;\r\n\t\tbase.baseEntity.ClientRPC<string>(global::RpcTarget.NetworkGroup(\"OnRadioIPChanged\"), this.CurrentRadioIp);\r\n\t\tInterface.CallHook(\"OnBoomboxStationUpdated\", this, text, msg.player);\r\n\t\tif (this.IsOn())\r\n\t\t{\r\n\t\t\tthis.ServerTogglePlay(false);\r\n\t\t}\r\n\t}\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -14336,62 +14336,6 @@
     },
     {
       "Type": 0,
-      "Name": "OnCupboardAuthorize [BuildingPrivlidge]",
-      "HookName": "OnCupboardAuthorize",
-      "HookParameters": {
-        "instance": "BuildingPrivlidge",
-        "player": "BasePlayer"
-      },
-      "ReturnBehavior": 1,
-      "TargetType": "BuildingPrivlidge",
-      "Category": "Structure",
-      "MethodData": {
-        "MethodName": "AddAuthorize",
-        "ReturnType": "void",
-        "Arguments": {
-          "rpc": "BaseEntity/RPCMessage"
-        }
-      },
-      "CodeAfterInjection": "//---\r\n\t\treturn;\r\n\t}\r\n\tulong num = rpc.read.UInt64();\r\n\tif (rpc.player.userID == num)\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnCupboardAuthorize\", this, rpc.player) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t}\r\n\tthis.AddPlayer(rpc.player, num);\r\n//---\r\n"
-    },
-    {
-      "Type": 1,
-      "Name": "OnCupboardAuthorize [BuildingPrivlidge] [patch]",
-      "HookName": "OnCupboardAuthorize [patch]",
-      "ReturnBehavior": 0,
-      "TargetType": "BuildingPrivlidge",
-      "Category": "Structure",
-      "MethodData": {
-        "MethodName": "AddAuthorize",
-        "ReturnType": "void",
-        "Arguments": {
-          "rpc": "BaseEntity/RPCMessage"
-        }
-      }
-    },
-    {
-      "Type": 0,
-      "Name": "OnCupboardAssign [BuildingPrivlidge]",
-      "HookName": "OnCupboardAssign",
-      "HookParameters": {
-        "instance": "BuildingPrivlidge",
-        "num": "ulong",
-        "player": "BasePlayer"
-      },
-      "ReturnBehavior": 1,
-      "TargetType": "BuildingPrivlidge",
-      "Category": "Structure",
-      "MethodData": {
-        "MethodName": "AddAuthorize",
-        "ReturnType": "void",
-        "Arguments": {
-          "rpc": "BaseEntity/RPCMessage"
-        }
-      },
-      "CodeAfterInjection": "//---\r\n\t\tif (Interface.CallHook(\"OnCupboardAuthorize\", this, rpc.player) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t}\r\n\telse if (Interface.CallHook(\"OnCupboardAssign\", this, num, rpc.player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.AddPlayer(rpc.player, num);\r\n\tbase.SendNetworkUpdate(global::BasePlayer.NetworkQueue.Update);\r\n//---\r\n"
-    },
-    {
-      "Type": 0,
       "Name": "OnElevatorButtonPress",
       "HookName": "OnElevatorButtonPress",
       "HookParameters": {
@@ -14467,6 +14411,27 @@
         }
       },
       "CodeAfterInjection": "//---\r\n\t\t\t}\r\n\t\t}\r\n\t\tbase.Hurt(info);\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnPlayerPveDamage\", info.Initiator, info, this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\t(info.Initiator as global::BasePlayer).Hurt(info.damageTypes.Total(), Rust.DamageType.Generic, null, true);\r\n}\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "IOnCupboardAuthorize [BuildingPrivlidge]",
+      "HookName": "IOnCupboardAuthorize",
+      "HookParameters": {
+        "num": "ulong",
+        "player": "BasePlayer",
+        "instance": "BuildingPrivlidge"
+      },
+      "ReturnBehavior": 4,
+      "TargetType": "BuildingPrivlidge",
+      "Category": "Structure",
+      "MethodData": {
+        "MethodName": "AddAuthorize",
+        "ReturnType": "void",
+        "Arguments": {
+          "rpc": "BaseEntity/RPCMessage"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\tif (!this.CanAdministrate(rpc.player))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tulong num = rpc.read.UInt64();\r\n\tif (Interface.CallHook(\"IOnCupboardAuthorize\", num, rpc.player, this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.AddPlayer(rpc.player, num);\r\n\tbase.SendNetworkUpdate(global::BasePlayer.NetworkQueue.Update);\r\n//---\r\n"
     },
     {
       "Type": 0,
