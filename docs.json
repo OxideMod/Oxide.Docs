@@ -14435,6 +14435,50 @@
     },
     {
       "Type": 0,
+      "Name": "OnStructureUpgraded",
+      "HookName": "OnStructureUpgraded",
+      "HookParameters": {
+        "instance": "BuildingBlock",
+        "player": "BasePlayer",
+        "type": "Enum",
+        "skin": "ulong"
+      },
+      "ReturnBehavior": 0,
+      "TargetType": "BuildingBlock",
+      "Category": "Structure",
+      "MethodData": {
+        "MethodName": "DoUpgradeToGrade",
+        "ReturnType": "void",
+        "Arguments": {
+          "msg": "BaseEntity/RPCMessage"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t\t{\r\n\t\t\tNetworkIdentifier = this.net.ID,\r\n\t\t\tIntIdentifier = (int)constructionGrade.gradeBase.type\r\n\t\t}, 1f);\r\n\t}\r\n\tInterface.CallHook(\"OnStructureUpgraded\", this, msg.player, constructionGrade.gradeBase.type, constructionGrade.gradeBase.skin);\r\n}\r\n\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnStructureUpgraded [Delayed]",
+      "HookName": "OnStructureUpgraded",
+      "HookParameters": {
+        "instance": "BuildingBlock",
+        "player": "BasePlayer",
+        "enum": "Enum",
+        "num": "ulong"
+      },
+      "ReturnBehavior": 0,
+      "TargetType": "BuildingBlock",
+      "Category": "Structure",
+      "MethodData": {
+        "MethodName": "DoUpgradeToGrade_Delayed",
+        "ReturnType": "void",
+        "Arguments": {
+          "msg": "BaseEntity/RPCMessage"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tbase.ClientRPC<int, ulong>(global::RpcTarget.NetworkGroup(\"DoUpgradeEffect\"), (int)@enum, num);\r\n\tFacepunch.Rust.Analytics.Azure.OnBuildingBlockUpgraded(msg.player, this, @enum, this.playerCustomColourToApply, num);\r\n\tthis.OnSkinChanged(this.skinID, num);\r\n\tthis.ChangeGrade(@enum, true, true);\r\n\tInterface.CallHook(\"OnStructureUpgraded\", this, msg.player, @enum, num);\r\n}\r\n\r\n"
+    },
+    {
+      "Type": 0,
       "Name": "IOnServerCommand",
       "HookName": "IOnServerCommand",
       "HookParameters": {
