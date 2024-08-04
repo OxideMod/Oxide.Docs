@@ -1,9 +1,15 @@
 import MarkdownItFootnote from 'markdown-it-footnote';
-import { defineConfig } from "vitepress";
+import { defineConfig, HeadConfig } from "vitepress";
 import { getHooksSidebar } from "../util/hooks";
 import { getSidebarByPath } from "../util/nav";
 
 var hooks = getHooksSidebar();
+
+const umamiScript: HeadConfig = ["script", {
+  defer: "true",
+  src: "https://um.oxidemod.com/script.js",
+  "data-website-id": "28a8b6b5-bf7b-481b-bdc5-f4dafeb0a796"
+}]
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -93,6 +99,7 @@ export default defineConfig({
       copyright: "Copyright © 2023-present OxideMod",
     },
   },
+  head: [umamiScript],
   markdown: {
     config(md) {
         md.use(MarkdownItFootnote);
