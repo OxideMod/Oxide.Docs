@@ -472,7 +472,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (!this.CanChangeToGrade(constructionGrade.gradeBase.type, constructionGrade.gradeBase.skin, msg.player))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnStructureUpgrade\", this, msg.player, constructionGrade.gradeBase.type, constructionGrade.gradeBase.skin) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (!this.CanAffordUpgrade(constructionGrade.gradeBase.type, constructionGrade.gradeBase.skin, msg.player))\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\t});\r\n\t\t\t}\r\n\t\t}\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnStructureUpgrade\", this, msg.player, constructionGrade.gradeBase.type, constructionGrade.gradeBase.skin) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (!this.CanAffordUpgrade(constructionGrade.gradeBase.type, constructionGrade.gradeBase.skin, msg.player))\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -1341,7 +1341,7 @@
           "obj": "BaseCombatEntity"
         }
       },
-      "CodeAfterInjection": "public bool ObjectVisible(BaseCombatEntity obj)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"CanBeTargeted\", obj, this);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\tList<RaycastHit> list = Pool.GetList<RaycastHit>();\r\n//---\r\n"
+      "CodeAfterInjection": "public bool ObjectVisible(BaseCombatEntity obj)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"CanBeTargeted\", obj, this);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\tList<RaycastHit> list = Pool.Get<List<RaycastHit>>();\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -1734,7 +1734,7 @@
           "userid": "ulong"
         }
       },
-      "CodeAfterInjection": "public static void Broadcast(string message, string username = \"SERVER\", string color = \"#eee\", ulong userid = 0uL)\r\n{\r\n\tif (Interface.CallHook(\"OnServerMessage\", message, username, color, userid) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tstring text = username.EscapeRichText();\r\n\tConsoleNetwork.BroadcastToAllClients(\"chat.add\", new object[]\r\n//---\r\n"
+      "CodeAfterInjection": "public static void Broadcast(string message, string username = \"SERVER\", string color = \"#eee\", ulong userid = 0uL)\r\n{\r\n\tif (Interface.CallHook(\"OnServerMessage\", message, username, color, userid) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tstring text = username.EscapeRichText(false);\r\n\tConsoleNetwork.BroadcastToAllClients(\"chat.add\", new object[]\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -2179,7 +2179,7 @@
           "rpc": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tif (this.IsVending())\r\n\t{\r\n\t\trpc.player.ShowToast(GameTip.Styles.Red_Normal, VendingMachine.WaitForVendingMessage, Array.Empty<string>());\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnBuyVendingItem\", this, rpc.player, num, num2) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.SetPendingOrder(rpc.player, num, num2);\r\n\tbase.Invoke(new Action(this.CompletePendingOrder), this.GetBuyDuration());\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tif (this.IsVending())\r\n\t{\r\n\t\trpc.player.ShowToast(GameTip.Styles.Red_Normal, VendingMachine.WaitForVendingMessage, false, Array.Empty<string>());\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnBuyVendingItem\", this, rpc.player, num, num2) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.SetPendingOrder(rpc.player, num, num2);\r\n\tbase.Invoke(new Action(this.CompletePendingOrder), this.GetBuyDuration());\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -2735,7 +2735,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\tstring arg_78_0 = \"Invalid item (\";\r\n\t\tItemId itemId2 = itemId;\r\n\t\targ_7D_0.ChatMessage(arg_78_0 + itemId2.ToString() + \")\");\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"CanMoveItem\", item, this, itemContainerId, num, num2, itemMoveModifier) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tBaseEntity entityOwner = item.GetEntityOwner();\r\n\tif (entityOwner != null && entityOwner == msg.player && msg.player.IsRestrainedOrSurrendering)\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tmsg.player.ShowToast(GameTip.Styles.Error, PlayerInventoryErrors.InvalidItem, false, Array.Empty<string>());\r\n\t\tConstructionErrors.Log(msg.player, id.ToString());\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"CanMoveItem\", item, this, itemContainerId, num, num2, itemMoveModifier) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tBaseEntity entityOwner = item.GetEntityOwner();\r\n\tif (entityOwner != null && entityOwner == msg.player && msg.player.IsRestrainedOrSurrendering)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -3792,7 +3792,7 @@
       "HookName": "OnEntityBuilt",
       "HookParameters": {
         "instance": "Planner",
-        "arg_263_0": "GameObject"
+        "result": "GameObject"
       },
       "ReturnBehavior": 0,
       "TargetType": "Planner",
@@ -3805,7 +3805,7 @@
           "component": "Construction"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t{\r\n\t\townerPlayer.ChatMessage(\"Can't place: \" + global::Construction.lastPlacementError);\r\n\t}\r\n\tif (gameObject != null)\r\n\t{\r\n\t\tInterface.CallHook(\"OnEntityBuilt\", this, gameObject);\r\n\t\tglobal::Deployable deployable = this.GetDeployable();\r\n\t\tglobal::BaseEntity baseEntity = gameObject.ToBaseEntity(false);\r\n\t\tif (baseEntity != null && deployable != null)\r\n\t\t{\r\n\t\t\tif (this.ShouldParent(target.entity, deployable))\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\townerPlayer.ShowToast(global::GameTip.Styles.Error, global::Construction.lastPlacementError, false, Array.Empty<string>());\r\n\t\tglobal::ConstructionErrors.Log(ownerPlayer, global::Construction.lastPlacementErrorDebug);\r\n\t}\r\n\tif (gameObject != null)\r\n\t{\r\n\t\tInterface.CallHook(\"OnEntityBuilt\", this, gameObject);\r\n\t\tglobal::Deployable deployable = this.GetDeployable();\r\n\t\tglobal::BaseEntity baseEntity = gameObject.ToBaseEntity(false);\r\n\t\tif (baseEntity != null && deployable != null)\r\n\t\t{\r\n\t\t\tif (this.ShouldParent(target.entity, deployable))\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -4261,7 +4261,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\tglobal::Effect.server.Run(\"assets/bundled/prefabs/fx/impacts/additive/fire.prefab\", current, 0u, new Vector3(0f, 1f, 0f), Vector3.up, null, false, null);\r\n\t\t\t}\r\n\t\t\thitInfo.PointEnd = current.transform.position;\r\n\t\t\thitInfo.HitPositionWorld = current.transform.position;\r\n\t\t\thitInfo.damageTypes.Set(Rust.DamageType.Heat, this.damagePerSecond * this.tickRate);\r\n\t\t\tInterface.CallHook(\"OnFireBallDamage\", this, current, hitInfo);\r\n\t\t\tcurrent.OnAttacked(hitInfo);\r\n\t\t}\r\n\t}\r\n\tPool.FreeList<global::BaseCombatEntity>(ref list);\r\n}\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\tglobal::Effect.server.Run(\"assets/bundled/prefabs/fx/impacts/additive/fire.prefab\", current, 0u, new Vector3(0f, 1f, 0f), Vector3.up, null, false, null);\r\n\t\t\t}\r\n\t\t\thitInfo.PointEnd = current.transform.position;\r\n\t\t\thitInfo.HitPositionWorld = current.transform.position;\r\n\t\t\thitInfo.damageTypes.Set(Rust.DamageType.Heat, this.damagePerSecond * this.tickRate);\r\n\t\t\tInterface.CallHook(\"OnFireBallDamage\", this, current, hitInfo);\r\n\t\t\tcurrent.OnAttacked(hitInfo);\r\n\t\t}\r\n\t}\r\n\tPool.FreeUnmanaged<global::BaseCombatEntity>(ref list);\r\n}\r\n"
     },
     {
       "Type": 0,
@@ -4609,7 +4609,7 @@
           "arg": "ConsoleSystem/Arg"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tglobal::RelationshipManager.PlayerTeam OxideGen_2 = global::RelationshipManager.ServerInstance.CreateTeam();\r\n\tglobal::RelationshipManager.PlayerTeam playerTeam = OxideGen_2;\r\n\tplayerTeam.teamLeader = basePlayer.userID;\r\n\tplayerTeam.AddPlayer(basePlayer);\r\n\tFacepunch.Rust.Analytics.Azure.OnTeamChanged(\"created\", playerTeam.teamID, basePlayer.userID, basePlayer.userID, playerTeam.members);\r\n\tInterface.CallHook(\"OnTeamCreated\", basePlayer, OxideGen_2);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\tglobal::RelationshipManager.PlayerTeam OxideGen_2 = global::RelationshipManager.ServerInstance.CreateTeam();\r\n\tglobal::RelationshipManager.PlayerTeam playerTeam = OxideGen_2;\r\n\tplayerTeam.teamLeader = basePlayer.userID;\r\n\tplayerTeam.AddPlayer(basePlayer, false);\r\n\tFacepunch.Rust.Analytics.Azure.OnTeamChanged(\"created\", playerTeam.teamID, basePlayer.userID, basePlayer.userID, playerTeam.members);\r\n\tInterface.CallHook(\"OnTeamCreated\", basePlayer, OxideGen_2);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -4720,7 +4720,7 @@
       "TargetType": "World",
       "Category": "World",
       "MethodData": {
-        "MethodName": "Spawn",
+        "MethodName": "SpawnPrefab",
         "ReturnType": "void",
         "Arguments": {
           "category": "string",
@@ -6020,7 +6020,7 @@
           "force": "bool"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\tnum2 = 0f;\r\n\t\t}\r\n\t}\r\n\tPool.FreeList<global::ItemAmount>(ref list);\r\n\tthis.cachedProtectedMinutes = num2;\r\n\tInterface.CallHook(\"OnCupboardProtectionCalculated\", this, this.cachedProtectedMinutes);\r\n\treturn this.cachedProtectedMinutes;\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\tnum2 = 0f;\r\n\t\t}\r\n\t}\r\n\tPool.FreeUnmanaged<global::ItemAmount>(ref list);\r\n\tthis.cachedProtectedMinutes = num2;\r\n\tInterface.CallHook(\"OnCupboardProtectionCalculated\", this, this.cachedProtectedMinutes);\r\n\treturn this.cachedProtectedMinutes;\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -7115,7 +7115,7 @@
           "Status": "AuthResponse"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif ((Status == AuthResponse.PublisherBanned || Status == AuthResponse.VACBanned) && !this.bannedPlayerNotices.Contains(SteamId))\r\n\t{\r\n\t\tInterface.CallHook(\"IOnPlayerBanned\", connection, Status);\r\n\t\tglobal::ConsoleNetwork.BroadcastToAllClients(\"chat.add\", new object[]\r\n\t\t{\r\n\t\t\t2,\r\n\t\t\t0,\r\n\t\t\t\"<color=#fff>SERVER</color> Kicking \" + connection.username.EscapeRichText() + \" (banned by anticheat)\"\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif ((Status == AuthResponse.PublisherBanned || Status == AuthResponse.VACBanned) && !this.bannedPlayerNotices.Contains(SteamId))\r\n\t{\r\n\t\tInterface.CallHook(\"IOnPlayerBanned\", connection, Status);\r\n\t\tglobal::ConsoleNetwork.BroadcastToAllClients(\"chat.add\", new object[]\r\n\t\t{\r\n\t\t\t2,\r\n\t\t\t0,\r\n\t\t\t\"<color=#fff>SERVER</color> Kicking \" + connection.username.EscapeRichText(false) + \" (banned by anticheat)\"\r\n//---\r\n"
     },
     {
       "Type": 1,
@@ -7707,7 +7707,9 @@
       "MethodData": {
         "MethodName": "OpenConnection",
         "ReturnType": "void",
-        "Arguments": {}
+        "Arguments": {
+          "useSteamServer": "bool"
+        }
       },
       "CodeAfterInjection": "//---\r\n\tConsoleSystem.OnReplicatedVarChanged += new Action<string, string>(global::ServerMgr.OnReplicatedVarChanged);\r\n\tif (ConVar.Server.autoUploadMap)\r\n\t{\r\n\t\tglobal::MapUploader.UploadMap();\r\n\t}\r\n\tInterface.CallHook(\"IOnServerInitialized\");\r\n}\r\n\r\n"
     },
@@ -8238,13 +8240,13 @@
       "TargetType": "Elevator",
       "Category": "Elevator",
       "MethodData": {
-        "MethodName": "<CallElevator>b__29_0",
+        "MethodName": "<CallElevator>b__26_0",
         "ReturnType": "void",
         "Arguments": {
           "elevatorEnt": "Elevator"
         }
       },
-      "CodeAfterInjection": "[CompilerGenerated]\r\nprivate void <CallElevator>b__29_0(global::Elevator elevatorEnt)\r\n{\r\n\tif (elevatorEnt.IsTop)\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnElevatorCall\", this, elevatorEnt) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tfloat num;\r\n\t\televatorEnt.RequestMoveLiftTo(this.Floor, out num, this);\r\n//---\r\n"
+      "CodeAfterInjection": "[CompilerGenerated]\r\nprivate void <CallElevator>b__26_0(global::Elevator elevatorEnt)\r\n{\r\n\tif (elevatorEnt.IsTop)\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnElevatorCall\", this, elevatorEnt) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tfloat num;\r\n\t\televatorEnt.RequestMoveLiftTo(this.Floor, out num, this);\r\n//---\r\n"
     },
     {
       "Type": 1,
@@ -9743,7 +9745,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\tthis.<SendRespawnOptions>g__CollectExternalAndSend|409_0();\r\n\t\treturn;\r\n\t}\r\n\tList<RespawnInformation.SpawnOptions> list = Pool.GetList<RespawnInformation.SpawnOptions>();\r\n\tglobal::BasePlayer.GetRespawnOptionsForPlayer(list, this.userID);\r\n\tInterface.CallHook(\"OnRespawnInformationGiven\", this, list);\r\n\tthis.<SendRespawnOptions>g__SendToPlayer|409_1(list, false);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tthis.<SendRespawnOptions>g__CollectExternalAndSend|409_0();\r\n\t\treturn;\r\n\t}\r\n\tList<RespawnInformation.SpawnOptions> list = Pool.Get<List<RespawnInformation.SpawnOptions>>();\r\n\tglobal::BasePlayer.GetRespawnOptionsForPlayer(list, this.userID);\r\n\tInterface.CallHook(\"OnRespawnInformationGiven\", this, list);\r\n\tthis.<SendRespawnOptions>g__SendToPlayer|409_1(list, false);\r\n}\r\n\r\n"
     },
     {
       "Type": 1,
@@ -10838,7 +10840,7 @@
           "surfaceNormal": "UnityEngine.Vector3"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\tfloat num2 = (float)num / this.numToCreate;\r\n\t\t\tVector3 modifiedAimConeDirection = global::AimConeUtil.GetModifiedAimConeDirection(this.spreadAngle * this.spreadCurve.Evaluate(num2), surfaceNormal, true);\r\n\t\t\tbaseEntity.transform.SetPositionAndRotation(position, Quaternion.LookRotation(modifiedAimConeDirection));\r\n\t\t\tbaseEntity.creatorEntity = ((this.creatorEntity == null) ? baseEntity : this.creatorEntity);\r\n\t\t\tbaseEntity.Spawn();\r\n\t\t\tInterface.CallHook(\"OnFlameExplosion\", this, component);\r\n\t\t\tVector3 vector = modifiedAimConeDirection.normalized * UnityEngine.Random.Range(this.minVelocity, this.maxVelocity) * this.velocityCurve.Evaluate(num2 * UnityEngine.Random.Range(1f, 1.1f));\r\n\t\t\tglobal::FireBall component2 = baseEntity.GetComponent<global::FireBall>();\r\n\t\t\tif (component2 != null)\r\n\t\t\t{\r\n\t\t\t\tcomponent2.SetDelayedVelocity(vector);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\tfloat y = UnityEngine.Random.Range(0f, 360f);\r\n\t\t\tQuaternion rotation = Quaternion.Euler(0f, y, 0f);\r\n\t\t\tbaseEntity.transform.SetPositionAndRotation(position, rotation);\r\n\t\t\tbaseEntity.creatorEntity = ((this.creatorEntity == null) ? baseEntity : this.creatorEntity);\r\n\t\t\tbaseEntity.Spawn();\r\n\t\t\tInterface.CallHook(\"OnFlameExplosion\", this, component);\r\n\t\t\tVector3 vector = modifiedAimConeDirection.normalized * UnityEngine.Random.Range(this.minVelocity, this.maxVelocity) * this.velocityCurve.Evaluate(num2 * UnityEngine.Random.Range(1f, 1.1f));\r\n\t\t\tglobal::FireBall component2 = baseEntity.GetComponent<global::FireBall>();\r\n\t\t\tif (component2 != null)\r\n\t\t\t{\r\n\t\t\t\tcomponent2.SetDelayedVelocity(vector);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -10895,7 +10897,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\tif (this.IsDead())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tList<global::SamSite.ISamSiteTarget> list = Pool.GetList<global::SamSite.ISamSiteTarget>();\r\n\tif (Interface.CallHook(\"OnSamSiteTargetScan\", this, list) == null)\r\n\t{\r\n\t\tif (!this.IsInDefenderMode())\r\n\t\t{\r\n\t\t\tthis.AddTargetSet(list, global::SamSite.targetTypeVehicle.scanRadius);\r\n\t\t}\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tif (this.IsDead())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tList<global::SamSite.ISamSiteTarget> list = Pool.Get<List<global::SamSite.ISamSiteTarget>>();\r\n\tif (Interface.CallHook(\"OnSamSiteTargetScan\", this, list) == null)\r\n\t{\r\n\t\tif (!this.IsInDefenderMode())\r\n\t\t{\r\n\t\t\tthis.AddTargetSet(list, global::SamSite.targetTypeVehicle.scanRadius);\r\n\t\t}\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -11560,7 +11562,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\tglobal::ItemDefinition itemDefinition2 = null;\r\n\t\t\tulong skinID = global::ItemDefinition.FindSkin(itemDefinition.itemid, <>c__DisplayClass34_.targetSkin);\r\n\t\t\tglobal::ItemSkinDirectory.Skin skin = itemDefinition.skins.FirstOrDefault((global::ItemSkinDirectory.Skin x) => x.id == <>c__DisplayClass34_.targetSkin);\r\n\t\t\tif (Interface.CallHook(\"OnEntityReskin\", baseEntity, skin, msg.player) != null)\r\n\t\t\t{\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\tif (skin.invItem != null)\r\n\t\t\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\tglobal::ItemDefinition itemDefinition2 = null;\r\n\t\t\tulong skinID = global::ItemDefinition.FindSkin(itemDefinition.itemid, <>c__DisplayClass39_.targetSkin);\r\n\t\t\tglobal::ItemSkinDirectory.Skin skin = itemDefinition.skins.FirstOrDefault((global::ItemSkinDirectory.Skin x) => x.id == <>c__DisplayClass39_.targetSkin);\r\n\t\t\tif (Interface.CallHook(\"OnEntityReskin\", baseEntity, skin, msg.player) != null)\r\n\t\t\t{\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\tif (skin.invItem != null)\r\n\t\t\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -11581,7 +11583,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\t\t\tcurrent4.TargetEntity.transform.localRotation = current4.LocalRotation;\r\n\t\t\t\t\t\tcurrent4.TargetEntity.SendNetworkUpdate(global::BasePlayer.NetworkQueue.Update);\r\n\t\t\t\t\t}\r\n\t\t\t\t\tbaseEntity.SetSlots(slots);\r\n\t\t\t\t}\r\n\t\t\t\tInterface.CallHook(\"OnEntityReskinned\", baseEntity, skin, msg.player);\r\n\t\t\t\tPool.FreeList<global::SprayCan.ChildPreserveInfo>(ref list);\r\n\t\t\t}\r\n\t\t\tbase.ClientRPC<int, NetworkableId>(global::RpcTarget.NetworkGroup(\"Client_ReskinResult\"), 1, baseEntity.net.ID);\r\n\t\t}\r\n\t}\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\t\t\tcurrent4.TargetEntity.transform.localRotation = current4.LocalRotation;\r\n\t\t\t\t\t\tcurrent4.TargetEntity.SendNetworkUpdate(global::BasePlayer.NetworkQueue.Update);\r\n\t\t\t\t\t}\r\n\t\t\t\t\tbaseEntity.SetSlots(slots);\r\n\t\t\t\t}\r\n\t\t\t\tInterface.CallHook(\"OnEntityReskinned\", baseEntity, skin, msg.player);\r\n\t\t\t\tPool.FreeUnmanaged<global::SprayCan.ChildPreserveInfo>(ref list);\r\n\t\t\t}\r\n\t\t\tbase.ClientRPC<int, NetworkableId>(global::RpcTarget.NetworkGroup(\"Client_ReskinResult\"), 1, baseEntity.net.ID);\r\n\t\t}\r\n\t}\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -11727,7 +11729,7 @@
           "amount": "int"
         }
       },
-      "CodeAfterInjection": "public static bool DoSplash(Vector3 position, float radius, global::ItemDefinition liquidDef, int amount)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"CanWaterBallSplash\", liquidDef, position, radius, amount);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\tList<global::BaseEntity> list = Pool.GetList<global::BaseEntity>();\r\n//---\r\n"
+      "CodeAfterInjection": "public static bool DoSplash(Vector3 position, float radius, global::ItemDefinition liquidDef, int amount)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"CanWaterBallSplash\", liquidDef, position, radius, amount);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\tList<global::BaseEntity> list = Pool.Get<List<global::BaseEntity>>();\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -11828,7 +11830,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t}\r\n\t\t}\r\n\t\tPool.FreeList<global::BasePlayer>(ref list);\r\n\t}\r\n\titem.LoseCondition(1f);\r\n\tInterface.CallHook(\"OnPhotoCaptured\", photoEntity, item, player, array);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t}\r\n\t\t}\r\n\t\tPool.FreeUnmanaged<global::BasePlayer>(ref list);\r\n\t}\r\n\titem.LoseCondition(1f);\r\n\tInterface.CallHook(\"OnPhotoCaptured\", photoEntity, item, player, array);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -12458,7 +12460,7 @@
           "data": "Epic.OnlineServices.AntiCheatCommon.OnClientActionRequiredCallbackInfo&"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\t{\r\n\t\t\t\t\t2,\r\n\t\t\t\t\t0,\r\n\t\t\t\t\t\"<color=#fff>SERVER</color> Kicking \" + connection.username + \" (banned by anticheat)\"\r\n\t\t\t\t});\r\n\t\t\t\tInterface.CallHook(\"OnPlayerBanned\", connection, actionReasonDetailsString.ToString());\r\n\t\t\t\tif (data.ActionReasonCode == AntiCheatCommonClientActionReason.PermanentBanned)\r\n\t\t\t\t{\r\n\t\t\t\t\tConVar.Entity.DeleteBy(connection.userid);\r\n\t\t\t\t}\r\n\t\t\t}\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t2,\r\n\t\t\t\t\t\t0,\r\n\t\t\t\t\t\t\"<color=#fff>SERVER</color> Kicking \" + connection.username + \" (banned by anticheat)\"\r\n\t\t\t\t\t});\r\n\t\t\t\t\tInterface.CallHook(\"OnPlayerBanned\", connection, actionReasonDetailsString.ToString());\r\n\t\t\t\t\tif (data.ActionReasonCode == AntiCheatCommonClientActionReason.PermanentBanned)\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\tConVar.Entity.DeleteBy(connection.userid);\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -12478,7 +12480,7 @@
           "data": "Epic.OnlineServices.AntiCheatCommon.OnClientActionRequiredCallbackInfo&"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t{\r\n\t\t\tUtf8String actionReasonDetailsString = data.ActionReasonDetailsString;\r\n\t\t\tDebug.Log(string.Format(\"[EAC] Kicking {0} / {1} ({2})\", connection.userid, connection.username, actionReasonDetailsString));\r\n\t\t\tconnection.authStatusEAC = \"eac\";\r\n\t\t\tNetwork.Net.sv.Kick(connection, \"EAC: \" + actionReasonDetailsString, false);\r\n\t\t\tInterface.CallHook(\"OnPlayerKicked\", connection, actionReasonDetailsString.ToString());\r\n\t\t\tif (data.ActionReasonCode == AntiCheatCommonClientActionReason.PermanentBanned || data.ActionReasonCode == AntiCheatCommonClientActionReason.TemporaryBanned)\r\n\t\t\t{\r\n\t\t\t\tconnection.authStatusEAC = \"eacbanned\";\r\n\t\t\t\tglobal::ConsoleNetwork.BroadcastToAllClients(\"chat.add\", new object[]\r\n\t\t\t\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\telse\r\n\t\t\t{\r\n\t\t\t\tDebug.Log(string.Format(\"[EAC] Kicking {0} / {1} ({2})\", connection.userid, connection.username, actionReasonDetailsString));\r\n\t\t\t\tconnection.authStatusEAC = \"eac\";\r\n\t\t\t\tNetwork.Net.sv.Kick(connection, \"EAC: \" + actionReasonDetailsString, false);\r\n\t\t\t\tInterface.CallHook(\"OnPlayerKicked\", connection, actionReasonDetailsString.ToString());\r\n\t\t\t\tif (data.ActionReasonCode == AntiCheatCommonClientActionReason.PermanentBanned || data.ActionReasonCode == AntiCheatCommonClientActionReason.TemporaryBanned)\r\n\t\t\t\t{\r\n\t\t\t\t\tconnection.authStatusEAC = \"eacbanned\";\r\n\t\t\t\t\tglobal::ConsoleNetwork.BroadcastToAllClients(\"chat.add\", new object[]\r\n\t\t\t\t\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -13030,7 +13032,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\t\tif (this.<strChatText>5__2.Length <= 0)\r\n\t\t\t{\r\n\t\t\t\tresult = false;\r\n\t\t\t\tgoto IL_8CF;\r\n\t\t\t}\r\n\t\t\tobject returnvar = Interface.CallHook(\"IOnPlayerChat\", this.userId, this.username, this.<strChatText>5__2, this.targetChannel, this.player);\r\n\t\t\tif (returnvar is bool)\r\n\t\t\t{\r\n\t\t\t\tresult = (bool)returnvar;\r\n\t\t\t}\r\n\t\t\tif (this.<strChatText>5__2.StartsWith(\"/\") || this.<strChatText>5__2.StartsWith(\"\\\\\"))\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\tif (this.<strChatText>5__2.Length <= 0)\r\n\t\t\t{\r\n\t\t\t\tresult = false;\r\n\t\t\t\tgoto IL_8D1;\r\n\t\t\t}\r\n\t\t\tobject returnvar = Interface.CallHook(\"IOnPlayerChat\", this.userId, this.username, this.<strChatText>5__2, this.targetChannel, this.player);\r\n\t\t\tif (returnvar is bool)\r\n\t\t\t{\r\n\t\t\t\tresult = (bool)returnvar;\r\n\t\t\t}\r\n\t\t\tif (this.<strChatText>5__2.StartsWith(\"/\") || this.<strChatText>5__2.StartsWith(\"\\\\\"))\r\n//---\r\n"
     },
     {
       "Type": 1,
@@ -13379,7 +13381,7 @@
           "explosionFxPos": "UnityEngine.Vector3"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tglobal::Effect.server.Run(this.watersurfaceExplosionEffect.resourcePath, explosionFxPos.WithY(waterInfo.surfaceLevel), this.explosionUsesForward ? base.transform.forward : Vector3.up, null, true, null);\r\n\t}\r\n\tif (this.damageTypes.Count > 0)\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnTimedExplosiveExplode\", this, explosionFxPos) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tVector3 vector = this.ExplosionCenter();\r\n\t\tif (this.onlyDamageParent)\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tglobal::Effect.server.Run(this.watersurfaceExplosionEffect.resourcePath, explosionFxPos.WithY(waterInfo.surfaceLevel), this.explosionUsesForward ? base.transform.forward : Vector3.up, null, true, null);\r\n\t}\r\n\tif (this.damageTypes.Count > 0)\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnTimedExplosiveExplode\", this, explosionFxPos) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tVector3 vector2 = this.ExplosionCenter();\r\n\t\tif (this.onlyDamageParent)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -13766,7 +13768,7 @@
           "created": "bool"
         }
       },
-      "CodeAfterInjection": "private void UpdateNearbyTurrets(bool created)\r\n{\r\n\tList<global::AutoTurret> list = Facepunch.Pool.GetList<global::AutoTurret>();\r\n\tif (Interface.CallHook(\"OnNearbyTurretsScan\", this, list, created) == null)\r\n\t{\r\n\t\tglobal::Vis.Entities<global::AutoTurret>(base.transform.position, ConVar.Sentry.interferenceradius, list, 256, QueryTriggerInteraction.Ignore);\r\n\t}\r\n\tforeach (global::AutoTurret current in list)\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "private void UpdateNearbyTurrets(bool created)\r\n{\r\n\tList<global::AutoTurret> list = Facepunch.Pool.Get<List<global::AutoTurret>>();\r\n\tif (Interface.CallHook(\"OnNearbyTurretsScan\", this, list, created) == null)\r\n\t{\r\n\t\tglobal::Vis.Entities<global::AutoTurret>(base.transform.position, ConVar.Sentry.interferenceradius, list, 256, QueryTriggerInteraction.Ignore);\r\n\t}\r\n\tforeach (global::AutoTurret current in list)\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -14067,7 +14069,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n{\r\n\tusing (MapNoteList mapNoteList = Pool.Get<MapNoteList>())\r\n\t{\r\n\t\tmapNoteList.notes = Pool.GetList<MapNote>();\r\n\t\tmapNoteList.notes.AddRange(this.State.pings);\r\n\t\tInterface.CallHook(\"OnPlayerPingsSend\", this, mapNoteList);\r\n\t\tbase.ClientRPC<MapNoteList>(global::RpcTarget.Player(\"Client_ReceivePings\", this), mapNoteList);\r\n\t\tmapNoteList.notes.Clear();\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n{\r\n\tusing (MapNoteList mapNoteList = Pool.Get<MapNoteList>())\r\n\t{\r\n\t\tmapNoteList.notes = Pool.Get<List<MapNote>>();\r\n\t\tmapNoteList.notes.AddRange(this.State.pings);\r\n\t\tInterface.CallHook(\"OnPlayerPingsSend\", this, mapNoteList);\r\n\t\tbase.ClientRPC<MapNoteList>(global::RpcTarget.Player(\"Client_ReceivePings\", this), mapNoteList);\r\n\t\tmapNoteList.notes.Clear();\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -14921,7 +14923,7 @@
           "addLimit": "int"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\tList<Group> list2 = Pool.GetList<Group>();\r\n\t\tList<Group> list3 = Pool.GetList<Group>();\r\n\t\tthis.sv.visibility.GetVisibleFromFar(this.group, list3);\r\n\t\tthis.AddVisibleFromNear(this.secondaryGroup, list3);\r\n\t\tthis.subscriber.subscribed.Compare(list3, list, list2, null);\r\n\t\tif (Interface.CallHook(\"OnNetworkSubscriptionsUpdate\", this, list, list2) == null)\r\n\t\t{\r\n\t\t\tfor (int i = 0; i < list2.Count; i++)\r\n\t\t\t{\r\n\t\t\t\tGroup group = list2[i];\r\n\t\t\t\tif (removeLimit > 0)\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tList<Group> list2 = Pool.Get<List<Group>>();\r\n\t\tList<Group> list3 = Pool.Get<List<Group>>();\r\n\t\tthis.sv.visibility.GetVisibleFromFar(this.group, list3);\r\n\t\tthis.AddVisibleFromNear(this.secondaryGroup, list3);\r\n\t\tthis.subscriber.subscribed.Compare(list3, list, list2, null);\r\n\t\tif (Interface.CallHook(\"OnNetworkSubscriptionsUpdate\", this, list, list2) == null)\r\n\t\t{\r\n\t\t\tfor (int i = 0; i < list2.Count; i++)\r\n\t\t\t{\r\n\t\t\t\tGroup group = list2[i];\r\n\t\t\t\tif (removeLimit > 0)\r\n//---\r\n"
     },
     {
       "Type": 1,
@@ -14935,7 +14937,7 @@
         "ReturnType": "bool",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\tList<Group> list = Pool.GetList<Group>();\r\n\t\tList<Group> list2 = Pool.GetList<Group>();\r\n\t\tthis.sv.visibility.GetVisibleFromNear(this.group, list2);\r\n\t\tthis.AddVisibleFromNear(this.secondaryGroup, list2);\r\n\t\tthis.subscriber.subscribed.Compare(list2, list, null, null);\r\n\t\tif (Interface.CallHook(\"OnNetworkSubscriptionsUpdate\", this, list, null) == null)\r\n\t\t{\r\n\t\t\tfor (int i = 0; i < list.Count; i++)\r\n\t\t\t{\r\n\t\t\t\tGroup group = list[i];\r\n\t\t\t\tthis.subscriber.Subscribe(group);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tList<Group> list = Pool.Get<List<Group>>();\r\n\t\tList<Group> list2 = Pool.Get<List<Group>>();\r\n\t\tthis.sv.visibility.GetVisibleFromNear(this.group, list2);\r\n\t\tthis.AddVisibleFromNear(this.secondaryGroup, list2);\r\n\t\tthis.subscriber.subscribed.Compare(list2, list, null, null);\r\n\t\tif (Interface.CallHook(\"OnNetworkSubscriptionsUpdate\", this, list, null) == null)\r\n\t\t{\r\n\t\t\tfor (int i = 0; i < list.Count; i++)\r\n\t\t\t{\r\n\t\t\t\tGroup group = list[i];\r\n\t\t\t\tthis.subscriber.Subscribe(group);\r\n//---\r\n"
     },
     {
       "Type": 1,
