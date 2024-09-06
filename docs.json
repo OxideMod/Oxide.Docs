@@ -472,7 +472,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\t});\r\n\t\t\t}\r\n\t\t}\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnStructureUpgrade\", this, msg.player, constructionGrade.gradeBase.type, constructionGrade.gradeBase.skin) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (!this.CanAffordUpgrade(constructionGrade.gradeBase.type, constructionGrade.gradeBase.skin, msg.player))\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnStructureUpgrade\", this, msg.player, constructionGrade.gradeBase.type, constructionGrade.gradeBase.skin) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (!this.CanAffordUpgrade(constructionGrade.gradeBase.type, constructionGrade.gradeBase.skin, msg.player))\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
