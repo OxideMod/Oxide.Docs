@@ -17,18 +17,18 @@ export function getGroupedHooks() {
   var out = {} as { [key: string]: { [key: string]: IHook[] } };
 
   for (let filename of docsNames) {
-	  const hooksJson = getHookJson(filename);
-	  hooksJson.forEach((hook) => {
-		if (!out[hook.Category]) {
-		  out[hook.Category] = {};
-		}
+	const hooksJson = getHookJson(filename);
+	hooksJson.forEach((hook) => {
+	  if (!out[hook.Category]) {
+	    out[hook.Category] = {};
+	  }
 
-		if (!out[hook.Category][hook.HookName]) {
-		  out[hook.Category][hook.HookName] = [];
-		}
+	  if (!out[hook.Category][hook.HookName]) {
+	    out[hook.Category][hook.HookName] = [];
+	  }
 
-		out[hook.Category][hook.HookName].push(hook);
-	  });
+	  out[hook.Category][hook.HookName].push(hook);
+	});
   }
 
   // Sort categories, hooks and hooks by TargetType and MethodData.MethodName using tolocaleCompare
