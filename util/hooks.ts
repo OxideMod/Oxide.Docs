@@ -22,7 +22,7 @@ export function getGroupedHooks() {
 	  if (!out[hook.Category]) {
 	    out[hook.Category] = {};
 	  }
-
+ 
 	  if (!out[hook.Category][hook.HookName]) {
 	    out[hook.Category][hook.HookName] = [];
 	  }
