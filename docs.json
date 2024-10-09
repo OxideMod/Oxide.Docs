@@ -3828,7 +3828,7 @@
           "component": "Construction"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\townerPlayer.ShowToast(global::GameTip.Styles.Error, global::Construction.lastPlacementError, false, Array.Empty<string>());\r\n\t\tglobal::ConstructionErrors.Log(ownerPlayer, global::Construction.lastPlacementErrorDebug);\r\n\t}\r\n\tif (gameObject != null)\r\n\t{\r\n\t\tInterface.CallHook(\"OnEntityBuilt\", this, gameObject);\r\n\t\tglobal::Deployable deployable = this.GetDeployable();\r\n\t\tglobal::BaseEntity baseEntity = gameObject.ToBaseEntity(false);\r\n\t\tif (baseEntity != null && deployable != null)\r\n\t\t{\r\n\t\t\tif (this.ShouldParent(target.entity, deployable))\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t}\r\n\t\tglobal::ConstructionErrors.Log(ownerPlayer, global::Construction.lastPlacementErrorDebug);\r\n\t}\r\n\tif (gameObject != null)\r\n\t{\r\n\t\tInterface.CallHook(\"OnEntityBuilt\", this, gameObject);\r\n\t\tglobal::Deployable deployable = this.GetDeployable();\r\n\t\tglobal::BaseEntity baseEntity = gameObject.ToBaseEntity(false);\r\n\t\tif (baseEntity != null && deployable != null)\r\n\t\t{\r\n\t\t\tif (this.ShouldParent(target.entity, deployable))\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -7485,7 +7485,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tif (msg.player == null || !msg.player.CanBuild())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tint num = msg.read.Int32();\r\n\tif (Interface.CallHook(\"OnRfFrequencyChange\", this, num, msg.player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tglobal::RFManager.ChangeFrequency(this.frequency, num, this, true, true);\r\n\tthis.frequency = num;\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tif (msg.player == null || !msg.player.CanBuild())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tint num = msg.read.Int32();\r\n\tif (Interface.CallHook(\"OnRfFrequencyChange\", this, num, msg.player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tnum = global::RFManager.ClampFrequency(num);\r\n\tglobal::RFManager.ChangeFrequency(this.frequency, num, this, true, true);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -7506,7 +7506,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tglobal::RFManager.ChangeFrequency(this.frequency, num, this, true, true);\r\n\tthis.frequency = num;\r\n\tthis.MarkDirty();\r\n\tbase.SendNetworkUpdate(global::BasePlayer.NetworkQueue.Update);\r\n\tInterface.CallHook(\"OnRfFrequencyChanged\", this, num, msg.player);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\tnum = global::RFManager.ClampFrequency(num);\r\n\tglobal::RFManager.ChangeFrequency(this.frequency, num, this, true, true);\r\n\tthis.frequency = num;\r\n\tthis.MarkDirty();\r\n\tbase.SendNetworkUpdate(global::BasePlayer.NetworkQueue.Update);\r\n\tInterface.CallHook(\"OnRfFrequencyChanged\", this, num, msg.player);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
