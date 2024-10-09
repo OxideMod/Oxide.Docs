@@ -12,34 +12,24 @@ export function getHookJson(filename: string) {
 }
 
 export function getGroupedHooks() {
-  const hooksJson = getHookJson("docs.json");
+  const docsNames: string[] = ["docs.json", "docs_core.json"];
 
   var out = {} as { [key: string]: { [key: string]: IHook[] } };
 
-  hooksJson.forEach((hook) => {
-    if (!out[hook.Category]) {
-      out[hook.Category] = {};
-    }
+  for (let filename of docsNames) {
+	  const hooksJson = getHookJson(filename);
+	  hooksJson.forEach((hook) => {
+		if (!out[hook.Category]) {
+		  out[hook.Category] = {};
+		}
 
-    if (!out[hook.Category][hook.HookName]) {
-      out[hook.Category][hook.HookName] = [];
-    }
+		if (!out[hook.Category][hook.HookName]) {
+		  out[hook.Category][hook.HookName] = [];
+		}
 
-    out[hook.Category][hook.HookName].push(hook);
-  });
-  
-  const hooksCoreJson = getHookJson("docs_core.json");
-  hooksCoreJson.forEach((hook) => {
-    if (!out[hook.Category]) {
-      out[hook.Category] = {};
-    }
-
-    if (!out[hook.Category][hook.HookName]) {
-      out[hook.Category][hook.HookName] = [];
-    }
-
-    out[hook.Category][hook.HookName].push(hook);
-  });
+		out[hook.Category][hook.HookName].push(hook);
+	  });
+  }
 
   // Sort categories, hooks and hooks by TargetType and MethodData.MethodName using tolocaleCompare
   Object.keys(out).forEach((category) => {
