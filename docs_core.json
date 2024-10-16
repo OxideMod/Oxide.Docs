@@ -7,9 +7,10 @@
 			"HookParameters": {
 				"args": "object[]"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "CSharpExtension",
-			"Category": "Oxide.CSharp",
+			"Category": "Server",
 			"HookDescription": "Called each frame",
 			"MethodData": {
 				"MethodName": "OnFrame",
@@ -25,9 +26,10 @@
 			"Name": "Loaded",
 			"HookName": "Loaded",
 			"HookParameters": {},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "CSharpPlugin",
-			"Category": "Oxide.CSharp",
+			"Category": "Server",
 			"HookDescription": "Called when a plugin has finished loading\r\nOther plugins may or may not be present, dependant on load order",
 			"MethodData": {
 				"MethodName": "HandleAddedToManager",
@@ -41,9 +43,10 @@
 			"Name": "Unload",
 			"HookName": "Unload",
 			"HookParameters": {},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "CSharpPlugin",
-			"Category": "Oxide.CSharp",
+			"Category": "Server",
 			"HookDescription": "Called when a plugin is being unloaded",
 			"MethodData": {
 				"MethodName": "HandleRemovedFromManager",
@@ -62,9 +65,10 @@
 				"name": "string",
 				"owner": "Plugin"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "Permission",
-			"Category": "Oxide.Core",
+			"Category": "Permission",
 			"HookDescription": "Called when a permission has been registered",
 			"MethodData": {
 				"MethodName": "RegisterPermission",
@@ -85,9 +89,10 @@
 				"oldName": "string",
 				"newName": "string"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "Permission",
-			"Category": "Oxide.Core",
+			"Category": "Permission",
 			"HookDescription": "Called when a player's stored nickname has been changed",
 			"MethodData": {
 				"MethodName": "UpdateNickname",
@@ -106,9 +111,10 @@
 			"HookParameters": {
 				"name": "string"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "Permission",
-			"Category": "Oxide.Core",
+			"Category": "Permission",
 			"HookDescription": "Called when a group has been created successfully",
 			"MethodData": {
 				"MethodName": "CreateGroup",
@@ -128,9 +134,10 @@
 			"HookParameters": {
 				"name": "string"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "Permission",
-			"Category": "Oxide.Core",
+			"Category": "Permission",
 			"HookDescription": "Called when a group has been deleted successfully",
 			"MethodData": {
 				"MethodName": "RemoveGroup",
@@ -149,9 +156,10 @@
 				"name": "string",
 				"title": "string"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "Permission",
-			"Category": "Oxide.Core",
+			"Category": "Permission",
 			"HookDescription": "Called when a group title has been updated",
 			"MethodData": {
 				"MethodName": "SetGroupTitle",
@@ -171,9 +179,10 @@
 				"name": "string",
 				"title": "string"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "Permission",
-			"Category": "Oxide.Core",
+			"Category": "Permission",
 			"HookDescription": "Called when a group title has been updated",
 			"MethodData": {
 				"MethodName": "SetGroupRank",
@@ -193,9 +202,10 @@
 				"name": "string",
 				"parent": "string"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "Permission",
-			"Category": "Oxide.Core",
+			"Category": "Permission",
 			"HookDescription": "Called when a group parent has been updated",
 			"MethodData": {
 				"MethodName": "SetGroupParent",
@@ -214,9 +224,10 @@
 			"HookParameters": {
 				"plugin": "Plugin"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "OxideMod",
-			"Category": "Oxide.Core",
+			"Category": "Server",
 			"HookDescription": "Called when any plugin has been loaded.  Not to be confused with Loaded",
 			"MethodData": {
 				"MethodName": "PluginLoaded",
@@ -234,9 +245,10 @@
 			"HookParameters": {
 				"plugin": "Plugin"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "OxideMod",
-			"Category": "Oxide.Core",
+			"Category": "Server",
 			"HookDescription": "Called when any plugin has been unloaded. Not to be confused with Unload",
 			"MethodData": {
 				"MethodName": " UnloadPlugin()",
@@ -250,11 +262,12 @@
 		{
 			"Type": 0,
 			"Name": "Init",
-			"HookName": " Init",
+			"HookName": "Init",
 			"HookParameters": {},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "CSPlugin",
-			"Category": "Oxide.Core",
+			"Category": "Server",
 			"HookDescription": "Called when a plugin is being initialized.\r\n Other plugins may or may not be present, dependant on load order",
 			"MethodData": {
 				"MethodName": "HandleAddedToManager",
@@ -270,9 +283,10 @@
 			"Name": "LoadDefaultConfig",
 			"HookName": "LoadDefaultConfig",
 			"HookParameters": {},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "Plugin",
-			"Category": "Oxide.Core",
+			"Category": "Server",
 			"HookDescription": "Called when the config for a plugin should be initialized.\r\n Only called if the config file does not already exist",
 			"MethodData": {
 				"MethodName": "LoadDefaultConfig",
@@ -286,9 +300,10 @@
 			"Name": "LoadDefaultMessages",
 			"HookName": "LoadDefaultMessages",
 			"HookParameters": {},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "Plugin",
-			"Category": "Oxide.Core",
+			"Category": "Server",
 			"HookDescription": "Called when the localization for a plugin should be registered",
 			"MethodData": {
 				"MethodName": "LoadDefaultMessages",
@@ -306,9 +321,10 @@
 				"command": "string",
 				"args": "string[]"
 			},
+			"ReturnType": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RemoteConsole",
-			"Category": "Oxide.Core",
+			"Category": "Server",
 			"HookDescription": "Called when a rcon command is received",
 			"MethodData": {
 				"MethodName": "OnMessage",
@@ -329,9 +345,10 @@
 				"player": "BasePlayer",
 				"userId": "ulong"
 			},
+			"ReturnType": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "Player",
-			"Category": "Oxide.Rust",
+			"Category": "Server",
 			"HookDescription": "Called when a message is sent to a player",
 			"MethodData": {
 				"MethodName": "Message",
@@ -353,9 +370,10 @@
 			"HookParameters": {
 				"serverInitialized": "bool"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Server",
 			"HookDescription": "Let plugins know server startup is complete",
 			"MethodData": {
 				"MethodName": "OnPluginLoaded",
@@ -373,9 +391,10 @@
 			"HookParameters": {
 				"serverInitialized": "bool"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Server",
 			"HookDescription": "Let plugins know server startup is complete",
 			"MethodData": {
 				"MethodName": "IOnServerInitialized",
@@ -389,9 +408,10 @@
 			"Name": "OnServerShutdown",
 			"HookName": "OnServerShutdown",
 			"HookParameters": {},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Server",
 			"HookDescription": "Server is shutting down",
 			"MethodData": {
 				"MethodName": "IOnServerShutdown",
@@ -408,9 +428,10 @@
 				"player": "BasePlayer",
 				"json": "string"
 			},
-			"ReturnBehavior": 0,
+			"ReturnType": "object",
+			"ReturnBehavior": 1,
 			"TargetType": "CUIHelper",
-			"Category": "Oxide.Rust",
+			"Category": "Server",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "AddUi",
@@ -430,9 +451,10 @@
 				"player": "BasePlayer",
 				"elem": "string"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "CUIHelper",
-			"Category": "Oxide.Rust",
+			"Category": "Server",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "DestroyUi",
@@ -452,9 +474,10 @@
 				"entity": "BaseCombatEntity",
 				"hitInfo": "HitInfo"
 			},
+			"ReturnType": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Entity",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "IOnBaseCombatEntityHurt",
@@ -474,9 +497,10 @@
 				"npc": "BaseNpc",
 				"target": "BaseEntity"
 			},
+			"ReturnType": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Entity",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "IOnNpcTarget",
@@ -496,9 +520,10 @@
 				"baseNetworkable": "BaseNetworkable",
 				"saveInfo": "BaseNetworkable.SaveInfo"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Entity",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "IOnEntitySaved",
@@ -518,9 +543,10 @@
 				"item": "Item",
 				"amount": "ref float"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Item",
 			"HookDescription": "Called right before the condition of the item is modified",
 			"MethodData": {
 				"MethodName": "IOnLoseCondition",
@@ -540,12 +566,13 @@
 				"basePlayer": "BasePlayer",
 				"entity": "DoorCloser"
 			},
+			"ReturnType": "bool",
 			"ReturnBehavior": 3,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Entity",
 			"HookDescription": "Called when a player attempts to pickup a deployed entity (AutoTurret, BaseMountable, BearTrap, DecorDeployable, Door, DoorCloser, ReactiveTarget, SamSite, SleepingBag, SpinnerWheel, StorageContainer, etc.)",
 			"MethodData": {
-				"MethodName": " ICanPickupEntity",
+				"MethodName": "ICanPickupEntity",
 				"ReturnType": "object",
 				"Arguments": {
 					"basePlayer": "BasePlayer",
@@ -562,9 +589,10 @@
 				"basePlayer": "BasePlayer",
 				"hitInfo": "HitInfo"
 			},
+			"ReturnType": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Entity",
 			"HookDescription": "Alternatively, modify the HitInfo object to change the damage.\r\n It should be okay to set the damage to 0, but if you don't return non-null, the player's client will receive a damage indicator (if entity is a BasePlayer).\r\n HitInfo has all kinds of useful things in it, such as Weapon, damageProperties or damageTypes",
 			"MethodData": {
 				"MethodName": "IOnBasePlayerAttacked",
@@ -584,9 +612,10 @@
 				"basePlayer": "BasePlayer",
 				"hitInfo": "HitInfo"
 			},
+			"ReturnType": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Entity",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "IOnBasePlayerHurt",
@@ -609,9 +638,10 @@
 				"reason": "string",
 				"expiry": "long"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Server",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "OnServerUserSet",
@@ -637,9 +667,10 @@
 				"reason": "string",
 				"expiry": "long"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Server",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "OnServerUserSet",
@@ -663,9 +694,10 @@
 				"steamId": "ulong",
 				"address": "string"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Server",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "OnServerUserRemove",
@@ -685,9 +717,10 @@
 				"steamId": "string",
 				"address": "string"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Server",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "OnServerUserRemove",
@@ -705,12 +738,13 @@
 			"HookParameters": {
 				"connection": "Connection"
 			},
+			"ReturnType": "bool",
 			"ReturnBehavior": 3,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Server",
 			"HookDescription": "Called when a player attempt to login the server",
 			"MethodData": {
-				"MethodName": " IOnUserApprove",
+				"MethodName": "IOnUserApprove",
 				"ReturnType": "object",
 				"Arguments": {
 					"connection": "Connection"
@@ -727,12 +761,13 @@
 				"connectionId": "string",
 				"connectionIp": "string"
 			},
+			"ReturnType": "bool",
 			"ReturnBehavior": 3,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Server",
 			"HookDescription": "Called when a player attempt to login the server",
 			"MethodData": {
-				"MethodName": " IOnUserApprove",
+				"MethodName": "IOnUserApprove",
 				"ReturnType": "object",
 				"Arguments": {
 					"connection": "Connection"
@@ -748,9 +783,10 @@
 				"connection": "Connection",
 				"status": "string"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Server",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "IOnPlayerBanned",
@@ -772,9 +808,10 @@
 				"message": "string",
 				"channel": "Chat.ChatChannel"
 			},
-			"ReturnBehavior": 0,
+			"ReturnType": "object",
+			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Player",
 			"HookDescription": "Hook is called when a chat message is sent to an offline player ",
 			"MethodData": {
 				"MethodName": "IOnPlayerChat(ulong playerId, string playerName, string message, Chat.ChatChannel channel, BasePlayer basePlayer)",
@@ -798,9 +835,10 @@
 				"message": "string",
 				"channel": "Chat.ChatChannel"
 			},
-			"ReturnBehavior": 0,
+			"ReturnType": "object",
+			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Player",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "IOnPlayerChat(ulong playerId, string playerName, string message, Chat.ChatChannel channel, BasePlayer basePlayer)",
@@ -823,9 +861,10 @@
 				"iplayer": "IPlayer",
 				"message": "string"
 			},
-			"ReturnBehavior": 0,
+			"ReturnType": "object",
+			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Player",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "IOnPlayerChat(ulong playerId, string playerName, string message, Chat.ChatChannel channel, BasePlayer basePlayer)",
@@ -849,9 +888,10 @@
 				"cmd": "string",
 				"args": "string[]"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Server",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "TryRunPlayerCommand",
@@ -873,9 +913,10 @@
 				"cmd": "string",
 				"args": "string[]"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Server",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "TryRunPlayerCommand",
@@ -897,9 +938,10 @@
 				"cmd": "string",
 				"args": "string[]"
 			},
-			"ReturnBehavior": 0,
+			"ReturnType": "object",
+			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Player",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "TryRunPlayerCommand",
@@ -921,9 +963,10 @@
 				"cmd": "string",
 				"args": "string[]"
 			},
-			"ReturnBehavior": 0,
+			"ReturnType": "object",
+			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Player",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "TryRunPlayerCommand",
@@ -943,9 +986,10 @@
 			"HookParameters": {
 				"iplayer": "IPlayer"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Player",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "IOnPlayerConnected",
@@ -963,9 +1007,10 @@
 			"HookParameters": {
 				"player": "BasePlayer"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Player",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "IOnPlayerConnected",
@@ -984,9 +1029,10 @@
 				"iplayer": "IPlayer",
 				"reason": "string"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Player",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "OnPlayerDisconnected",
@@ -1006,9 +1052,10 @@
 				"player": "BasePlayer",
 				"val": "string"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Player",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "OnPlayerSetInfo",
@@ -1029,9 +1076,10 @@
 				"iplayer": "IPlayer",
 				"val": "string"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Player",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "OnPlayerSetInfo",
@@ -1052,9 +1100,10 @@
 				"iplayer": "IPlayer",
 				"reason": "string"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Server",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "OnPlayerKicked",
@@ -1073,9 +1122,10 @@
 			"HookParameters": {
 				"iplayer": "IPlayer"
 			},
+			"ReturnType": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Player",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "object OnPlayerRespawn",
@@ -1093,9 +1143,10 @@
 			"HookParameters": {
 				"iplayer": "IPlayer"
 			},
+			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Player",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "OnPlayerRespawned",
@@ -1114,9 +1165,10 @@
 				"ipAddress": "IPAddress",
 				"message": "RemoteMessage"
 			},
+			"ReturnType": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Server",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "IOnRconMessage",
@@ -1137,9 +1189,10 @@
 				"message": "string",
 				"arg": "string[]"
 			},
+			"ReturnType": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Server",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "IOnRconMessage",
@@ -1158,9 +1211,10 @@
 			"HookParameters": {
 				"arg": "ConsoleSystem.Arg"
 			},
+			"ReturnType": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Server",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "object IOnServerCommand(ConsoleSystem.Arg arg)",
@@ -1179,9 +1233,10 @@
 				"cmd": "string",
 				"arg": "string[]"
 			},
+			"ReturnType": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Server",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "object IOnServerCommand(ConsoleSystem.Arg arg)",
@@ -1200,9 +1255,10 @@
 				"privlidge": "BuildingPrivlidge",
 				"player": "BasePlayer"
 			},
+			"ReturnType": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Entity",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "IOnCupboardAuthorize",
@@ -1224,9 +1280,10 @@
 				"userID": "ulong",
 				"player": "BasePlayer"
 			},
+			"ReturnType": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
-			"Category": "Oxide.Rust",
+			"Category": "Entity",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "IOnCupboardAuthorize",
