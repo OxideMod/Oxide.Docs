@@ -12570,7 +12570,7 @@
           "player": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t}\r\n\t\tplayer.UpdateNetworkGroup();\r\n\t\tplayer.SetPlayerFlag(global::BasePlayer.PlayerFlags.ReceivingSnapshot, true);\r\n\t\tbase.SendNetworkUpdateImmediate(false);\r\n\t\tplayer.ClientRPC<bool>(global::RpcTarget.Player(\"StartLoading_Quick\", player), true);\r\n\t\tInterface.CallHook(\"OnPortalUsed\", player, this);\r\n\t\treturn;\r\n\t}\r\n\tDebug.Log(\"No portal...\");\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\tglobal::Effect.server.Run(this.transitionSoundEffect.resourcePath, this.targetPortal.relativeAnchor.transform.position, Vector3.up, null, false, null);\r\n\t\t}\r\n\t\tplayer.UpdateNetworkGroup();\r\n\t\tplayer.SetPlayerFlag(global::BasePlayer.PlayerFlags.ReceivingSnapshot, true);\r\n\t\tbase.SendNetworkUpdateImmediate(false);\r\n\t\tInterface.CallHook(\"OnPortalUsed\", player, this);\r\n\t\treturn;\r\n\t}\r\n\tDebug.Log(\"No portal...\");\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
