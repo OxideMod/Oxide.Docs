@@ -1183,7 +1183,7 @@
           "rpc": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (!this.Armed())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnTrapDisarm\", this, rpc.player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tbase.SetFlag(BaseEntity.Flags.On, false, false, true);\r\n\tif (UnityEngine.Random.Range(0, 100) < 15)\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (this.Armed())\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnTrapDisarm\", this, rpc.player) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tif (this.Triggered())\r\n\t\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -2261,7 +2261,7 @@
           "itemDef": "ItemDefinition"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\tFunc<global::Item, int> arg_82_1;\r\n\t\t\t\tif ((arg_82_1 = global::VendingMachine.<>c.<>9__24_0) == null)\r\n\t\t\t\t{\r\n\t\t\t\t\targ_82_1 = (global::VendingMachine.<>c.<>9__24_0 = new Func<global::Item, int>(global::VendingMachine.<>c.<>9.<RefreshSellOrderStockLevel>b__24_0));\r\n\t\t\t\t}\r\n\t\t\t\tInterface.CallHook(\"OnRefreshVendingStock\", this, itemDef);\r\n\t\t\t\targ_8E_1 = arg_82_0.Sum(arg_82_1) / current.itemToSellAmount;\r\n\t\t\t}\r\n\t\t\targ_8E_0.inStock = arg_8E_1;\r\n\t\t\tfloat itemCondition = 0f;\r\n\t\t\tfloat itemConditionMax = 0f;\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\tFunc<global::Item, int> arg_BD_1;\r\n\t\t\t\tif ((arg_BD_1 = global::VendingMachine.<>c.<>9__27_0) == null)\r\n\t\t\t\t{\r\n\t\t\t\t\targ_BD_1 = (global::VendingMachine.<>c.<>9__27_0 = new Func<global::Item, int>(global::VendingMachine.<>c.<>9.<RefreshSellOrderStockLevel>b__27_0));\r\n\t\t\t\t}\r\n\t\t\t\tInterface.CallHook(\"OnRefreshVendingStock\", this, itemDef);\r\n\t\t\t\targ_C5_1 = arg_BD_0.Sum(arg_BD_1) / num2;\r\n\t\t\t}\r\n\t\t\targ_C5_0.inStock = arg_C5_1;\r\n\t\t\tfloat itemCondition = 0f;\r\n\t\t\tfloat itemConditionMax = 0f;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -4265,7 +4265,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\tthis.nextFlameTime = Time.realtimeSinceStartup + (ownerPlayer.IsNpc ? 0.25f : 0.45f);\r\n\t\tVector3 point = raycastHit.point;\r\n\t\tglobal::BaseEntity baseEntity = global::GameManager.server.CreateEntity(this.fireballPrefab.resourcePath, point - ray.direction * 0.25f, default(Quaternion), true);\r\n\t\tif (baseEntity)\r\n\t\t{\r\n\t\t\tInterface.CallHook(\"OnFlameThrowerBurn\", this, baseEntity);\r\n\t\t\tbaseEntity.creatorEntity = ownerPlayer;\r\n\t\t\tglobal::FireBall fireBall = baseEntity as global::FireBall;\r\n\t\t\tif (fireBall != null && ownerPlayer.IsNpc)\r\n\t\t\t{\r\n\t\t\t\tfireBall.ignoreNPC = true;\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tif (flag)\r\n\t\t{\r\n\t\t\tglobal::BaseEntity baseEntity = global::GameManager.server.CreateEntity(this.fireballPrefab.resourcePath, vector, default(Quaternion), true);\r\n\t\t\tif (baseEntity)\r\n\t\t\t{\r\n\t\t\t\tInterface.CallHook(\"OnFlameThrowerBurn\", this, baseEntity);\r\n\t\t\t\tbaseEntity.creatorEntity = ownerPlayer;\r\n\t\t\t\tglobal::FireBall fireBall = baseEntity as global::FireBall;\r\n\t\t\t\tif (fireBall != null && ownerPlayer.IsNpc)\r\n\t\t\t\t{\r\n\t\t\t\t\tfireBall.ignoreNPC = true;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -6500,7 +6500,7 @@
           "player": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (ent.net == null || player.net == null)\r\n\t{\r\n\t\treturn false;\r\n\t}\r\n\tobject returnvar = Interface.CallHook(\"OnEntityFromOwnerCheck\", ent, player, id, debugName);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\treturn ent.net.ID == player.net.ID || !(ent.parentEntity.uid != player.net.ID);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (ent.net == null || player.net == null)\r\n\t{\r\n\t\treturn false;\r\n\t}\r\n\tobject returnvar = Interface.CallHook(\"OnEntityFromOwnerCheck\", ent, player, id, debugName);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\tif (ent.net.ID == player.net.ID)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -9613,7 +9613,7 @@
           "fromPlayer": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (slot != null)\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnItemSubmit\", slot, this, fromPlayer) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tif (this.MoveItemToStorage(slot))\r\n\t\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tfor (int i = 0; i < this.InputContainer.capacity; i++)\r\n\t{\r\n\t\tglobal::Item slot = this.InputContainer.GetSlot(i);\r\n\t\tif (slot != null)\r\n\t\t{\r\n\t\t\tif (Interface.CallHook(\"OnItemSubmit\", slot, this, fromPlayer) != null)\r\n\t\t\t{\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\tif (slot.MoveToContainer(base.inventory, -1, true, false, null, true))\r\n\t\t\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -10606,7 +10606,7 @@
           "droneMarketTerminal": "MarketTerminal"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\tDebug.LogError(\"Vending machine error, contact developers!\");\r\n\t\t}\r\n\t\telse\r\n\t\t{\r\n\t\t\tnum6 += item2.amount;\r\n\t\t\tobject returnvar2 = Interface.CallHook(\"CanPurchaseItem\", buyer, item2, onItemPurchased, this, targetContainer);\r\n\t\t\tif (returnvar2 != null)\r\n\t\t\t{\r\n\t\t\t\treturn returnvar2 is bool && (bool)returnvar2;\r\n\t\t\t}\r\n\t\t\tthis.RecordSaleAnalytics(item2, sellOrderId);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\tDebug.LogError(\"Vending machine error, contact developers!\");\r\n\t\t}\r\n\t\telse\r\n\t\t{\r\n\t\t\tnum6 += item2.amount;\r\n\t\t\tobject returnvar2 = Interface.CallHook(\"CanPurchaseItem\", buyer, item2, onItemPurchased, this, targetContainer);\r\n\t\t\tif (returnvar2 != null)\r\n\t\t\t{\r\n\t\t\t\treturn returnvar2 is bool && (bool)returnvar2;\r\n\t\t\t}\r\n\t\t\tthis.RecordSaleAnalytics(item2, sellOrderId, sellOrder.currencyAmountPerItem * numberOfTransactions);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -11618,12 +11618,12 @@
           "connection": "Network.Connection"
         }
       },
-      "CodeAfterInjection": "internal void Join(Connection connection)\r\n{\r\n\tif (Interface.CallHook(\"OnConnectionQueue\", connection) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tconnection.state = Connection.State.InQueue;\r\n\tthis.queue.Add(connection);\r\n//---\r\n"
+      "CodeAfterInjection": "internal void Join(Connection connection)\r\n{\r\n\tif (Interface.CallHook(\"OnConnectionQueue\", connection) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.nextMessageTime = 0f;\r\n\tif ((this.Queued == 0 && !this.IsServerFull) || this.CanJumpQueue(connection))\r\n//---\r\n"
     },
     {
       "Type": 0,
-      "Name": "OnQueueMessage",
-      "HookName": "OnQueueMessage",
+      "Name": "OnQueueUpdate",
+      "HookName": "OnQueueUpdate",
       "HookParameters": {
         "c": "Connection",
         "position": "int"
@@ -11632,14 +11632,14 @@
       "TargetType": "ConnectionQueue",
       "Category": "Queue",
       "MethodData": {
-        "MethodName": "SendMessage",
+        "MethodName": "SendQueueUpdate",
         "ReturnType": "void",
         "Arguments": {
           "c": "Network.Connection",
           "position": "int"
         }
       },
-      "CodeAfterInjection": "private void SendMessage(Connection c, int position)\r\n{\r\n\tif (Interface.CallHook(\"OnQueueMessage\", c, position) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tstring val = string.Empty;\r\n\tif (position > 0)\r\n//---\r\n"
+      "CodeAfterInjection": "private void SendQueueUpdate(Connection c, int position)\r\n{\r\n\tif (Interface.CallHook(\"OnQueueUpdate\", c, position) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tNetWrite expr_1F = Net.sv.StartWrite();\r\n\texpr_1F.PacketID(Message.Type.QueueUpdate);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -14059,7 +14059,7 @@
           "url": "string"
         }
       },
-      "CodeAfterInjection": "private static bool IsStationValid(string url)\r\n{\r\n\tglobal::BoomBox.ParseServerUrlList();\r\n\tobject returnvar = Interface.CallHook(\"OnBoomboxStationValidate\", url);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\treturn (global::BoomBox.ValidStations != null && global::BoomBox.ValidStations.ContainsValue(url)) || (global::BoomBox.ServerValidStations != null && global::BoomBox.ServerValidStations.ContainsValue(url));\r\n//---\r\n"
+      "CodeAfterInjection": "private static bool IsStationValid(string url)\r\n{\r\n\tglobal::BoomBox.ParseServerUrlList();\r\n\tobject returnvar = Interface.CallHook(\"OnBoomboxStationValidate\", url);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\tglobal::ShoutcastStreamer.CheckBuiltInRadios();\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -14077,10 +14077,11 @@
         "MethodName": "ServerTogglePlay",
         "ReturnType": "void",
         "Arguments": {
-          "msg": "BaseEntity/RPCMessage"
+          "msg": "BaseEntity/RPCMessage",
+          "bypassPower": "bool"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tif (!this.IsPowered())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tbool flag = msg.read.ReadByte() == 1;\r\n\tif (Interface.CallHook(\"OnBoomboxToggle\", this, msg.player, flag) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.ServerTogglePlay(flag);\r\n}\r\n"
+      "CodeAfterInjection": "//---\r\n\tif (!this.IsPowered() && !bypassPower)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tbool flag = msg.read.ReadByte() == 1;\r\n\tif (Interface.CallHook(\"OnBoomboxToggle\", this, msg.player, flag) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.ServerTogglePlay(flag);\r\n}\r\n"
     },
     {
       "Type": 0,
@@ -14359,7 +14360,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "[global::BaseEntity.RPC_Server, global::BaseEntity.RPC_Server.IsVisible(3f)]\r\npublic void Server_RaiseLowerFloor(global::BaseEntity.RPCMessage msg)\r\n{\r\n\tglobal::Elevator.Direction direction = (global::Elevator.Direction)msg.read.Int32();\r\n\tbool flag = msg.read.Bit();\r\n\tif (Interface.CallHook(\"OnElevatorButtonPress\", this, msg.player, direction, flag) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tbase.SetFlag((direction == global::Elevator.Direction.Up) ? global::BaseEntity.Flags.Reserved1 : global::BaseEntity.Flags.Reserved2, true, false, true);\r\n\tthis.owner.Server_RaiseLowerElevator(direction, flag);\r\n//---\r\n"
+      "CodeAfterInjection": "[global::BaseEntity.RPC_Server, global::BaseEntity.RPC_Server.IsVisible(3f)]\r\npublic void Server_RaiseLowerFloor(global::BaseEntity.RPCMessage msg)\r\n{\r\n\tglobal::Elevator.Direction direction = (global::Elevator.Direction)msg.read.Int32();\r\n\tbool flag = msg.read.Bit();\r\n\tif (Interface.CallHook(\"OnElevatorButtonPress\", this, msg.player, direction, flag) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tbase.SetFlag((direction == global::Elevator.Direction.Up) ? global::BaseEntity.Flags.Reserved1 : global::BaseEntity.Flags.Reserved2, true, false, true);\r\n\tbase.SetFlag(global::BaseEntity.Flags.Reserved6, flag, false, true);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -14458,7 +14459,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t{\r\n\t\t\tNetworkIdentifier = this.net.ID,\r\n\t\t\tIntIdentifier = (int)constructionGrade.gradeBase.type\r\n\t\t}, 1f);\r\n\t}\r\n\tInterface.CallHook(\"OnStructureUpgraded\", this, msg.player, constructionGrade.gradeBase.type, constructionGrade.gradeBase.skin);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t{\r\n\t\t\tNetworkIdentifier = this.net.ID,\r\n\t\t\tIntIdentifier = (int)constructionGrade.gradeBase.type\r\n\t\t}, 1f);\r\n\t}\r\n\tInterface.CallHook(\"OnStructureUpgraded\", this, msg.player, constructionGrade.gradeBase.type, constructionGrade.gradeBase.skin);\r\n\tthis.timePlaced = this.GetNetworkTime();\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -14862,6 +14863,22 @@
       }
     },
     {
+      "Type": 1,
+      "Name": "OnItemSubmit [patch]",
+      "HookName": "OnItemSubmit",
+      "ReturnBehavior": 0,
+      "TargetType": "Mailbox",
+      "Category": "Item",
+      "MethodData": {
+        "MethodName": "SubmitInputItems",
+        "ReturnType": "void",
+        "Arguments": {
+          "fromPlayer": "BasePlayer"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\tfor (int i = 0; i < this.InputContainer.capacity; i++)\r\n\t{\r\n\t\tglobal::Item slot = this.InputContainer.GetSlot(i);\r\n\t\tif (slot != null)\r\n\t\t{\r\n\t\t\tif (Interface.CallHook(\"OnItemSubmit\", slot, this, fromPlayer) == null)\r\n\t\t\t{\r\n\t\t\t\tif (slot.MoveToContainer(base.inventory, -1, true, false, null, true))\r\n\t\t\t\t{\r\n\t\t\t\t\tglobal::Effect.server.Run(this.mailDropSound.resourcePath, this.GetDropPosition(), default(Vector3), null, false, null);\r\n\t\t\t\t\tif (fromPlayer != null && !this.PlayerIsOwner(fromPlayer))\r\n//---\r\n"
+    },
+    {
       "Type": 0,
       "Name": "IOnServerCommand",
       "HookName": "IOnServerCommand",
@@ -14933,7 +14950,7 @@
         "ClientIpAddress": "IPAddress"
       },
       "ReturnBehavior": 1,
-      "TargetType": "Facepunch.Rcon.Listener/<>c__DisplayClass10_0",
+      "TargetType": "Facepunch.Rcon.Listener/<>c__DisplayClass27_0",
       "Category": "Server",
       "MethodData": {
         "MethodName": "<Start>b__0",
@@ -14942,14 +14959,14 @@
           "socket": "Fleck.IWebSocketConnection"
         }
       },
-      "CodeAfterInjection": "internal void <Start>b__0(IWebSocketConnection socket)\r\n{\r\n\tListener.<>c__DisplayClass10_1 <>c__DisplayClass10_ = new Listener.<>c__DisplayClass10_1();\r\n\t<>c__DisplayClass10_.CS$<>8__locals1 = this;\r\n\t<>c__DisplayClass10_.socket = socket;\r\n\tif (Interface.CallHook(\"OnRconConnection\", socket.ConnectionInfo.ClientIpAddress) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (<>c__DisplayClass10_.socket.ConnectionInfo.Path != this.requiredPath)\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t{\r\n\t\t\tDebug.Log(string.Format(\"RCON: CRITICAL - Banned IP {0} supplied the correct password. Access was still denied.\", <>c__DisplayClass27_.socket.ConnectionInfo.ClientIpAddress));\r\n\t\t}\r\n\t\t<>c__DisplayClass27_.socket.Close();\r\n\t}\r\n\tif (Interface.CallHook(\"OnRconConnection\", socket.ConnectionInfo.ClientIpAddress) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (<>c__DisplayClass27_.socket.ConnectionInfo.Path != this.requiredPath)\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 1,
       "Name": "OnRconConnection [web, patch]",
       "HookName": "OnRconConnection [web, patch]",
       "ReturnBehavior": 0,
-      "TargetType": "Facepunch.Rcon.Listener/<>c__DisplayClass10_0",
+      "TargetType": "Facepunch.Rcon.Listener/<>c__DisplayClass27_0",
       "Category": "_Patches",
       "MethodData": {
         "MethodName": "<Start>b__0",
@@ -14968,7 +14985,7 @@
         "s": "string"
       },
       "ReturnBehavior": 1,
-      "TargetType": "Facepunch.Rcon.Listener/<>c__DisplayClass10_1",
+      "TargetType": "Facepunch.Rcon.Listener/<>c__DisplayClass27_1",
       "Category": "Server",
       "MethodData": {
         "MethodName": "<Start>b__3",
