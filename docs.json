@@ -796,7 +796,7 @@
           "info": "HitInfo"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (this.IsImmortalTo(info) && info.damageTypes.Total() >= 0f)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"IOnBasePlayerHurt\", this, info) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (ConVar.Server.pve && !this.IsNpc && info.Initiator && info.Initiator is BasePlayer && info.Initiator != this)\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (this.IsImmortalTo(info) && info.damageTypes.Total() >= 0f)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"IOnBasePlayerHurt\", this, info) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tbool wasWounded = this.IsWounded();\r\n\tif (ConVar.Server.pve && !this.IsNpc && info.Initiator && info.Initiator is BasePlayer && info.Initiator != this)\r\n//---\r\n"
     },
     {
       "Type": 0,
