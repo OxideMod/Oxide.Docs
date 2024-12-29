@@ -154,6 +154,7 @@ function getExamplesMarkdown(hooks: IHook[]) {
     output += `\nprivate ${returnType} ${hook.HookName}( ${getArgumentString(hook.HookParameters)} )`;
     output += `\n{`;
     output += `\n    Puts( "${hook.HookName} works!" );`;
+    if (returnType!="void") output += `\n    return null;`;
     output += `\n}`;
     output += `\n\`\`\`\n`;
   }
