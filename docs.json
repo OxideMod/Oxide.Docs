@@ -11554,7 +11554,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\t\t\tcurrent4.TargetEntity.transform.localRotation = current4.LocalRotation;\r\n\t\t\t\t\t\tcurrent4.TargetEntity.SendNetworkUpdate(global::BasePlayer.NetworkQueue.Update);\r\n\t\t\t\t\t}\r\n\t\t\t\t\tbaseEntity.SetSlots(slots);\r\n\t\t\t\t}\r\n\t\t\t\tInterface.CallHook(\"OnEntityReskinned\", baseEntity, skin, msg.player);\r\n\t\t\t\tPool.FreeUnmanaged<global::SprayCan.ChildPreserveInfo>(ref list);\r\n\t\t\t}\r\n\t\t\tbase.ClientRPC<int, NetworkableId>(global::RpcTarget.NetworkGroup(\"Client_ReskinResult\"), 1, baseEntity.net.ID);\r\n\t\t}\r\n\t}\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\t\t}\r\n\t\t\t\t\tbaseEntity.SetSlots(slots);\r\n\t\t\t\t}\r\n\t\t\t\tPool.FreeUnmanaged<global::SprayCan.ChildPreserveInfo>(ref list);\r\n\t\t\t}\r\n\t\t\tInterface.CallHook(\"OnEntityReskinned\", baseEntity, skin, msg.player);\r\n\t\t\tbase.ClientRPC<int, NetworkableId>(global::RpcTarget.NetworkGroup(\"Client_ReskinResult\"), 1, baseEntity.net.ID);\r\n\t\t}\r\n\t}\r\n\tthis.LoseCondition(this.ConditionLossPerReskin);\r\n\tbase.ClientRPC<int>(global::RpcTarget.NetworkGroup(\"Client_ChangeSprayColour\"), -1);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -14877,6 +14877,64 @@
         }
       },
       "CodeAfterInjection": "//---\r\n\tfor (int i = 0; i < this.InputContainer.capacity; i++)\r\n\t{\r\n\t\tglobal::Item slot = this.InputContainer.GetSlot(i);\r\n\t\tif (slot != null)\r\n\t\t{\r\n\t\t\tif (Interface.CallHook(\"OnItemSubmit\", slot, this, fromPlayer) == null)\r\n\t\t\t{\r\n\t\t\t\tif (slot.MoveToContainer(base.inventory, -1, true, false, null, true))\r\n\t\t\t\t{\r\n\t\t\t\t\tglobal::Effect.server.Run(this.mailDropSound.resourcePath, this.GetDropPosition(), default(Vector3), null, false, null);\r\n\t\t\t\t\tif (fromPlayer != null && !this.PlayerIsOwner(fromPlayer))\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "IOnNpcTarget [SenseComponent]",
+      "HookName": "IOnNpcTarget",
+      "HookParameters": {
+        "instance": "SenseComponent",
+        "entity": "BaseEntity"
+      },
+      "ReturnBehavior": 1,
+      "TargetType": "Rust.Ai.Gen2.SenseComponent",
+      "Category": "NPC",
+      "MethodData": {
+        "MethodName": "CanTarget",
+        "ReturnType": "bool",
+        "Arguments": {
+          "entity": "BaseEntity"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t\tif (basePlayer.InSafeZone())\r\n\t\t{\r\n\t\t\treturn false;\r\n\t\t}\r\n\t}\r\n\tobject returnvar = Interface.CallHook(\"IOnNpcTarget\", this, entity);\r\n\treturn !(returnvar is bool) || (bool)returnvar;\r\n}\r\n\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnPlayerVanish",
+      "HookName": "OnPlayerVanish",
+      "HookParameters": {
+        "basePlayer": "BasePlayer"
+      },
+      "ReturnBehavior": 0,
+      "TargetType": "ConVar.Debugging",
+      "Category": "Player",
+      "MethodData": {
+        "MethodName": "invis",
+        "ReturnType": "void",
+        "Arguments": {
+          "arg": "ConsoleSystem/Arg"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t\t\texpr_5D.SetHeld(false);\r\n\t\t}\r\n\t\tbasePlayer.DisablePlayerCollider();\r\n\t\tRust.Ai.SimpleAIMemory.AddIgnorePlayer(basePlayer);\r\n\t\tglobal::BaseEntity.Query.Server.RemovePlayer(basePlayer);\r\n\t\tInterface.CallHook(\"OnPlayerVanish\", basePlayer);\r\n\t\tif (!Global.Runner.IsInvoking(new Action(Debugging.TickInvis)))\r\n\t\t{\r\n\t\t\tGlobal.Runner.InvokeRepeating(new Action(Debugging.TickInvis), 0f, 0f);\r\n\t\t}\r\n\t}\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnPlayerUnvanish",
+      "HookName": "OnPlayerUnvanish",
+      "HookParameters": {
+        "basePlayer": "BasePlayer"
+      },
+      "ReturnBehavior": 0,
+      "TargetType": "ConVar.Debugging",
+      "Category": "Player",
+      "MethodData": {
+        "MethodName": "invis",
+        "ReturnType": "void",
+        "Arguments": {
+          "arg": "ConsoleSystem/Arg"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t\tbasePlayer.syncPosition = true;\r\n\t\tbasePlayer.EnablePlayerCollider();\r\n\t\tRust.Ai.SimpleAIMemory.RemoveIgnorePlayer(basePlayer);\r\n\t\tglobal::BaseEntity.Query.Server.RemovePlayer(basePlayer);\r\n\t\tglobal::BaseEntity.Query.Server.AddPlayer(basePlayer);\r\n\t\tInterface.CallHook(\"OnPlayerUnvanish\", basePlayer);\r\n\t\tif (Debugging.invisiblePlayers.Count == 0)\r\n\t\t{\r\n\t\t\tGlobal.Runner.CancelInvoke(new Action(Debugging.TickInvis));\r\n\t\t}\r\n\t}\r\n//---\r\n"
     },
     {
       "Type": 0,
