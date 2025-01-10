@@ -1,6 +1,6 @@
 ---
 title: Plugin Guidelines
-after: my-first-plugin
+after: Timers
 ---
 
 # Plugin Guidelines
