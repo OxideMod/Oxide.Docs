@@ -1,6 +1,6 @@
 ---
 title: Attributes
-after: my-first-plugin
+after: WebRequests
 ---
 # Attributes
 ## Commands
@@ -106,3 +106,4 @@ static class DoPlace_Process
 	}
 }
 ```
+Note: see harmony documentation for info about harmony patches

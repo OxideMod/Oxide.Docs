@@ -1,6 +1,6 @@
 ---
 title: Timers
-after: Attributes
+after: my-first-plugin
 ---
 # Timers
 

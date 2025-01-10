@@ -1,6 +1,6 @@
 ---
 title: Plugin Guidelines
-after: Timers
+after: Database
 ---
 
 # Plugin Guidelines
