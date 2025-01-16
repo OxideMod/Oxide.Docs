@@ -91,7 +91,14 @@ class OnlinePlayer
 [OnlinePlayers]
 Hash<BasePlayer, OnlinePlayer> onlinePlayers = new Hash<BasePlayer, OnlinePlayer> ();
 ```
-# AutoPatch
+## HookMethod
+Indicates that the specified method should be a handler for a hook
+```csharp
+[HookMethod("OnPlayerConnected")]
+private void base_OnPlayerConnected(BasePlayer player) => AddOnlinePlayer(player);
+```
+
+## AutoPatch
 Used with HarmonyPatch to automatically install harmony patch when plugin start, and uninstall when plugin terminate
 ```csharp
 [AutoPatch]
