@@ -13,20 +13,20 @@ Oxide (also known as uMod) is a powerful and flexible framework for Rust server 
 
 In the following guides, you'll learn about the various aspects of using Oxide to manage your Rust server:
 
-- **[Server Setup](server-setup-link)**: This guide will walk you through the basics of setting up your Rust server, an essential first step before introducing Oxide into the mix.
+- **[Server Setup](setup-server)**: This guide will walk you through the basics of setting up your Rust server, an essential first step before introducing Oxide into the mix.
 
-- **[Installing Oxide](installing-oxide-link)**: Learn about the process of installing Oxide onto your Rust server, a crucial step to unlock all the features that Oxide has to offer.
+- **[Installing Oxide](install-oxide)**: Learn about the process of installing Oxide onto your Rust server, a crucial step to unlock all the features that Oxide has to offer.
 
-- **[Commands](commands-link)**: This guide covers the various Oxide and server commands you'll be using to manage your server and plugins.
+- **[Commands](commands)**: This guide covers the various Oxide and server commands you'll be using to manage your server and plugins.
 
-- **[Permissions](permissions-link)**: Here, we dive into Oxide's permissions system, allowing for granular control over who can do what on your server.
+- **[Permissions](permissions)**: Here, we dive into Oxide's permissions system, allowing for granular control over who can do what on your server.
 
-- **[Localization](localization-link)**: Understand how to customize your server's language to best suit your player base.
+- **[Localization](localization)**: Understand how to customize your server's language to best suit your player base.
 
-- **[Installing Plugins](installing-plugins-link)**: Learn how to add new features and capabilities to your server by installing plugins.
+- **[Installing Plugins](install-plugins)**: Learn how to add new features and capabilities to your server by installing plugins.
 
-- **[Configuring Plugins](configuring-plugins-link)**: Each plugin comes with its own set of configurations. This guide will walk you through how to customize your plugins to your liking.
+- **[Configuring Plugins](configure-plugins)**: Each plugin comes with its own set of configurations. This guide will walk you through how to customize your plugins to your liking.
 
-- **[Extensions](extensions-link)**: Extensions allow you to further enhance Oxide's functionality. Learn how to install and manage these extensions to get even more out of Oxide.
+- **[Extensions](extensions)**: Extensions allow you to further enhance Oxide's functionality. Learn how to install and manage these extensions to get even more out of Oxide.
 
 By exploring these guides, you'll gain a comprehensive understanding of Oxide and its potential, empowering you to create a truly unique and controlled Rust server experience. The journey begins here, so strap in and get ready to dive deep into the world of Oxide for Rust!
