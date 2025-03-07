@@ -2810,7 +2810,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\tglobal::Item slot = base.inventory.GetSlot(i);\r\n\t\tif (this.CanBeRecycled(slot))\r\n\t\t{\r\n\t\t\tint num2;\r\n\t\t\tList<global::ItemAmount>.Enumerator enumerator2;\r\n\t\t\tif (Interface.CallHook(\"OnItemRecycle\", slot, this) != null)\r\n\t\t\t{\r\n\t\t\t\tif (!base.HasRecyclable())\r\n\t\t\t\t{\r\n\t\t\t\t\tbase.StopRecycling();\r\n\t\t\t\t\treturn;\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tfor (int i = 0; i < 6; i++)\r\n\t{\r\n\t\tglobal::Item slot = base.inventory.GetSlot(i);\r\n\t\tif (this.CanBeRecycled(slot))\r\n\t\t{\r\n\t\t\tif (Interface.CallHook(\"OnItemRecycle\", slot, this) != null)\r\n\t\t\t{\r\n\t\t\t\tif (!base.HasRecyclable())\r\n\t\t\t\t{\r\n\t\t\t\t\tbase.StopRecycling();\r\n\t\t\t\t\treturn;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -12178,7 +12178,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\tnum2 = 1;\r\n\t\t\t\tif (slot.amount > 1)\r\n\t\t\t\t{\r\n\t\t\t\t\tnum2 = Mathf.CeilToInt(Mathf.Min((float)slot.amount, (float)slot.MaxStackable() * 0.1f));\r\n\t\t\t\t}\r\n\t\t\t\tobject returnvar = Interface.CallHook(\"OnItemRecycleAmount\", slot, num2, this);\r\n\t\t\t\tif (returnvar is int)\r\n\t\t\t\t{\r\n\t\t\t\t\tnum2 = (int)returnvar;\r\n\t\t\t\t}\r\n\t\t\t\tif (slot.info.Blueprint.scrapFromRecycle > 0)\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\tint num2 = 1;\r\n\t\t\t\tif (slot.amount > 1)\r\n\t\t\t\t{\r\n\t\t\t\t\tnum2 = Mathf.CeilToInt(Mathf.Min((float)slot.amount, (float)slot.MaxStackable() * 0.1f));\r\n\t\t\t\t}\r\n\t\t\t\tobject returnvar = Interface.CallHook(\"OnItemRecycleAmount\", slot, num2, this);\r\n\t\t\t\tif (returnvar is int)\r\n\t\t\t\t{\r\n\t\t\t\t\tnum2 = (int)returnvar;\r\n\t\t\t\t}\r\n\t\t\t\tif (slot.info.Blueprint.scrapFromRecycle > 0)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -14064,7 +14064,7 @@
       "HookParameters": {
         "instance": "CollectibleEntity",
         "reciever": "BasePlayer",
-        "itemAmount": "int"
+        "component": "Item"
       },
       "ReturnBehavior": 0,
       "TargetType": "CollectibleEntity",
@@ -14077,7 +14077,7 @@
           "eat": "bool"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\t\t\t\tif (reciever)\r\n\t\t\t\t{\r\n\t\t\t\t\tFacepunch.Rust.Analytics.Azure.OnGatherItem(item.info.shortname, item.amount, this, reciever, null);\r\n\t\t\t\t\tInterface.CallHook(\"OnCollectiblePickedup\", this, reciever, i);\r\n\t\t\t\t\treciever.GiveItem(item, global::BaseEntity.GiveItemReason.ResourceHarvested);\r\n\t\t\t\t}\r\n\t\t\t\telse\r\n\t\t\t\t{\r\n\t\t\t\t\titem.Drop(base.transform.position + Vector3.up * 0.5f, Vector3.up, default(Quaternion));\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\t\t\t\tif (reciever)\r\n\t\t\t\t{\r\n\t\t\t\t\tFacepunch.Rust.Analytics.Azure.OnGatherItem(item.info.shortname, item.amount, this, reciever, null);\r\n\t\t\t\t\tInterface.CallHook(\"OnCollectiblePickedup\", this, reciever, item);\r\n\t\t\t\t\treciever.GiveItem(item, global::BaseEntity.GiveItemReason.ResourceHarvested);\r\n\t\t\t\t}\r\n\t\t\t\telse\r\n\t\t\t\t{\r\n\t\t\t\t\titem.Drop(base.transform.position + Vector3.up * 0.5f, Vector3.up, default(Quaternion));\r\n//---\r\n"
     },
     {
       "Type": 0,
