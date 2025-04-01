@@ -110,24 +110,26 @@ This is an internal hook and will not be called in plugins. See [Internal Hooks]
 
 // Get the return behavior of the hook by return behavior type
 function getUsageReturn(hookData: IHook) {
+  let returnType = "non-null";
+  if (hookData.ReturnType!=null && hookData.ReturnType!="object") returnType = hookData.ReturnType.replace(/`1</g, '&lt;').replace(/>/g, '&gt;').replace(/\//g, '.');
+  
   if (hookData.ReturnBehavior === ReturnBehaviour.Continue) {
-    return "* No return behavior";
+    return `* No return behavior`;
   }
 
   if (hookData.ReturnBehavior === ReturnBehaviour.ExitWhenValidType) {
-    return "* Return a non-null value to override default behavior";
+    return `* Return a ${returnType} value to override default behavior`;
   }
 
   if (hookData.ReturnBehavior === ReturnBehaviour.ExitWhenNonNull) {
-    return "* Return a non-null value or bool to override default behavior";
+    return `* Return a ${returnType} value to override default behavior`;
   }
 
-  //TODO: Get the return type of the hook
   if (hookData.ReturnBehavior === ReturnBehaviour.UseArgumentString) {
-    return "* Return TYPE to prevent default behavior";
+    return `* Return type ${returnType} to prevent default behavior`;
   }
 
-  return "* No return behavior";
+  return `* No return behavior`;
 }
 
 // Generate example code for the hook
@@ -148,7 +150,7 @@ function getExamplesMarkdown(hooks: IHook[]) {
   }, [] as IHook[]);
 
   for (const hook of hooks) {
-    let returnType = (hook.ReturnType!=null) ? hook.ReturnType : "void";
+    let returnType = (hook.ReturnType!=null && hook.ReturnType!="void") ? "object" : "void";
     output += `\`\`\`csharp`;
     //TODO: Use proper return type instead of void
     output += `\nprivate ${returnType} ${hook.HookName}( ${getArgumentString(hook.HookParameters)} )`;
