@@ -12448,7 +12448,7 @@
           "di": "DroppedItem"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\tthis.DropReason = global::DroppedItem.DropReasonEnum.Player;\r\n\t}\r\n\tdi.item.MigrateItemOwnership(this.item, di.item.amount);\r\n\tdi.DestroyItem();\r\n\tdi.Kill(global::BaseNetworkable.DestroyMode.None);\r\n\tInterface.CallHook(\"OnDroppedItemCombined\", this);\r\n\tint arg_28A_0 = this.item.info.GetWorldModelIndex(this.item.amount);\r\n\tthis.item.amount = num2;\r\n\tthis.item.MarkDirty();\r\n\tif (this.GetDespawnDuration() < float.PositiveInfinity)\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (di.DropReason == global::DroppedItem.DropReasonEnum.Player)\r\n\t{\r\n\t\tthis.DropReason = global::DroppedItem.DropReasonEnum.Player;\r\n\t}\r\n\tInterface.CallHook(\"OnDroppedItemCombined\", this);\r\n\tdi.item.MigrateItemOwnership(this.item, di.item.amount);\r\n\tdi.DestroyItem();\r\n\tdi.Kill(global::BaseNetworkable.DestroyMode.None);\r\n\tint arg_29E_0 = this.item.info.GetWorldModelIndex(this.item.amount);\r\n\tthis.item.amount = num2;\r\n//---\r\n"
     },
     {
       "Type": 1,
