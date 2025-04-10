@@ -13656,7 +13656,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "private void StartEvent()\r\n{\r\n\tif (Interface.CallHook(\"OnHuntEventStart\", this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (this.initialSpawnIndex <= global::BasePlayer.activePlayerList.Count)\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "private void StartEvent()\r\n{\r\n\tif (Interface.CallHook(\"OnHuntEventStart\", this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tint count = global::BasePlayer.activePlayerList.Count;\r\n\tif (global::EggHuntEvent.includeBots)\r\n//---\r\n"
     },
     {
       "Type": 0,
