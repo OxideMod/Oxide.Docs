@@ -1,8 +1,48 @@
-
 /**
   * Customize default theme styling by overriding CSS variables:
   * https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css
   */
+
+/* Default light theme colors - don't override with dark colors */
+:root {
+  /* Default light colors are inherited from VitePress */
+  
+  /* Brand colors that apply to both light and dark modes */
+  --vp-c-brand-1: #f76b15;
+  --vp-c-brand-2: #f8833a;
+  --vp-c-brand-3: #f76b15;
+  --vp-c-brand-soft: rgba(142, 82, 31, 0.14);
+}
+
+/* Dark theme colors override - ONLY in dark mode */
+.dark {
+  --vp-c-bg: #121113;
+  --vp-c-bg-alt: #121113;
+  --vp-c-bg-elv: #1a1a1c;
+  --vp-c-bg-soft: #1a1a1c;
+  
+  /* Override all border and divider colors */
+  --vp-c-divider: rgba(255, 255, 255, 0.1);
+  --vp-c-gutter: #121113;
+  --vp-c-divider-light: rgba(255, 255, 255, 0.1);
+  --vp-c-divider-inverse: rgba(255, 255, 255, 0.1);
+  --vp-c-divider-light-2: rgba(255, 255, 255, 0.1);
+}
+
+/* Force backgrounds on main sections - only in dark mode */
+.dark html, .dark body, .dark #app {
+  background-color: #121113;
+}
+
+/* Force dark backgrounds for content areas - only in dark mode */
+.dark main, .dark .VPMain, .dark .VPContent, .dark .VPDoc {
+  background-color: #121113;
+}
+
+/* Make sure the sidebar and aside elements match - only in dark mode */
+.dark .VPSidebar, .dark .VPDocAside {
+  background-color: #121113;
+}
 
 /**
 * Colors
@@ -50,11 +90,6 @@
   --vp-c-default-3: var(--vp-c-gray-3);
   --vp-c-default-soft: var(--vp-c-gray-soft);
   
-  --vp-c-brand-1: #f76b15;
-  --vp-c-brand-2: #f8833a;
-  --vp-c-brand-3: #f76b15;
-  --vp-c-brand-soft: rgba(142, 82, 31, 0.14);
-
   --vp-c-tip-1: var(--vp-c-brand-1);
   --vp-c-tip-2: var(--vp-c-brand-2);
   --vp-c-tip-3: var(--vp-c-brand-3);
@@ -105,6 +140,248 @@
     #cd412b 50%
   );
   --vp-home-hero-image-filter: blur(40px);
+}
+
+/* Custom home page background with orange orbs */
+.VPHome {
+  position: relative;
+  overflow: hidden;
+}
+
+.dark .VPHome {
+  background-color: #121113;
+}
+
+/* Dark navbar and footer - only in dark mode */
+.dark .VPNav {
+  background-color: #121113;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .VPFooter {
+  background-color: #121113;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  box-shadow: none;
+}
+
+/* Target absolutely all possible elements that could cause the black bar - only in dark mode */
+.dark .VPApp, 
+.dark body .VPApp,
+.dark .VPApp .VPContent,
+.dark .VPContent .VPFooter,
+.dark .main .VPFooter,
+.dark .VPFooter,
+.dark .VPFooter::before,
+.dark .VPFooter::after,
+.dark .VPFooter .container,
+.dark .VPFooter .container::before,
+.dark .VPFooter .container::after,
+.dark .VPApp div[class^="VPFooter"],
+.dark .VPApp *[data-v-80147a0d],
+.dark .VPApp *[data-v-8f7cd5e4] {
+  background-color: #121113;
+  border-color: rgba(255, 255, 255, 0.1);
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Reset all borders to be the color we want - only in dark mode */
+.dark .VPFooter *,
+.dark .VPFooter *::before,
+.dark .VPFooter *::after {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Ensure no black bars in footer - for all modes */
+.VPFooter::before,
+.VPFooter::after {
+  display: none !important;
+}
+
+.VPFooter .container::before,
+.VPFooter .container::after {
+  display: none !important;
+}
+
+/* Ensure correct background in dark mode */
+.dark .VPFooter .container {
+  border-top: none !important;
+  box-shadow: none !important;
+  background-color: #121113;
+}
+
+/* Fix any border-images */
+.VPFooter, 
+.VPFooter .container {
+  border-image: none !important;
+}
+
+/* Fix all footer dividers and borders - dark mode specific */
+.dark .VPFooter .divider,
+.dark .VPFooter .separator,
+.dark .VPFooter hr,
+.dark .VPDoc .container > .outline-marker,
+.dark .VPDocFooter .prev-next .divider,
+.dark .VPDocFooter,
+.dark .VPDocFooter .border {
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Area below hero (features section) - dark mode only */
+.dark .VPFeatures {
+  background-color: #121113;
+}
+
+/* Adjust text colors for better visibility */
+.dark .VPFeatures .container h2,
+.dark .VPFeatures .container p {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Improve hero area appearance - dark mode only */
+.dark .VPHero {
+  background-color: #121113;
+}
+
+.dark .VPHero .container {
+  background-color: transparent;
+}
+
+/* Improve feature icons visibility */
+.VPFeatures .VPFeature .icon {
+  background-color: rgba(247, 107, 21, 0.1);
+  border-radius: 6px;
+  padding: 8px;
+}
+
+/* Make sure body background is also dark */
+.dark {
+  background-color: #121113;
+}
+
+/* Target main content and other containers - dark mode only*/
+.dark .VPContent {
+  background-color: #121113;
+}
+
+.dark .VPContent.is-home {
+  background-color: #121113;
+}
+
+/* Target hero image background */
+.VPHero .image-container .image-bg {
+  background-color: transparent !important;
+  background-image: linear-gradient(
+    -45deg,
+    #f76b15 50%,
+    #cd412b 50%
+  ) !important;
+  opacity: 0.8;
+}
+
+/* Target Layout backgrounds - dark mode only */
+.dark .Layout {
+  background-color: #121113;
+}
+
+/* Set box backgrounds for features - dark mode only */
+.dark .VPFeature .box {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.VPHome::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+/* Orange orbs with blur effect - REMOVED */
+.VPHome::after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+/* First orb - top right - REMOVED */
+/* 
+.VPHome .orb-1 {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-color: #f76b15;
+  top: -50px;
+  right: -50px;
+  filter: blur(80px);
+  opacity: 0.5;
+  z-index: 0;
+}
+*/
+
+/* Second orb - bottom left - REMOVED */
+/*
+.VPHome .orb-2 {
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background-color: #f76b15;
+  bottom: -100px;
+  left: -100px;
+  filter: blur(100px);
+  opacity: 0.4;
+  z-index: 0;
+}
+*/
+
+/* Third orb - center right - REMOVED */
+/*
+.VPHome .orb-3 {
+  position: fixed;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background-color: #cd412b;
+  top: 40%;
+  right: 10%;
+  filter: blur(70px);
+  opacity: 0.3;
+  z-index: 0;
+}
+*/
+
+/* Fourth orb - bottom center - REMOVED */
+/*
+.VPHome .orb-4 {
+  position: fixed;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  background-color: #cd412b;
+  bottom: -100px;
+  right: 30%;
+  filter: blur(90px);
+  opacity: 0.3;
+  z-index: 0;
+}
+*/
+
+/* Ensure home content is above the orbs */
+.VPHome .container {
+  position: relative;
+  z-index: 2;
 }
 
 @media (min-width: 640px) {
