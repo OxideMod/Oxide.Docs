@@ -36,12 +36,12 @@
 
 /* Force dark backgrounds for content areas - only in dark mode */
 .dark main, .dark .VPMain, .dark .VPContent, .dark .VPDoc {
-  background-color: #121113;
+  background-color: #12111300;
 }
 
 /* Make sure the sidebar and aside elements match - only in dark mode */
 .dark .VPSidebar, .dark .VPDocAside {
-  background-color: #121113;
+  background-color: #12111300;
 }
 
 /**
@@ -129,8 +129,8 @@
 :root {
   --vp-home-hero-name-color: transparent;
   --vp-home-hero-name-background: -webkit-linear-gradient(
-    120deg,
-    #f76b15 30%,
+    10deg,
+    #f76b15 10%,
     #cd412b
   );
 
@@ -146,10 +146,14 @@
 .VPHome {
   position: relative;
   overflow: hidden;
+  background-image: url('../public/bg.svg') !important;
+  background-size: cover !important;
 }
 
 .dark .VPHome {
   background-color: #121113;
+  background-image: url('../public/bg.svg') !important;
+  background-size: cover !important;
 }
 
 /* Dark navbar and footer - only in dark mode */
@@ -224,13 +228,13 @@
 .dark .VPDocFooter .prev-next .divider,
 .dark .VPDocFooter,
 .dark .VPDocFooter .border {
-  border-color: rgba(255, 255, 255, 0.1);
-  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #121113;
+  background-color: #121113;
 }
 
 /* Area below hero (features section) - dark mode only */
 .dark .VPFeatures {
-  background-color: #121113;
+  background-color: transparent;
 }
 
 /* Adjust text colors for better visibility */
@@ -240,11 +244,15 @@
 }
 
 /* Improve hero area appearance - dark mode only */
-.dark .VPHero {
-  background-color: #121113;
+.dark .VPHero, .dark .VPHomeHero {
+  background-color: transparent;
 }
 
-.dark .VPHero .container {
+.dark .VPHero .container, .dark .VPHomeHero .container {
+  background-color: transparent;
+}
+
+.dark .VPHero.has-image, .dark .VPHomeHero.has-image {
   background-color: transparent;
 }
 
@@ -270,7 +278,7 @@
 }
 
 /* Target hero image background */
-.VPHero .image-container .image-bg {
+.VPHero .image-container .image-bg, .VPHomeHero .image-container .image-bg {
   background-color: transparent !important;
   background-image: linear-gradient(
     -45deg,
@@ -278,6 +286,7 @@
     #cd412b 50%
   ) !important;
   opacity: 0.8;
+  border-radius: 500px;
 }
 
 /* Target Layout backgrounds - dark mode only */
@@ -289,6 +298,12 @@
 .dark .VPFeature .box {
   background-color: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+/* Set box backgrounds for features - light mode */
+.VPFeature .box {
+  border-radius: 8px;
 }
 
 .VPHome::before {
@@ -313,70 +328,6 @@
   bottom: 0;
   pointer-events: none;
 }
-
-/* First orb - top right - REMOVED */
-/* 
-.VPHome .orb-1 {
-  position: fixed;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  background-color: #f76b15;
-  top: -50px;
-  right: -50px;
-  filter: blur(80px);
-  opacity: 0.5;
-  z-index: 0;
-}
-*/
-
-/* Second orb - bottom left - REMOVED */
-/*
-.VPHome .orb-2 {
-  position: fixed;
-  width: 400px;
-  height: 400px;
-  border-radius: 50%;
-  background-color: #f76b15;
-  bottom: -100px;
-  left: -100px;
-  filter: blur(100px);
-  opacity: 0.4;
-  z-index: 0;
-}
-*/
-
-/* Third orb - center right - REMOVED */
-/*
-.VPHome .orb-3 {
-  position: fixed;
-  width: 250px;
-  height: 250px;
-  border-radius: 50%;
-  background-color: #cd412b;
-  top: 40%;
-  right: 10%;
-  filter: blur(70px);
-  opacity: 0.3;
-  z-index: 0;
-}
-*/
-
-/* Fourth orb - bottom center - REMOVED */
-/*
-.VPHome .orb-4 {
-  position: fixed;
-  width: 350px;
-  height: 350px;
-  border-radius: 50%;
-  background-color: #cd412b;
-  bottom: -100px;
-  right: 30%;
-  filter: blur(90px);
-  opacity: 0.3;
-  z-index: 0;
-}
-*/
 
 /* Ensure home content is above the orbs */
 .VPHome .container {
