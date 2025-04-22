@@ -21,12 +21,8 @@
   --vp-c-bg-elv: #1a1a1c;
   --vp-c-bg-soft: #1a1a1c;
   
-  /* Override all border and divider colors */
-  --vp-c-divider: rgba(255, 255, 255, 0.1);
+  /* Override just the gutter color, not the dividers - this keeps dividers consistent with light mode */
   --vp-c-gutter: #121113;
-  --vp-c-divider-light: rgba(255, 255, 255, 0.1);
-  --vp-c-divider-inverse: rgba(255, 255, 255, 0.1);
-  --vp-c-divider-light-2: rgba(255, 255, 255, 0.1);
 }
 
 /* Force backgrounds on main sections - only in dark mode */
@@ -122,6 +118,33 @@
   --vp-button-brand-active-bg: var(--vp-c-brand-1);
 }
 
+/* Gradient buttons for home page */
+.VPHomeHero .VPButton.brand,
+.VPHome .actions .VPButton.brand {
+  background: linear-gradient(135deg, #f76b15, #cd412b) !important;
+  border: none !important;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border-radius: 8px;
+}
+
+.VPHomeHero .VPButton.brand:hover,
+.VPHome .actions .VPButton.brand:hover {
+  background: linear-gradient(135deg, #ff7a1e, #e04c33) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  
+}
+
+.VPHomeHero .VPButton.brand:active,
+.VPHome .actions .VPButton.brand:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
 /**
 * Component: Home
 * -------------------------------------------------------------------------- */
@@ -148,12 +171,20 @@
   overflow: hidden;
   background-image: url('../public/bg.svg') !important;
   background-size: cover !important;
+  min-height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
 }
 
 .dark .VPHome {
   background-color: #121113;
   background-image: url('../public/bg.svg') !important;
   background-size: cover !important;
+  min-height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
 }
 
 /* Dark navbar and footer - only in dark mode */
@@ -261,6 +292,7 @@
   background-color: rgba(247, 107, 21, 0.1);
   border-radius: 6px;
   padding: 8px;
+  
 }
 
 /* Make sure body background is also dark */
@@ -333,6 +365,10 @@
 .VPHome .container {
   position: relative;
   z-index: 2;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 2rem !important;
+  padding-bottom: 2rem !important;
 }
 
 @media (min-width: 640px) {
