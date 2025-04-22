@@ -66,6 +66,7 @@ export default defineConfig({
       { text: "Guides", link: "/guides/" },
       { text: "Core", link: "/core/" },
       { text: "Hooks", link: "/hooks/" },
+      { text: "Glossary", link: "/glossary" },
     ],
 
     sidebar: {
@@ -73,12 +74,28 @@ export default defineConfig({
         {
           text: "Server Owners",
           collapsed: false,
-          items: getSidebarByPath("docs/guides/owners/"),
+          items: [
+            // Filter out community-related files from server owners section
+            ...getSidebarByPath("docs/guides/owners/").filter(item => 
+              !["community-guidelines", "contributing", "reporting-issues"].includes(
+                item.link.split('/').pop()?.replace('.html', '') || ''
+              )
+            )
+          ],
         },
         {
           text: "Developers",
           collapsed: false,
           items: getSidebarByPath("docs/guides/developers/")
+        },
+        {
+          text: "Community",
+          collapsed: false,
+          items: [
+            { text: "Community Guidelines", link: "/guides/owners/community-guidelines" },
+            { text: "Contributing", link: "/guides/owners/contributing" },
+            { text: "Reporting Issues", link: "/guides/owners/reporting-issues" },
+          ]
         },
       ],
       "/guides/reviewers/": [
@@ -121,7 +138,7 @@ export default defineConfig({
   head: [umamiScript, logoStyle, ['link', { rel: 'stylesheet', href: '/theme/custom.css' }]],
   markdown: {
     config(md) {
-        md.use(MarkdownItFootnote);
+      md.use(MarkdownItFootnote);
     }
   }
 });
