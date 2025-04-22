@@ -114,3 +114,10 @@ static class DoPlace_Process
 }
 ```
 Note: see harmony documentation for info about harmony patches
+
+## Reference
+Add the ablility to reference additionnal DLL files to be used by the plugin
+```csharp
+//Reference: System.Drawing
+```
+
