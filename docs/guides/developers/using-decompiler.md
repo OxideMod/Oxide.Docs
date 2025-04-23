@@ -20,7 +20,7 @@ Many software exist to help decompile C# code. here a are a few examples
 
 ## Modules to load
 
-These are the most common DLL files to load in the decompiler. Files are located in the `.\server\RustDedicated_Data\Managed\` folder. The files beginning with Oxide are part of the Oxide development platform. Files starting with Oxide.Ext. are extension modules.  
+These are the most common DLL files to load in the decompiler. For game Rust, files are located in the `.\server\RustDedicated_Data\Managed\` folder. The files beginning with Oxide are part of the Oxide development platform. Files starting with Oxide.Ext. are extension modules.  
 
 `Assembly-CSharp.dll` (main dll files)  
 `Oxide.Core.dll`  

@@ -7,7 +7,10 @@ after: using-decompiler
 
 ## Configuration/user data file
 
-As previously mentioned in section [My first plugin](./my-first-plugin), configuration and user data file use `Newtonsoft.Json` to serialize data structure.
+As previously mentioned in the section [My first plugin](./my-first-plugin), configuration and user data file use `Newtonsoft.Json` to serialize data structure.  
+Configuration files are stored in  `./oxide/config folder`  
+User data files are stored in  `./oxide/data`  
+Default path can be modified to save in subfolder.  
 
 the basic data structure 
 ```csharp
@@ -45,12 +48,25 @@ private class PluginData
 	public List<string> Zones = new List<string> { "KeepOut" };	
 }
 ```
+
+will be serialized to
+
+```json
+{
+	"A simple message when player spawn" : "a simple reply message",
+	"Maximum health value (default=100)" : 100,
+	"Zones to prevent something" : [
+		"KeepOut"
+		]
+}
+```
+
 ## Language data file
 
-The language file is initialized in the LoadDefaultMessages hook. All messages definition will be stored in a file in the ./oxide/lang/[Language code]/[Plugin name].json.
+The language file is initialized in the LoadDefaultMessages hook. All messages definition will be stored in a file in the `./oxide/lang/(Language code)/(Plugin name).json`.
 Only the missing messages are added but it does not overwrite the one already existing. This allows server owners to customize messages to their preference.
-Server owners can also translate messages to other languages. for example, messages could be translated into Italian and saved in the ./oxide/lang/it/[Plugin name].json file  
-Note: To revert the language file to the default for a plugin, just delete the file ./oxide/lang/{Language code]/[Plugin name].json
+Server owners can also translate messages to other languages. for example, messages could be translated into Italian and saved in the `./oxide/lang/it/(Plugin name).json` file  
+Note: To revert the language file to the default for a plugin, just delete the file `./oxide/lang/(Language code)/(Plugin name).json`
 ``` csharp
 private new void LoadDefaultMessages()
 {
@@ -102,7 +118,13 @@ private string Lang(string key, string id = null, params object[] args) => strin
 
 ## Protobuf storage
 
-see ProtoStorage class
+Protobuf store data in a binary format. Main advantage is a more compact and faster data storage, with the disadvantage to not be human readable
+
+`[ProtoContract]`  : to indicates that this class will serialize.  
+`[ProtoMember(N)]` : where N represents the number in which order it will serialize  
+`[ProtoIgnore]`    : this field will not be serialized.  
+
+### Protobuf class sample
 
 ``` csharp
 [ProtoContract]
@@ -110,27 +132,109 @@ public class sample {
     [ProtoMember(1)]
     public string data1;
     [ProtoMember(2)]
-    public List data2;
+    public List<int> data2;
     [ProtoMember(3)]
     public DateTime data3;
-    [ProtoMember(4)]
+    [ProtoIgnore]
     public int data4;
 }
 ```
-
+### Protobuf Loading
 ``` csharp
-if ProtoStorage.Exists(filename)
-   sample mySample = ProtoStorage.Load(filename) ?? new sample();
+sample mySample
+if (ProtoStorage.Exists(filename))
+{
+	mySample = ProtoStorage.Load<sample>(filename) ?? new sample();
+}
 else
-   sample mySample = new sample();
+{
+	mySample = new sample();
+}
 ```
-
+### Protobuf Saving
 ``` csharp
 ProtoStorage.Save(mySample, filename);
 ```
 
 ## Database storage
 
+Data can be stored in a database using either `SQLite`  or `MySQL`. 
 
+### SQlite
+In an Oxide plugin, SQLite can be used as a lightweight database solution for storing and retrieving data. 
+Unlike traditional file-based storage, SQLite allows structured data management through tables, like tracking player statistics. 
+Plugins can interact with the database using SQL queries to insert, update, delete, or retrieve information.
+Since SQLite is embedded, it eliminates the need for a separate database server, 
+making it a convenient choice for smaller-scale applications within game servers. 
 
+Example of SQLite plugin :
+```csharp
+using Oxide.Core;
+using Oxide.Core.Libraries.Covalence;
 
+namespace Oxide.Plugins
+{
+    [Info("Test SQLite", "Oxide", "1.0.0")]
+    public class TestSQLite : CovalencePlugin
+    {
+        private readonly string _databaseName = "TestSQLite";
+        static readonly Oxide.Core.SQLite.Libraries.SQLite sqlite = Interface.Oxide.GetLibrary<Oxide.Core.SQLite.Libraries.SQLite>();
+        static Oxide.Core.Database.Connection sqlConnection;
+
+        private void Init()
+        {
+            sqlConnection = sqlite.OpenDb(_databaseName, this);
+            var sql = new Oxide.Core.Database.Sql();
+            sql.Append(@"CREATE TABLE IF NOT EXISTS Players (id INTEGER PRIMARY KEY, name TEXT, kills INTEGER);");
+            sqlite.Insert(sql, sqlConnection);
+        }
+
+        private void InsertPlayerData(string playerName, int kills)
+        {
+            string query = $"INSERT INTO Players (name, kills) VALUES ('{playerName}', {kills});";
+            var sql = new Oxide.Core.Database.Sql();
+            sql.Append(query);
+            sqlite.Insert(sql, sqlConnection);
+        }
+
+        private void ReadPlayerData()
+        {
+            string query = "SELECT * FROM Players;";
+            var sql = new Oxide.Core.Database.Sql();
+            sql.Append(query);
+            sqlite.Query(sql, sqlConnection, list =>
+            {
+                foreach (var row in list)
+                {
+                    Puts($"Player {row["name"]} has {row["kills"]} kills.");
+                }
+            });
+        }
+
+        [Command("addplayer")]
+        private void CmdAddPlayer(IPlayer iplayer, string command, string[] args)
+        {
+            if (args.Length < 2)
+            {
+                Puts("addplayer, Missing arguments");
+                return;
+            }
+            InsertPlayerData(args[0], int.Parse(args[1]));
+            Puts($"Added player {args[0]} with {args[1]} kills.");
+        }
+
+        [Command("listplayers")]
+        private void CmdListPlayers(IPlayer iplayer, string command, string[] args)
+        {
+            Puts("listplayers command");
+            ReadPlayerData();
+        }
+    }
+}
+```
+
+### MySQL
+To use MySQL, you need a separate database server. MySQL and MariaDB are the most commonly used server, but other product also be used.
+
+- [MySQL](https://dev.mysql.com/downloads/installer/), version 5.7.X or earlier.  
+- [MariaDB](https://mariadb.org/download/?t=mariadb&p=mariadb&r=11.7.2&os=windows&cpu=x86_64&pkg=msi&mirror=osuosl)  version 10.9.8 or earlier.  
