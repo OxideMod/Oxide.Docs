@@ -1,5 +1,18 @@
 {
     "compilerOptions": {
-        "esModuleInterop": true
-    }
+        "esModuleInterop": true,
+        "jsx": "preserve",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "types": ["vite/client"]
+    },
+    "include": [
+        ".vitepress/**/*.ts",
+        ".vitepress/**/*.d.ts",
+        ".vitepress/**/*.vue",
+        "components/**/*.ts",
+        "components/**/*.vue",
+        "shims.d.ts"
+    ]
 }

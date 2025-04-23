@@ -1,8 +1,44 @@
-
 /**
   * Customize default theme styling by overriding CSS variables:
   * https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css
   */
+
+/* Default light theme colors - don't override with dark colors */
+:root {
+  /* Default light colors are inherited from VitePress */
+  
+  /* Brand colors that apply to both light and dark modes */
+  --vp-c-brand-1: #f76b15;
+  --vp-c-brand-2: #f8833a;
+  --vp-c-brand-3: #f76b15;
+  --vp-c-brand-soft: rgba(142, 82, 31, 0.14);
+}
+
+/* Dark theme colors override - ONLY in dark mode */
+.dark {
+  --vp-c-bg: #121113;
+  --vp-c-bg-alt: #121113;
+  --vp-c-bg-elv: #1a1a1c;
+  --vp-c-bg-soft: #1a1a1c;
+  
+  /* Override just the gutter color, not the dividers - this keeps dividers consistent with light mode */
+  --vp-c-gutter: #121113;
+}
+
+/* Force backgrounds on main sections - only in dark mode */
+.dark html, .dark body, .dark #app {
+  background-color: #121113;
+}
+
+/* Force dark backgrounds for content areas - only in dark mode */
+.dark main, .dark .VPMain, .dark .VPContent, .dark .VPDoc {
+  background-color: #12111300;
+}
+
+/* Make sure the sidebar and aside elements match - only in dark mode */
+.dark .VPSidebar, .dark .VPDocAside {
+  background-color: #12111300;
+}
 
 /**
 * Colors
@@ -50,11 +86,6 @@
   --vp-c-default-3: var(--vp-c-gray-3);
   --vp-c-default-soft: var(--vp-c-gray-soft);
   
-  --vp-c-brand-1: #f76b15;
-  --vp-c-brand-2: #f8833a;
-  --vp-c-brand-3: #f76b15;
-  --vp-c-brand-soft: rgba(142, 82, 31, 0.14);
-
   --vp-c-tip-1: var(--vp-c-brand-1);
   --vp-c-tip-2: var(--vp-c-brand-2);
   --vp-c-tip-3: var(--vp-c-brand-3);
@@ -87,6 +118,33 @@
   --vp-button-brand-active-bg: var(--vp-c-brand-1);
 }
 
+/* Gradient buttons for home page */
+.VPHomeHero .VPButton.brand,
+.VPHome .actions .VPButton.brand {
+  background: linear-gradient(135deg, #f76b15, #cd412b) !important;
+  border: none !important;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border-radius: 8px;
+}
+
+.VPHomeHero .VPButton.brand:hover,
+.VPHome .actions .VPButton.brand:hover {
+  background: linear-gradient(135deg, #ff7a1e, #e04c33) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  
+}
+
+.VPHomeHero .VPButton.brand:active,
+.VPHome .actions .VPButton.brand:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
 /**
 * Component: Home
 * -------------------------------------------------------------------------- */
@@ -94,8 +152,8 @@
 :root {
   --vp-home-hero-name-color: transparent;
   --vp-home-hero-name-background: -webkit-linear-gradient(
-    120deg,
-    #f76b15 30%,
+    10deg,
+    #f76b15 10%,
     #cd412b
   );
 
@@ -105,6 +163,212 @@
     #cd412b 50%
   );
   --vp-home-hero-image-filter: blur(40px);
+}
+
+/* Custom home page background with orange orbs */
+.VPHome {
+  position: relative;
+  overflow: hidden;
+  background-image: url('../public/bg.svg') !important;
+  background-size: cover !important;
+  min-height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+
+.dark .VPHome {
+  background-color: #121113;
+  background-image: url('../public/bg.svg') !important;
+  background-size: cover !important;
+  min-height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+
+/* Dark navbar and footer - only in dark mode */
+.dark .VPNav {
+  background-color: #121113;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .VPFooter {
+  background-color: #121113;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  box-shadow: none;
+}
+
+/* Target absolutely all possible elements that could cause the black bar - only in dark mode */
+.dark .VPApp, 
+.dark body .VPApp,
+.dark .VPApp .VPContent,
+.dark .VPContent .VPFooter,
+.dark .main .VPFooter,
+.dark .VPFooter,
+.dark .VPFooter::before,
+.dark .VPFooter::after,
+.dark .VPFooter .container,
+.dark .VPFooter .container::before,
+.dark .VPFooter .container::after,
+.dark .VPApp div[class^="VPFooter"],
+.dark .VPApp *[data-v-80147a0d],
+.dark .VPApp *[data-v-8f7cd5e4] {
+  background-color: #121113;
+  border-color: rgba(255, 255, 255, 0.1);
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Reset all borders to be the color we want - only in dark mode */
+.dark .VPFooter *,
+.dark .VPFooter *::before,
+.dark .VPFooter *::after {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Ensure no black bars in footer - for all modes */
+.VPFooter::before,
+.VPFooter::after {
+  display: none !important;
+}
+
+.VPFooter .container::before,
+.VPFooter .container::after {
+  display: none !important;
+}
+
+/* Ensure correct background in dark mode */
+.dark .VPFooter .container {
+  border-top: none !important;
+  box-shadow: none !important;
+  background-color: #121113;
+}
+
+/* Fix any border-images */
+.VPFooter, 
+.VPFooter .container {
+  border-image: none !important;
+}
+
+/* Fix all footer dividers and borders - dark mode specific */
+.dark .VPFooter .divider,
+.dark .VPFooter .separator,
+.dark .VPFooter hr,
+.dark .VPDoc .container > .outline-marker,
+.dark .VPDocFooter .prev-next .divider,
+.dark .VPDocFooter,
+.dark .VPDocFooter .border {
+  border-color: #121113;
+  background-color: #121113;
+}
+
+/* Area below hero (features section) - dark mode only */
+.dark .VPFeatures {
+  background-color: transparent;
+}
+
+/* Adjust text colors for better visibility */
+.dark .VPFeatures .container h2,
+.dark .VPFeatures .container p {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Improve hero area appearance - dark mode only */
+.dark .VPHero, .dark .VPHomeHero {
+  background-color: transparent;
+}
+
+.dark .VPHero .container, .dark .VPHomeHero .container {
+  background-color: transparent;
+}
+
+.dark .VPHero.has-image, .dark .VPHomeHero.has-image {
+  background-color: transparent;
+}
+
+/* Improve feature icons visibility */
+.VPFeatures .VPFeature .icon {
+  background-color: rgba(247, 107, 21, 0.1);
+  border-radius: 6px;
+  padding: 8px;
+  
+}
+
+/* Make sure body background is also dark */
+.dark {
+  background-color: #121113;
+}
+
+/* Target main content and other containers - dark mode only*/
+.dark .VPContent {
+  background-color: #121113;
+}
+
+.dark .VPContent.is-home {
+  background-color: #121113;
+}
+
+/* Target hero image background */
+.VPHero .image-container .image-bg, .VPHomeHero .image-container .image-bg {
+  background-color: transparent !important;
+  background-image: linear-gradient(
+    -45deg,
+    #f76b15 50%,
+    #cd412b 50%
+  ) !important;
+  opacity: 0.8;
+  border-radius: 500px;
+}
+
+/* Target Layout backgrounds - dark mode only */
+.dark .Layout {
+  background-color: #121113;
+}
+
+/* Set box backgrounds for features - dark mode only */
+.dark .VPFeature .box {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+/* Set box backgrounds for features - light mode */
+.VPFeature .box {
+  border-radius: 8px;
+}
+
+.VPHome::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+/* Orange orbs with blur effect - REMOVED */
+.VPHome::after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+/* Ensure home content is above the orbs */
+.VPHome .container {
+  position: relative;
+  z-index: 2;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 2rem !important;
+  padding-bottom: 2rem !important;
 }
 
 @media (min-width: 640px) {

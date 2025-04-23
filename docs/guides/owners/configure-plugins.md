@@ -5,130 +5,111 @@ after: install-plugins
 
 # Configuring Plugins
 
-Configuring plugins is an essential part of setting up your Rust server to function exactly the way you want it to. This process involves adjusting the settings of your installed plugins by editing their associated configuration files. These files are usually in the JSON format, which we'll go over in this guide.
+Most plugins will generate a JSON configuration file once loaded. With these files, you can adjust how plugins behave to customize your server experience. This guide will help you understand how to locate, edit, and apply configuration changes.
 
 :::warning ⚠️Important Note
-Always make backups of your configuration files before making changes. Configuration files contain important settings, and it's easy to make a mistake. Having a backup allows you to restore the original settings if something goes wrong.
+Always make backups of your configuration files before making changes. It's easy to make mistakes when editing JSON files, and having a backup allows you to restore the original settings if something goes wrong.
 :::
 
-## 1. Prerequisites
+## 1. Understanding Configuration Files
 
-Before we begin, ensure that you have the following:
-
-- **A working Rust server set up and running**. If you need help with this, please check out our [Server Setup](todo_server_setup_linky) Guide.
-- **Oxide installed on your server**. If you need help with this, please check out our [Install Oxide](todo_install_oxide_linky) Guide.
-- **At least one plugin installed on your server**. If you need help with this, please check out our [Install Plugins](todo_install_plugins_linky) Guide.
-
-## 2. Understanding Configuration Files
-
-Configuration files, often referred to as config files, are created in the `/oxide/config` directory each time a plugin is loaded into the server. These files store the settings of the plugins in a structured format, usually JSON.
-
-The JSON (JavaScript Object Notation) is a lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate. Here's an example:
+Configuration files are saved as JSON (JavaScript Object Notation), a lightweight data-interchange format that is both human-readable and machine-parsable. Here's an example of what a simple configuration file might look like:
 
 ```json
 {
-  "Setting1": true,
-  "Setting2": 5,
-  "Setting3": "example text"
+  "EnableFeature": true,
+  "MessageDelay": 5,
+  "WelcomeMessage": "Welcome to our server!"
 }
 ```
 
-Each setting is a key-value pair. The key (like "Setting1") is the name of the setting, and the value (like true) is the value of the setting.
+Each setting is a key-value pair:
+- The key (like "EnableFeature") is the name of the setting
+- The value (like `true`) is the setting's value, which can be:
+  - Boolean values (`true` or `false`)
+  - Numbers (like `5`)
+  - Text strings (like `"Welcome to our server!"`)
+  - Arrays (lists of values)
+  - Objects (nested settings)
 
-You can change the values of these settings to modify how the plugin behaves. For example, changing "Setting1" from true to false might disable a certain feature of the plugin.
+## 2. Locating Configuration Files
 
-## 3. Locating and Accessing Configuration Files
+### Config Directory
+Configuration files are found in the `config` folder which is located by default in `oxide/config` (unless the server host has moved it).
 
-To start with, we need to locate the configuration files for our installed plugins. These files will allow us to customize our plugins' functionality.
+### File Name
+A plugin configuration file will have the same name as the plugin itself. For example, a plugin that is installed as `MyPlugin.cs` (if it's configurable) will be accompanied by a JSON file named `MyPlugin.json`.
 
-### 3.1 Where are the Configuration Files?
-
-Typically, the primary configuration files for your plugins will be stored in the `/oxide/config` directory within your Rust server's main directory. However, some plugins may also store additional configuration or data files in the `/oxide/data` directory.
-
-For localization purposes, some plugins will utilize a `/oxide/lang` file. The details regarding these 'lang' files and their role in localization are covered in the Localization section of this guide.
-
-### 3.2 Where is My Rust Server's Main Directory?
-
-If you've followed our guide to setting up a Rust server using SteamCMD, your Rust server's main directory will be the one named "rust_server".
-
-So, if you're looking for the config files, their full path from your Rust server's root directory would be: `rust_server/oxide/config`.
-
-### 3.3 How Do I Access These Files?
-
-Depending on your setup, there are several methods to access these files:
-
-- **Local Machine**: If you're hosting the server on your own computer, you can simply use the File Explorer (Windows) or Finder (macOS) to navigate to the Rust server directory and access the files.
-- **Hosting Provider**: If you're using a hosting provider, they will likely provide a web-based file manager which you can use to access these files.
-- **Command-line Tools**: If you're comfortable with command-line tools, you can use an FTP client or a remote SSH session to navigate to your server directory.
-
-Now, you have located and accessed your configuration files, let's move on to Editing these files.
-
-## 4. 4. Editing Configuration Files
-
-Now that we've located our configuration files, the next step is to learn how to make modifications to these files to tweak our plugins.
-
-### 4.1 Accessing the Configuration Files
-
-As previously mentioned, depending on your server setup, you may access these files either directly through your computer's file explorer, a web-based file manager provided by your hosting service, or command-line tools like FTP clients or SSH.
-
-### 4.2 Opening Configuration Files
-
-These configuration files are typically in the JSON format, which is a widely used data-interchange format. You can open and edit JSON files with any text editor. [Visual Studio Code](https://code.visualstudio.com/) is a free and popular choice, but any text editor will suffice.
-
-Remember to make a backup of your configuration files before making any changes!
-
-### 4.3 Editing the Configuration Files
-
-When you open a JSON file, you will typically see a series of key-value pairs. Each key represents a particular setting, and the corresponding value is what that setting is currently configured to.
-
-For example, if you have a plugin that controls the day-night cycle, your JSON file might look something like this:
-
-```json
-{
-    "dayLength": 30,
-    "nightLength": 10
-}
-```
-
-To adjust the settings, you simply need to change the values. Once you have made your changes, save the file and ensure it remains in the JSON format.
-
-### 4.4 Saving and Applying Changes
-
-Once you've saved your changes, you can apply them to your server. As mentioned in the previous section, the Oxide Mod allows changes to be applied without needing to restart your server entirely.
-
-Instead, you can use the `oxide.reload` command to reload a specific plugin, applying any changes made to its configuration file. This can be done via the server's console.
-
-For example, to reload a plugin named "DayNightCycle", you would use:
-
-```bash
-oxide.reload DayNightCycle
-```
-
-This will reload the plugin, applying your new configuration settings.
-
-:::warning
-Be aware that some plugins save their current configuration to disk when they are unloaded, which may overwrite your changes if the plugin is reloaded. In such cases, you may need to unload the plugin, make your changes, and then load the plugin again. More details on this can be found in the Troubleshooting section.
+:::tip
+Do not rename the configuration file or change the file extension.
 :::
+
+If a plugin is installed but no configuration file appears, there are two possibilities:
+1. The plugin isn't configurable
+2. The plugin might be broken - check the log files under the `oxide/logs` directory for errors
+
+## 3. Editing Configuration Files
+
+### Accessing the Files
+Depending on your server setup, you can access these files through:
+- File explorer (for local servers)
+- Web-based file manager (provided by hosting services)
+- FTP client or SSH (for remote servers)
+
+### Editing Process
+1. Open the configuration file with any text editor (Notepad, Visual Studio Code, etc.)
+2. Make your desired changes to the values
+3. Ensure the file remains valid JSON
+4. Save the file
+
+### Validating JSON
+All plugin configuration files must be valid JSON. Use a validator such as [jsonlint.com](https://jsonlint.com) to ensure the configuration is valid JSON if you're unsure about your edits.
+
+Common JSON errors include:
+- Missing or extra commas
+- Unclosed quotes or brackets
+- Using single quotes instead of double quotes
+- Adding trailing commas
+
+## 4. Applying Configuration Changes
+
+After making changes to a plugin configuration file, you need to reload the plugin for the changes to take effect:
+
+```
+oxide.reload MyPlugin
+```
+
+Replace `MyPlugin` with the name of the plugin you modified. This command tells Oxide to reload the plugin, which will cause it to read the updated configuration file.
 
 ## 5. Troubleshooting Plugin Configuration
 
-Even when you follow the proper steps to modify your plugin configuration, there are times when things might not work as expected. Here are some common issues that you might encounter and their solutions.
+Even when following proper procedures, you might encounter issues:
 
-**Invalid JSON**
+### Invalid JSON
+If your configuration file contains syntax errors, the plugin might fail to load or use default values. Always validate your JSON after making changes.
 
-JSON files are quite sensitive to format. Even a small mistake like a missing comma, bracket, or an extra quote can invalidate the entire file, causing your changes not to be recognized. Always validate your JSON file after making changes. Online JSON validators like JSONLint can help you with this.
+### Plugin Saves Configuration on Unload
+Some plugins save their current configuration to disk when they are unloaded. If you edit a configuration while the plugin is loaded and then use `oxide.reload`, the plugin might overwrite your changes. In such cases:
 
-**Plugin saves configuration on unload**
+1. Unload the plugin:
+   ```
+   oxide.unload PluginName
+   ```
+2. Edit the configuration file
+3. Load the plugin again:
+   ```
+   oxide.load PluginName
+   ```
 
-Some plugins save their current configuration to disk when they are unloaded. This means that if you edit a configuration file while the plugin is loaded and then use oxide.reload to apply the changes, the plugin might overwrite your changes when it unloads. In such cases, you need to unload the plugin, edit the configuration, and then load the plugin again.
+### Plugin Data Files
+In addition to configuration files, plugins may create data files in the `oxide/data` directory. These store information the plugin needs to persist across server restarts. Generally, you shouldn't modify these files unless you know exactly what you're doing.
 
-To do this, use the following commands:
-```bash
-oxide.unload PluginName
-```
-Now that the plugin is unloaded, make your changes to the config file(s). Once you are finished, load the plugin:
-```bash
-oxide.load PluginName
-```
+## Conclusion
 
-Remember, whenever you're editing your server's configuration, always backup your files and carefully validate any changes. With careful management, you'll be able to customize your Rust server to your exact specifications!
+Understanding how to properly configure plugins allows you to tailor your server to your exact specifications. With the knowledge from this guide, you should be able to effectively customize your plugins' behavior.
+
+Remember to always:
+1. Make backups before editing
+2. Ensure your JSON is valid
+3. Reload plugins after making changes
+4. Check logs if you encounter issues

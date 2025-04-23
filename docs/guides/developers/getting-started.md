@@ -5,21 +5,37 @@ after: 0
 
 # Getting started with plugin development
 
-Welcome to the exciting world of Rust modding using the Oxide framework! If you're a fan of the game Rust, and you love to code, you're in for a treat. This guide is the first step on your journey towards creating unique and immersive mods that can add new layers of fun and complexity to the game.
+Welcome to the world of game modding using the Oxide framework! This guide is the first step on your journey towards creating unique and immersive plugins that can add new layers of functionality to supported games.
 
-## Introduction to Rust and Oxide Modding
+## Introduction to Oxide Plugin Development
 
-Rust is a popular multiplayer survival game where players contend with challenges such as hunger, thirst, and exposure, not to mention other players! With the Oxide modding framework, you can build upon this base game, introducing new features, tweaking gameplay elements, and fundamentally transforming the Rust experience.
+Oxide is a powerful modding framework that allows developers to create plugins to modify and enhance gameplay on game servers. With Oxide, you can build plugins that introduce new features, tweak gameplay elements, and fundamentally transform the player experience.
 
 ## Key Concepts
 
 Before you dive in, there are a few key concepts to understand:
 
-- **Plugins**: These are the scripts you'll be writing, which add new functionality to the game or modify existing features.
+- **Plugins**: These are self-contained bits of code which modify game server behavior. Plugins are distributed as CSharp (C#) files with a `.cs` file extension.
+
 - **Hooks**: These are functions that get called by the game or by Oxide. By using hooks in your plugins, you can define what happens when certain game events occur.
-- **Data storage**: Oxide provides several ways to store data, such as player scores or configuration settings. Understanding the different data storage options and knowing when to use each is essential to creating efficient and effective mods.
-- **Testing and Debugging**: A significant part of mod development is testing your creations and fixing any bugs that arise. Familiarizing yourself with the debugging tools available in your chosen IDE will save you a lot of time and headache.
 
-With these basic concepts under your belt, you're ready to embark on your journey as a Rust mod developer!
+- **Configuration**: Most plugins generate a JSON configuration file that server administrators can use to change how the plugin works. Understanding how to create and manage configuration files is essential.
 
-In the next sections, we'll delve into the specifics of setting up your development environment, crafting your first plugin, and following best practices. Don't worry, we'll guide you through it every step of the way.
+- **Data Files**: Plugins can create data files in JSON format to store persistent information. These files are saved in the `oxide/data` directory.
+
+- **Permissions**: Many plugins have permissions which must be assigned to users or groups in order to use certain plugin features. Implementing a proper permission system is crucial for server administration.
+
+- **Commands**: Plugins can add new commands that may be used by players or server administrators. This can include both console commands and chat commands.
+
+- **Testing and Debugging**: A significant part of plugin development is testing your creations and fixing any bugs that arise. Familiarizing yourself with debugging tools will save you time and frustration.
+
+## Next Steps
+
+With these basic concepts in mind, you're ready to embark on your journey as an Oxide plugin developer! In the following sections, we'll dive into:
+
+1. Setting up your [Development Environment](development-environment)
+2. Creating [Your First Plugin](my-first-plugin)
+3. Following [Best Practices](best-practices) for plugin development
+4. Understanding [Plugin Guidelines](plugin-guidelines) for publishing
+
+Let's get started on your plugin development journey!

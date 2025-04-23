@@ -11,6 +11,17 @@ const umamiScript: HeadConfig = ["script", {
   "data-website-id": "28a8b6b5-bf7b-481b-bdc5-f4dafeb0a796"
 }]
 
+const logoStyle: HeadConfig = ["style", {}, `
+  :root {
+    --vp-nav-logo-height: 60px !important;
+  }
+  .VPNavBarTitle .VPImage {
+    height: 60px !important;
+    width: auto !important;
+    max-height: 60px !important;
+  }
+`]
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   lang: "en-US",
@@ -20,8 +31,15 @@ export default defineConfig({
   ignoreDeadLinks: true, //TODO: Remove for PR
   cleanUrls: true,
   lastUpdated: true,
+  appearance: 'dark',
   themeConfig: {
-    logo: "/logo.png",
+    logo: {
+      light: "/oxide_white_bg.svg",
+      dark: "/oxide_black_bg.svg",
+      alt: "OxideMod",
+      height: 48
+    },
+    siteTitle: false,
     externalLinkIcon: false,
     
     editLink: {
@@ -44,9 +62,11 @@ export default defineConfig({
     }, 
 
     nav: [
+      { text: "← Back to OxideMod", link: "https://oxidemod.com/" },
       { text: "Guides", link: "/guides/" },
       { text: "Core", link: "/core/" },
       { text: "Hooks", link: "/hooks/" },
+      { text: "Glossary", link: "/glossary" },
     ],
 
     sidebar: {
@@ -54,12 +74,28 @@ export default defineConfig({
         {
           text: "Server Owners",
           collapsed: false,
-          items: getSidebarByPath("docs/guides/owners/"),
+          items: [
+            // Filter out community-related files from server owners section
+            ...getSidebarByPath("docs/guides/owners/").filter(item => 
+              !["community-guidelines", "contributing", "reporting-issues"].includes(
+                item.link.split('/').pop()?.replace('.html', '') || ''
+              )
+            )
+          ],
         },
         {
           text: "Developers",
           collapsed: false,
           items: getSidebarByPath("docs/guides/developers/")
+        },
+        {
+          text: "Community",
+          collapsed: false,
+          items: [
+            { text: "Community Guidelines", link: "/guides/owners/community-guidelines" },
+            { text: "Contributing", link: "/guides/owners/contributing" },
+            { text: "Reporting Issues", link: "/guides/owners/reporting-issues" },
+          ]
         },
       ],
       "/guides/reviewers/": [
@@ -99,10 +135,10 @@ export default defineConfig({
       copyright: "Copyright © 2023-present OxideMod",
     },
   },
-  head: [umamiScript],
+  head: [umamiScript, logoStyle, ['link', { rel: 'stylesheet', href: '/theme/custom.css' }]],
   markdown: {
     config(md) {
-        md.use(MarkdownItFootnote);
+      md.use(MarkdownItFootnote);
     }
   }
 });

@@ -2,7 +2,6 @@
 import { useRoute, useRouter } from 'vitepress'
 import { useSidebar } from 'vitepress/theme'
 import { ComputedRef, computed, ref } from 'vue'
-import VPSidebarItem from 'vitepress/dist/client/theme-default/components/VPSidebarItem.vue'
 
 withDefaults(
   defineProps<{
@@ -48,7 +47,7 @@ const searchResults: ComputedRef<any[]> = computed(() => {
 
 <template>
   <div v-if="!inSidebar || showSearch">
-    <VPSidebarItem v-if="inSidebar" :item="{text:'Hooks'}" :depth="0" class="remove-bottom" />
+    <div v-if="inSidebar" class="sidebar-heading remove-bottom">Hooks</div>
     
     <input
       type="search"
@@ -59,7 +58,15 @@ const searchResults: ComputedRef<any[]> = computed(() => {
       v-model="search"
       />
 
-    <VPSidebarItem v-if="searchResults.length > 0" :item="{text: 'Results', items: searchResults}" :depth="1" class="custom-sidebar" />
+    <div v-if="searchResults.length > 0" class="custom-sidebar">
+      <div class="sidebar-heading">Results</div>
+      <div class="sidebar-items">
+        <div v-for="result in searchResults" :key="result.text" class="sidebar-link">
+          <a v-if="result.link" :href="result.link">{{ result.text }}</a>
+          <span v-else>{{ result.text }}</span>
+        </div>
+      </div>
+    </div>
 
     <div class="divider"></div>
   </div>
@@ -104,5 +111,28 @@ const searchResults: ComputedRef<any[]> = computed(() => {
 .divider{
   margin-top: 1rem;
   border-top: 1px solid var(--vp-c-divider);
+}
+
+/* Added styles for sidebar components */
+.sidebar-heading {
+  font-weight: 600;
+  font-size: 14px;
+  padding: 6px 0;
+}
+
+.sidebar-link {
+  font-size: 14px;
+  padding: 4px 0 4px 12px;
+}
+
+.sidebar-link a {
+  display: block;
+  color: var(--vp-c-text-2);
+  text-decoration: none;
+  transition: color 0.25s;
+}
+
+.sidebar-link a:hover {
+  color: var(--vp-c-brand);
 }
 </style>
