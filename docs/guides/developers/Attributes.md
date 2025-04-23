@@ -1,6 +1,6 @@
 ---
 title: Attributes
-after: WebRequests
+after: webrequests
 ---
 # Attributes
 ## Commands

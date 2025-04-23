@@ -1,6 +1,6 @@
 ---
 title: Database
-after: Permissions
+after: permissions
 ---
 # Database
 

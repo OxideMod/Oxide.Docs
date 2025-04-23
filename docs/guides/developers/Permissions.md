@@ -1,6 +1,6 @@
 ---
 title: Permissions
-after: Attributes
+after: attributes
 ---
 # Permissions
 

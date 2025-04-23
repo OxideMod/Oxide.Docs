@@ -1,6 +1,6 @@
 ---
 title: Plugin Guidelines
-after: Database
+after: database
 ---
 
 # Plugin Guidelines
