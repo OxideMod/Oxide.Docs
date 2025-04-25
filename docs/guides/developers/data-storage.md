@@ -7,10 +7,10 @@ after: using-decompiler
 
 ## Configuration/user data file
 
-As previously mentioned in the section [My first plugin](./my-first-plugin), configuration and user data file use `Newtonsoft.Json` to serialize data structure.  
-Configuration files are stored in  `./oxide/config folder`  
-User data files are stored in  `./oxide/data`  
-Default path can be modified to save in subfolder.  
+As previously mentioned in the section [My first plugin](./my-first-plugin), configuration and user data file use `Newtonsoft.Json` to serialize data structure.
+Configuration files are stored in  `./oxide/config folder` and
+User data files are stored in  `./oxide/data`. 
+But default path can be modified to save in subfolder.  
 
 the basic data structure 
 ```csharp
@@ -25,8 +25,8 @@ will be serialised to
 	"ReplyMessage" : "a simple reply message"
 }
 ```
-Best practice is to use [NewtonSoft serialization attributes](https://www.newtonsoft.com/json/help/html/SerializeObject.htm) for clarity and easy readability.
-Most commonly use attributes :
+Using the variable name as the key, which is not good for readability and clarity.  
+Best practice is to use [NewtonSoft serialization attributes](https://www.newtonsoft.com/json/help/html/SerializeObject.htm) for clarity the information given to the user.Most commonly use attributes :
 ```csharp
 private class PluginData
 {
@@ -49,7 +49,7 @@ private class PluginData
 }
 ```
 
-will be serialized to
+and previous sample code will serialize to:
 
 ```json
 {
@@ -61,12 +61,13 @@ will be serialized to
 }
 ```
 
+
 ## Language data file
 
-The language file is initialized in the LoadDefaultMessages hook. All messages definition will be stored in a file in the `./oxide/lang/(Language code)/(Plugin name).json`.
-Only the missing messages are added but it does not overwrite the one already existing. This allows server owners to customize messages to their preference.
-Server owners can also translate messages to other languages. for example, messages could be translated into Italian and saved in the `./oxide/lang/it/(Plugin name).json` file  
-Note: To revert the language file to the default for a plugin, just delete the file `./oxide/lang/(Language code)/(Plugin name).json`
+The language file is initialized in the LoadDefaultMessages hook. All new message definition will be stored in a file in the `./oxide/lang/(Language code)/(Plugin name).json`.
+Only the missing messages are added but does not overwrite the one already existing. This allows server owners to customize messages to their preference.
+Server owners can also translate messages to other languages. for example, messages could be translated into Italian and saved in the `./oxide/lang/it/(Plugin name).json` file.  
+Note: To revert to the default messages, just delete the file `./oxide/lang/en/(Plugin name).json`.  
 ``` csharp
 private new void LoadDefaultMessages()
 {
@@ -87,7 +88,7 @@ private new void LoadDefaultMessages()
 }
 ```
 
-ex: The previous test plugin would initialise a file ./oxide/lang/en/test.json that can be edited by server owners.
+Ex: The previous test code would initialize a file ./oxide/lang/en/test.json that can be customized by server owners.
 ```json
 {
   "MSG1": "English string 1",
@@ -118,7 +119,7 @@ private string Lang(string key, string id = null, params object[] args) => strin
 
 ## Protobuf storage
 
-Protobuf store data in a binary format. Main advantage is a more compact and faster data storage, with the disadvantage to not be human readable
+Protobuf store data in a binary format. Main advantage is a more compact and faster data storage, with the disadvantage to not be human readable like JSON.
 
 `[ProtoContract]`  : to indicates that this class will serialize.  
 `[ProtoMember(N)]` : where N represents the number in which order it will serialize  
@@ -234,7 +235,14 @@ namespace Oxide.Plugins
 ```
 
 ### MySQL
-To use MySQL, you need a separate database server. MySQL and MariaDB are the most commonly used server, but other product also be used.
+Using MySQL is very similar to SQLite, with the difference that, you need a separate database server that can be on a different machine then the game server, 
+and many servers can connect to the same database server. MySQL and MariaDB are probably the most commonly used server, but other products also be used.
 
 - [MySQL](https://dev.mysql.com/downloads/installer/), version 5.7.X or earlier.  
 - [MariaDB](https://mariadb.org/download/?t=mariadb&p=mariadb&r=11.7.2&os=windows&cpu=x86_64&pkg=msi&mirror=osuosl)  version 10.9.8 or earlier.  
+
+```csharp
+Oxide.Core.Database.Connection sqlConnection;
+Core.MySql.Libraries.MySql Sql = Interface.Oxide.GetLibrary<Core.MySql.Libraries.MySql>();
+sqlConnection = Sql.OpenDb(config.MYSQL_host, config.MySQL_port, config.MySQL_db, confif.MySQL_user, config.MySQL_pass + ";Connection Timeout = 10; CharSet=utf8mb4", this);
+```
