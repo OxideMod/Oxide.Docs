@@ -509,3 +509,41 @@ body:has(.VPContent.is-home) .VPNav {
 .dark * {
   scrollbar-color: #f76b15 #1a1a1c;
 }
+
+/* Sidebar overlapping navbar and logo positioning */
+.VPSidebar {
+  z-index: 40;
+  position: fixed;
+  top: 0 !important;
+  height: 100vh !important;
+  padding-top: 70px !important;
+}
+
+/* Add logo to sidebar */
+.VPSidebar::before {
+  content: '';
+  background-image: url('/logo.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: block;
+  width: 100%;
+  height: 50px;
+  margin: 0 auto 16px;
+  position: absolute;
+  top: 12px;
+  left: 0;
+  right: 0;
+}
+
+/* Fix sidebar scrollbar */
+.VPSidebar .VPSidebarItem {
+  width: calc(100% - 10px);
+}
+
+.VPSidebar .container {
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
+}
