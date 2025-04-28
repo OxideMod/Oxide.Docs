@@ -5,13 +5,23 @@ after: permissions
 # Database
 
 The Oxide database extensions implement a generalized database abstraction layer for both MySQL and SQLite.
+[MySQL](https://dev.mysql.com/downloads/installer/) and [MariaDB](https://mariadb.org/download/?t=mariadb&p=mariadb&r=11.7.2&os=windows&cpu=x86_64&pkg=msi&mirror=osuosl) are probably the most commonly used server, but other products also be used.
+
+
 ## Open a connection
 
-Create a new connection to a database by providing the database file location or an address (URI and port), a database name, and authentication credentials.
+Create a new `MYSQL` connection to a database by providing the database file location or an address (URI and port), a database name, and authentication credentials.
 ```csharp
 Core.MySql.Libraries.MySql sqlLibrary = Interface.Oxide.GetLibrary<Core.MySql.Libraries.MySql>();
 Connection sqlConnection = sqlLibrary.OpenDb("localhost", 3306, "umod", "username", "password", this);
 ```
+
+In the case of SQLite, the database is local, in `./oxide/data/` folder
+```csharp
+Oxide.Core.SQLite.Libraries.SQLite sqlLibrary = Interface.Oxide.GetLibrary<Oxide.Core.SQLite.Libraries.SQLite>();
+Connection sqlConnection = sqlLibrary.OpenDb(_databaseName, this);
+```
+
 ## Close the connection
 
 Close an existing connection to the database.
@@ -75,6 +85,7 @@ sqlLibrary.Update(updateCommand, sqlConnection, rowsAffected =>
     }
 });
 ```
+
 ## Delete query
 
 Delete existing records from a database using a DELETE statement.

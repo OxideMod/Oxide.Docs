@@ -99,7 +99,7 @@ private void base_OnPlayerConnected(BasePlayer player) => AddOnlinePlayer(player
 ```
 
 ## AutoPatch
-Used with HarmonyPatch to automatically install harmony patch when plugin start, and uninstall when plugin terminate
+Used with HarmonyPatch to automatically install the patch when plugin start, and uninstall it, when plugin terminate
 ```csharp
 [AutoPatch]
 [HarmonyPatch(typeof(Planner), "DoPlace")]
