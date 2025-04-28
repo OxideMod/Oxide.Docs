@@ -12,7 +12,7 @@ Creating your first plugin can be an exciting introduction to modding in Rust wi
 Before you start, ensure you have the following:
 
 1. A configured development environment. If you haven't set up your development environment yet, please follow our guide [here](development-environment).
-3. The .NET Framework 4.8 SDK (Developer Bundle) from [Microsoft .NET](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48). Make sure when creating your project to choose .NET Framework 4.8 or set the version manually in your .csproj file.
+3. The latest .NET SDK from [Microsoft .NET Downloads](https://dotnet.microsoft.com/en-us/download/dotnet/9.0). This modern SDK includes support for all previous versions. When creating your project, make sure to select .NET Framework 4.8 as your target framework or set it manually in your .csproj file.
 
 ## Understanding Plugins and Extensions
 

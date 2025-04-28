@@ -187,9 +187,15 @@
   justify-content: center !important;
 }
 
-/* Dark navbar and footer - only in dark mode */
+/* Dark navbar - only in dark mode - no border by default */
 .dark .VPNav {
   background-color: #121113;
+  border-bottom: none; /* No border by default */
+}
+
+/* Show navbar border only on homepage */
+/* VitePress adds is-home class to the content component on homepage */
+body:has(.VPContent.is-home) .VPNav {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -454,4 +460,52 @@
   font-weight: 500;
   color: var(--vp-c-brand);
   transition: color 0.25s;
+}
+
+/**
+* Component: Custom Scrollbars
+* -------------------------------------------------------------------------- */
+
+/* Webkit-based browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--vp-c-bg);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #f76b15, #cd412b);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #ff7a1e, #e04c33);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--vp-c-bg);
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #f76b15 var(--vp-c-bg);
+}
+
+/* Dark mode adjustments */
+.dark ::-webkit-scrollbar-track {
+  background: #1a1a1c;
+}
+
+.dark ::-webkit-scrollbar-corner {
+  background: #1a1a1c;
+}
+
+.dark * {
+  scrollbar-color: #f76b15 #1a1a1c;
 }
