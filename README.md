@@ -37,3 +37,15 @@ This can be previewed by running the following command:
 ```bash
 npm run docs:preview
 ```
+
+### Code Style
+
+The project uses EditorConfig, Prettier, and pre-commit hooks to ensure consistent code style across the codebase.
+
+When you commit changes, pre-commit hooks will automatically format your code according to our style guidelines.
+
+To manually format all files, run:
+
+```bash
+npm run format
+```
