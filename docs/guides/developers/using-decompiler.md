@@ -34,7 +34,29 @@ These are the most common DLL files to load in the decompiler. For game Rust, fi
 
 ## How to use decompilers
 
-Use Google to find a good tutorial or go on Youtube to learn about your prefered decompile tool.
+The info below is about DnSpy. other decompiler have very similar functionnality
 
+### Select files to decompile
+Locate the .\RustDedicated_Data\Managed\ folder in your server installation. Make sure that Oxide is installed if you want to view the modified files.
+ In DnSpy, Open the files Assembly-CSharp.dll, from the managed folder. You can also add other files like the Oxide Dlls, 
+ 
+### Search
+The search and browsing are probably the most usefull function of the decompiler.
+When searching for a hook name, the `search for` field needs to be `Number/String`, to do a literal search in the files.
+If you can't find a hook name that you know exist, double check that the Oxide .dll files are loaded, they contain some of the hooks.
+
+When searching for function, variable, class, etc.  select `All of the above` in the search field, or one of the more restrictive searches.
+ 
+### Used by / uses
+When inspecting and analyzing the game API, going deeper in the code is easy, you just click on a data type or method and the software will bring you to that piece of code.
+To find where a method is used, you need to use the analyze function (right-click Analyze). In the analyzer window will show info like `Overriden by, Used by, Uses`
+
+### viewing IL code
+C# language is compiled to a Microsoft intermediate language `(MSIL)`  
+In rare occasions, it's interesting to view MSIL code. Select a line of code, right click on it and select `Edit IL instruction` in the menu.
+
+Note: a usefull web tool to view how C# code translate to MSIL code  [sharplab.io](https://sharplab.io/)
+
+Also, there are many good tutorials on YouTube for your favorite decompiler
 
 
