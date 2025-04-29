@@ -11,23 +11,22 @@ For a primer on how to use permissions as a server owner, please consult the Usi
 
 Most plugins can benefit from some permissions. Below is a basic example of how to register a permission and check if a player has that permission assigned to them.
 ```csharp
-namespace Oxide.Plugins
+using Oxide.Core.Libraries.Covalence;
+namespace Oxide.Plugins;
+[Info("Epic Stuff", "Unknown Author", "0.1.0")]
+[Description("Makes epic stuff happen")]
+class EpicStuff : CovalencePlugin
 {
-    [Info("Epic Stuff", "Unknown Author", "0.1.0")]
-    [Description("Makes epic stuff happen")]
-    class EpicStuff : CovalencePlugin
+    private void Init()
     {
-        private void Init()
-        {
-            permission.RegisterPermission("epicstuff.use", this);
-        }
+        permission.RegisterPermission("epicstuff.use", this);
+    }
 
-        private void OnUserConnected(IPlayer player)
+    private void OnUserConnected(IPlayer player)
+    {
+        if (player.HasPermission("epicstuff.use"))
         {
-            if (player.HasPermission("epicstuff.use"))
-            {
-                // Player has permission, do special stuff for them
-            }
+            // Player has permission, do special stuff for them
         }
     }
 }
