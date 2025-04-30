@@ -17,33 +17,18 @@
 /* Dark theme colors override - ONLY in dark mode */
 .dark {
   --vp-c-bg: #121113;
-  --vp-c-bg-alt: #121113;
-  --vp-c-bg-elv: #1a1a1c;
-  --vp-c-bg-soft: #1a1a1c;
+  --vp-c-bg-alt: #1a191b;
+  --vp-sidebar-bg-color: var(--vp-c-bg);
+  --vp-c-bg-elv: #00ff95;
+  --vp-c-bg-soft: #19181b;
+
+  /* TODO: */
+  --vp-c-gray-1: #19181b;
+  --vp-c-gray-2: #19181b;
+  --vp-c-gray-3: #19181b;
 
   /* Override just the gutter color, not the dividers - this keeps dividers consistent with light mode */
-  --vp-c-gutter: #121113;
-}
-
-/* Force backgrounds on main sections - only in dark mode */
-.dark html,
-.dark body,
-.dark #app {
-  background-color: #121113;
-}
-
-/* Force dark backgrounds for content areas - only in dark mode */
-.dark main,
-.dark .VPMain,
-.dark .VPContent,
-.dark .VPDoc {
-  background-color: #12111300;
-}
-
-/* Make sure the sidebar and aside elements match - only in dark mode */
-.dark .VPSidebar,
-.dark .VPDocAside {
-  background-color: #121113;
+  --vp-c-gutter: #1a191b;
 }
 
 /**
@@ -51,7 +36,7 @@
 *
 * Each colors have exact same color scale system with 3 levels of solid
 * colors with different brightness, and 1 soft color.
-* 
+*
 * - `XXX-1`: The most solid color used mainly for colored text. It must
 *   satisfy the contrast ratio against when used on top of `XXX-soft`.
 *
@@ -125,31 +110,25 @@
 }
 
 /* Gradient buttons for home page */
+.VPHomeHero .VPButton {
+  border-radius: 8px !important;
+}
+
 .VPHomeHero .VPButton.brand,
 .VPHome .actions .VPButton.brand {
   background: linear-gradient(135deg, #f76b15, #cd412b) !important;
   border: none !important;
   position: relative;
   z-index: 1;
-  transition:
-    transform 0.3s,
-    box-shadow 0.3s;
-  border-radius: 8px;
 }
 
 .VPHomeHero .VPButton.brand:hover,
 .VPHome .actions .VPButton.brand:hover {
   background: linear-gradient(135deg, #ff7a1e, #e04c33) !important;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
 }
 
-.VPHomeHero .VPButton.brand:active,
-.VPHome .actions .VPButton.brand:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
+.search.inSidebar {
+  background-color: var(--vp-c-bg-alt) !important;
 }
 
 /**
@@ -176,103 +155,11 @@
   justify-content: center !important;
 }
 
-.dark .VPHome {
-  background-color: #121113;
-  background-image: url('../public/bg.svg') !important;
-  background-size: cover !important;
-  min-height: 100vh !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-}
-
-/* Dark navbar - only in dark mode - no border by default */
-.dark .VPNav {
-  background-color: #121113;
-  border-bottom: none; /* No border by default */
-}
-
 /* Show navbar border only on homepage */
 /* VitePress adds is-home class to the content component on homepage */
-body:has(.VPContent.is-home) .VPNav {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Dark navbar and footer - only in dark mode */
-.dark .VPFooter {
-  background-color: #121113;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  position: relative;
-  box-shadow: none;
-}
-
-/* Target absolutely all possible elements that could cause the black bar - only in dark mode */
-.dark .VPApp,
-.dark body .VPApp,
-.dark .VPApp .VPContent,
-.dark .VPContent .VPFooter,
-.dark .main .VPFooter,
-.dark .VPFooter,
-.dark .VPFooter::before,
-.dark .VPFooter::after,
-.dark .VPFooter .container,
-.dark .VPFooter .container::before,
-.dark .VPFooter .container::after,
-.dark .VPApp div[class^='VPFooter'],
-.dark .VPApp *[data-v-80147a0d],
-.dark .VPApp *[data-v-8f7cd5e4] {
-  background-color: #121113;
-  border-color: rgba(255, 255, 255, 0.1);
-  border-top-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Reset all borders to be the color we want - only in dark mode */
-.dark .VPFooter *,
-.dark .VPFooter *::before,
-.dark .VPFooter *::after {
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Ensure no black bars in footer - for all modes */
-.VPFooter::before,
-.VPFooter::after {
-  display: none !important;
-}
-
-.VPFooter .container::before,
-.VPFooter .container::after {
-  display: none !important;
-}
-
-/* Ensure correct background in dark mode */
-.dark .VPFooter .container {
-  border-top: none !important;
-  box-shadow: none !important;
-  background-color: #121113;
-}
-
-/* Fix any border-images */
-.VPFooter,
-.VPFooter .container {
-  border-image: none !important;
-}
-
-/* Fix all footer dividers and borders - dark mode specific */
-.dark .VPFooter .divider,
-.dark .VPFooter .separator,
-.dark .VPFooter hr,
-.dark .VPDoc .container > .outline-marker,
-.dark .VPDocFooter .prev-next .divider,
-.dark .VPDocFooter,
-.dark .VPDocFooter .border {
-  border-color: #121113;
-  background-color: #121113;
-}
-
-/* Area below hero (features section) - dark mode only */
-.dark .VPFeatures {
-  background-color: transparent;
-}
+/* body:has(.VPContent.is-home) .VPNav {
+  border-bottom: 1px solid var(--vp-c-divider);
+} */
 
 /* Adjust text colors for better visibility */
 .dark .VPFeatures .container h2,
@@ -280,100 +167,20 @@ body:has(.VPContent.is-home) .VPNav {
   color: rgba(255, 255, 255, 0.9);
 }
 
-/* Improve hero area appearance - dark mode only */
-.dark .VPHero,
-.dark .VPHomeHero {
-  background-color: transparent;
-}
-
-.dark .VPHero .container,
-.dark .VPHomeHero .container {
-  background-color: transparent;
-}
-
-.dark .VPHero.has-image,
-.dark .VPHomeHero.has-image {
-  background-color: transparent;
-}
-
-/* Improve feature icons visibility */
-.VPFeatures .VPFeature .icon {
-  background-color: rgba(247, 107, 21, 0.1);
-  border-radius: 6px;
-  padding: 8px;
-}
-
-/* Make sure body background is also dark */
-.dark {
-  background-color: #121113;
-}
-
-/* Target main content and other containers - dark mode only*/
-.dark .VPContent {
-  background-color: #121113;
-}
-
-.dark .VPContent.is-home {
-  background-color: #121113;
-}
-
 /* Target hero image background */
 .VPHero .image-container .image-bg,
 .VPHomeHero .image-container .image-bg {
-  background-color: transparent !important;
-  background-image: linear-gradient(-45deg, #f76b15 50%, #cd412b 50%) !important;
   opacity: 0.8;
-  border-radius: 500px;
-}
-
-/* Target Layout backgrounds - dark mode only */
-.dark .Layout {
-  background-color: #121113;
 }
 
 /* Set box backgrounds for features - dark mode only */
 .dark .VPFeature .box {
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
+  border: 1px solid #232225;
 }
 
 /* Set box backgrounds for features - light mode */
 .VPFeature .box {
   border-radius: 8px;
-}
-
-.VPHome::before {
-  content: '';
-  position: absolute;
-  z-index: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-}
-
-/* Orange orbs with blur effect - REMOVED */
-.VPHome::after {
-  content: '';
-  position: absolute;
-  z-index: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-}
-
-/* Ensure home content is above the orbs */
-.VPHome .container {
-  position: relative;
-  z-index: 2;
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-  padding-top: 2rem !important;
-  padding-bottom: 2rem !important;
 }
 
 @media (min-width: 640px) {
@@ -472,78 +279,27 @@ body:has(.VPContent.is-home) .VPNav {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--vp-c-bg);
+  background: var(--vp-c-bg-alt);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #f76b15, #cd412b);
+  background: #15f715;
   border-radius: 4px;
   transition: background 0.3s ease;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, #ff7a1e, #e04c33);
-}
-
 ::-webkit-scrollbar-corner {
-  background: var(--vp-c-bg);
+  background: var(--vp-c-bg-alt);
 }
 
 /* For Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #f76b15 var(--vp-c-bg);
+  scrollbar-color: #757575 var(--vp-c-bg-soft);
 }
 
 /* Dark mode adjustments */
 .dark ::-webkit-scrollbar-track {
   background: #1a1a1c;
-}
-
-.dark ::-webkit-scrollbar-corner {
-  background: #1a1a1c;
-}
-
-.dark * {
-  scrollbar-color: #f76b15 #1a1a1c;
-}
-
-/* Sidebar overlapping navbar and logo positioning */
-.VPSidebar {
-  z-index: 40;
-  position: fixed;
-  top: 0 !important;
-  height: 100vh !important;
-  padding-top: 70px !important;
-  background-color: var(--vp-c-bg);
-}
-
-/* Add logo to sidebar */
-.VPSidebar::before {
-  content: '';
-  background-image: url('/logo.svg');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  display: block;
-  width: 100%;
-  height: 50px;
-  margin: 0 auto 16px;
-  position: absolute;
-  top: 12px;
-  left: 0;
-  right: 0;
-}
-
-/* Fix sidebar scrollbar */
-.VPSidebar .VPSidebarItem {
-  width: calc(100% - 10px);
-}
-
-.VPSidebar .container {
-  height: 100%;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-gutter: stable;
 }

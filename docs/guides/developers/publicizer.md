@@ -25,7 +25,7 @@ Oxide does runtime patching of DLLs to publicize everything in the servers `Rust
 
 ::: code-group
 
-```json5{7-8} [oxide.config.json]
+```json{7-8} [oxide.config.json]
 {
   //---
   "Plugin Compiler": {

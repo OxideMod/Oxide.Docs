@@ -148,12 +148,5 @@ export default defineConfig({
     config(md) {
       md.use(MarkdownItFootnote);
     },
-    // Configure code highlighting with modern syntax themes
-    theme: {
-      light: 'github-light',
-      dark: 'one-dark-pro',
-    },
-    // Default code block line numbers
-    lineNumbers: true,
   },
 });
