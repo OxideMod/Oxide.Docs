@@ -22,11 +22,6 @@ The above code will create two object arrays which must be garbage collected. In
 This is just an example as Oxide.Core.ArrayPool is marked obsolete
 
 ```csharp
-//
-//
-```
-
-```csharp
 	// Note that Oxide.Core.ArrayPool is obsolete
 	object[] objectArray = ArrayPool.Get(2);
 	ArrayPool.Free(objectArray);
