@@ -15,11 +15,11 @@ An Integrated Development Environment, or IDE, is a software application that pr
 - **[Visual Studio Code](https://code.visualstudio.com/)**: A lightweight but powerful source code editor by Microsoft. It comes with built-in support for C#, JavaScript, TypeScript, and Node.js. You can also add other languages, themes, and tools via extensions. Dependency management in Visual Studio Code can be handled using the .NET Core CLI.
 - **[JetBrains Rider](https://www.jetbrains.com/rider/)**: A cross-platform .NET IDE by JetBrains. It provides many tools for .NET development, such as a decompiler, templates for Unity tests, seamless Unity integration, and more. In JetBrains Rider, dependencies can be managed via the NuGet tab.
 
-Choose the IDE that suits your preferences and needs. 
+Choose the IDE that suits your preferences and needs.
 
 ## Oxide for Rust
 
-To develop plugins for Rust, you need to install Oxide for Rust. You can download it from the [GitHub repository](https://github.com/OxideMod/Oxide.Rust). 
+To develop plugins for Rust, you need to install Oxide for Rust. You can download it from the [GitHub repository](https://github.com/OxideMod/Oxide.Rust).
 
 To install Oxide for Rust:
 
@@ -32,6 +32,7 @@ To install Oxide for Rust:
 In plugin development, dependencies are additional pieces of code your plugin relies on to function correctly. In our case, these would be the Oxide and Rust libraries and assemblies. Referencing these dependencies in your project allows you to access their functionalities and classes in your code.
 
 Commonly used libraries include:
+
 - `Oxide.Core.dll`
 - `Oxide.Rust.dll`
 - `Assembly-CSharp.dll` (Rust library)

@@ -55,7 +55,7 @@ public class MyFirstPlugin : RustPlugin
 
     void Init() {
         // Create a timer, and store it in _timer when the plugin is initialized
-        _timer = timer.Every(300, () => { 
+        _timer = timer.Every(300, () => {
             // Timer will run the callback every 300 seconds
             Puts("Timer was ran.");
         });

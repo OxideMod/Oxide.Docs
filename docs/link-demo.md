@@ -36,4 +36,4 @@ Here's a paragraph with multiple occurrences of the same terms. Oxide plugins us
 1. Terms in code blocks should not be linked: `Oxide`, `plugins`, `hooks`
 2. Terms in links should not be double-linked: [Visit Oxide website](https://oxidemod.com)
 3. Terms within other terms: internal hooks should link properly
-4. Terms that appear in headings should not be linked 
+4. Terms that appear in headings should not be linked

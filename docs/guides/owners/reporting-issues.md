@@ -12,15 +12,18 @@ To get timely assistance with your issues, please carefully follow this guide. W
 Before submitting a bug report, take these preliminary steps:
 
 1. **Reproduce the bug**
+
    - Figure out the steps to reproduce the bug consistently
    - If you can reproduce occasionally but not after following specific steps, you must provide as much additional information as possible
    - If you can't reproduce the problem, there is probably no use in reporting it, unless you have unique information about its occurrence
 
 2. **Update your software**
+
    - Make sure Oxide, your plugins, and other extensions are up to date
    - Your bug may already be fixed in a newer version
 
 3. **Check if others have the same issue**
+
    - If the bug only happens in your existing setup, try to figure out what settings, extensions, or files are needed to reproduce the bug
    - If the bug seems egregious (obviously affecting many users), there is probably something unusual happening, perhaps related to a recent game update
 
@@ -64,15 +67,18 @@ After your steps, precisely describe the observed (actual) result and the expect
 Include these details to help developers understand and fix the issue:
 
 1. **Reproducibility**
+
    - Indicate whether you can reproduce the bug at will, occasionally, or not at all
 
 2. **Environment Details**
+
    - Game Version (run `version` or comparable command)
    - Oxide Version (run `oxide.version`)
    - Plugin Version (found inside of the plugin file, log file, or with `oxide.show`)
    - Plugin Configuration JSON file (found in oxide/config or umod/config directory)
 
 3. **Logs**
+
    - Include relevant portions of log files from the `oxide/logs` directory
    - Error messages are especially important
 
@@ -88,6 +94,7 @@ Include these details to help developers understand and fix the issue:
 ## After Reporting
 
 After submitting a report:
+
 - Be patient - developers are often volunteers with limited time
 - Stay engaged - be available to answer follow-up questions
 - Test any proposed solutions and provide feedback on whether they solved the issue
@@ -122,4 +129,4 @@ Additional Notes:
 This only happens near water, not near lava or other liquids. Log shows no errors during the process.
 ```
 
-By following these guidelines, you'll help developers understand and fix issues more efficiently, resulting in a better experience for everyone. 
+By following these guidelines, you'll help developers understand and fix issues more efficiently, resulting in a better experience for everyone.

@@ -8,7 +8,7 @@ after: miscellaneous
 ## oxide.plugins
 
 **Usage:** `oxide.plugins`  
-**Aliases:** `o.plugins`, `plugins`  
+**Aliases:** `o.plugins`, `plugins`
 
 Lists all plugins including ones that failed to load. Shows the plugin name, version, author, total hooktime and filename. If a plugin failed to load, the reason will be shown.
 

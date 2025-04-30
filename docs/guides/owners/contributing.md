@@ -107,4 +107,4 @@ Contributors to the Oxide project are recognized in several ways:
 - Acknowledgment in documentation
 - Community recognition
 
-Thank you for your interest in contributing to Oxide. Your efforts help make the platform better for everyone! 
+Thank you for your interest in contributing to Oxide. Your efforts help make the platform better for everyone!

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { useRoute, useRouter } from 'vitepress'
-import { useSidebar } from 'vitepress/theme'
-import { ComputedRef, computed, ref } from 'vue'
+import { useRoute, useRouter } from 'vitepress';
+import { useSidebar } from 'vitepress/theme';
+import { ComputedRef, computed, ref } from 'vue';
 
 withDefaults(
   defineProps<{
@@ -12,16 +12,14 @@ withDefaults(
   }
 );
 
-const route = useRoute()
-const showSearch = computed(() =>
-  /^\/(hooks)\//.test(route.path)
-)
+const route = useRoute();
+const showSearch = computed(() => /^\/(hooks)\//.test(route.path));
 
-const search = ref('')
-const { sidebarGroups } = useSidebar()
+const search = ref('');
+const { sidebarGroups } = useSidebar();
 
 const searchResults: ComputedRef<any[]> = computed(() => {
-  if (!search.value) return []
+  if (!search.value) return [];
 
   let result = [];
 
@@ -48,15 +46,15 @@ const searchResults: ComputedRef<any[]> = computed(() => {
 <template>
   <div v-if="!inSidebar || showSearch">
     <div v-if="inSidebar" class="sidebar-heading remove-bottom">Hooks</div>
-    
+
     <input
       type="search"
       class="search"
-      :class="{inSidebar}"
+      :class="{ inSidebar }"
       placeholder="Search Hooks"
       aria-label="Search Hooks"
       v-model="search"
-      />
+    />
 
     <div v-if="searchResults.length > 0" class="custom-sidebar">
       <div class="sidebar-heading">Results</div>
@@ -103,12 +101,12 @@ const searchResults: ComputedRef<any[]> = computed(() => {
   margin-top: 0;
 }
 
-.remove-bottom{
+.remove-bottom {
   padding-bottom: 0 !important;
   margin-bottom: 0 !important;
 }
 
-.divider{
+.divider {
   margin-top: 1rem;
   border-top: 1px solid var(--vp-c-divider);
 }

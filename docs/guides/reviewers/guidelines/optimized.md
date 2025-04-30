@@ -21,7 +21,7 @@ Developers should avoid using slow methods like `FindObjectsOfType<T>()`. There 
 
 Developers should consider how much data they are going to be storing when using data files. Plugins should be designed to work smoothly on high population servers where there are likely to be a high volume of unique players, which can mean storing large amounts of data.
 
-If the plugin is likely to be storing large amounts of data, then the developer should use a database, proto storage or split the data into multiple files to reduce write times. 
+If the plugin is likely to be storing large amounts of data, then the developer should use a database, proto storage or split the data into multiple files to reduce write times.
 
 Furthermore, it would be a good idea to only save data when it is changed, rather than saving all the data at every opportunity. For example, you do not need to save player A's data when you only changed player B's data.
 

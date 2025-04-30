@@ -3,9 +3,9 @@ title: Pooling
 after: data-storage
 ---
 
-# Pooling  
+# Pooling
 
-## Reducing allocations and garbage collections with pooling  
+## Reducing allocations and garbage collections with pooling
 
 A pool provides a repository of active and ready-made objects that may be obtained upon request and freed back to the pool after they are no longer needed.
 
@@ -35,12 +35,13 @@ This is just an example as Oxide.Core.ArrayPool is marked obsolete
 	ArrayPool.Free(anotherObjectArray);
 ```
 
-In the case where a program must create a lot of objects, the garbage collector may in-fact represent a significant and typically unavoidable performance bottleneck. Pooling provides a relatively easy way around this bottleneck by avoiding memory allocations and garbage collections altogether.  
+In the case where a program must create a lot of objects, the garbage collector may in-fact represent a significant and typically unavoidable performance bottleneck. Pooling provides a relatively easy way around this bottleneck by avoiding memory allocations and garbage collections altogether.
 
 ## Facepunch.Pool (Rust)
 
 The Facepunch.Pool implementation is specific to the game Rust.
-Facepunch pooling is divided on three types of object `<T>` or collections of objects.  
+Facepunch pooling is divided on three types of object `<T>` or collections of objects.
+
 - Object or collections of objects derived from IPooled
 - Collections of object not derived from IPooled
 - Collections of objects not part of the two previous cases.
@@ -49,9 +50,9 @@ Facepunch pooling is divided on three types of object `<T>` or collections of ob
 
 `Get<T>()` and `Free<T>(ref T obj)` / `Free<T>(ref ICollection<T> obj)`
 
-Where ICollection is one of :  `List<T>, HashSet<T>, BufferList<T>, Queue<T>, ListHashSet<T>, Dictionnary<T>, ListDictionary<T>`  and `<T>` is derived from IPooled
+Where ICollection is one of : `List<T>, HashSet<T>, BufferList<T>, Queue<T>, ListHashSet<T>, Dictionnary<T>, ListDictionary<T>` and `<T>` is derived from IPooled
 
-example with Item, derived from IPooled :  
+example with Item, derived from IPooled :
 
 ```csharp
 var itemList = Pool.Get<List<Item>>();
@@ -64,9 +65,9 @@ Pool.Free(ref itemList);
 
 `Get<T>()` and `FreeUnmanaged<T>(ref ICollection<T> obj)`
 
-Where ICollection is one of :  `MemoryStream, StringBuilder, Stopwatch, List<T>, HashSet<T>, BufferList<T>, Queue<T>, ListHashSet<T>, Dictionnary<T>, ListDictionary<T>`
+Where ICollection is one of : `MemoryStream, StringBuilder, Stopwatch, List<T>, HashSet<T>, BufferList<T>, Queue<T>, ListHashSet<T>, Dictionnary<T>, ListDictionary<T>`
 
-example with DieselEngine :  
+example with DieselEngine :
 
 ```csharp
 List<DieselEngine> engineList = Pool.Get<List<DieselEngine>>();
@@ -85,11 +86,12 @@ Stack<BaseOven> ovenStack = Pool.Get<Stack<BaseOven>>();
 Pool.FreeUnsafe(ref ovenStack);
 ```
 
-### Using try / finally  
+### Using try / finally
 
 It is important to ensure that when an object or ICollection is obtained from a pool that it is freed back to that (same) pool. This can be difficult when exceptions are thrown by any code in-between.
 
 If there is any chance that an exception may be thrown, wrap the code with a "try/finally" block to ensure the code within the "finally" is always executed no matter the outcome.
+
 ```csharp
 // Obtain an StringBuilder
 StringBuilder sb = Pool.Get<StringBuilder>();
@@ -105,6 +107,6 @@ finally
 }
 ```
 
-### Reset  
+### Reset
 
 When using `Pool.Free<T>`, `Pool.FreeUnmanaged<T>` or `Pool.FreeUnsafe<T>`, the object freed back to the pool will reset to `obj = default(T);` and `ICollection` will be cleared. When the object is used again, it will not contain previous data.

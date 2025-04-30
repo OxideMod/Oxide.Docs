@@ -1,38 +1,38 @@
-import { readFileSync } from "fs";
-import IDocs from "../entities/hooks/docs";
-import IHook from "../entities/hooks/hook";
+import { readFileSync } from 'fs';
+import IDocs from '../entities/hooks/docs';
+import IHook from '../entities/hooks/hook';
 
 // Todo: improve code to merge both JSON files docs.json and docs_core.json
-// this quick implementation is for test. 
+// this quick implementation is for test.
 // docs_core.json contain hook info for oxide.code, oxide.csharp and oxide.rust
 export function getHookJson(filename: string) {
   const hookData = readFileSync(filename).toString();
   const hooks = JSON.parse(hookData) as IDocs;
-  return hooks.Hooks.filter(hook => hook.Category !== "_Patches" && !hook.HookName.includes("["));
+  return hooks.Hooks.filter(hook => hook.Category !== '_Patches' && !hook.HookName.includes('['));
 }
 
 export function getGroupedHooks() {
-  const docsNames: string[] = ["docs.json", "docs_core.json"];
+  const docsNames: string[] = ['docs.json', 'docs_core.json'];
 
   var out = {} as { [key: string]: { [key: string]: IHook[] } };
 
   for (let filename of docsNames) {
-	const hooksJson = getHookJson(filename);
-	hooksJson.forEach((hook) => {
-	  if (!out[hook.Category]) {
-	    out[hook.Category] = {};
-	  }
- 
-	  if (!out[hook.Category][hook.HookName]) {
-	    out[hook.Category][hook.HookName] = [];
-	  }
+    const hooksJson = getHookJson(filename);
+    hooksJson.forEach(hook => {
+      if (!out[hook.Category]) {
+        out[hook.Category] = {};
+      }
 
-	  out[hook.Category][hook.HookName].push(hook);
-	});
+      if (!out[hook.Category][hook.HookName]) {
+        out[hook.Category][hook.HookName] = [];
+      }
+
+      out[hook.Category][hook.HookName].push(hook);
+    });
   }
 
   // Sort categories, hooks and hooks by TargetType and MethodData.MethodName using tolocaleCompare
-  Object.keys(out).forEach((category) => {
+  Object.keys(out).forEach(category => {
     out[category] = Object.keys(out[category])
       .sort((a, b) => a.localeCompare(b))
       .reduce((obj, key) => {
@@ -54,11 +54,11 @@ export function getHooksSidebar() {
 
   return Object.keys(data)
     .sort()
-    .map((category) => {
+    .map(category => {
       return {
-        text: category + " (" + Object.keys(data[category]).length + ")",
+        text: category + ' (' + Object.keys(data[category]).length + ')',
         collapsed: true,
-        items: Object.keys(data[category]).map((hookName) => {
+        items: Object.keys(data[category]).map(hookName => {
           return {
             text: hookName,
             link: `/hooks/${category.toLowerCase()}/${hookName}`,

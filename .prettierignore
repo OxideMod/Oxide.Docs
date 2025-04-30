@@ -1,0 +1,20 @@
+# Build files
+dist
+.vitepress/dist
+.vitepress/cache
+
+# Node modules
+node_modules
+
+# Package files
+package-lock.json
+
+# Large JSON data files
+*.json
+
+# Git files
+.git
+.husky 
+
+# Markdown files
+*.md 

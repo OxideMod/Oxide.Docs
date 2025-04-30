@@ -32,6 +32,7 @@ The documentation **can't** include
   - Personal advertising (e.g. links to other marketplace sites)
 
 The documentation **can** include
+
 - Link to voluntary donations for the plugin author.
 - Links to support (e.g. Discord tag, GitHub repository)
 - Links to external services, though only if they are used by the plugin or necessary for it to function.

@@ -8,6 +8,7 @@ after: install-oxide
 Commands are a fundamental aspect of managing a Rust server. They allow you to manipulate the server, users, gameplay, and even the Oxide system itself in various ways. This document aims to provide you with an overview of how to use commands in your Rust server and some common commands that will help you manage your server effectively.
 
 ## Prerequisites
+
 Before proceeding with this guide, ensure that you have Moderator or administrator permissions on your Rust server. If you are not already an admin or moderator on your server, you can grant yourself these permissions. Here are the steps to do this:
 
 1. First, you need your Steam64ID. You can get this by going to a site like [SteamID.io](https://steamid.io/), entering your steam profile URL, and copying the steamID64.
@@ -19,14 +20,13 @@ Alternatively, you can use the `ownerid` command in the server's console followe
 
 For more details, you can refer to this [Rust Admin Setup Guide](https://www.rustafied.com/how-to-make-yourself-an-admin-in-rust/).
 
-
 ## Accessing the Console
 
 In Rust, there are two main types of consoles that you can access - the in-game F1 console and the server console.
 
 1. **In-game F1 Console**: This console can be accessed in-game by pressing the `F1` key. Once open, you can type commands and press `Enter` to execute them.
 
-2. **Server Console**: If you are running the server on your own machine or have access to the server console via your game hosting provider, you can type commands directly into this console. 
+2. **Server Console**: If you are running the server on your own machine or have access to the server console via your game hosting provider, you can type commands directly into this console.
 
 Note: Depending on your server setup, you might be accessing the server console via RCON (remote console). This allows you to send console commands from a separate device or application, such as RustAdmin or rcon.io.
 
@@ -47,6 +47,7 @@ When executing commands, Oxide intelligently parses the input to handle:
 **Command Processing**
 
 When a command is executed, Oxide:
+
 1. Determines if it's a chat or console command based on context and prefixes
 2. Parses the command and its arguments
 3. Checks if the user has permission to use the command
@@ -109,6 +110,7 @@ For security purposes, Oxide also supports command filtering, which can prevent 
 One of the powerful features of Oxide's Covalence command system is that it allows plugins to be compatible across different games. Developers can create plugins that register commands using the Covalence API, and these commands will work the same way regardless of whether the server is running Rust, Hurtworld, or any other supported game.
 
 This cross-game functionality is particularly useful for:
+
 - Server owners who run multiple types of game servers
 - Plugin developers who want to create plugins that work on different games
 - Communities that operate across multiple games and want consistent command syntax

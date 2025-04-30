@@ -6,7 +6,7 @@
 /* Default light theme colors - don't override with dark colors */
 :root {
   /* Default light colors are inherited from VitePress */
-  
+
   /* Brand colors that apply to both light and dark modes */
   --vp-c-brand-1: #f76b15;
   --vp-c-brand-2: #f8833a;
@@ -20,24 +20,30 @@
   --vp-c-bg-alt: #121113;
   --vp-c-bg-elv: #1a1a1c;
   --vp-c-bg-soft: #1a1a1c;
-  
+
   /* Override just the gutter color, not the dividers - this keeps dividers consistent with light mode */
   --vp-c-gutter: #121113;
 }
 
 /* Force backgrounds on main sections - only in dark mode */
-.dark html, .dark body, .dark #app {
+.dark html,
+.dark body,
+.dark #app {
   background-color: #121113;
 }
 
 /* Force dark backgrounds for content areas - only in dark mode */
-.dark main, .dark .VPMain, .dark .VPContent, .dark .VPDoc {
+.dark main,
+.dark .VPMain,
+.dark .VPContent,
+.dark .VPDoc {
   background-color: #12111300;
 }
 
 /* Make sure the sidebar and aside elements match - only in dark mode */
-.dark .VPSidebar, .dark .VPDocAside {
-  background-color: #12111300;
+.dark .VPSidebar,
+.dark .VPDocAside {
+  background-color: #121113;
 }
 
 /**
@@ -85,7 +91,7 @@
   --vp-c-default-2: var(--vp-c-gray-2);
   --vp-c-default-3: var(--vp-c-gray-3);
   --vp-c-default-soft: var(--vp-c-gray-soft);
-  
+
   --vp-c-tip-1: var(--vp-c-brand-1);
   --vp-c-tip-2: var(--vp-c-brand-2);
   --vp-c-tip-3: var(--vp-c-brand-3);
@@ -125,7 +131,9 @@
   border: none !important;
   position: relative;
   z-index: 1;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
   border-radius: 8px;
 }
 
@@ -135,7 +143,6 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
-  
 }
 
 .VPHomeHero .VPButton.brand:active,
@@ -151,17 +158,9 @@
 
 :root {
   --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: -webkit-linear-gradient(
-    10deg,
-    #f76b15 10%,
-    #cd412b
-  );
+  --vp-home-hero-name-background: -webkit-linear-gradient(10deg, #f76b15 10%, #cd412b);
 
-  --vp-home-hero-image-background-image: linear-gradient(
-    -45deg,
-    #f76b15 50%,
-    #cd412b 50%
-  );
+  --vp-home-hero-image-background-image: linear-gradient(-45deg, #f76b15 50%, #cd412b 50%);
   --vp-home-hero-image-filter: blur(40px);
 }
 
@@ -208,7 +207,7 @@ body:has(.VPContent.is-home) .VPNav {
 }
 
 /* Target absolutely all possible elements that could cause the black bar - only in dark mode */
-.dark .VPApp, 
+.dark .VPApp,
 .dark body .VPApp,
 .dark .VPApp .VPContent,
 .dark .VPContent .VPFooter,
@@ -219,7 +218,7 @@ body:has(.VPContent.is-home) .VPNav {
 .dark .VPFooter .container,
 .dark .VPFooter .container::before,
 .dark .VPFooter .container::after,
-.dark .VPApp div[class^="VPFooter"],
+.dark .VPApp div[class^='VPFooter'],
 .dark .VPApp *[data-v-80147a0d],
 .dark .VPApp *[data-v-8f7cd5e4] {
   background-color: #121113;
@@ -253,7 +252,7 @@ body:has(.VPContent.is-home) .VPNav {
 }
 
 /* Fix any border-images */
-.VPFooter, 
+.VPFooter,
 .VPFooter .container {
   border-image: none !important;
 }
@@ -282,15 +281,18 @@ body:has(.VPContent.is-home) .VPNav {
 }
 
 /* Improve hero area appearance - dark mode only */
-.dark .VPHero, .dark .VPHomeHero {
+.dark .VPHero,
+.dark .VPHomeHero {
   background-color: transparent;
 }
 
-.dark .VPHero .container, .dark .VPHomeHero .container {
+.dark .VPHero .container,
+.dark .VPHomeHero .container {
   background-color: transparent;
 }
 
-.dark .VPHero.has-image, .dark .VPHomeHero.has-image {
+.dark .VPHero.has-image,
+.dark .VPHomeHero.has-image {
   background-color: transparent;
 }
 
@@ -299,7 +301,6 @@ body:has(.VPContent.is-home) .VPNav {
   background-color: rgba(247, 107, 21, 0.1);
   border-radius: 6px;
   padding: 8px;
-  
 }
 
 /* Make sure body background is also dark */
@@ -317,13 +318,10 @@ body:has(.VPContent.is-home) .VPNav {
 }
 
 /* Target hero image background */
-.VPHero .image-container .image-bg, .VPHomeHero .image-container .image-bg {
+.VPHero .image-container .image-bg,
+.VPHomeHero .image-container .image-bg {
   background-color: transparent !important;
-  background-image: linear-gradient(
-    -45deg,
-    #f76b15 50%,
-    #cd412b 50%
-  ) !important;
+  background-image: linear-gradient(-45deg, #f76b15 50%, #cd412b 50%) !important;
   opacity: 0.8;
   border-radius: 500px;
 }
@@ -413,12 +411,12 @@ body:has(.VPContent.is-home) .VPNav {
  * Component: Footnote
  * -------------------------------------------------------------------------- */
 
-.footnotes-list{
+.footnotes-list {
   color: gray;
   font-size: 90%;
 }
 
-.footnote-item > p{
+.footnote-item > p {
   line-height: 21px !important;
 }
 
@@ -433,11 +431,11 @@ body:has(.VPContent.is-home) .VPNav {
   gap: 5px;
 }
 
-.overview-pager.column{
+.overview-pager.column {
   flex-direction: column;
 }
 
-.overview-pager.wrap{
+.overview-pager.wrap {
   flex-wrap: wrap;
 }
 
@@ -518,6 +516,7 @@ body:has(.VPContent.is-home) .VPNav {
   top: 0 !important;
   height: 100vh !important;
   padding-top: 70px !important;
+  background-color: var(--vp-c-bg);
 }
 
 /* Add logo to sidebar */

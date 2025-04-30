@@ -1,4 +1,4 @@
-import { getHooksSidebar } from "../../util/hooks";
+import { getHooksSidebar } from '../../util/hooks';
 
 export default {
   load() {

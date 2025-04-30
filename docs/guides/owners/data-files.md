@@ -44,6 +44,7 @@ It's important to understand the difference between data files and configuration
 When making server backups, it's crucial to include the `oxide/data/` directory. This ensures that if you need to restore your server, all the data that plugins have stored will be preserved.
 
 Some important data files to back up include:
+
 - Player economy data
 - Player stats and progress
 - Group and permission data
@@ -63,4 +64,4 @@ If a plugin is experiencing issues related to its data files, here are some comm
 
 ## Conclusion
 
-Understanding how plugins use data files can help you better manage your server and troubleshoot issues. While you should generally avoid directly editing data files, knowing where they're stored and how they're used is valuable knowledge for any server administrator. 
+Understanding how plugins use data files can help you better manage your server and troubleshoot issues. While you should generally avoid directly editing data files, knowing where they're stored and how they're used is valuable knowledge for any server administrator.

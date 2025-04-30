@@ -9,43 +9,48 @@ after: using-decompiler
 
 As previously mentioned in the section [My first plugin](./my-first-plugin), configuration and user data file use `Newtonsoft.Json` to serialize data structure.
 Configuration files are stored in the `./oxide/config folder` and
-user data files are stored in  `./oxide/data`.  
-But default path can be modified to save in subfolder.  
+user data files are stored in `./oxide/data`.  
+But default path can be modified to save in subfolder.
 
-the basic data structure 
+the basic data structure
+
 ```csharp
 private class Configuration
 {
 	public string ReplyMessage;
 }
 ```
+
 will be serialised to
+
 ```json
 {
-	"ReplyMessage" : "a simple reply message"
+  "ReplyMessage": "a simple reply message"
 }
 ```
+
 Using the variable name as the key, which is not good for readability and clarity.  
-Best practice is to use [NewtonSoft serialization attributes](https://www.newtonsoft.com/json/help/html/SerializeObject.htm) attributes, to improve clarity of the information given to the user. Most commonly use attributes are JsonProperty and JsonIgnore:  
+Best practice is to use [NewtonSoft serialization attributes](https://www.newtonsoft.com/json/help/html/SerializeObject.htm) attributes, to improve clarity of the information given to the user. Most commonly use attributes are JsonProperty and JsonIgnore:
+
 ```csharp
 private class PluginData
 {
 	[JsonProperty(PropertyName = "A simple message when player spawn")]
 	public string ReplyMessage;
-	
+
 	// Add some info about default value
 	// or possible range of the data
 	[JsonProperty(PropertyName = "Maximum health value (default=100)")]
 	public int MaxHealth = 100;
-	
+
 	// because some data does not need to be saved. only save what's needed
-	[JsonIgnore]  
+	[JsonIgnore]
 	public Vector3 Position;
 
-	// Here, ObjectCreationHandling is required, 
+	// Here, ObjectCreationHandling is required,
 	// to avoid initialisation data to be added over and over, each time plugin restart.
 	[JsonProperty(PropertyName = "Zones to prevent something", ObjectCreationHandling = ObjectCreationHandling.Replace)]
-	public List<string> Zones = new List<string> { "KeepOut" };	
+	public List<string> Zones = new List<string> { "KeepOut" };
 }
 ```
 
@@ -53,18 +58,18 @@ and previous sample code will serialize to:
 
 ```json
 {
-	"A simple message when player spawn" : "a simple reply message",
-	"Maximum health value (default=100)" : 100,
-	"Zones to prevent something" : [
-		"KeepOut"
-		]
+  "A simple message when player spawn": "a simple reply message",
+  "Maximum health value (default=100)": 100,
+  "Zones to prevent something": ["KeepOut"]
 }
 ```
+
 ### JSON converter
 
 It is possible to add custom converter modules by using JsonConverter, for specific types of data.
 JsonConverter derived class with methods WriteJson, ReadJson and CanConvert, need to be defined.
-The function will determine what to save and how to format the data. The sample code is to show how to serialize `Vector3` on a single line.  
+The function will determine what to save and how to format the data. The sample code is to show how to serialize `Vector3` on a single line.
+
 ```csharp{5-6}
 DynamicConfigFile data;
 private void LoadData()
@@ -83,12 +88,14 @@ private void LoadData()
 	data.Clear();
 }
 ```
+
 ```csharp
 private void SaveData()
 {
 	if (datafile != null) data.WriteObject(datafile);
 }
 ```
+
 ```csharp
 private class UnityVector3Converter : JsonConverter
 {
@@ -115,9 +122,10 @@ private class UnityVector3Converter : JsonConverter
 	}
 }
 ```
-		
+
 With this sample code, the serialized data will be compact and look like this for Vertor3d data.
-```json		
+
+```json
 "position": "-2310 11.10 574",
 ```
 
@@ -126,8 +134,9 @@ With this sample code, the serialized data will be compact and look like this fo
 The language file is initialized in the LoadDefaultMessages hook. All new message definition will be stored in a file in the `./oxide/lang/(Language code)/(Plugin name).json`.
 Only the missing messages are added but does not overwrite the one already existing. This allows server owners to customize messages to their preference.
 Server owners can also translate messages to other languages. for example, messages could be translated into Italian and saved in the `./oxide/lang/it/(Plugin name).json` file.  
-Note: To revert to the default messages, just delete the file `./oxide/lang/en/(Plugin name).json`.  
-``` csharp
+Note: To revert to the default messages, just delete the file `./oxide/lang/en/(Plugin name).json`.
+
+```csharp
 private new void LoadDefaultMessages()
 {
 	lang.RegisterMessages(new Dictionary<string, string>
@@ -142,51 +151,53 @@ private new void LoadDefaultMessages()
 		["MSG1"]  = "Localised string for message 1",
 		["MSG2"]  = "Localised string for message 2",
 	}, this, "fr");
-	
-	// ... other languages	
+
+	// ... other languages
 }
 ```
 
 Ex: The previous test code would initialize a file ./oxide/lang/en/test.json that can be customized by server owners.
+
 ```json
 {
   "MSG1": "English string 1",
-  "MSG2": "English string 1",
+  "MSG2": "English string 1"
 }
 ```
 
 Sample code to retrieving translated message from the language file using the lang.GetMessage function.
-``` csharp
+
+```csharp
 private string Lang(string key, string id = null, params object[] args) => string.Format(lang.GetMessage(key, this, id), args);
 ```
 
 ### Language code per country/language
-| Country | Language code | Country | Language code | Country | Language code |
-| :---------------- | :------: | :---------------- | :------: | :---------------- | :------: |
-| Afrikaans        | af    | Arabic        | ar   | Catalan          | ca    |
-| Czech            | cs    | Denmark       | da   | Deutsch          | de    |
-| Greek            | el    | English       | en   | Pirate english   | en-pt |
-| Spanish          | es-ES | Finland       | fi   | French           | fr    |
-| Hebrew           | he    | Hungarian     | hu   | Italian          | it    |
-| Japan            | ja    | Korea         | ko   | Netherland       | nl    |
-| Norwegian        | no    | Polish        | pl   | Portuguese Brazil | pt-BR |
-| Portuguese Portugal | pt-PT | Romania       | ro   | Russia       | ru    |
-| Serbian          | sr    | Swedish       | sv   | Turkish          | tr    |
-| Ukrainian        | uk    | Vietnamese    | vi   |                  |       |
-| Simplified Chinese | zh-CN | Traditional Chinese |  zh-TW   |        |       |
 
+| Country             | Language code | Country             | Language code | Country           | Language code |
+| :------------------ | :-----------: | :------------------ | :-----------: | :---------------- | :-----------: |
+| Afrikaans           |      af       | Arabic              |      ar       | Catalan           |      ca       |
+| Czech               |      cs       | Denmark             |      da       | Deutsch           |      de       |
+| Greek               |      el       | English             |      en       | Pirate english    |     en-pt     |
+| Spanish             |     es-ES     | Finland             |      fi       | French            |      fr       |
+| Hebrew              |      he       | Hungarian           |      hu       | Italian           |      it       |
+| Japan               |      ja       | Korea               |      ko       | Netherland        |      nl       |
+| Norwegian           |      no       | Polish              |      pl       | Portuguese Brazil |     pt-BR     |
+| Portuguese Portugal |     pt-PT     | Romania             |      ro       | Russia            |      ru       |
+| Serbian             |      sr       | Swedish             |      sv       | Turkish           |      tr       |
+| Ukrainian           |      uk       | Vietnamese          |      vi       |                   |               |
+| Simplified Chinese  |     zh-CN     | Traditional Chinese |     zh-TW     |                   |               |
 
 ## Protobuf storage
 
 Protobuf store data in a binary format. Main advantage is a more compact and faster data storage, with the disadvantage to not be human readable like JSON.
 
-`[ProtoContract]`  : to indicates that this class will serialize.  
+`[ProtoContract]` : to indicates that this class will serialize.  
 `[ProtoMember(N)]` : where N represents the number in which order it will serialize  
-`[ProtoIgnore]`    : this field will not be serialized.  
+`[ProtoIgnore]` : this field will not be serialized.
 
 ### Protobuf class sample
 
-``` csharp
+```csharp
 [ProtoContract]
 public class sample {
     [ProtoMember(1)]
@@ -199,8 +210,10 @@ public class sample {
     public int data4;
 }
 ```
+
 ### Protobuf Loading
-``` csharp
+
+```csharp
 sample mySample
 if (ProtoStorage.Exists(filename))
 {
@@ -211,8 +224,9 @@ else
 	mySample = new sample();
 }
 ```
+
 ### Protobuf Saving
-``` csharp
+
+```csharp
 ProtoStorage.Save(mySample, filename);
 ```
-

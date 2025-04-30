@@ -1,4 +1,4 @@
-import { getItemSkins } from "../../../util/items";
+import { getItemSkins } from '../../../util/items';
 
 export default {
   load() {
