@@ -30,9 +30,9 @@ To install Oxide on your Rust server, you first need to download the latest vers
 4. In the expanded "Assets" section, you'll see a `Oxide.Rust.zip` file for Windows servers and a `Oxide.Rust-linux.zip` for Linux servers. Choose the file that corresponds to your server's operating system. This is the file you need to download. Click on it to start the download.
 
 5. Once downloaded, locate the `.zip` file in your downloads folder and extract the contents.
-::: info NOTE
-You should extract the contents to a temporary directory, not directly to your Rust server directory. We'll cover uploading the files to your Rust server in the next section below.
-:::
+   ::: info NOTE
+   You should extract the contents to a temporary directory, not directly to your Rust server directory. We'll cover uploading the files to your Rust server in the next section below.
+   :::
 
 Now that we've downloaded and properly extracted Oxide, we can move on to the next section: Uploading Oxide to Your Server.
 

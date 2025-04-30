@@ -2,6 +2,7 @@
 title: Miscellaneous
 after: permission
 ---
+
 # Miscellaneous Commands
 
 ## oxide.lang
@@ -12,6 +13,7 @@ after: permission
 Sets the server language to the specified language.
 
 ### Example `oxide.lang en`
+
 ```
 Server language set to en
 ```
@@ -24,6 +26,7 @@ Server language set to en
 Saves all data files.
 
 ### Example `oxide.save`
+
 ```
 Saving Oxide data...
 ```

@@ -5,7 +5,7 @@ after: opensource-license
 
 # Does not rely on deprecated functionality
 
-1. Upcoming or existing deprecations will necessitate fundamental changes, refactoring, and/or universalization (with preprocessor directives). 
+1. Upcoming or existing deprecations will necessitate fundamental changes, refactoring, and/or universalization (with preprocessor directives).
 2. Plugin should utilize the most up-to-date game-agnostic API.
 
 ## Explanation

@@ -19,7 +19,7 @@ after: index
 
 The `AddUserGroup` method will assign `playerId` the specified `groupName`
 
-::: details Github Location 
+::: details Github Location
 [`AddUserGroup`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L683)
 :::
 
@@ -27,7 +27,7 @@ The `AddUserGroup` method will assign `playerId` the specified `groupName`
 
 The `CreateGroup` method will create a group with the specified `groupName` and assign it the `GroupData` class which holds `groupTitle` and `groupRank`
 
-::: details Github Location 
+::: details Github Location
 [`CreateGroup`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L1085)
 :::
 
@@ -39,7 +39,7 @@ The `Export` method will save `GroupData` and `UserData` to `oxide/data`
 
 **UserData** contains `groups`, `nickname` and `perms`
 
-::: details Github Location 
+::: details Github Location
 [`Export`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L263)
 :::
 
@@ -47,7 +47,7 @@ The `Export` method will save `GroupData` and `UserData` to `oxide/data`
 
 The `GetGroupData` method returns the `GroupData` of `groupName`
 
-::: details Github Location 
+::: details Github Location
 [`GetGroupData`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L770)
 :::
 
@@ -55,7 +55,7 @@ The `GetGroupData` method returns the `GroupData` of `groupName`
 
 The `GetGroupParent` method will return the `Parent Group` of `groupName`
 
-::: details Github Location 
+::: details Github Location
 [`GetGroupParent`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L1213)
 :::
 
@@ -63,7 +63,7 @@ The `GetGroupParent` method will return the `Parent Group` of `groupName`
 
 The `GetGroupPermissions` method will return the `permissions` assigned to `groupName`
 
-::: details Github Location 
+::: details Github Location
 [`GetGroupPermissions`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L595)
 :::
 
@@ -71,7 +71,7 @@ The `GetGroupPermissions` method will return the `permissions` assigned to `grou
 
 The `GetGroupRank` method will return the rank of `groupName`
 
-::: details Github Location 
+::: details Github Location
 [`GetGroupRank`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L832)
 :::
 
@@ -79,7 +79,7 @@ The `GetGroupRank` method will return the rank of `groupName`
 
 The `GetGroups` method will return every created group
 
-::: details Github Location 
+::: details Github Location
 [`GetGroups`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L786)
 :::
 
@@ -87,7 +87,7 @@ The `GetGroups` method will return every created group
 
 The `GetGroupTitle` method will return the title of `groupName`
 
-::: details Github Location 
+::: details Github Location
 [`GetGroupTitle`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L809)
 :::
 
@@ -95,7 +95,7 @@ The `GetGroupTitle` method will return the title of `groupName`
 
 The `GetPermissionGroups` method will return every group which is assigned `permission`
 
-::: details Github Location 
+::: details Github Location
 [`GetPermissionGroups`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L656)
 :::
 
@@ -103,7 +103,7 @@ The `GetPermissionGroups` method will return every group which is assigned `perm
 
 The `GetPermissions` method will return every registered permission
 
-::: details Github Location 
+::: details Github Location
 [`GetPermissions`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L622)
 :::
 
@@ -111,7 +111,7 @@ The `GetPermissions` method will return every registered permission
 
 The `GetPermissionUsers` method will return every user who has been assigned `permission`
 
-::: details Github Location 
+::: details Github Location
 [`GetPermissionUsers`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L630)
 :::
 
@@ -119,7 +119,7 @@ The `GetPermissionUsers` method will return every user who has been assigned `pe
 
 The `GetUserData` method will return the UserData of `playerId`
 
-::: details Github Location 
+::: details Github Location
 [`GetUserData`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L459)
 :::
 
@@ -127,7 +127,7 @@ The `GetUserData` method will return the UserData of `playerId`
 
 The `GetUserGroups` method will return every group `playerId` is assigned to.
 
-::: details Github Location 
+::: details Github Location
 [`GetUserGroups`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L567)
 :::
 
@@ -135,7 +135,7 @@ The `GetUserGroups` method will return every group `playerId` is assigned to.
 
 The `GetUserPermissions` method will return the permissions assigned to `playerId`
 
-::: details Github Location 
+::: details Github Location
 [`GetUserPermissions`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L575)
 :::
 
@@ -143,7 +143,7 @@ The `GetUserPermissions` method will return the permissions assigned to `playerI
 
 The `GetUsersInGroup` method will return every user assigned to `groupName`
 
-::: details Github Location 
+::: details Github Location
 [`GetUsersInGroup`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L794)
 :::
 
@@ -151,7 +151,7 @@ The `GetUsersInGroup` method will return every user assigned to `groupName`
 
 The `GrantGroupPermission` method will assign `permission` to the specified `groupName`
 
-::: details Github Location 
+::: details Github Location
 [`GrantGroupPermission`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L969)
 :::
 
@@ -159,7 +159,7 @@ The `GrantGroupPermission` method will assign `permission` to the specified `gro
 
 The `GrantUserPermission` method will assign the specified `permission` to the specified `playerId`
 
-::: details Github Location 
+::: details Github Location
 [`GrantUserPermission`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L860)
 :::
 
@@ -167,7 +167,7 @@ The `GrantUserPermission` method will assign the specified `permission` to the s
 
 The `GroupExists` method will return `true` if the specified `groupName` exists
 
-::: details Github Location 
+::: details Github Location
 [`GroupExists`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L760)
 :::
 
@@ -175,7 +175,7 @@ The `GroupExists` method will return `true` if the specified `groupName` exists
 
 The `GroupHasPermission` method will return `true` if the specified `groupName` has been assigned `permission`
 
-::: details Github Location 
+::: details Github Location
 [`GroupHasPermission`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L512)
 :::
 
@@ -183,7 +183,7 @@ The `GroupHasPermission` method will return `true` if the specified `groupName` 
 
 The `GroupsHavePermission` method will return `true` if any of the specified `groupNames` have been assigned the specified `permission`
 
-::: details Github Location 
+::: details Github Location
 [`GroupsHavePermission`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L503)
 :::
 
@@ -191,7 +191,7 @@ The `GroupsHavePermission` method will return `true` if any of the specified `gr
 
 The `MigrateGroup` method will copy everything from `oldGroupName` and transfer it to `newGroupName`
 
-::: details Github Location 
+::: details Github Location
 [`MigrateGroup`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L320)
 :::
 
@@ -199,15 +199,15 @@ The `MigrateGroup` method will copy everything from `oldGroupName` and transfer 
 
 The `PermissionExists` method will return `true` if `permission` has been registered
 
-::: details Github Location 
+::: details Github Location
 [`PermissionExists`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L383)
 :::
 
 ## `RegisterPermission`
 
-The `RegisterPermission` method will register `permission` for use in plugins/assignability to players *and/or* groups
+The `RegisterPermission` method will register `permission` for use in plugins/assignability to players _and/or_ groups
 
-::: details Github Location 
+::: details Github Location
 [`RegisterPermission`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L347)
 :::
 
@@ -215,7 +215,7 @@ The `RegisterPermission` method will register `permission` for use in plugins/as
 
 The `RemoveGroup` method will remove the `groupName` from the `groupsData`
 
-::: details Github Location 
+::: details Github Location
 [`RemoveGroup`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L1109)
 :::
 
@@ -223,7 +223,7 @@ The `RemoveGroup` method will remove the `groupName` from the `groupsData`
 
 The `RemoveUserGroup` method will remove the `groupName` assigned to `playerId`
 
-::: details Github Location 
+::: details Github Location
 [`RemoveUserGroup`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L708)
 :::
 
@@ -231,7 +231,7 @@ The `RemoveUserGroup` method will remove the `groupName` assigned to `playerId`
 
 The `RevokeGroupPermission` method will revoke the `permission` assigned to `groupName`
 
-::: details Github Location 
+::: details Github Location
 [`RevokeGroupPermission`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L1030)
 :::
 
@@ -239,7 +239,7 @@ The `RevokeGroupPermission` method will revoke the `permission` assigned to `gro
 
 The `SetGroupParent` method will set the `groupParent` of `groupName` as `parentGroupName`
 
-::: details Github Location 
+::: details Github Location
 [`SetGroupParent`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L1228)
 :::
 
@@ -247,7 +247,7 @@ The `SetGroupParent` method will set the `groupParent` of `groupName` as `parent
 
 The `SetGroupRank` method will set the `groupRank` of `groupName`
 
-::: details Github Location 
+::: details Github Location
 [`SetGroupRank`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L1182)
 :::
 
@@ -255,7 +255,7 @@ The `SetGroupRank` method will set the `groupRank` of `groupName`
 
 The `SetGroupTitle` method will set the `groupTitle` of `groupName`
 
-::: details Github Location 
+::: details Github Location
 [`SetGroupTitle`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L1150)
 :::
 
@@ -263,7 +263,7 @@ The `SetGroupTitle` method will set the `groupTitle` of `groupName`
 
 The `UpdateNickname` method will update the `nickname` of `playerId` with `playerName`
 
-::: details Github Location 
+::: details Github Location
 [`UpdateNickname`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L476)
 :::
 
@@ -271,7 +271,7 @@ The `UpdateNickname` method will update the `nickname` of `playerId` with `playe
 
 The `UserExists` method will return `true` if `playerId` has any `UserData`
 
-::: details Github Location 
+::: details Github Location
 [`UserExists`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L452)
 :::
 
@@ -279,7 +279,7 @@ The `UserExists` method will return `true` if `playerId` has any `UserData`
 
 The `UserHasAnyGroup` method will return `true` if `playerId` has been assigned one or more group(s)
 
-::: details Github Location 
+::: details Github Location
 [`UserHasAnyGroup`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L494)
 :::
 
@@ -287,7 +287,7 @@ The `UserHasAnyGroup` method will return `true` if `playerId` has been assigned 
 
 The `UserHasGroup` method will return `true` if `groupName` has been assigned to `playerId`
 
-::: details Github Location 
+::: details Github Location
 [`UserHasGroup`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L744)
 :::
 
@@ -295,6 +295,6 @@ The `UserHasGroup` method will return `true` if `groupName` has been assigned to
 
 The `UserHasPermission` method will return `true` if `permission` has been assigned to `playerId`
 
-::: details Github Location 
+::: details Github Location
 [`UserHasPermission`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L535)
 :::

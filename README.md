@@ -44,8 +44,15 @@ The project uses EditorConfig, Prettier, and pre-commit hooks to ensure consiste
 
 When you commit changes, pre-commit hooks will automatically format your code according to our style guidelines.
 
-To manually format all files, run:
+To manually format files:
 
 ```bash
+# Format all supported files
 npm run format
+
+# Check code style
+npm run lint
+
+# Also check code style
+npm run check
 ```

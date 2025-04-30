@@ -16,7 +16,6 @@ The main plugin class (the class inheriting `RustPlugin` or `CovalencePlugin`) m
 
 ### Condition 2
 
-
 This guideline requires that the main plugin class and the file name should match identically. This is necessary, otherwise the plugin will fail to compile.
 
 Example: "Teleport" and "Teleport.cs"

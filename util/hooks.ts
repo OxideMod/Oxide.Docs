@@ -1,11 +1,11 @@
-import { readFileSync } from "fs";
-import IDocs from "../entities/hooks/docs";
-import IHook from "../entities/hooks/hook";
+import { readFileSync } from 'fs';
+import IDocs from '../entities/hooks/docs';
+import IHook from '../entities/hooks/hook';
 
 export function getHookJson() {
-  const hookData = readFileSync("docs.json").toString();
+  const hookData = readFileSync('docs.json').toString();
   const hooks = JSON.parse(hookData) as IDocs;
-  return hooks.Hooks.filter(hook => hook.Category !== "_Patches" && !hook.HookName.includes("["));
+  return hooks.Hooks.filter(hook => hook.Category !== '_Patches' && !hook.HookName.includes('['));
 }
 
 export function getGroupedHooks() {
@@ -13,7 +13,7 @@ export function getGroupedHooks() {
 
   var out = {} as { [key: string]: { [key: string]: IHook[] } };
 
-  hooksJson.forEach((hook) => {
+  hooksJson.forEach(hook => {
     if (!out[hook.Category]) {
       out[hook.Category] = {};
     }
@@ -26,7 +26,7 @@ export function getGroupedHooks() {
   });
 
   // Sort categories, hooks and hooks by TargetType and MethodData.MethodName using tolocaleCompare
-  Object.keys(out).forEach((category) => {
+  Object.keys(out).forEach(category => {
     out[category] = Object.keys(out[category])
       .sort((a, b) => a.localeCompare(b))
       .reduce((obj, key) => {
@@ -48,11 +48,11 @@ export function getHooksSidebar() {
 
   return Object.keys(data)
     .sort()
-    .map((category) => {
+    .map(category => {
       return {
-        text: category + " (" + Object.keys(data[category]).length + ")",
+        text: category + ' (' + Object.keys(data[category]).length + ')',
         collapsed: true,
-        items: Object.keys(data[category]).map((hookName) => {
+        items: Object.keys(data[category]).map(hookName => {
           return {
             text: hookName,
             link: `/hooks/${category.toLowerCase()}/${hookName}`,

@@ -25,7 +25,6 @@ The author field of the `Info` attribute needs to match the name of the account 
 
 The version field of the `Info` attribute must use semantic versioning (`Major.Minor.Patch`). Other than this, the user is free to set the version number to whatever they like at the time of submission.
 
-
 ### Condition 2
 
 The description should aim to be concise, not too short that important information is omitted, but not so long that it is too wordy.
@@ -38,7 +37,7 @@ Some examples of descriptions[^3]:
 
 + "Prevents F1 item giving notices from showing in the chat" (GOOD)
     Reason: Brief but contains all information required to understand what the plugin does.
-    
+
 + "Teleports players to a safe location when they violate antihack InsideTerrain." (GOOD)
     Reason: Contains all information needed to understand what the plugin does and when/why it does this.
 

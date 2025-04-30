@@ -28,6 +28,7 @@ There are several sources where you can find plugins for your game server:
 3. Various developer websites and communities
 
 When browsing for plugins, make sure to:
+
 - Check compatibility with your game and Oxide version
 - Read reviews and comments to ensure the plugin is reliable
 - Verify the plugin comes from a reputable source
@@ -43,20 +44,24 @@ To install plugins on your server, the server must have Oxide 2.0 or higher inst
 ### Installation Process
 
 1. **Download the plugin**: Download the plugin file from a reputable source.
+
    - Do not rename the plugin or change the file extension.
 
-2. **Access your server files**: 
+2. **Access your server files**:
+
    - For a local server, navigate to your server directory.
    - For a remote server, connect via FTP client. If unsure of the FTP details, contact your server host.
 
-3. **Locate the plugins directory**: 
+3. **Locate the plugins directory**:
+
    - Find the plugins folder which is located by default at `oxide/plugins` (or `umod/plugins` for some installations).
 
-4. **Upload the plugin**: 
+4. **Upload the plugin**:
+
    - Upload the `.cs` file to the plugins directory.
    - The plugin will be loaded automatically once placed in this directory.
 
-5. **Check the server console**: 
+5. **Check the server console**:
    - Look for a message confirming the plugin has been loaded.
 
 ## 5. Verifying the Plugin Installation
@@ -64,6 +69,7 @@ To install plugins on your server, the server must have Oxide 2.0 or higher inst
 To ensure that your plugin is correctly installed and functioning:
 
 1. **Check the console or log messages**: You should see a message like:
+
    ```
    [Oxide] Loading plugin "PluginName" v1.0.0
    ```

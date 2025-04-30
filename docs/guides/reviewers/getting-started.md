@@ -4,10 +4,12 @@ after: 0
 ---
 
 # Getting started with reviews
+
 [[toc]]
+
 ## Introduction
 
-Before you start reviewing submissions there are some things that are important to keep in mind while reviewing plugins. 
+Before you start reviewing submissions there are some things that are important to keep in mind while reviewing plugins.
 
 It is easy to get carried away obsessing over code quality, performance, coding conventions, and other technical aspects when reviewing a plugin. However, it is important to not lose sight of what we are really trying to achieve here.
 
@@ -38,9 +40,9 @@ Our main goal is to build and manage a flourishing community of developers and s
 
 ### Quality over quantity
 
-While it is important to push plugins through the review process at a reasonable pace, it is more valuable to us to perform in-depth and thorough reviews despite the fact that this might mean a plugin sits in the queue for a little longer. This is for two reasons. 
+While it is important to push plugins through the review process at a reasonable pace, it is more valuable to us to perform in-depth and thorough reviews despite the fact that this might mean a plugin sits in the queue for a little longer. This is for two reasons.
 
-The first is to build and maintain our reputation as a place for quality plugins. We take pride in the plugins on our site and we want to avoid being known as a cesspool of poorly coded plugins. 
+The first is to build and maintain our reputation as a place for quality plugins. We take pride in the plugins on our site and we want to avoid being known as a cesspool of poorly coded plugins.
 
 Secondly, if we are more thorough with our reviews, we are able to provide more and better feedback to the author.
 
@@ -96,8 +98,8 @@ We have some general rules for our plugin reviews that help us maintain quality 
 
 There are also some general rules we have for what can be included in the code.
 
-- No "Loaded" or "Made by ___" messages in Init or other methods.
-- No "__ has joined the server" messages **for specific players** (like the plugin developer).
+- No "Loaded" or "Made by \_\_\_" messages in Init or other methods.
+- No "\_\_ has joined the server" messages **for specific players** (like the plugin developer).
 - No advertising, even in comments.
 - Avoid walls of using statements at the top of the plugin. Should only be the ones that are in use.
 - Avoid large chunks of commented out code. If it's not being used then it should be removed for cleanliness and maintainability. Keeping track of old and future code is for version control tools.

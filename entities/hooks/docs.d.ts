@@ -1,5 +1,5 @@
-import IHook from "./hook";
+import IHook from './hook';
 
 export default interface IDocs {
-    Hooks: IHook[];
+  Hooks: IHook[];
 }
