@@ -6,7 +6,7 @@ after: best-practices
 # Publicizer
 
 ::: warning
-Publicizer will only run if you have at least one Plugin loaded
+Publicizer will only run if you have at least one plugin loaded
 :::
 
 Oxide does runtime patching of DLLs to publicize everything in the servers `RustDedicated_Data\Managed` directory, Excluding DLLs with names starting with:
@@ -32,7 +32,7 @@ Oxide does runtime patching of DLLs to publicize everything in the servers `Rust
     "Shutdown on idle": true,
     "Seconds before idle": 60,
     "Preprocessor directives": [],
-    "Enable Publicizer": true, // [!code focus:2]
+    "Enable Publicizer": true,
     "Ignored Publicizer References": []
   },
   //---
@@ -43,7 +43,7 @@ Oxide does runtime patching of DLLs to publicize everything in the servers `Rust
 
 ### Enable Publicizer
 
-Weather the publicizer is enabled or not
+Whether the publicizer is enabled or not
 
 Option key: `Enable Publicizer`
 
@@ -59,13 +59,13 @@ Default value: `[]`
 
 ## Preprocessor directive
 
-As it is possible to disable the publicizer this allows you to check it is enabled before attempting to access a usually non-public value
+As it is possible to disable the publicizer, this allows you to check it is enabled before attempting to access usually non-public value.
 
 Directive name: `OXIDE_PUBLICIZED`
 
 ## Environment Variable
 
-As the publicizer utilises runtime patching the changes it make will not exist in the DLLs which can lead to some pretty annoying IDE warnings about stuff not existing. To help with this the environment variable allows you to specify a path to write the publicized assemblies to disk.
+As the publicizer utilizes runtime patching the changes it make will not exist in the DLLs which can lead to some pretty annoying IDE warnings about stuff not existing. To help with this, the environment variable allows you to specify a path to write the publicized assemblies to disk.
 
 ENV Var name: `OXIDE_PublicizerOutput`
 
