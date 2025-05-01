@@ -149,4 +149,7 @@ export default defineConfig({
       md.use(MarkdownItFootnote);
     },
   },
+  sitemap: {
+    hostname: 'https://docs.oxidemod.com'
+  }
 });
