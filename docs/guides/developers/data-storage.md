@@ -8,8 +8,8 @@ after: using-decompiler
 ## Configuration/user data file
 
 As previously mentioned in the section [My first plugin](./my-first-plugin), configuration and user data file use `Newtonsoft.Json` to serialize data structure.
-Configuration files are stored in the `./oxide/config folder` and
-user data files are stored in `./oxide/data`.  
+Configuration files<sup><a href="/glossary#config-files">[5]</a></sup> are stored in the `./oxide/config folder` and
+user data files<sup><a href="/glossary#data-files">[4]</a></sup> are stored in `./oxide/data`.  
 But default path can be modified to save in subfolder.
 
 the basic data structure
@@ -48,7 +48,7 @@ private class PluginData
 	public Vector3 Position;
 
 	// Here, ObjectCreationHandling is required,
-	// to avoid initialisation data to be added over and over, each time plugin restart.
+	// to avoid initialisation data to be added over and over, each time plugin<sup><a href="/glossary#plugins">[1]</a></sup> restart.
 	[JsonProperty(PropertyName = "Zones to prevent something", ObjectCreationHandling = ObjectCreationHandling.Replace)]
 	public List<string> Zones = new List<string> { "KeepOut" };
 }
@@ -131,10 +131,10 @@ With this sample code, the serialized data will be compact and look like this fo
 
 ## Language data file
 
-The language file is initialized in the LoadDefaultMessages hook. All new message definition will be stored in a file in the `./oxide/lang/(Language code)/(Plugin name).json`.
+The language file is initialized in the LoadDefaultMessages hook. All new message definition will be stored in a file in the `./oxide/lang/(Language code)/(Plugin name).json<sup><a href="/glossary#json">[3]</a></sup>`.
 Only the missing messages are added but does not overwrite the one already existing. This allows server owners to customize messages to their preference.
-Server owners can also translate messages to other languages. for example, messages could be translated into Italian and saved in the `./oxide/lang/it/(Plugin name).json` file.  
-Note: To revert to the default messages, just delete the file `./oxide/lang/en/(Plugin name).json`.
+Server owners can also translate messages to other languages. for example, messages could be translated into Italian and saved in the `./oxide/lang/it/(Plugin name).json<sup><a href="/glossary#json">[3]</a></sup>` file.  
+Note: To revert to the default messages, just delete the file `./oxide/lang/en/(Plugin name).json<sup><a href="/glossary#json">[3]</a></sup>`.
 
 ```csharp
 private new void LoadDefaultMessages()
@@ -156,7 +156,7 @@ private new void LoadDefaultMessages()
 }
 ```
 
-Ex: The previous test code would initialize a file ./oxide/lang/en/test.json that can be customized by server owners.
+Ex: The previous test code would initialize a file ./oxide/lang/en/test.json<sup><a href="/glossary#json">[3]</a></sup> that can be customized by server owners.
 
 ```json
 {
@@ -189,7 +189,7 @@ private string Lang(string key, string id = null, params object[] args) => strin
 
 ## Protobuf storage
 
-Protobuf store data in a binary format. Main advantage is a more compact and faster data storage, with the disadvantage to not be human readable like JSON.
+Protobuf store data in a binary format. Main advantage is a more compact and faster data storage, with the disadvantage to not be human readable like JSON<sup><a href="/glossary#json">[3]</a></sup>.
 
 `[ProtoContract]` : to indicates that this class will serialize.  
 `[ProtoMember(N)]` : where N represents the number in which order it will serialize  

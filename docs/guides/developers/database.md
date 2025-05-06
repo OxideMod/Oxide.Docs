@@ -8,6 +8,8 @@ after: permissions
 The Oxide database extensions implement a generalized database abstraction layer for both MySQL and SQLite.
 [MySQL](https://dev.mysql.com/downloads/installer/) and [MariaDB](https://mariadb.org/download/?t=mariadb&p=mariadb&r=11.7.2&os=windows&cpu=x86_64&pkg=msi&mirror=osuosl) are probably the most commonly used server, but other products also be used.
 
+Database functionality is essential for plugins<sup><a href="/glossary#plugins">[1]</a></sup> that need to store large amounts of data or perform complex queries that would be inefficient with traditional data files<sup><a href="/glossary#data-files">[4]</a></sup>.
+
 ## Open a connection
 
 Create a new `MYSQL` connection to a database by providing the database file location or an address (URI and port), a database name, and authentication credentials.

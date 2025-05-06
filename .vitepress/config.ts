@@ -150,6 +150,6 @@ export default defineConfig({
     },
   },
   sitemap: {
-    hostname: 'https://docs.oxidemod.com'
-  }
+    hostname: 'https://docs.oxidemod.com',
+  },
 });

@@ -59,7 +59,7 @@ private void cmdTest((ConsoleSystem.Arg arg))
 
 ## Command permissions
 
-Easily restrict command usage to players who have a permission assigned to them.
+Easily restrict command usage to players who have a permission<sup><a href="/glossary#permissions">[6]</a></sup> assigned to them.
 
 ```csharp
 [Command("test"), Permission("epicstuff.use")]
@@ -71,7 +71,7 @@ private void TestCommand(IPlayer player, string command, string[] args)
 
 ## Info
 
-Information about the plugin. plugin name (with spaces between words), Developper or maintainer name, and a 3 digit version number.
+Information about the plugin<sup><a href="/glossary#plugins">[1]</a></sup>. plugin<sup><a href="/glossary#plugins">[1]</a></sup> name (with spaces between words), Developper or maintainer name, and a 3 digit version number.
 
 ```csharp
 [Info("Plugin name", "Developper/Maintainer", "1.0.0")]
@@ -79,7 +79,7 @@ Information about the plugin. plugin name (with spaces between words), Developpe
 
 ## Description
 
-A short description of what the plugin does
+A short description of what the plugin<sup><a href="/glossary#plugins">[1]</a></sup> does
 
 ```csharp
 [Description("A short description of the plugin")]
@@ -87,25 +87,25 @@ A short description of what the plugin does
 
 ## PluginReference
 
-Reference to other plugin, when this plugin need to use functions from other plugins.
+Reference to other plugin<sup><a href="/glossary#plugins">[1]</a></sup>, when this plugin<sup><a href="/glossary#plugins">[1]</a></sup> need to use functions from other plugins<sup><a href="/glossary#plugins">[1]</a></sup>.
 
 ```csharp
 [PluginReference] private Plugin Vanish, Backpacks;
 ```
 
-Note: when a plugin is required by this plugin, this line should appear at the top.
+Note: when a plugin<sup><a href="/glossary#plugins">[1]</a></sup> is required by this plugin<sup><a href="/glossary#plugins">[1]</a></sup>, this line should appear at the top.
 
 ```csharp
 //Requires: Backpacks
 ```
 
-If required plugin is absent from plugin folder, this plugin will not start
+If required plugin<sup><a href="/glossary#plugins">[1]</a></sup> is absent from plugin folder, this plugin<sup><a href="/glossary#plugins">[1]</a></sup> will not start
 
 ## OnlinePlayers
 
 Auto manage an Hashtable of online players.
 
-see Bank and Trade plugin for usage example
+see Bank and Trade plugin<sup><a href="/glossary#plugins">[1]</a></sup> for usage example
 
 ```csharp
 class OnlinePlayer
@@ -122,7 +122,7 @@ Hash<BasePlayer, OnlinePlayer> onlinePlayers = new Hash<BasePlayer, OnlinePlayer
 
 ## HookMethod
 
-Indicates that the specified method should be a handler for a hook
+Indicates that the specified method should be a handler for a hook<sup><a href="/glossary#hooks">[2]</a></sup>
 
 ```csharp
 [HookMethod("OnPlayerConnected")]
@@ -131,7 +131,7 @@ private void base_OnPlayerConnected(BasePlayer player) => AddOnlinePlayer(player
 
 ## AutoPatch
 
-Used with HarmonyPatch to automatically install the patch when plugin start, and uninstall it, when plugin terminate
+Used with HarmonyPatch to automatically install the patch when plugin<sup><a href="/glossary#plugins">[1]</a></sup> start, and uninstall it, when plugin<sup><a href="/glossary#plugins">[1]</a></sup> terminate
 
 ```csharp
 [AutoPatch]
@@ -151,7 +151,7 @@ Note: see harmony documentation for info about harmony patches
 
 ## Reference
 
-Add the ablility to reference additionnal DLL files to be used by the plugin
+Add the ablility to reference additionnal DLL files to be used by the plugin<sup><a href="/glossary#plugins">[1]</a></sup>
 
 ```csharp
 //Reference: System.Drawing

@@ -9,7 +9,7 @@ export default {
   extends: DefaultTheme,
   Layout() {
     return h(DefaultTheme.Layout, null, {
-      'sidebar-nav-before': () => h(HookSearch),
+      'sidebar-nav-before': () => h(HookSearch, { inSidebar: true }),
       'layout-bottom': () => h(GlossaryLinker),
     });
   },

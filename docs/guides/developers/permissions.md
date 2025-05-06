@@ -5,12 +5,12 @@ after: attributes
 
 # Permissions
 
-Oxide offers a substantial API to control user access with permissions and groups
+Oxide offers a substantial API to control user access with permissions<sup><a href="/glossary#permissions">[6]</a></sup> and groups<sup><a href="/glossary#groups">[9]</a></sup>
 Basic usage
 
-For a primer on how to use permissions as a server owner, please consult the Using the Oxide permissions system tutorial.
+For a primer on how to use permissions<sup><a href="/glossary#permissions">[6]</a></sup> as a server owner, please consult the Using the Oxide permissions<sup><a href="/glossary#permissions">[6]</a></sup> system tutorial.
 
-Most plugins can benefit from some permissions. Below is a basic example of how to register a permission and check if a player has that permission assigned to them.
+Most plugins<sup><a href="/glossary#plugins">[1]</a></sup> can benefit from some permissions<sup><a href="/glossary#permissions">[6]</a></sup>. Below is a basic example of how to register a permission<sup><a href="/glossary#permissions">[6]</a></sup> and check if a player has that permission<sup><a href="/glossary#permissions">[6]</a></sup> assigned to them.
 
 ```csharp
 using Oxide.Core.Libraries.Covalence;
@@ -38,73 +38,73 @@ class EpicStuff : CovalencePlugin
 
 ## Groups
 
-Get all groups
+Get all groups<sup><a href="/glossary#groups">[9]</a></sup>
 
 ```csharp
 string[] groups = permission.GetGroups();
 ```
 
-Check if group exists
+Check if group<sup><a href="/glossary#groups">[9]</a></sup> exists
 
 ```csharp
 bool GroupExists = permission.GroupExists("GroupName");
 ```
 
-Create a group
+Create a group<sup><a href="/glossary#groups">[9]</a></sup>
 
 ```csharp
 bool GroupCreated = permission.CreateGroup("GroupName", "Group Title", 0);
 ```
 
-Remove a group
+Remove a group<sup><a href="/glossary#groups">[9]</a></sup>
 
 ```csharp
 bool GroupRemoved = permission.RemoveGroup("GroupName");
 ```
 
-Check if group has a permission
+Check if group<sup><a href="/glossary#groups">[9]</a></sup> has a permission<sup><a href="/glossary#permissions">[6]</a></sup>
 
 ```csharp
 bool GroupHasPermission = permission.GroupHasPermission("GroupName", "epicstuff.use");
 ```
 
-Grant permission to a group
+Grant permission<sup><a href="/glossary#permissions">[6]</a></sup> to a group<sup><a href="/glossary#groups">[9]</a></sup>
 
 ```csharp
 permission.GrantGroupPermission("GroupName", "epicstuff.use", this);
 ```
 
-Revoke permission from a group
+Revoke permission<sup><a href="/glossary#permissions">[6]</a></sup> from a group<sup><a href="/glossary#groups">[9]</a></sup>
 
 ```csharp
 permission.RevokeGroupPermission("GroupName", "epicstuff.use");
 ```
 
-Get the rank for a group
+Get the rank for a group<sup><a href="/glossary#groups">[9]</a></sup>
 
 ```csharp
 int GroupRank = permission.GetGroupRank("GroupName");
 ```
 
-Get the title for a group
+Get the title for a group<sup><a href="/glossary#groups">[9]</a></sup>
 
 ```csharp
 string GroupTitle = permission.GetGroupTitle("GroupName");
 ```
 
-Get parent group for a group
+Get parent group<sup><a href="/glossary#groups">[9]</a></sup> for a group<sup><a href="/glossary#groups">[9]</a></sup>
 
 ```csharp
 string GroupParent = permission.GetGroupParent("GroupName");
 ```
 
-Get permissions for a group
+Get permissions<sup><a href="/glossary#permissions">[6]</a></sup> for a group<sup><a href="/glossary#groups">[9]</a></sup>
 
 ```csharp
 string[] permissions = permission.GetGroupPermissions("GroupName", false);
 ```
 
-Migrate group
+Migrate group<sup><a href="/glossary#groups">[9]</a></sup>
 
 ```csharp
 permission.MigrateGroup("OldGroupName", "NewGroupName");
@@ -112,43 +112,43 @@ permission.MigrateGroup("OldGroupName", "NewGroupName");
 
 ## Users
 
-Get permissions granted to player
+Get permissions<sup><a href="/glossary#permissions">[6]</a></sup> granted to player
 
 ```csharp
 string[] UserPermissions = permission.GetUserPermissions("playerID");
 ```
 
-Check if player has a permission
+Check if player has a permission<sup><a href="/glossary#permissions">[6]</a></sup>
 
 ```csharp
 bool UserHasPermission = permission.UserHasPermission("playerID", "epicstuff.use");
 ```
 
-Add player to a group
+Add player to a group<sup><a href="/glossary#groups">[9]</a></sup>
 
 ```csharp
 permission.AddUserGroup("playerID", "GroupName");
 ```
 
-Remove player from a group
+Remove player from a group<sup><a href="/glossary#groups">[9]</a></sup>
 
 ```csharp
 permission.RemoveUserGroup("playerID", "GroupName");
 ```
 
-Check if player is in a group
+Check if player is in a group<sup><a href="/glossary#groups">[9]</a></sup>
 
 ```csharp
 bool UserHasGroup = permission.UserHasGroup("playerID", "GroupName");
 ```
 
-Grant permission to a player
+Grant permission<sup><a href="/glossary#permissions">[6]</a></sup> to a player
 
 ```csharp
 permission.GrantUserPermission("playerID", "epicstuff.use", this);
 ```
 
-Revoke permission from a player
+Revoke permission<sup><a href="/glossary#permissions">[6]</a></sup> from a player
 
 ```csharp
 permission.RevokeUserPermission("playerID", "epicstuff.use");
@@ -156,19 +156,19 @@ permission.RevokeUserPermission("playerID", "epicstuff.use");
 
 ## Server
 
-Get all registered permissions
+Get all registered permissions<sup><a href="/glossary#permissions">[6]</a></sup>
 
 ```csharp
 string[] permissions = permission.GetPermissions();
 ```
 
-Check if a permission exists
+Check if a permission<sup><a href="/glossary#permissions">[6]</a></sup> exists
 
 ```csharp
 bool PermissionExists = permission.PermissionExists("epicstuff.use", this);
 ```
 
-Register a permission
+Register a permission<sup><a href="/glossary#permissions">[6]</a></sup>
 
 ```csharp
 permission.RegisterPermission("epicstuff.use", this);
