@@ -5,13 +5,13 @@ after: database
 
 # Plugin Guidelines
 
-Here, we will guide you through key practices and conventions that will set you up for success in developing plugins for Rust using the Oxide Mod framework. Whether you're a seasoned developer or just starting your journey in plugin development, adhering to these guidelines can help you create clean, maintainable, and efficient plugins. This guide will cover a range of topics, from naming conventions and error handling, to versioning, documentation, and respectfulness in coding practices. So let's dive in!
+Here, we will guide you through key practices and conventions that will set you up for success in developing plugins<sup><a href="/glossary#plugins">[1]</a></sup> for Rust using the Oxide Mod framework. Whether you're a seasoned developer or just starting your journey in plugin<sup><a href="/glossary#plugins">[1]</a></sup> development, adhering to these guidelines can help you create clean, maintainable, and efficient plugins<sup><a href="/glossary#plugins">[1]</a></sup>. This guide will cover a range of topics, from naming conventions and error handling, to versioning, documentation, and respectfulness in coding practices. So let's dive in!
 
 ## 1. Naming Conventions
 
 ### 1.1 Plugin Files, Classes, Namespaces
 
-The filename of your plugin should be clear, concise and indicative of its functionality. It should match the name of your main class and use PascalCase (e.g., `MyFirstPlugin.cs`). The class and file name should be encapsulated in a namespace - `Oxide.Plugins` is a common choice.
+The filename of your plugin<sup><a href="/glossary#plugins">[1]</a></sup> should be clear, concise and indicative of its functionality. It should match the name of your main class and use PascalCase (e.g., `MyFirstPlugin.cs`). The class and file name should be encapsulated in a namespace - `Oxide.Plugins` is a common choice.
 
 For example:
 
@@ -41,7 +41,7 @@ private void MyCommand(BasePlayer player, string command, string[] args)
 
 ### 1.3 Permissions
 
-Permissions should follow a specific format: `pluginname.permission`. The plugin name should be in lowercase and the permission should clearly represent its function.
+Permissions<sup><a href="/glossary#permissions">[6]</a></sup> should follow a specific format: `pluginname.permission`. The plugin<sup><a href="/glossary#plugins">[1]</a></sup> name should be in lowercase and the permission<sup><a href="/glossary#permissions">[6]</a></sup> should clearly represent its function.
 
 For example:
 
@@ -99,7 +99,7 @@ Aim to make your code as self-explanatory as possible. This often reduces the ne
 
 ### 2.2 Comment Types
 
-Here are different types of comments you might use in your plugin:
+Here are different types of comments you might use in your plugin<sup><a href="/glossary#plugins">[1]</a></sup>:
 
 - `Single line comments` start with `//` and are typically placed above the code they refer to.
 
@@ -145,7 +145,7 @@ Most IDEs have a feature to list all TODO comments in a project, making it easy 
 
 ### 3.1 General
 
-When writing your plugin, it's essential to anticipate and handle potential errors. This not only makes your plugin more robust but also helps server administrators troubleshoot issues when they arise.
+When writing your plugin<sup><a href="/glossary#plugins">[1]</a></sup>, it's essential to anticipate and handle potential errors. This not only makes your plugin<sup><a href="/glossary#plugins">[1]</a></sup> more robust but also helps server administrators troubleshoot issues when they arise.
 
 ### 3.2 Exception Handling
 
@@ -166,7 +166,7 @@ In this example, `Puts` is a method provided by the Oxide framework for logging 
 
 ### Input Validation
 
-One common source of errors in plugins is user input. Always validate input before using it. For instance, if you're expecting a number, check if the input can be parsed as a number:
+One common source of errors in plugins<sup><a href="/glossary#plugins">[1]</a></sup> is user input. Always validate input before using it. For instance, if you're expecting a number, check if the input can be parsed as a number:
 
 ```csharp
 public void MyCommand(ConsoleSystem.Arg arg)
@@ -181,7 +181,7 @@ public void MyCommand(ConsoleSystem.Arg arg)
 }
 ```
 
-In this example, `SendReply` is another method provided by Oxide. It allows your plugin to send a message back to the player who executed the command.
+In this example, `SendReply` is another method provided by Oxide. It allows your plugin<sup><a href="/glossary#plugins">[1]</a></sup> to send a message back to the player who executed the command.
 
 ### 3.4 Null Checking
 
@@ -204,7 +204,7 @@ In this example, if the player is not found, `BasePlayer.Find` returns `null`, a
 
 ### 4.1 General
 
-When writing your plugins, consider how they might impact the server's performance. It's crucial to use resources efficiently and avoid unnecessary operations that could slow down the server.
+When writing your plugins<sup><a href="/glossary#plugins">[1]</a></sup>, consider how they might impact the server's performance. It's crucial to use resources efficiently and avoid unnecessary operations that could slow down the server.
 
 ### 4.2 Avoid Unnecessary Calculations
 
@@ -224,7 +224,7 @@ In this example, the count of active players is stored in `playerCount` variable
 
 ### 4.3 Caching Expensive Values
 
-If your plugin frequently accesses a value that's expensive to compute or retrieve, consider caching it. This is particularly useful for data that doesn't change frequently.
+If your plugin<sup><a href="/glossary#plugins">[1]</a></sup> frequently accesses a value that's expensive to compute or retrieve, consider caching it. This is particularly useful for data that doesn't change frequently.
 
 ```csharp
 private Dictionary<string, BasePlayer> playerCache = new Dictionary<string, BasePlayer>();
@@ -245,7 +245,7 @@ In this example, `GetPlayer` method uses a dictionary to cache player instances.
 
 ### 4.4 Using Data Structures Effectively
 
-Understanding and using the right data structures can greatly improve the efficiency of your plugin. For example, if you frequently need to check whether a set of players contains a specific player, a `HashSet<BasePlayer>` is more efficient than a `List<BasePlayer>`.
+Understanding and using the right data structures can greatly improve the efficiency of your plugin<sup><a href="/glossary#plugins">[1]</a></sup>. For example, if you frequently need to check whether a set of players contains a specific player, a `HashSet<BasePlayer>` is more efficient than a `List<BasePlayer>`.
 
 ```csharp
 private HashSet<BasePlayer> playersSet = new HashSet<BasePlayer>();
@@ -265,7 +265,7 @@ In this example, `HashSet` is used to store a set of players. The `Contains` met
 
 ## 5. Code Structure
 
-Good code structure makes your plugin easier to understand, maintain, and extend.
+Good code structure makes your plugin<sup><a href="/glossary#plugins">[1]</a></sup> easier to understand, maintain, and extend.
 
 ### 5.1 Use Methods to Break Down Complex Tasks
 
@@ -306,7 +306,7 @@ In this example, a `PlayerManager` class is used to manage the set of players. I
 
 ### 5.3 Keep Related Code Together
 
-Code that is related should be located near each other. This makes it easier to understand the relationships between different parts of your plugin.
+Code that is related should be located near each other. This makes it easier to understand the relationships between different parts of your plugin<sup><a href="/glossary#plugins">[1]</a></sup>.
 
 ```csharp
 public void Init()
@@ -325,7 +325,7 @@ private void HelloCommand(IPlayer player, string command, string[] args)
 
 In this example, the `Init` method and the `HelloCommand` method are close together because they are related - the command is registered in the `Init` method and handled in the `HelloCommand` method.
 
-Regions can be very useful to group related code together, especially in large code files. In Rust plugins, it's common to use regions to separate different sections of your code, such as command handlers, hooks, and helper methods.
+Regions can be very useful to group related code together, especially in large code files. In Rust plugins<sup><a href="/glossary#plugins">[1]</a></sup>, it's common to use regions to separate different sections of your code, such as command handlers, hooks<sup><a href="/glossary#hooks">[2]</a></sup>, and helper methods.
 
 ```csharp
 #region Command Handlers
@@ -362,11 +362,11 @@ private void BroadcastServerRestart(BasePlayer player)
 #endregion
 ```
 
-In this example, the code is organized into three regions: Command Handlers, Hooks, and Helper Methods. This organization makes it easier to navigate through the code.
+In this example, the code is organized into three regions: Command Handlers, Hooks<sup><a href="/glossary#hooks">[2]</a></sup>, and Helper Methods. This organization makes it easier to navigate through the code.
 
 ## 6. Versioning
 
-Adopting a clear versioning system for your plugin is essential as it helps track changes over time and provides a reliable way for users to identify different versions of your plugin.
+Adopting a clear versioning system for your plugin<sup><a href="/glossary#plugins">[1]</a></sup> is essential as it helps track changes over time and provides a reliable way for users to identify different versions of your plugin<sup><a href="/glossary#plugins">[1]</a></sup>.
 
 ### 6.1 Semantic Versioning
 
@@ -375,7 +375,7 @@ Semantic Versioning (SemVer) is a common versioning scheme that is easy to under
 - `MAJOR` version increment indicates that incompatible API changes were made.
 - `MINOR` version increment indicates that new functionalities were added in a backward-compatible manner.
 - `PATCH` version increment indicates that backward-compatible bug fixes were made.
-  Remember to update the version number in the `[Info]` attribute at the top of your plugin file every time you make a change to your plugin. Here's an example:
+  Remember to update the version number in the `[Info]` attribute at the top of your plugin<sup><a href="/glossary#plugins">[1]</a></sup> file every time you make a change to your plugin<sup><a href="/glossary#plugins">[1]</a></sup>. Here's an example:
 
 ```csharp
 [Info("ExamplePlugin", "AuthorName", "1.0.0")]
@@ -387,7 +387,7 @@ public class ExamplePlugin : RustPlugin
 
 ### 6.2 Changelog
 
-It's a good practice to maintain a changelog for your plugin. A changelog is a file that contains a curated, chronologically ordered list of notable changes for each version of a project. It allows users to see what changes were made in each version.
+It's a good practice to maintain a changelog for your plugin<sup><a href="/glossary#plugins">[1]</a></sup>. A changelog is a file that contains a curated, chronologically ordered list of notable changes for each version of a project. It allows users to see what changes were made in each version.
 
 It is typically placed in the root directory of your project as `CHANGELOG.md` and follows a structure similar to:
 
@@ -409,15 +409,15 @@ It is typically placed in the root directory of your project as `CHANGELOG.md` a
 - Initial release.
 ```
 
-Remember, each entry in your changelog should document any changes to the functionality of your plugin, such as bug fixes, new features, or changes to existing features.
+Remember, each entry in your changelog should document any changes to the functionality of your plugin<sup><a href="/glossary#plugins">[1]</a></sup>, such as bug fixes, new features, or changes to existing features.
 
 ## 7. Documentation
 
-Documentation is a critical part of any software development project, including Oxide plugins. Clear, comprehensive documentation helps other developers understand your code and users use your plugin effectively. Here are some guidelines to keep in mind when documenting your Rust plugin:
+Documentation is a critical part of any software development project, including Oxide plugins<sup><a href="/glossary#plugins">[1]</a></sup>. Clear, comprehensive documentation helps other developers understand your code and users use your plugin<sup><a href="/glossary#plugins">[1]</a></sup> effectively. Here are some guidelines to keep in mind when documenting your Rust plugin<sup><a href="/glossary#plugins">[1]</a></sup>:
 
 ### 7.1 Plugin Description
 
-Start by documenting the plugin's basic information using the `Description` attribute, such as its purpose, basic functionality, and any important usage notes. For example:
+Start by documenting the plugin's<sup><a href="/glossary#plugins">[1]</a></sup> basic information using the `Description` attribute, such as its purpose, basic functionality, and any important usage notes. For example:
 
 ```csharp
 [Info("ExamplePlugin", "AuthorName", "1.0.0")]
@@ -430,7 +430,7 @@ public class ExamplePlugin : RustPlugin
 
 ### 7.2 README file
 
-Every plugin should have a README file that provides an overview of the plugin, its features, how to install and use it, and any dependencies or prerequisites it requires.
+Every plugin<sup><a href="/glossary#plugins">[1]</a></sup> should have a README file that provides an overview of the plugin<sup><a href="/glossary#plugins">[1]</a></sup>, its features, how to install and use it, and any dependencies or prerequisites it requires.
 
 Here's an example of what a basic README might look like:
 
@@ -477,11 +477,11 @@ if (!player.HasPermission("exampleplugin.use"))
 
 ### 7.4 API Documentation
 
-If your plugin provides an API for other plugins to use, make sure to document that API thoroughly. Include explanations of what each method and property does, what arguments it accepts (if any), and what it returns (if anything).
+If your plugin<sup><a href="/glossary#plugins">[1]</a></sup> provides an API for other plugins<sup><a href="/glossary#plugins">[1]</a></sup> to use, make sure to document that API thoroughly. Include explanations of what each method and property does, what arguments it accepts (if any), and what it returns (if anything).
 
 ## 8. Respectfulness
 
-While developing plugins, it's important to keep in mind that your software will be running on other people's servers, impacting their resources, performance, and the overall player experience. Therefore, you should follow a set of best practices to ensure that your plugin behaves respectfully. Here are some guidelines:
+While developing plugins<sup><a href="/glossary#plugins">[1]</a></sup>, it's important to keep in mind that your software will be running on other people's servers, impacting their resources, performance, and the overall player experience. Therefore, you should follow a set of best practices to ensure that your plugin<sup><a href="/glossary#plugins">[1]</a></sup> behaves respectfully. Here are some guidelines:
 
 ### 8.1 Avoid Malicious Code
 
@@ -509,7 +509,7 @@ Avoid creating unnecessary load on the server. This includes:
 
 ### 8.4 Stay Updated with Oxide Updates
 
-Oxide Mod and game updates can often cause plugins to break. Keeping your plugin updated ensures your users don't experience unexpected downtime. If you're aware of an update that may take some time to adjust to, communicate this to your users to manage expectations.
+Oxide Mod and game updates can often cause plugins<sup><a href="/glossary#plugins">[1]</a></sup> to break. Keeping your plugin<sup><a href="/glossary#plugins">[1]</a></sup> updated ensures your users don't experience unexpected downtime. If you're aware of an update that may take some time to adjust to, communicate this to your users to manage expectations.
 
 You've now walked through the key guidelines for developing Rust plugins using the Oxide Mod framework. These guidelines cover important areas including naming conventions, commenting, error handling, efficiency, code structure, versioning, documentation, and respectfulness in coding practices.
 

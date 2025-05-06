@@ -27,19 +27,20 @@ features:
       height: 64
       style: 'background-color: rgba(180, 180, 180, 0.1); padding: 16px; border-radius: 12px; display: flex; align-items: center; justify-content: center;'
     title: Guides
-    details: Clear instructions and tutorials for installation, plugin development, configuration, troubleshooting, and modding best practices.
+    details: Clear instructions and tutorials for installation, plugin<sup><a href="/glossary#plugins">[1]</a></sup> development, configuration, troubleshooting, and modding best practices.
   - icon:
       src: /document.svg
       width: 64
       height: 64
       style: 'background-color: rgba(180, 180, 180, 0.1); padding: 16px; border-radius: 12px; display: flex; align-items: center; justify-content: center;'
     title: Core Documentation
-    details: Complete resource for developers. Installation, plugin architecture, examples, troubleshooting, and community support.
+    details: Complete resource for developers. Installation, plugin<sup><a href="/glossary#plugins">[1]</a></sup> architecture, examples, troubleshooting, and community support.
   - icon:
       src: /hook.svg
       width: 64
       height: 64
       style: 'background-color: rgba(180, 180, 180, 0.1); padding: 16px; border-radius: 12px; display: flex; align-items: center; justify-content: center;'
     title: Hook Index
-    details: Extensive reference for available hooks, parameters, and examples. Customize and enhance behavior efficiently.
+    details: Extensive reference for available hooks<sup><a href="/glossary#hooks">[2]</a></sup>, parameters, and examples. Customize and enhance behavior efficiently.
 ---
+

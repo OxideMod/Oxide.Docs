@@ -301,5 +301,81 @@
 
 /* Dark mode adjustments */
 .dark ::-webkit-scrollbar-track {
-  background: #1a1a1c;
+  background: transparent;
+}
+
+/**
+* Component: Glossary
+* -------------------------------------------------------------------------- */
+
+/* Glossary page specific styles */
+.vp-doc h3[id] {
+  margin-top: 1.5em;
+  position: relative;
+}
+
+.vp-doc h3[id]::before {
+  content: '';
+  display: block;
+  height: 1px;
+  width: 100%;
+  background: var(--vp-c-divider);
+  position: absolute;
+  top: -0.75em;
+  left: 0;
+}
+
+/* Glossary term reference styling (enhanced in markdown) */
+.vp-doc a[href^='/glossary#'] {
+  position: relative;
+  font-weight: normal;
+  text-decoration: none;
+  color: var(--vp-c-brand);
+  transition: all 0.2s ease;
+}
+
+.vp-doc a[href^='/glossary#']:hover {
+  background-color: rgba(var(--vp-c-brand-1), 0.05);
+}
+
+/* Style only the superscript reference numbers */
+.vp-doc a[href^='/glossary#'] sup {
+  color: var(--vp-c-brand);
+  font-weight: 500;
+  border-bottom: 1px dashed var(--vp-c-brand-1);
+  padding: 0 2px;
+}
+
+.vp-doc a[href^='/glossary#']:hover sup {
+  border-bottom: 1px solid var(--vp-c-brand-1);
+}
+
+/* Special case for glossary page table of contents */
+.vp-doc [id^='toc-'] a,
+.vp-doc .header-anchor {
+  border-bottom: none !important;
+}
+
+/* Glossary Reference Styling */
+sup a {
+  text-decoration: none;
+  font-size: 0.7em;
+  font-weight: normal;
+  color: var(--vp-c-brand);
+  margin-left: 0.1em;
+  position: relative;
+  top: -0.2em;
+  transition: all 0.2s ease;
+}
+
+sup a:hover {
+  color: var(--vp-c-brand-dark);
+  background-color: rgba(var(--vp-c-brand-rgb), 0.1);
+  border-radius: 3px;
+}
+
+/* Make sure references maintain their superscript position */
+sup {
+  vertical-align: super;
+  line-height: 0;
 }

@@ -20,7 +20,7 @@ Timer myTimer = timer.Once(1f, () =>
 
 ## Continuous timer
 
-Executes a function at the specified delay interval (until the timer is manually destroyed or plugin is unloaded).
+Executes a function at the specified delay interval (until the timer is manually destroyed or plugin<sup><a href="/glossary#plugins">[1]</a></sup> is unloaded).
 
 ```csharp
 Timer myTimer = timer.Every(3f, () =>
