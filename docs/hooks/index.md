@@ -1,7 +1,7 @@
 # Hook Index
 
 <script setup>
-import { data } from './hooks.data.ts'
+import { data } from './hooks<sup><a href="/glossary#hooks">[7]</a></sup>.data.ts'
 import HookSearch from '../../components/HookSearch.vue'
 </script>
 

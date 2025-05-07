@@ -3,6 +3,7 @@
   "devDependencies": {
     "@types/markdown-it": "^12.2.3",
     "@types/node": "^20.6.1",
+    "glob": "^10.4.5",
     "gray-matter": "^4.0.3",
     "husky": "^8.0.0",
     "lint-staged": "^15.0.2",
@@ -19,13 +20,19 @@
     "prepare": "husky install",
     "format": "prettier --write .",
     "lint": "prettier --check .",
-    "check": "prettier --check ."
+    "check": "prettier --check .",
+    "glossary-links": "node util/glossary-linker.js",
+    "format-with-glossary": "npm run glossary-links && prettier --write ."
   },
   "volta": {
     "node": "20.6.1"
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx,vue,css,md}": [
+    "*.{js,ts,jsx,tsx,vue,css}": [
+      "prettier --write"
+    ],
+    "*.md": [
+      "node util/glossary-linker.js",
       "prettier --write"
     ]
   }

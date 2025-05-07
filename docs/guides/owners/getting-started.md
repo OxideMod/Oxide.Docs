@@ -7,7 +7,7 @@ after: 0
 
 ## What is Oxide and Why Use It?
 
-Oxide is a powerful and flexible modding framework for game servers, enhancing gameplay through the use of plugins<sup><a href="/glossary#plugins">[1]</a></sup>. It opens the door to limitless possibilities, providing the tools for server owners to customize and control their servers in ways that wouldn't be possible with the vanilla server software. Whether you're aiming to create a unique player experience, want more administrative control, or simply wish to experiment with new features, Oxide is an excellent tool to have in your arsenal.
+Oxide is a powerful and flexible modding framework for game servers, enhancing gameplay through the use of plugins<sup><a href="/glossary#plugins">[3]</a></sup>. It opens the door to limitless possibilities, providing the tools for server owners to customize and control their servers in ways that wouldn't be possible with the vanilla server software. Whether you're aiming to create a unique player experience, want more administrative control, or simply wish to experiment with new features, Oxide is an excellent tool to have in your arsenal.
 
 ## Understanding Oxide
 
@@ -17,17 +17,17 @@ In the following guides, you'll learn about the various aspects of using Oxide t
 
 - **[Installing Oxide](install-oxide)**: Learn about the process of installing Oxide onto your server, a crucial step to unlock all the features that Oxide has to offer.
 
-- **[Commands](commands)**: This guide covers the various Oxide and server commands you'll be using to manage your server and plugins<sup><a href="/glossary#plugins">[1]</a></sup>.
+- **[Commands](commands)**: This guide covers the various Oxide and server commands you'll be using to manage your server and plugins<sup><a href="/glossary#plugins">[3]</a></sup>.
 
-- **[Permissions](permissions)**: Here, we dive into Oxide's permissions<sup><a href="/glossary#permissions">[6]</a></sup> system, allowing for granular control over who can do what on your server.
+- **[Permissions<sup><a href="/glossary#permissions">[11]</a></sup>](permissions<sup><a href="/glossary#permissions">[11]</a></sup>)**: Here, we dive into Oxide's permissions<sup><a href="/glossary#permissions">[11]</a></sup> system, allowing for granular control over who can do what on your server.
 
 - **[Localization](localization)**: Understand how to customize your server's language to best suit your player base.
 
-- **[Installing Plugins](install-plugins)**: Learn how to add new features and capabilities to your server by installing plugins<sup><a href="/glossary#plugins">[1]</a></sup>.
+- **[Installing Plugins<sup><a href="/glossary#plugins">[3]</a></sup>](install-plugins<sup><a href="/glossary#plugins">[3]</a></sup>)**: Learn how to add new features and capabilities to your server by installing plugins<sup><a href="/glossary#plugins">[3]</a></sup>.
 
-- **[Configuring Plugins](configure-plugins)**: Each plugin comes with its own set of configurations. This guide will walk you through how to customize your plugins<sup><a href="/glossary#plugins">[1]</a></sup> to your liking.
+- **[Configuring Plugins<sup><a href="/glossary#plugins">[3]</a></sup>](configure-plugins<sup><a href="/glossary#plugins">[3]</a></sup>)**: Each plugin comes with its own set of configurations. This guide will walk you through how to customize your plugins<sup><a href="/glossary#plugins">[3]</a></sup> to your liking.
 
-- **[Extensions](extensions)**: Extensions add additional functionality to Oxide. Learn how to install and manage these extensions to get even more out of Oxide.
+- **[Extensions<sup><a href="/glossary#extensions">[2]</a></sup>](extensions<sup><a href="/glossary#extensions">[2]</a></sup>)**: Extensions<sup><a href="/glossary#extensions">[2]</a></sup> add additional functionality to Oxide. Learn how to install and manage these extensions<sup><a href="/glossary#extensions">[2]</a></sup> to get even more out of Oxide.
 
 ## Getting Help
 
@@ -37,6 +37,6 @@ If you encounter issues or have questions about Oxide:
 2. **Plugin Issues**: For plugin-specific issues, visit the resource page and use the help button or create a thread in that resource's forum category.
 3. **General Help**: For questions about the site or platform, use the General Support forum.
 
-Remember that most free plugins<sup><a href="/glossary#plugins">[1]</a></sup> are maintained voluntarily without compensation. While the community is supportive, immediate responses aren't guaranteed. Consider donating to developers for better support.
+Remember that most free plugins<sup><a href="/glossary#plugins">[3]</a></sup> are maintained voluntarily without compensation. While the community is supportive, immediate responses aren't guaranteed. Consider donating to developers for better support.
 
 By exploring these guides, you'll gain a comprehensive understanding of Oxide and its potential, empowering you to create a truly unique and controlled server experience.
