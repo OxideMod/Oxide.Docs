@@ -6,9 +6,6 @@ after: target-frameworks
 # Server lifecycle
 The lifecycle of a game server application
 
-    Server application
-    Client application
-
 ## Server application
 ### Initialization
 
