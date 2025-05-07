@@ -12,6 +12,7 @@ after: messages-in-english
 One of the open-source licenses listed below must be attached to the plugin. This applies to plugins hosted on GitHub.
 
 The allowed licenses are:
+
 - MIT
 - Apache
 - GNU GPLv3

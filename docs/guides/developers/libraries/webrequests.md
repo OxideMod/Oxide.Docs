@@ -8,7 +8,7 @@ after: Timers
 ## Understanding Web Requests
 
 Oxides WebRequests library is responsible for handling HTTP requests asynchronously, when utilized in your plugin it can effectively and efficiently communicate with web resources.
- 
+
 ## Using `Enqeue` to send a `GET Request`
 
 ```csharp
@@ -50,7 +50,6 @@ private void GetCallback(int code, string response, IPlayer player)
     Puts($"Google answered for {player.Name}: {response}");
 }
 ```
-
 
 ## Using `Enqeue` to send a `POST Request`
 

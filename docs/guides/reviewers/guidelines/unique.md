@@ -2,13 +2,14 @@
 title: Unique functionality
 after: static-instances
 ---
+
 # Functionality is unique or is an improvement over existing solutions
 
 1. New plugins should add functionality that does not already exist or provide a substantial improvement over existing solutions.
 
 ## Explanation
 
-This guideline requires that the submission must add value to what is already on the website. This means that if the functionality of the plugin already exists within other plugins on the website, the developer will need to explain what is different about their plugin and what it offers over the rest of the existing plugins. 
+This guideline requires that the submission must add value to what is already on the website. This means that if the functionality of the plugin already exists within other plugins on the website, the developer will need to explain what is different about their plugin and what it offers over the rest of the existing plugins.
 
 This is to avoid over-saturating the website with hundreds of the same plugin and to encourage developers to collaborate on one version of a plugin instead of recreating their own version for every minor change.
 

@@ -24,6 +24,7 @@ This is the second severity level, this is generally applied to suggestions that
 You would typically use this level for changes that the author really should make, but if not made would not affect the plugin in a serious way.
 
 Some examples of when you would use this are:
+
 - Unused fields or methods that can be removed.
 - Minor to moderate performance issues.
 - Nesting
@@ -32,11 +33,12 @@ You should only really use this over may fix if it is strongly recommended that 
 
 ## Must fix
 
-This is the highest severity level, this is generally applied to critical changes that **must** be fixed before the plugin can be approved. 
+This is the highest severity level, this is generally applied to critical changes that **must** be fixed before the plugin can be approved.
 
 This level is only applied to problems that must be addressed otherwise the plugin is at risk of poor performance or worse case not working at all. Alternatively this can be used to flag issues that mean the plugin cannot be approved, but the rules is not necessarily one of the guidelines (see general rules).
 
 Some examples of when you would use this are:
+
 - Major performance issues.
 - Obsolete functionality (obsolete/deprecated hook or method).
 - Malicious or exploitable code.

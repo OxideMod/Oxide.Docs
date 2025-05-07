@@ -24,22 +24,25 @@ Oxide does runtime patching of DLLs to publicize everything in the servers `Rust
 ## Oxide config options
 
 ::: code-group
-```json5{7-8} [oxide.config.json]
+
+```json{7-8} [oxide.config.json]
 {
   //---
   "Plugin Compiler": {
     "Shutdown on idle": true,
     "Seconds before idle": 60,
     "Preprocessor directives": [],
-    "Enable Publicizer": true, // [!code focus:2]
+    "Enable Publicizer": true,
     "Ignored Publicizer References": []
   },
   //---
 }
 ```
+
 :::
 
 ### Enable Publicizer
+
 Whether the publicizer is enabled or not
 
 Option key: `Enable Publicizer`
@@ -47,6 +50,7 @@ Option key: `Enable Publicizer`
 Default value: `true`
 
 ### Ignored Publicizer References
+
 This option accepts an array of strings of custom DLL names to ignore
 
 Option key: `Ignored Publicizer References`
@@ -54,11 +58,13 @@ Option key: `Ignored Publicizer References`
 Default value: `[]`
 
 ## Preprocessor directive
+
 As it is possible to disable the publicizer, this allows you to check it is enabled before attempting to access usually non-public value.
 
 Directive name: `OXIDE_PUBLICIZED`
 
 ## Environment Variable
+
 As the publicizer utilizes runtime patching the changes it make will not exist in the DLLs which can lead to some pretty annoying IDE warnings about stuff not existing. To help with this, the environment variable allows you to specify a path to write the publicized assemblies to disk.
 
 ENV Var name: `OXIDE_PublicizerOutput`
@@ -70,4 +76,3 @@ Batch file example: `set OXIDE_PublicizerOutput=D:\Servers\Rust\Patched`
 ::: warning
 The directory must already exist otherwise nothing will be written to disk!
 :::
-

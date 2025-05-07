@@ -9,13 +9,14 @@ after: detailed-documentation
 
 ## Explanation
 
-This guideline requires that each every message sent to any player must use the language API to localise the message. This includes all messages sent to the user under normal use of the plugin, whether sent to the player's chat or the server console. 
+This guideline requires that each every message sent to any player must use the language API to localise the message. This includes all messages sent to the user under normal use of the plugin, whether sent to the player's chat or the server console.
 
 Messages used by the developer to diagnose issues or messages that describe plugin processes (e.g. "Creating config file...", "Saving player data..." etc.) do not need to be localised. However, messages that describe user errors ("Invalid command syntax..." etc.) should still be localised.
 
 This guideline can passed if the plugin does not implement any player (or admin) facing chat messages.
 
 Some common methods used to send messages to players are:
+
 - `RustPlugin.PrintToChat()`
 - `BasePlayer.ChatMessage()`
 - `BasePlayer.ConsoleCommand("chat.add", ...)`

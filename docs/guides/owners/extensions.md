@@ -28,8 +28,9 @@ Modern Oxide extensions include several advanced features:
 - **Branch Information**: Extensions include metadata about which branch they belong to (e.g., "master", "develop"), helping to identify their development stage.
 
 - **Plugin Support**: Extensions often provide libraries, references, and APIs that plugins can use. They can define:
+
   - Default references for plugins
-  - Whitelisted assemblies (allowed .NET libraries) 
+  - Whitelisted assemblies (allowed .NET libraries)
   - Whitelisted namespaces (allowed code namespaces)
   - Preprocessor directives for conditional compilation
 

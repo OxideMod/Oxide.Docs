@@ -2,6 +2,7 @@
 title: Permission
 after: index
 ---
+
 # Permission Commands
 
 ## oxide.grant
@@ -15,7 +16,7 @@ Grants a user the specified permission.
 
 ```
 Player 'OxideMod (76561199558781314)' granted permission 'myawesomeplugin.use'
-``` 
+```
 
 ## oxide.group
 

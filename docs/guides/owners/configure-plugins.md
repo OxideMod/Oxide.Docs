@@ -24,6 +24,7 @@ Configuration files are saved as JSON (JavaScript Object Notation), a lightweigh
 ```
 
 Each setting is a key-value pair:
+
 - The key (like "EnableFeature") is the name of the setting
 - The value (like `true`) is the setting's value, which can be:
   - Boolean values (`true` or `false`)
@@ -35,9 +36,11 @@ Each setting is a key-value pair:
 ## 2. Locating Configuration Files
 
 ### Config Directory
+
 Configuration files are found in the `config` folder which is located by default in `oxide/config` (unless the server host has moved it).
 
 ### File Name
+
 A plugin configuration file will have the same name as the plugin itself. For example, a plugin that is installed as `MyPlugin.cs` (if it's configurable) will be accompanied by a JSON file named `MyPlugin.json`.
 
 :::tip
@@ -45,27 +48,33 @@ Do not rename the configuration file or change the file extension.
 :::
 
 If a plugin is installed but no configuration file appears, there are two possibilities:
+
 1. The plugin isn't configurable
 2. The plugin might be broken - check the log files under the `oxide/logs` directory for errors
 
 ## 3. Editing Configuration Files
 
 ### Accessing the Files
+
 Depending on your server setup, you can access these files through:
+
 - File explorer (for local servers)
 - Web-based file manager (provided by hosting services)
 - FTP client or SSH (for remote servers)
 
 ### Editing Process
+
 1. Open the configuration file with any text editor (Notepad, Visual Studio Code, etc.)
 2. Make your desired changes to the values
 3. Ensure the file remains valid JSON
 4. Save the file
 
 ### Validating JSON
+
 All plugin configuration files must be valid JSON. Use a validator such as [jsonlint.com](https://jsonlint.com) to ensure the configuration is valid JSON if you're unsure about your edits.
 
 Common JSON errors include:
+
 - Missing or extra commas
 - Unclosed quotes or brackets
 - Using single quotes instead of double quotes
@@ -86,9 +95,11 @@ Replace `MyPlugin` with the name of the plugin you modified. This command tells 
 Even when following proper procedures, you might encounter issues:
 
 ### Invalid JSON
+
 If your configuration file contains syntax errors, the plugin might fail to load or use default values. Always validate your JSON after making changes.
 
 ### Plugin Saves Configuration on Unload
+
 Some plugins save their current configuration to disk when they are unloaded. If you edit a configuration while the plugin is loaded and then use `oxide.reload`, the plugin might overwrite your changes. In such cases:
 
 1. Unload the plugin:
@@ -102,6 +113,7 @@ Some plugins save their current configuration to disk when they are unloaded. If
    ```
 
 ### Plugin Data Files
+
 In addition to configuration files, plugins may create data files in the `oxide/data` directory. These store information the plugin needs to persist across server restarts. Generally, you shouldn't modify these files unless you know exactly what you're doing.
 
 ## Conclusion
@@ -109,6 +121,7 @@ In addition to configuration files, plugins may create data files in the `oxide/
 Understanding how to properly configure plugins allows you to tailor your server to your exact specifications. With the knowledge from this guide, you should be able to effectively customize your plugins' behavior.
 
 Remember to always:
+
 1. Make backups before editing
 2. Ensure your JSON is valid
 3. Reload plugins after making changes

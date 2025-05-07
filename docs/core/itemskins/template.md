@@ -6,4 +6,3 @@
 
 **Image**
 {skinIcon}
-

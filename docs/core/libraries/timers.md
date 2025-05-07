@@ -19,7 +19,7 @@ after: permissions
 
 The `Once` method will run the `callback` once after the `interval` has passed in seconds.
 
-::: details Github Location 
+::: details Github Location
 [`Once`](https://github.com/OxideMod/Oxide.CSharp/blob/develop/src/PluginTimers.cs#L74)
 :::
 
@@ -27,7 +27,7 @@ The `Once` method will run the `callback` once after the `interval` has passed i
 
 The `In` method will run the `callback` once after the `interval` has passed in seconds.
 
-::: details Github Location 
+::: details Github Location
 [`In`](https://github.com/OxideMod/Oxide.CSharp/blob/develop/src/PluginTimers.cs#L84)
 :::
 
@@ -35,7 +35,7 @@ The `In` method will run the `callback` once after the `interval` has passed in 
 
 The `Every` method will continuously run the `callback` every `interval` milliseconds
 
-::: details Github Location 
+::: details Github Location
 [`Every`](https://github.com/OxideMod/Oxide.CSharp/blob/develop/src/PluginTimers.cs#L94)
 :::
 
@@ -43,6 +43,6 @@ The `Every` method will continuously run the `callback` every `interval` millise
 
 The `Repeat` method will run the `callback` every `interval` milliseconds for a set number of `repeats`
 
-::: details Github Location 
+::: details Github Location
 [`Repeat`](https://github.com/OxideMod/Oxide.CSharp/blob/develop/src/PluginTimers.cs#L105)
 :::

@@ -1,7 +1,7 @@
-import { getSidebarByPath } from "../../../../util/nav";
+import { getSidebarByPath } from '../../../../util/nav';
 
 export default {
   load() {
-    return getSidebarByPath("docs/guides/reviewers/guidelines/");
+    return getSidebarByPath('docs/guides/reviewers/guidelines/');
   },
 };

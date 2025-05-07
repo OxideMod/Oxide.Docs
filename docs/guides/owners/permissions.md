@@ -4,6 +4,7 @@ after: commands
 ---
 
 # Introduction to Permissions
+
 In Oxide, permissions play a crucial role in server management, allowing server administrators to fine-tune who can do what on their server. Permissions allows server owners to give players unique abilities and benefits on their servers.
 
 Administering permissions is easy; simply enter the desired command and you're done! If your server does not have a console, you can use any compatible RCON tool or remote console to send the commands to the server. Most Oxide-supported games also support the permission commands in the chat.
@@ -11,6 +12,7 @@ Administering permissions is easy; simply enter the desired command and you're d
 Permissions in Oxide are managed on a per-user and per-group basis. This means you can assign permissions to a specific user or a group of users. Groups are beneficial when you want to assign the same set of permissions to many users, such as admins, mods, or VIPs.
 
 ## Understanding Permissions
+
 Each permission in Oxide is represented by a string, often in a format like "pluginname.permission". For instance, a permission like "epicstuff.use" would be associated with the "epicstuff" plugin.
 
 When a command is executed, Oxide checks if the user has the corresponding permission. If they do, the command is executed; if they don't, the command is rejected, and usually, a message like "You don't have permission to use this command" is shown.
@@ -28,27 +30,28 @@ There are three ways to assign permissions in Oxide:
 Understanding how these permission types interact is key to effectively managing your server's permissions.
 
 ## Creating and Managing Groups
+
 Groups in Oxide are sets of users that share the same permissions. This makes managing permissions for multiple users more manageable. Here's how you can create and manage groups in Oxide:
 
 - To list all groups: `oxide.show groups`
 - To see the members and permissions of a specific group: `oxide.show group [groupname]`
-    - Example: `oxide.show group admin`
+  - Example: `oxide.show group admin`
 - To create a group: `oxide.group add [groupname]`
-    - Example: `oxide.group add vip`
+  - Example: `oxide.group add vip`
 - To create a group with title and rank: `oxide.group add [groupname] [title] [rank]`
-    - Example: `oxide.group add vip "VIP" 0`
+  - Example: `oxide.group add vip "VIP" 0`
 - To remove an existing group: `oxide.group remove [groupname]`
-    - Example: `oxide.group remove vip`
+  - Example: `oxide.group remove vip`
 - To add a user to a group: `oxide.usergroup add [username] [groupname]`
-    - Example: `oxide.usergroup add Wulf admin`
+  - Example: `oxide.usergroup add Wulf admin`
 - To remove a user from a group: `oxide.usergroup remove [username] [groupname]`
-    - Example: `oxide.usergroup remove Wulf admin`
+  - Example: `oxide.usergroup remove Wulf admin`
 - To set the title of a group: `oxide.group set [groupname] [title]`
-    - Example: `oxide.group set vip "[VIP Member]"`
+  - Example: `oxide.group set vip "[VIP Member]"`
 - To set the title and rank of a group: `oxide.group set [groupname] [title] [rank]`
-    - Example: `oxide.group set vip "[VIP Member]" 1`
+  - Example: `oxide.group set vip "[VIP Member]" 1`
 - To set the parent group of another group: `oxide.group parent [groupname] [parentgroupname]`
-    - Example: `oxide.group parent admin default`
+  - Example: `oxide.group parent admin default`
 
 :::info
 **Note on Group Inheritance:** Oxide supports parent-child relationships between groups. When you set a parent group, the child group inherits all permissions from the parent group. This is a powerful way to create hierarchical permission structures without duplicating permissions.
@@ -59,33 +62,35 @@ All group and permission names are handled case-insensitively, so "Admin" and "a
 :::
 
 ## Assigning Permissions to Users and Groups
+
 In Oxide, permissions allow you to control which commands and functions a user or group can use. This includes Oxide commands, game server commands, and commands provided by installed plugins.
 
 - To check a user's permissions: `oxide.show user [username]`
-    - Example: `oxide.show user Wulf`
+  - Example: `oxide.show user Wulf`
 - To check a group's permissions: `oxide.show group [groupname]`
-    - Example: `oxide.show group admin`
+  - Example: `oxide.show group admin`
 - To show which user or group has a specific permission: `oxide.show perm [permission]`
-    - Example: `oxide.show perm epicstuff.use`
+  - Example: `oxide.show perm epicstuff.use`
 - To show all registered permissions: `oxide.show perms`
 - To assign a permission:
-    - To a user: `oxide.grant user [username] [permission]`
-      - Example: `oxide.grant user Wulf epicstuff.use`
-    - To a group: `oxide.grant group [groupname] [permission]`
-      - Example: `oxide.grant group admin epicstuff.use`
+  - To a user: `oxide.grant user [username] [permission]`
+    - Example: `oxide.grant user Wulf epicstuff.use`
+  - To a group: `oxide.grant group [groupname] [permission]`
+    - Example: `oxide.grant group admin epicstuff.use`
 - To revoke a permission:
-    - From a user: `oxide.revoke user [username] [permission]`
-      - Example: `oxide.revoke user Wulf epicstuff.use`
-    - From a group: `oxide.revoke group [groupname] [permission]`
-      - Example: `oxide.revoke group admin epicstuff.use`
+  - From a user: `oxide.revoke user [username] [permission]`
+    - Example: `oxide.revoke user Wulf epicstuff.use`
+  - From a group: `oxide.revoke group [groupname] [permission]`
+    - Example: `oxide.revoke group admin epicstuff.use`
 
 ### Using Wildcards
-You can use the wildcard (*) to grant multiple permissions at one time:
+
+You can use the wildcard (\*) to grant multiple permissions at one time:
 
 - To give a group all permissions: `oxide.grant group [groupname] *`
-    - Example: `oxide.grant group admin *`
+  - Example: `oxide.grant group admin *`
 - To give a user all permissions for a specific plugin or system: `oxide.grant user [username] [prefix].*`
-    - Example: `oxide.grant user Wulf oxide.*`
+  - Example: `oxide.grant user Wulf oxide.*`
 
 ## Useful Permissions Plugins
 
@@ -107,12 +112,15 @@ If you encounter problems while managing permissions, here are some general step
 ## Advanced Features
 
 ### User Data Validation
+
 Oxide includes a validation system for user IDs to ensure that invalid or obsolete entries don't accumulate in the permissions database. Server administrators can customize validation rules through extensions, and the system will automatically clean up invalid entries.
 
 ### Export and Import
+
 You can export your permissions to JSON format using the `oxide.export` command, which creates separate files for groups and users. This is useful for backup purposes or transferring permission settings between servers.
 
 ### Command Shortcuts
+
 The same commands are also available with the "o." prefix (ex. "o.grant").
 
 ## Conclusion

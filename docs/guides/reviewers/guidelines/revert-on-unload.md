@@ -12,6 +12,7 @@ after: permission-system
 This guideline requires that if the plugin makes changes to the game world or anything within it, the plugin should aim to revert as many of those changes to how they were before the plugin was loaded.
 
 Some examples of these changes might be:
+
 - Changing the time of day, ocean height, weather etc.
 - Changing player health or metabolism values.
 - Spawning temporary entities.
