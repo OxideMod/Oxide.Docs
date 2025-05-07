@@ -9,7 +9,7 @@ after: setup-server
 
 Before you begin with the installation of the Oxide modding framework, ensure that you meet the following prerequisites:
 
-1. `Rust Server`: You need to have a fully set up Rust server. If you haven't set up one, refer to the previous section ["Setting up a Rust Server"](linky.todo).
+1. `Rust Server`: You need to have a fully set up Rust server. If you haven't set up one, refer to the previous section ["Setting up a Rust Server"](./setup-server).
 
 2. `Server Access`: You must have access to your server's file system. This is typically done through a FTP (File Transfer Protocol) client such as FileZilla or through a hosting provider's control panel.
 
