@@ -10,7 +10,7 @@ after: class-and-file-name
 
 ## Explanation
 
-This guideline requires that all plugins should have a unique name that does not too closely match to other names of existing plugins. This is to avoid confusion between different resources and misinterpretation of functionality and purpose.
+This guideline requires that all plugins<sup><a href="/glossary#plugins">[3]</a></sup> should have a unique name that does not too closely match to other names of existing plugins<sup><a href="/glossary#plugins">[3]</a></sup>. This is to avoid confusion between different resources and misinterpretation of functionality and purpose.
 
 ### Condition 1
 
@@ -18,6 +18,6 @@ Plugin names should be easily discernable from other resources on the website. F
 
 ### Condition 2
 
-Names should also be relevant to the plugin's functionality to avoid becoming too generic. For example, `Ban System` and `Server Vote` are not good names. They are bad because vague names leave room for misinterpretation about the plugin's purpose and functionality. The other problem with generic names is that because the name is so general, it restricts what plugins with similar functionality can be called.
+Names should also be relevant to the plugin's functionality to avoid becoming too generic. For example, `Ban System` and `Server Vote` are not good names. They are bad because vague names leave room for misinterpretation about the plugin's purpose and functionality. The other problem with generic names is that because the name is so general, it restricts what plugins<sup><a href="/glossary#plugins">[3]</a></sup> with similar functionality can be called.
 
 A simple way to check for uniqueness is to search the plugin name on the website and check that nothing too similar pops up in the search results.

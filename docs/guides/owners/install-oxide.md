@@ -66,4 +66,4 @@ After you have uploaded the Oxide files to your Rust server and restarted it, yo
 
 If you see Oxide messages in your server console and the `oxide.version` command returns a version number, then Oxide is installed correctly! If you don't see these indications, you may need to troubleshoot the installation.
 
-Continue to the next page for information on installing plugins!
+Continue to the next page for information on installing plugins<sup><a href="/glossary#plugins">[3]</a></sup>!

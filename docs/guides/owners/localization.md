@@ -5,11 +5,11 @@ after: permissions
 
 # Localization
 
-Localization in the context of a Rust server powered by the Oxide plugin<sup><a href="/glossary#plugins">[1]</a></sup> system refers to the process of customizing and translating various aspects of the server's interface and user interactions to match the languages and cultural preferences of your server's players.
+Localization in the context of a Rust server powered by the Oxide plugin system refers to the process of customizing and translating various aspects of the server's interface and user interactions to match the languages and cultural preferences of your server's players.
 
 ## What is Localization?
 
-Localization is the process of adapting a product, in this case, your Rust server, to a specific locale or market. It involves translating text and adjusting other elements to accommodate different languages, units of measure, date formats, and more. In the context of Oxide, localization mainly involves translating plugin<sup><a href="/glossary#plugins">[1]</a></sup> messages and interfaces to better accommodate players from various geographical regions.
+Localization is the process of adapting a product, in this case, your Rust server, to a specific locale or market. It involves translating text and adjusting other elements to accommodate different languages, units of measure, date formats, and more. In the context of Oxide, localization mainly involves translating plugin messages and interfaces to better accommodate players from various geographical regions.
 
 ## Why is Localization Important for My Rust Server?
 
@@ -19,13 +19,13 @@ Moreover, localization can increase the engagement level of your players. Player
 
 ## What are Language Files?
 
-Language files are the backbone of the localization process in Oxide. They are text files that contain translations of various plugin<sup><a href="/glossary#plugins">[1]</a></sup> texts and messages into different languages. Each plugin<sup><a href="/glossary#plugins">[1]</a></sup> that supports localization will have its own set of language files, and each language supported by the plugin<sup><a href="/glossary#plugins">[1]</a></sup> will have its own file. These files are usually in JSON<sup><a href="/glossary#json">[3]</a></sup> format and can be easily edited to customize or add new translations.
+Language files are the backbone of the localization process in Oxide. They are text files that contain translations of various plugin texts and messages into different languages. Each plugin that supports localization will have its own set of language files, and each language supported by the plugin will have its own file. These files are usually in JSON<sup><a href="/glossary#json">[8]</a></sup> format and can be easily edited to customize or add new translations.
 
 ## Where are Language Files Located in the Oxide Plugin System?
 
-Language files for Oxide plugins<sup><a href="/glossary#plugins">[1]</a></sup> are typically located within your server's installation directory in the `oxide/lang` folder. Each language has its own subdirectory in the `lang` folder, which contains the language files for different plugins<sup><a href="/glossary#plugins">[1]</a></sup> supporting that language.
+Language files for Oxide plugins<sup><a href="/glossary#plugins">[3]</a></sup> are typically located within your server's installation directory in the `oxide/lang` folder. Each language has its own subdirectory in the `lang` folder, which contains the language files for different plugins<sup><a href="/glossary#plugins">[3]</a></sup> supporting that language.
 
-Here is a sample directory structure showing where you might find a language file for a plugin<sup><a href="/glossary#plugins">[1]</a></sup> called SamplePlugin:
+Here is a sample directory structure showing where you might find a language file for a plugin called SamplePlugin:
 
 ```txt
 └── server
@@ -44,9 +44,9 @@ In this example, the `en` folder (for English language) contains the language fi
 
 ## How Can I Modify a Language File?
 
-Modifying a language file is straightforward and involves editing the respective JSON<sup><a href="/glossary#json">[3]</a></sup> file using a text editor or an Integrated Development Environment (IDE) of your choice.
+Modifying a language file is straightforward and involves editing the respective JSON<sup><a href="/glossary#json">[8]</a></sup> file using a text editor or an Integrated Development Environment (IDE) of your choice.
 
-When you open the JSON<sup><a href="/glossary#json">[3]</a></sup> file, you'll see a structure similar to the following:
+When you open the JSON<sup><a href="/glossary#json">[8]</a></sup> file, you'll see a structure similar to the following:
 
 ```json
 {
@@ -66,7 +66,7 @@ In this case, if you wanted to change the welcome message, you could simply repl
 
 Remember to save your changes before closing the file. The modified text will now be displayed when the corresponding event occurs in the game.
 
-Different plugins<sup><a href="/glossary#plugins">[1]</a></sup> may use different keys for their messages. Some plugins<sup><a href="/glossary#plugins">[1]</a></sup> may also use placeholders (e.g., `{0}`, `{1}`, etc.) within their messages that are replaced with dynamic content when the message is displayed in the game. For instance, in a welcome message like below:
+Different plugins<sup><a href="/glossary#plugins">[3]</a></sup> may use different keys for their messages. Some plugins<sup><a href="/glossary#plugins">[3]</a></sup> may also use placeholders (e.g., `{0}`, `{1}`, etc.) within their messages that are replaced with dynamic content when the message is displayed in the game. For instance, in a welcome message like below:
 
 ```json
 {
@@ -74,9 +74,9 @@ Different plugins<sup><a href="/glossary#plugins">[1]</a></sup> may use differen
 }
 ```
 
-The `{0}` would be replaced with a parameter used in the plugin<sup><a href="/glossary#plugins">[1]</a></sup> such as the server's name.
+The `{0}` would be replaced with a parameter used in the plugin such as the server's name.
 
-In addition, some Oxide plugins<sup><a href="/glossary#plugins">[1]</a></sup> may allow for the use of Rust's text tags like `<color>` and `<size>` within the language files. These tags can be used to change the color and size of the text.
+In addition, some Oxide plugins<sup><a href="/glossary#plugins">[3]</a></sup> may allow for the use of Rust's text tags like `<color>` and `<size>` within the language files. These tags can be used to change the color and size of the text.
 
 Here's an example of using Rust's text tags:
 
@@ -100,19 +100,19 @@ If you need to support a new language that isn't already included in the default
 
 4. Open the copied language file in a text editor of your choice and begin translating the values in the file to the new language.
 
-5. Once completed, save your changes. The Oxide plugin<sup><a href="/glossary#plugins">[1]</a></sup> system will now be able to use the new language file.
+5. Once completed, save your changes. The Oxide plugin system will now be able to use the new language file.
 
 :::info NOTE
-Make sure you maintain the JSON<sup><a href="/glossary#json">[3]</a></sup> format in the file when you're editing it. Each entry should be surrounded by double quotes and separated by a comma.
+Make sure you maintain the JSON<sup><a href="/glossary#json">[8]</a></sup> format in the file when you're editing it. Each entry should be surrounded by double quotes and separated by a comma.
 :::
 
 ## Troubleshooting Localization Problems
 
 If you're having trouble with localization on your server, here are a few things to check:
 
-1. **Check the language file format**: Ensure the JSON<sup><a href="/glossary#json">[3]</a></sup> format is correct in your language files. Invalid format can cause issues with the plugin's<sup><a href="/glossary#plugins">[1]</a></sup> ability to read the file. Use a JSON<sup><a href="/glossary#json">[3]</a></sup> validator to confirm that the JSON<sup><a href="/glossary#json">[3]</a></sup> is properly structured.
+1. **Check the language file format**: Ensure the JSON<sup><a href="/glossary#json">[8]</a></sup> format is correct in your language files. Invalid format can cause issues with the plugin's ability to read the file. Use a JSON<sup><a href="/glossary#json">[8]</a></sup> validator to confirm that the JSON<sup><a href="/glossary#json">[8]</a></sup> is properly structured.
 
-2. **Check the language directory**: The language directory should match the standard language code for the language you're using (e.g., `en` for English, `de` for German). If the directory is incorrectly named, the plugin<sup><a href="/glossary#plugins">[1]</a></sup> may not be able to locate the language file.
+2. **Check the language directory**: The language directory should match the standard language code for the language you're using (e.g., `en` for English, `de` for German). If the directory is incorrectly named, the plugin may not be able to locate the language file.
 
 3. **Check the translations**: Ensure that all the keys in the language file have corresponding values and that those values are correctly translated. Missing or incorrect translations could result in unlocalized text appearing in the game.
 

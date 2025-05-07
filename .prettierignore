@@ -15,6 +15,3 @@ package-lock.json
 # Git files
 .git
 .husky 
-
-# Markdown files
-*.md 
