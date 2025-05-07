@@ -93,7 +93,7 @@ server.headerimage "http://example.com/myheaderimage.jpg"
 server.url "http://example.com"
 ```
 
-These are just a few of the many settings that can be customized in the `server.cfg` file. For a complete list of available server configurations, you can refer to the [official FacePunch documentation](https://wiki.facepunch.com/rust/Configuring-Rust).
+These are just a few of the many settings that can be customized in the `server.cfg` file. For a complete list of available server configurations, you can refer to the [official FacePunch documentation](https://wiki.facepunch.com/rust/Creating-a-server).
 
 ## 4. Starting the Server
 
