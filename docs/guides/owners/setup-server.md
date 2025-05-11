@@ -60,14 +60,18 @@ Here is an example of a batch script that automatically updates the Rust server:
 
 ```batch
 @echo off
-start "" steamcmd.exe +login anonymous +force_install_dir "C:\rust_server" +app_update 258550 validate +quit
+start "" steamcmd.exe +login anonymous +force_install_dir "C:\rust_server" +app_update 258550 -beta public validate +quit
 ```
 
 Replace `C:\rust_server` with the path to the directory where you want to install the Rust server.
 
-The `+app_update 258550 validate` command checks for any updates to the Rust server files and downloads them if necessary.
+The `+app_update 258550 -beta public validate` command checks for any updates to the Rust server files and downloads them if necessary.
 
 Running this script will keep your Rust server up to date. You might consider scheduling it to run automatically at regular intervals.
+
+::: info
+To install staging, replace `-beta public` with  `-beta staging` 
+:::
 
 ## 3. Configuring Your Server
 
@@ -75,7 +79,7 @@ Once you have Rust installed on your server, the next step is to configure the s
 
 ### Server.cfg
 
-Rust servers use a configuration file called `server.cfg` to manage server settings. This file is typically located in the server install directory under the `cfg` folder. If the file does not exist, you can create it.
+Rust servers use a configuration file called `server.cfg` to manage server settings. This file is typically located in the server install directory under the `YourServerName\cfg` folder. If the file does not exist, you can create it.
 
 Here are some common settings that you might want to configure:
 
