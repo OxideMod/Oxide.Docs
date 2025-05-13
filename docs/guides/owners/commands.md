@@ -119,7 +119,7 @@ This cross-game functionality is particularly useful for:
 
 If you're experiencing issues with commands:
 
-1. **Check permissions<sup><a href="/glossary#permissions">[11]</a></sup>**: Ensure the user has permission to use the command
+1. **Check permissions**: Ensure the user has permission to use the command
 2. **Try using the global prefix**: If a command isn't recognized, try prefixing it with `global.`
 3. **Verify syntax**: Check that you're using the correct syntax, especially for commands with multiple arguments
 4. **Check console output**: The server console may provide error messages explaining why a command failed

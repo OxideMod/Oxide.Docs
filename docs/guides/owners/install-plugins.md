@@ -52,7 +52,7 @@ To install plugins<sup><a href="/glossary#plugins">[3]</a></sup> on your server,
    - For a local server, navigate to your server directory.
    - For a remote server, connect via FTP client. If unsure of the FTP details, contact your server host.
 
-3. **Locate the plugins<sup><a href="/glossary#plugins">[3]</a></sup> directory**:
+3. **Locate the plugins directory**:
 
    - Find the plugins<sup><a href="/glossary#plugins">[3]</a></sup> folder which is located by default at `oxide/plugins` (or `umod/plugins` for some installations).
 

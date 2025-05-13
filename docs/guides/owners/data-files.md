@@ -37,7 +37,7 @@ It's important to understand the difference between data files<sup><a href="/glo
 
 - **Configuration files** (`oxide/config/`): Intended to be edited by server administrators to change plugin behavior. These usually contain settings that affect how the plugin functions.
 
-- **Data files<sup><a href="/glossary#data-files">[10]</a></sup>** (`oxide/data/`): Generated and managed by plugins<sup><a href="/glossary#plugins">[3]</a></sup> to store information. These should generally not be manually edited as they contain data that the plugin relies on for proper operation.
+- **Data files** (`oxide/data/`): Generated and managed by plugins<sup><a href="/glossary#plugins">[3]</a></sup> to store information. These should generally not be manually edited as they contain data that the plugin relies on for proper operation.
 
 ## Backing Up Data Files
 
@@ -54,11 +54,11 @@ Some important data files<sup><a href="/glossary#data-files">[10]</a></sup> to b
 
 If a plugin is experiencing issues related to its data files<sup><a href="/glossary#data-files">[10]</a></sup>, here are some common troubleshooting steps:
 
-1. **Check file permissions<sup><a href="/glossary#permissions">[11]</a></sup>**: Ensure the data directory and files are writable by the server process.
+1. **Check file permissions**: Ensure the data directory and files are writable by the server process.
 
 2. **Verify file integrity**: If a data file has become corrupted, the plugin may fail to load it properly. In such cases, you might need to restore from a backup or, as a last resort, delete the file to let the plugin regenerate it (note that this will result in data loss).
 
-3. **Check for JSON<sup><a href="/glossary#json">[8]</a></sup> errors**: If a data file has been manually edited and contains syntax errors, the plugin may not be able to parse it correctly.
+3. **Check for JSON errors**: If a data file has been manually edited and contains syntax errors, the plugin may not be able to parse it correctly.
 
 4. **Plugin update issues**: Sometimes when a plugin updates, its data file format may change. In rare cases, this might require converting or resetting the data file.
 

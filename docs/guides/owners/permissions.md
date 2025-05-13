@@ -21,9 +21,9 @@ By default, the groups<sup><a href="/glossary#groups">[12]</a></sup> that are cr
 
 There are three ways to assign permissions<sup><a href="/glossary#permissions">[11]</a></sup> in Oxide:
 
-1. **User Permissions<sup><a href="/glossary#permissions">[11]</a></sup>**: These are permissions<sup><a href="/glossary#permissions">[11]</a></sup> given to a specific user. For instance, you might give a particular user the ability to kick other players, even if they're not part of any special group.
+1. **User Permissions**: These are permissions<sup><a href="/glossary#permissions">[11]</a></sup> given to a specific user. For instance, you might give a particular user the ability to kick other players, even if they're not part of any special group.
 
-2. **Group Permissions<sup><a href="/glossary#permissions">[11]</a></sup>**: These are permissions<sup><a href="/glossary#permissions">[11]</a></sup> given to a group of users. Any user who is part of this group inherits all the group's permissions<sup><a href="/glossary#permissions">[11]</a></sup>. For example, you might create an "admin" group and give it permissions<sup><a href="/glossary#permissions">[11]</a></sup> to kick and ban players.
+2. **Group Permissions**: These are permissions<sup><a href="/glossary#permissions">[11]</a></sup> given to a group of users. Any user who is part of this group inherits all the group's permissions<sup><a href="/glossary#permissions">[11]</a></sup>. For example, you might create an "admin" group and give it permissions<sup><a href="/glossary#permissions">[11]</a></sup> to kick and ban players.
 
 3. **Permission Inheritance**: Groups<sup><a href="/glossary#groups">[12]</a></sup> can inherit permissions<sup><a href="/glossary#permissions">[11]</a></sup> from other groups<sup><a href="/glossary#groups">[12]</a></sup> through parent relationships. This is useful when you have a hierarchical structure. A group will inherit all permissions<sup><a href="/glossary#permissions">[11]</a></sup> from its parent group.
 
@@ -97,7 +97,7 @@ You can use the wildcard (\*) to grant multiple permissions<sup><a href="/glossa
 While the base Oxide permissions<sup><a href="/glossary#permissions">[11]</a></sup> system is comprehensive, managing permissions<sup><a href="/glossary#permissions">[11]</a></sup> through commands may not always be the most convenient way, especially for larger servers. A plugin that can provide a graphical interface for managing permissions<sup><a href="/glossary#permissions">[11]</a></sup> could prove helpful in this regard:
 
 :::tip
-**Permissions<sup><a href="/glossary#permissions">[11]</a></sup> Manager**: This plugin provides a graphical interface for managing Oxide permissions<sup><a href="/glossary#permissions">[11]</a></sup>. It makes it easier to add, remove, and view permissions<sup><a href="/glossary#permissions">[11]</a></sup>. This can greatly simplify permissions<sup><a href="/glossary#permissions">[11]</a></sup> management, especially on servers with many players and groups<sup><a href="/glossary#groups">[12]</a></sup>.
+**Permissions Manager**: This plugin provides a graphical interface for managing Oxide permissions<sup><a href="/glossary#permissions">[11]</a></sup>. It makes it easier to add, remove, and view permissions<sup><a href="/glossary#permissions">[11]</a></sup>. This can greatly simplify permissions<sup><a href="/glossary#permissions">[11]</a></sup> management, especially on servers with many players and groups<sup><a href="/glossary#groups">[12]</a></sup>.
 :::
 
 ## Troubleshooting Permissions
@@ -105,7 +105,7 @@ While the base Oxide permissions<sup><a href="/glossary#permissions">[11]</a></s
 If you encounter problems while managing permissions<sup><a href="/glossary#permissions">[11]</a></sup>, here are some general steps you can follow:
 
 - **Check console output**: Oxide will often output useful information to the server console. This can include errors with permissions<sup><a href="/glossary#permissions">[11]</a></sup> and groups<sup><a href="/glossary#groups">[12]</a></sup>.
-- **Check the user's permissions<sup><a href="/glossary#permissions">[11]</a></sup>**: Use the command `oxide.show user [username]` to view all the permissions<sup><a href="/glossary#permissions">[11]</a></sup> that a user has. This can help identify if they are missing a necessary permission or have one that they should not.
+- **Check the user's permissions**: Use the command `oxide.show user [username]` to view all the permissions<sup><a href="/glossary#permissions">[11]</a></sup> that a user has. This can help identify if they are missing a necessary permission or have one that they should not.
 - **Verify parent group relationships**: If you're using group inheritance, make sure that the parent-child relationships are set up correctly and don't contain any circular references.
 - **Review data storage**: Oxide stores permissions<sup><a href="/glossary#permissions">[11]</a></sup> data using ProtoBuf serialization in the `oxide.users` and `oxide.groups` files. If you suspect data corruption, you might need to manually edit or delete these files (after making backups).
 

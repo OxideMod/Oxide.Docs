@@ -91,8 +91,28 @@ function isInExcludedZone(content, position) {
     return true;
   }
 
+  // Check if we're inside bold text using both ** and __ markers
+  for (const boldMarker of ['**', '__']) {
+    let boldCount = 0;
+    let boldPos = 0;
+
+    while (boldPos < position) {
+      const nextBold = content.indexOf(boldMarker, boldPos);
+      if (nextBold === -1 || nextBold >= position) {
+        break;
+      }
+      boldCount++;
+      boldPos = nextBold + boldMarker.length;
+    }
+
+    // If we have an odd number of bold markers before our position, we're inside bold text
+    if (boldCount % 2 === 1) {
+      return true;
+    }
+  }
+
   // Check if inside any HTML tag
-  // This is a simple heuristic that might not work for all cases, but should catch most
+
   const beforePosition = content.substring(0, position);
   const lastOpenBracket = beforePosition.lastIndexOf('<');
   const lastCloseBracket = beforePosition.lastIndexOf('>');

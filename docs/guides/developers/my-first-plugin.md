@@ -18,9 +18,9 @@ Before you start, ensure you have the following:
 
 In the Oxide modding framework, plugins<sup><a href="/glossary#plugins">[3]</a></sup> and extensions<sup><a href="/glossary#extensions">[2]</a></sup> serve different roles:
 
-- **Plugins<sup><a href="/glossary#plugins">[3]</a></sup>** are .cs files that are compiled at runtime by the Oxide framework. These are typically game-specific and provide unique gameplay features or modifications.
+- **Plugins** are .cs files that are compiled at runtime by the Oxide framework. These are typically game-specific and provide unique gameplay features or modifications.
 
-- **Extensions<sup><a href="/glossary#extensions">[2]</a></sup>** are .dll files that provide additional functionalities to the Oxide framework. They're built using class libraries and can be utilized by plugins<sup><a href="/glossary#plugins">[3]</a></sup>.
+- **Extensions** are .dll files that provide additional functionalities to the Oxide framework. They're built using class libraries and can be utilized by plugins<sup><a href="/glossary#plugins">[3]</a></sup>.
 
 In this guide, we will be focusing on creating a Plugin.
 

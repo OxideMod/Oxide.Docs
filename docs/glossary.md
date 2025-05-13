@@ -31,11 +31,11 @@ A base class for plugins that are designed to work across multiple games. Covale
 
 ### RustPlugin
 
-A base class for plugins specific to the Rust game. RustPlugin provides access to Rust-specific hooks<sup><a href="/glossary#hooks">[7]</a></sup> and functionality that may not be available through the Covalence layer.
+A base class for plugins<sup><a href="/glossary#plugins">[3]</a></sup> specific to the Rust game. RustPlugin provides access to Rust-specific hooks<sup><a href="/glossary#hooks">[7]</a></sup> and functionality that may not be available through the Covalence layer.
 
 ### Internal Hooks
 
-Internal hooks<sup><a href="/glossary#internal-hooks">[6]</a></sup> are hooks<sup><a href="/glossary#hooks">[7]</a></sup> that are used by Oxide itself, internal hooks<sup><a href="/glossary#internal-hooks">[6]</a></sup> are **not** called in plugins<sup><a href="/glossary#plugins">[3]</a></sup>.
+Internal hooks<sup><a href="/glossary#internal-hooks">[6]</a></sup> are hooks that are used by Oxide itself, internal hooks<sup><a href="/glossary#internal-hooks">[6]</a></sup> are **not** called in plugins<sup><a href="/glossary#plugins">[3]</a></sup>.
 Most internal hooks<sup><a href="/glossary#internal-hooks">[6]</a></sup> will have a public counterpart that is called in plugins<sup><a href="/glossary#plugins">[3]</a></sup>.
 All internal hooks<sup><a href="/glossary#internal-hooks">[6]</a></sup> call to the RustHooks file which can be found [here](https://github.com/OxideMod/Oxide.Rust/blob/develop/src/RustHooks.cs).
 Internal hooks<sup><a href="/glossary#internal-hooks">[6]</a></sup> always start with the `I` prefix eg. `IOnServerShutdown`.
