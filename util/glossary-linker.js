@@ -51,6 +51,15 @@ function isInExcludedZone(content, position) {
     return true;
   }
 
+  // Check if in an import statement or JavaScript/TypeScript code
+  if (
+    /^import\s+|^export\s+|^from\s+|^const\s+|^let\s+|^var\s+|^function\s+|^class\s+/.test(
+      currentLine.trim()
+    )
+  ) {
+    return true;
+  }
+
   // Check for fenced code blocks
   for (const marker of ['```', '~~~']) {
     const occurrences = [];
@@ -112,7 +121,7 @@ function isInExcludedZone(content, position) {
   }
 
   // Check if inside any HTML tag
-
+  // This is a simple heuristic that might not work for all cases, but should catch most
   const beforePosition = content.substring(0, position);
   const lastOpenBracket = beforePosition.lastIndexOf('<');
   const lastCloseBracket = beforePosition.lastIndexOf('>');
