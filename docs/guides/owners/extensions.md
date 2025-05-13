@@ -13,11 +13,11 @@ Extensions<sup><a href="/glossary#extensions">[2]</a></sup> are class libraries 
 
 Oxide extensions<sup><a href="/glossary#extensions">[2]</a></sup> fall into several categories:
 
-1. **Core Extensions<sup><a href="/glossary#extensions">[2]</a></sup>**: These are fundamental extensions<sup><a href="/glossary#extensions">[2]</a></sup> built into Oxide that provide essential functionality. Core extensions<sup><a href="/glossary#extensions">[2]</a></sup> can't be unloaded and are maintained by the Oxide team.
+1. **Core Extensions**: These are fundamental extensions<sup><a href="/glossary#extensions">[2]</a></sup> built into Oxide that provide essential functionality. Core extensions<sup><a href="/glossary#extensions">[2]</a></sup> can't be unloaded and are maintained by the Oxide team.
 
-2. **Game Extensions<sup><a href="/glossary#extensions">[2]</a></sup>**: These are extensions<sup><a href="/glossary#extensions">[2]</a></sup> specific to a particular game (like Rust, Hurtworld, etc.). They provide game-specific APIs that plugins<sup><a href="/glossary#plugins">[3]</a></sup> can use.
+2. **Game Extensions**: These are extensions<sup><a href="/glossary#extensions">[2]</a></sup> specific to a particular game (like Rust, Hurtworld, etc.). They provide game-specific APIs that plugins<sup><a href="/glossary#plugins">[3]</a></sup> can use.
 
-3. **Third-Party Extensions<sup><a href="/glossary#extensions">[2]</a></sup>**: These are created by the community to add specific functionality like Discord integration or analytics.
+3. **Third-Party Extensions**: These are created by the community to add specific functionality like Discord integration or analytics.
 
 ## Extension Features
 
@@ -77,7 +77,7 @@ If you encounter issues with an extension:
 1. **Check server logs**: Extension loading errors will be logged in the server console.
 2. **Version compatibility**: Ensure the extension is compatible with your version of Oxide and the game.
 3. **Dependencies**: Some extensions<sup><a href="/glossary#extensions">[2]</a></sup> depend on other extensions<sup><a href="/glossary#extensions">[2]</a></sup> or libraries, make sure all required components are installed.
-4. **Permissions<sup><a href="/glossary#permissions">[11]</a></sup>**: Verify the extension file has appropriate read/execute permissions<sup><a href="/glossary#permissions">[11]</a></sup>.
+4. **Permissions**: Verify the extension file has appropriate read/execute permissions<sup><a href="/glossary#permissions">[11]</a></sup>.
 5. **Conflicts**: Extensions<sup><a href="/glossary#extensions">[2]</a></sup> may conflict with each other. Try disabling other extensions<sup><a href="/glossary#extensions">[2]</a></sup> to isolate the issue.
 
 ## Common Extension Commands

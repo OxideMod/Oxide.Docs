@@ -19,15 +19,15 @@ In the following guides, you'll learn about the various aspects of using Oxide t
 
 - **[Commands](commands)**: This guide covers the various Oxide and server commands you'll be using to manage your server and plugins<sup><a href="/glossary#plugins">[3]</a></sup>.
 
-- **[Permissions<sup><a href="/glossary#permissions">[11]</a></sup>](permissions<sup><a href="/glossary#permissions">[11]</a></sup>)**: Here, we dive into Oxide's permissions<sup><a href="/glossary#permissions">[11]</a></sup> system, allowing for granular control over who can do what on your server.
+- **[Permissions](permissions)**: Here, we dive into Oxide's permissions<sup><a href="/glossary#permissions">[11]</a></sup> system, allowing for granular control over who can do what on your server.
 
 - **[Localization](localization)**: Understand how to customize your server's language to best suit your player base.
 
-- **[Installing Plugins<sup><a href="/glossary#plugins">[3]</a></sup>](install-plugins<sup><a href="/glossary#plugins">[3]</a></sup>)**: Learn how to add new features and capabilities to your server by installing plugins<sup><a href="/glossary#plugins">[3]</a></sup>.
+- **[Installing Plugins](install-plugins)**: Learn how to add new features and capabilities to your server by installing plugins<sup><a href="/glossary#plugins">[3]</a></sup>.
 
-- **[Configuring Plugins<sup><a href="/glossary#plugins">[3]</a></sup>](configure-plugins<sup><a href="/glossary#plugins">[3]</a></sup>)**: Each plugin comes with its own set of configurations. This guide will walk you through how to customize your plugins<sup><a href="/glossary#plugins">[3]</a></sup> to your liking.
+- **[Configuring Plugins](configure-plugins)**: Each plugin comes with its own set of configurations. This guide will walk you through how to customize your plugins<sup><a href="/glossary#plugins">[3]</a></sup> to your liking.
 
-- **[Extensions<sup><a href="/glossary#extensions">[2]</a></sup>](extensions<sup><a href="/glossary#extensions">[2]</a></sup>)**: Extensions<sup><a href="/glossary#extensions">[2]</a></sup> add additional functionality to Oxide. Learn how to install and manage these extensions<sup><a href="/glossary#extensions">[2]</a></sup> to get even more out of Oxide.
+- **[Extensions](extensions)**: Extensions<sup><a href="/glossary#extensions">[2]</a></sup> add additional functionality to Oxide. Learn how to install and manage these extensions<sup><a href="/glossary#extensions">[2]</a></sup> to get even more out of Oxide.
 
 ## Getting Help
 

@@ -15,15 +15,15 @@ Oxide is a powerful modding framework that allows developers to create plugins<s
 
 Before you dive in, there are a few key concepts to understand:
 
-- **Plugins<sup><a href="/glossary#plugins">[3]</a></sup>**: These are self-contained bits of code which modify game server behavior. Plugins<sup><a href="/glossary#plugins">[3]</a></sup> are distributed as CSharp (C#) files with a `.cs` file extension.
+- **Plugins**: These are self-contained bits of code which modify game server behavior. Plugins<sup><a href="/glossary#plugins">[3]</a></sup> are distributed as CSharp (C#) files with a `.cs` file extension.
 
-- **Hooks<sup><a href="/glossary#hooks">[7]</a></sup>**: These are functions that get called by the game or by Oxide. By using hooks<sup><a href="/glossary#hooks">[7]</a></sup> in your plugins<sup><a href="/glossary#plugins">[3]</a></sup>, you can define what happens when certain game events occur.
+- **Hooks**: These are functions that get called by the game or by Oxide. By using hooks<sup><a href="/glossary#hooks">[7]</a></sup> in your plugins<sup><a href="/glossary#plugins">[3]</a></sup>, you can define what happens when certain game events occur.
 
 - **Configuration**: Most plugins<sup><a href="/glossary#plugins">[3]</a></sup> generate a JSON<sup><a href="/glossary#json">[8]</a></sup> configuration file that server administrators can use to change how the plugin works. Understanding how to create and manage config files<sup><a href="/glossary#config-files">[9]</a></sup> is essential.
 
-- **Data Files<sup><a href="/glossary#data-files">[10]</a></sup>**: Plugins<sup><a href="/glossary#plugins">[3]</a></sup> can create data files<sup><a href="/glossary#data-files">[10]</a></sup> in JSON<sup><a href="/glossary#json">[8]</a></sup> format to store persistent information. These files are saved in the `oxide/data` directory.
+- **Data Files**: Plugins<sup><a href="/glossary#plugins">[3]</a></sup> can create data files<sup><a href="/glossary#data-files">[10]</a></sup> in JSON<sup><a href="/glossary#json">[8]</a></sup> format to store persistent information. These files are saved in the `oxide/data` directory.
 
-- **Permissions<sup><a href="/glossary#permissions">[11]</a></sup>**: Many plugins<sup><a href="/glossary#plugins">[3]</a></sup> have permissions<sup><a href="/glossary#permissions">[11]</a></sup> which must be assigned to users or groups<sup><a href="/glossary#groups">[12]</a></sup> in order to use certain plugin features. Implementing a proper permission system is crucial for server administration.
+- **Permissions**: Many plugins<sup><a href="/glossary#plugins">[3]</a></sup> have permissions<sup><a href="/glossary#permissions">[11]</a></sup> which must be assigned to users or groups<sup><a href="/glossary#groups">[12]</a></sup> in order to use certain plugin features. Implementing a proper permission system is crucial for server administration.
 
 - **Commands**: Plugins<sup><a href="/glossary#plugins">[3]</a></sup> can add new commands that may be used by players or server administrators. This can include both console commands and chat commands.
 
