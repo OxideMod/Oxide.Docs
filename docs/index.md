@@ -18,7 +18,7 @@ hero:
       link: /guides/developers/getting-started
     - theme: alt
       text: Hook Documentation
-      link: /hooks/index
+      link: /hooks/
 features:
   - icon:
       src: /stack-of-books-and-magnifier.svg

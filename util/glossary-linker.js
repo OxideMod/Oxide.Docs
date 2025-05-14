@@ -166,10 +166,12 @@ function addGlossaryReferences(filePath, terms) {
         const matchedTerm = match[0];
         const position = match.index;
 
-        // Skip if we've already processed this position or nearby
+        // Skip if we've already processed this exact position (but not nearby positions)
         let shouldSkip = false;
         for (const pos of processedPositions) {
-          if (Math.abs(pos - position) < matchedTerm.length * 2) {
+          // Only skip if we're referring to exactly the same position
+          // This is more lenient than the previous version which would skip nearby positions
+          if (pos === position) {
             shouldSkip = true;
             break;
           }
@@ -240,6 +242,9 @@ async function main() {
     console.log(`Processing only specific files/patterns: ${filePatterns.join(', ')}`);
   }
 
+  // Create an explicit list of excluded files with absolute paths for more reliable checking
+  const absoluteExcludePaths = EXCLUDE_FILES.map(file => path.join(DOCS_DIR, file));
+
   const files = globSync(filePatterns, {
     cwd: args.length > 0 ? process.cwd() : DOCS_DIR,
     ignore: EXCLUDE_FILES,
@@ -253,6 +258,12 @@ async function main() {
 
   for (const file of files) {
     try {
+      // Skip the glossary file and other excluded files - use absolute path comparison
+      if (absoluteExcludePaths.includes(path.resolve(file))) {
+        console.log(`Skipping excluded file: ${path.relative(process.cwd(), file)}`);
+        continue;
+      }
+
       console.log(`Processing: ${path.relative(process.cwd(), file)}`);
       const success = addGlossaryReferences(file, terms);
       if (success) successCount++;
