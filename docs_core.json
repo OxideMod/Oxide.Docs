@@ -491,7 +491,7 @@
 		},
 		{
 			"Type": 0,
-			"Name": "OnNpcTarget",
+			"Name": "OnNpcTarget [AI]",
 			"HookName": "OnNpcTarget",
 			"HookParameters": {
 				"npc": "BaseNpc",
@@ -500,8 +500,8 @@
 			"ReturnType": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
-			"Category": "Entity",
-			"HookDescription": "",
+			"Category": "NPC",
+			"HookDescription": "AI targetting other BaseEntity.",
 			"MethodData": {
 				"MethodName": "IOnNpcTarget",
 				"ReturnType": "object",
@@ -512,6 +512,29 @@
 			},
 			"CodeAfterInjection": "private object IOnNpcTarget(BaseNpc npc, BaseEntity target)\r\n{\r\n\tif (Interface.CallHook(\"OnNpcTarget\", npc, target) != null)\r\n\t{\r\n\t\tnpc.SetFact(BaseNpc.Facts.HasEnemy, 0);\r\n\t\tnpc.SetFact(BaseNpc.Facts.EnemyRange, 3);\r\n\t\tnpc.SetFact(BaseNpc.Facts.AfraidRange, 1);\r\n\r\n\t\t//TODO: Find replacements of those:\r\n\t\t// npc.AiContext.EnemyPlayer = null;\r\n\t\t// npc.AiContext.LastEnemyPlayerScore = 0f;\r\n\r\n\t\tnpc.playerTargetDecisionStartTime = 0f;\r\n\t\treturn 0f;\r\n\t}\r\n\r\n\treturn null;\r\n}"
 		},
+		{
+			"Type": 0,
+			"Name": "OnNpcTarget [AI.Gen2]",
+			"HookName": "OnNpcTarget",
+			"HookParameters": {
+				"npc": "BaseEntity",
+				"target": "BaseEntity"
+			},
+			"ReturnType": "object",
+			"ReturnBehavior": 1,
+			"TargetType": "RustCore",
+			"Category": "NPC",
+			"HookDescription": "Rust.AI.Gen2 targetting other BaseEntity.",
+			"MethodData": {
+				"MethodName": "IOnNpcTarget",
+				"ReturnType": "object",
+				"Arguments": {
+					"sense": "SenseComponent",
+					"target": "BaseEntity"
+				}
+			},
+			"CodeAfterInjection": "private object IOnNpcTarget(SenseComponent sense, BaseEntity target)\r\n{\r\n\tif (!sense || !target)\r\n\t{\r\n\t\treturn null;\r\n\t}\r\n\tBaseEntity baseEntity = sense.baseEntity;\r\n\tif (!baseEntity)\r\n\t{\r\n\t\treturn null;\r\n\t}\r\n\tif (Interface.CallHook(\"OnNpcTarget\", baseEntity, target) != null)\r\n\t{\r\n\t\treturn false;\r\n\t}\r\n\treturn null;\r\n}"
+		},		
 		{
 			"Type": 0,
 			"Name": "OnEntitySaved",
