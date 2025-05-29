@@ -30,7 +30,7 @@ jobs:
         run: python scripts/fetch_rust_skins.py --clear --max-items 10000
         env:
           STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
-        continue-on-error: false  # Fail the workflow if the script fails
+        continue-on-error: false  # Fail the workflow if the script fails.
           
       - name: Commit and push changes
         run: |
