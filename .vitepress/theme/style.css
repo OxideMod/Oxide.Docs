@@ -410,3 +410,52 @@ sup {
   max-width: 100%;
   padding: 0;
 }
+
+/**
+* Component: Navigation Dropdown
+* -------------------------------------------------------------------------- */
+
+/* Style the dropdown menu to match the theme */
+.VPNavBar .VPFlyout {
+  --vp-c-bg-elv: var(--vp-c-bg-alt);
+}
+
+.VPNavBar .VPMenu {
+  background-color: var(--vp-c-bg-alt) !important;
+  border: 1px solid var(--vp-c-divider) !important;
+  border-radius: 8px !important;
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.1),
+    0 2px 6px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Dark mode dropdown styling */
+.dark .VPNavBar .VPMenu {
+  background-color: var(--vp-c-bg-alt) !important;
+  border: 1px solid #232225 !important;
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.4),
+    0 2px 6px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Style dropdown menu items */
+.VPNavBar .VPMenu .VPMenuLink {
+  color: var(--vp-c-text-1) !important;
+  transition: all 0.25s ease !important;
+  border-radius: 4px !important;
+  margin: 2px 4px !important;
+}
+
+.VPNavBar .VPMenu .VPMenuLink:hover {
+  background-color: var(--vp-c-brand-soft) !important;
+  color: var(--vp-c-brand-1) !important;
+}
+
+/* Style the dropdown text/button */
+.VPNavBar .VPNavBarMenuGroup .VPNavBarMenuGroupTitle {
+  color: var(--vp-c-text-1) !important;
+}
+
+.VPNavBar .VPNavBarMenuGroup .VPNavBarMenuGroupTitle:hover {
+  color: var(--vp-c-brand-1) !important;
+}
