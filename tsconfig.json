@@ -13,6 +13,7 @@
         ".vitepress/**/*.vue",
         "components/**/*.ts",
         "components/**/*.vue",
+        "composables/**/*.ts",
         "shims.d.ts"
     ]
 }

@@ -8,7 +8,7 @@ import matter from 'gray-matter';
 // Configuration
 const GLOSSARY_FILE = path.join(process.cwd(), 'docs', 'glossary.md');
 const DOCS_DIR = path.join(process.cwd(), 'docs');
-const EXCLUDE_FILES = ['glossary.md', 'index.md']; // Files to exclude from processing
+const EXCLUDE_FILES = ['glossary.md', 'index.md', 'skins.md']; // Files to exclude from processing
 const EXCLUDE_SECTIONS = ['```', '~~~', '<code', '</code>']; // Sections to exclude (code blocks)
 
 // Extract glossary terms and their anchors from the glossary file

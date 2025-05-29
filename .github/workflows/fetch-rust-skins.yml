@@ -2,9 +2,9 @@ name: Fetch Rust Skins from Steam Marketplace
 
 on:
   schedule:
-    # Run every Sunday at 6:00 PM EST (UTC-5)
+    # Run every Thursday at 6:00 PM EST (UTC-5)
     # In cron syntax: minute hour day-of-month month day-of-week
-    - cron: '0 23 * * 0'  # 23:00 UTC = 18:00 EST
+    - cron: '0 23 * * 4'  # 23:00 UTC = 18:00 EST, day 4 = Thursday
   workflow_dispatch:  # Allow manual triggering
 
 jobs:
@@ -36,7 +36,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add docs/public/data/skins.json
+          git add data/skins.json
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else

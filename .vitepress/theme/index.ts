@@ -2,6 +2,7 @@
 import { h } from 'vue';
 import DefaultTheme from 'vitepress/theme';
 import './style.css';
+import './skins.css';
 import HookSearch from '../../components/HookSearch.vue';
 import GlossaryLinker from './components/GlossaryLinker.vue';
 
