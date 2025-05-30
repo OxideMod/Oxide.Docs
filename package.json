@@ -21,8 +21,11 @@
     "format": "prettier --write .",
     "lint": "prettier --check .",
     "check": "prettier --check .",
-    "glossary-links": "node util/glossary-linker.js",
-    "format-with-glossary": "npm run glossary-links && prettier --write ."
+    "glossary-links": "node scripts/glossary-linker.js",
+    "format-with-glossary": "npm run glossary-links && prettier --write .",
+    "merge-skins": "python scripts/merge_skins.py",
+    "fetch-skins": "python scripts/fetch_rust_skins.py",
+    "fix-glossary": "node scripts/fix-broken-glossary-links.js"
   },
   "volta": {
     "node": "20.6.1"
@@ -32,7 +35,7 @@
       "prettier --write"
     ],
     "*.md": [
-      "node util/glossary-linker.js",
+      "node scripts/glossary-linker.js",
       "prettier --write"
     ]
   }

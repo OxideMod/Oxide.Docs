@@ -117,9 +117,9 @@ def main():
                         default=datetime.now().strftime('%Y-%m-%d'))
     parser.add_argument('--exporter-file', type=str, help='Path to exporter skins file')
     parser.add_argument('--skins-file', type=str, help='Path to skins.json file', 
-                        default='data/skins.json')
+                        default='docs/public/data/skins.json')
     parser.add_argument('--output-file', type=str, help='Path to output merged file',
-                        default='data/merged_skins.json')
+                        default='docs/public/data/merged_skins.json')
     
     args = parser.parse_args()
     
@@ -127,7 +127,7 @@ def main():
     if args.exporter_file:
         exporter_file = Path(args.exporter_file)
     else:
-        exporter_file = Path(f'data/exporter_skins-{args.date}.json')
+        exporter_file = Path(f'docs/public/data/exporter_skins-{args.date}.json')
     
     skins_file = Path(args.skins_file)
     output_file = Path(args.output_file)

@@ -65,8 +65,7 @@ const {
         <div class="skin-image-container">
           <img 
             v-if="item.iconUrl" 
-            :src="'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InRyYW5zcGFyZW50Ii8+PC9zdmc+'"
-            :data-src="getImageUrl(item.iconUrl)"
+            :src="getImageUrl(item.iconUrl)"
             alt="Skin image"
             class="skin-image"
             loading="lazy"
