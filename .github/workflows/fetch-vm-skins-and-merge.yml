@@ -45,7 +45,7 @@ jobs:
           fi
           
           echo "Fetching data from VM endpoint..."
-          curl -f -o "data/exporter_skins-$CURRENT_DATE.json" "$VM_ENDPOINT"
+          curl -f -o "docs/public/data/exporter_skins-$CURRENT_DATE.json" "$VM_ENDPOINT"
           
           if [ $? -eq 0 ]; then
             echo "Successfully fetched VM data"
@@ -63,8 +63,8 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add data/exporter_skins-${{ env.CURRENT_DATE }}.json
-          git add data/merged_skins.json
+          git add docs/public/data/exporter_skins-${{ env.CURRENT_DATE }}.json
+          git add docs/public/data/merged_skins.json
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else

@@ -57,24 +57,19 @@
   display: none !important;
 }
 
-/* Custom styling for skins page with Oxide theme */
-/* Define color variables for both light and dark modes */
+/* Simplified color variables - no gradients */
 :root {
-  --skin-card-bg: linear-gradient(145deg, #ffffff, #f8f9fa);
+  --skin-card-bg: #ffffff;
   --skin-card-border: #e9ecef;
-  --skin-image-bg-1: linear-gradient(135deg, #f8f9fa, #e9ecef);
-  --skin-image-bg-2: linear-gradient(135deg, #dee2e6, #ced4da);
-  --skin-shadow: rgba(0, 0, 0, 0.1);
-  --skin-shadow-hover: rgba(0, 0, 0, 0.2);
+  --skin-shadow: rgba(0, 0, 0, 0.08);
+  --skin-shadow-hover: rgba(0, 0, 0, 0.12);
 }
 
 .dark {
-  --skin-card-bg: linear-gradient(145deg, var(--vp-c-bg-alt), #1a1a1d);
+  --skin-card-bg: var(--vp-c-bg-alt);
   --skin-card-border: #2d2d30;
-  --skin-image-bg-1: linear-gradient(135deg, #1e1e21, #16161a);
-  --skin-image-bg-2: linear-gradient(135deg, #131316, #0f0f12);
-  --skin-shadow: rgba(0, 0, 0, 0.3);
-  --skin-shadow-hover: rgba(0, 0, 0, 0.5);
+  --skin-shadow: rgba(0, 0, 0, 0.2);
+  --skin-shadow-hover: rgba(0, 0, 0, 0.3);
 }
 
 .skins-page-container {
@@ -90,10 +85,7 @@
 }
 
 .skins-header h1 {
-  background: -webkit-linear-gradient(10deg, #f76b15 10%, #cd412b);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #f76b15;
   font-size: 2.5rem;
   margin-bottom: 10px;
 }
@@ -114,22 +106,19 @@
   background-color: var(--vp-c-bg-alt);
   color: var(--vp-c-text-1);
   font-size: 1rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.2s ease;
+  box-shadow: 0 2px 4px var(--skin-shadow);
 }
 
 .search-input:focus {
   outline: none;
   border-color: var(--vp-c-brand-1);
-  box-shadow:
-    0 0 0 2px rgba(247, 107, 21, 0.2),
-    0 4px 12px rgba(0, 0, 0, 0.15);
-  transform: translateY(-1px);
+  box-shadow: 0 0 0 2px rgba(247, 107, 21, 0.2);
 }
 
 .skin-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: 12px;
   margin-top: 30px;
   padding: 0 40px;
@@ -138,19 +127,19 @@
 /* Responsive grid layout for horizontal cards */
 @media (max-width: 1800px) {
   .skin-container {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 1400px) {
   .skin-container {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 1024px) {
   .skin-container {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
   }
 
@@ -452,23 +441,21 @@
 }
 
 .skin-item {
-  border-radius: 12px;
+  border-radius: 8px;
   background: var(--skin-card-bg);
-  box-shadow: 0 4px 20px var(--skin-shadow);
+  box-shadow: 0 2px 8px var(--skin-shadow);
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: box-shadow 0.2s ease;
   display: flex;
   flex-direction: row;
   position: relative;
   border: 1px solid var(--skin-card-border);
-  backdrop-filter: blur(10px);
   min-height: 100px;
   align-items: center;
 }
 
 .skin-item:hover {
-  transform: translateY(-4px) scale(1.01);
-  box-shadow: 0 8px 30px var(--skin-shadow-hover);
+  box-shadow: 0 4px 12px var(--skin-shadow-hover);
   border-color: var(--vp-c-brand-2);
 }
 
@@ -488,38 +475,8 @@
   width: 80px;
   height: 80px;
   object-fit: contain;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  opacity: 0.7;
-}
-
-.skin-image.loaded {
+  transition: opacity 0.2s ease;
   opacity: 1;
-}
-
-.skin-item:hover .skin-image {
-  transform: scale(1.1) rotate(2deg);
-}
-
-/* Loading placeholder for images */
-.skin-image-container::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--vp-c-brand-1);
-  border-top: 2px solid transparent;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  opacity: 0.8;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
-.skin-image-container:has(.skin-image.loaded)::before {
-  opacity: 0;
 }
 
 .skin-content {
@@ -527,7 +484,6 @@
   flex: 1;
   display: flex;
   flex-direction: row;
-  background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.02));
   align-items: center;
   min-width: 0;
   gap: 20px;
@@ -570,26 +526,21 @@
   color: var(--vp-c-text-3);
   opacity: 0.7;
   font-family: monospace;
-  background: rgba(var(--vp-c-text-3), 0.1);
+  background: rgba(128, 128, 128, 0.1);
   padding: 2px 6px;
   border-radius: 4px;
   flex-shrink: 0;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: opacity 0.2s ease;
   user-select: none;
   position: relative;
 }
 
 .skin-id:hover {
   opacity: 1;
-  background: rgba(var(--vp-c-brand-1), 0.1);
+  background: rgba(247, 107, 21, 0.1);
   color: var(--vp-c-brand-1);
-  transform: translateY(-1px);
-}
-
-.skin-id:active {
-  transform: translateY(0);
 }
 
 .skin-id.copied {
@@ -626,35 +577,24 @@
 
 .skin-type {
   font-size: 0.7rem;
-  color: var(--vp-c-text-3);
+  color: var(--vp-c-brand-1);
   opacity: 0.8;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  background: linear-gradient(135deg, var(--vp-c-brand-1), var(--vp-c-brand-2));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .skin-price {
   font-size: 0.9rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #4caf50, #45a049);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: 0 1px 2px rgba(76, 175, 80, 0.2);
+  color: #4caf50;
   flex-shrink: 0;
   text-align: right;
   min-width: fit-content;
 }
 
 .skin-price.unavailable {
-  background: linear-gradient(135deg, var(--vp-c-text-3), var(--vp-c-text-2));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--vp-c-text-3);
   font-style: italic;
 }
 
@@ -662,7 +602,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #f76b15 0%, #ff8533 50%, #cd412b 100%);
+  background: #f76b15;
   color: white !important;
   padding: 8px 12px;
   border-radius: 6px;
@@ -670,63 +610,37 @@
   font-weight: 600;
   font-size: 0.75rem;
   text-align: center;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 0.2s ease;
   border: none;
   min-height: 32px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(247, 107, 21, 0.3);
   white-space: nowrap;
-  will-change: transform;
-}
-
-/* Performance optimization - reduce paint on hover */
-.skin-link::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
-  will-change: left;
-}
-
-.skin-link:hover::before {
-  left: 100%;
 }
 
 .skin-link:hover {
-  background: linear-gradient(135deg, #ff7a1e 0%, #ff9547 50%, #e04c33 100%);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(247, 107, 21, 0.4);
+  background: #e55a0c;
   text-decoration: none;
   color: white !important;
 }
 
 .skin-link.rusthelp {
-  background: linear-gradient(135deg, #2c5aa0 0%, #3d6bb5 50%, #1e3d6f 100%);
-  box-shadow: 0 2px 8px rgba(44, 90, 160, 0.3);
+  background: #2c5aa0;
   font-size: 0.65rem;
   font-weight: 700;
 }
 
 .skin-link.rusthelp:hover {
-  background: linear-gradient(135deg, #3366bb 0%, #4777cc 50%, #225088 100%);
-  box-shadow: 0 4px 12px rgba(44, 90, 160, 0.4);
+  background: #1e3d6f;
 }
 
 .skin-link.rusthelp.blocked {
-  background: linear-gradient(135deg, #6c757d 0%, #495057 50%, #343a40 100%);
+  background: #6c757d;
   opacity: 0.6;
-  box-shadow: 0 2px 8px rgba(108, 117, 125, 0.3);
 }
 
 .skin-link.rusthelp.blocked:hover {
-  background: linear-gradient(135deg, #6c757d 0%, #495057 50%, #343a40 100%);
-  box-shadow: 0 2px 8px rgba(108, 117, 125, 0.3);
-  transform: none;
+  background: #6c757d;
 }
 
 .skin-buttons-container {

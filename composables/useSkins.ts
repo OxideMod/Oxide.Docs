@@ -128,18 +128,24 @@ export function useSkins(): UseSkins {
     });
   });
 
-  // Enhanced scroll handler with intersection observer for better performance
+  // Optimized scroll handler with better throttling
   let scrollTimeout: NodeJS.Timeout;
+  let isScrolling = false;
   const handleScroll = () => {
+    if (isScrolling) return; // Prevent multiple simultaneous scroll handlers
+
+    isScrolling = true;
     if (scrollTimeout) clearTimeout(scrollTimeout);
+
     scrollTimeout = setTimeout(() => {
       const scrollPosition = window.scrollY + window.innerHeight;
-      const bottomPosition = document.body.offsetHeight - 500;
+      const bottomPosition = document.body.offsetHeight - 800; // Increased threshold
 
       if (scrollPosition >= bottomPosition) {
         loadMore();
       }
-    }, 200);
+      isScrolling = false;
+    }, 150); // Reduced debounce time for better responsiveness
   };
 
   // Optimized load more function
@@ -281,45 +287,22 @@ export function useSkins(): UseSkins {
     }
   };
 
-  // Lazy loading for images (intersection observer)
+  // Simplified lazy loading - remove complex intersection observer
   const setupLazyLoading = () => {
-    if ('IntersectionObserver' in window) {
-      const imageObserver = new IntersectionObserver(
-        entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const img = entry.target as HTMLImageElement;
-              const dataSrc = img.getAttribute('data-src');
-              if (dataSrc) {
-                // Create a new image to preload
-                const newImg = new Image();
-                newImg.onload = () => {
-                  img.src = dataSrc;
-                  img.classList.add('loaded');
-                  img.removeAttribute('data-src');
-                };
-                newImg.onerror = () => {
-                  img.classList.add('loaded'); // Still remove loading state on error
-                  img.removeAttribute('data-src');
-                };
-                newImg.src = dataSrc;
-                imageObserver.unobserve(img);
-              }
-            }
-          });
-        },
-        {
-          rootMargin: '50px 0px', // Start loading 50px before the image is visible
-          threshold: 0.1,
+    // Use native browser lazy loading instead of custom intersection observer
+    // This is much more performant and handles everything automatically
+    nextTick(() => {
+      const lazyImages = document.querySelectorAll('img[data-src]');
+      lazyImages.forEach(img => {
+        const dataSrc = img.getAttribute('data-src');
+        if (dataSrc) {
+          // Simple direct assignment - let browser handle lazy loading
+          img.src = dataSrc;
+          img.classList.add('loaded');
+          img.removeAttribute('data-src');
         }
-      );
-
-      // Observe all lazy images
-      nextTick(() => {
-        const lazyImages = document.querySelectorAll('img[data-src]');
-        lazyImages.forEach(img => imageObserver.observe(img));
       });
-    }
+    });
   };
 
   // Fallback copy function for older browsers
@@ -421,6 +404,8 @@ export function useSkins(): UseSkins {
       document.body.setAttribute('data-skins-page', 'true');
       await initializeSkins();
       window.addEventListener('scroll', handleScroll, { passive: true });
+      // Setup lazy loading once after initial load
+      setupLazyLoading();
     });
 
     onUnmounted(() => {
@@ -435,17 +420,6 @@ export function useSkins(): UseSkins {
         clearTimeout(scrollTimeout);
       }
     });
-
-    // Watch for filtered skins changes to setup lazy loading
-    watch(
-      filteredSkins,
-      () => {
-        nextTick(() => {
-          setupLazyLoading();
-        });
-      },
-      { flush: 'post' }
-    );
   };
 
   // Initialize lifecycle hooks
