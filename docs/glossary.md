@@ -11,10 +11,6 @@ This page contains definitions for terminology used throughout the OxideMod docu
 
 ## Core Concepts
 
-### Oxide
-
-Oxide is a modding platform that extends game servers with plugin support. It provides a framework for developers to create plugins that modify game behavior without changing the game's source code.
-
 ### Covalence
 
 Covalence is a cross-game compatibility layer in Oxide that provides unified APIs for common functions across different games. It allows plugin developers to write code that works across multiple games without game-specific implementations. Covalence handles differences in command systems, permissions, and player management across supported games.
@@ -66,7 +62,7 @@ Data files are JSON files that plugins use to store persistent data between serv
 
 ### Permissions
 
-Permissions in Oxide are a system that allows server owners to grant specific abilities and commands to players or groups. Permissions are defined by plugins and controlled using Oxide's permission commands.
+Permissions in Oxide are a system that allows server owners to control what players can and cannot do. Permissions can be assigned to individual players or to groups.
 
 ### Groups
 

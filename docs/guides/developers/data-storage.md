@@ -9,7 +9,7 @@ after: using-decompiler
 
 As previously mentioned in the section [My first plugin](./my-first-plugin), configuration and user data file use `Newtonsoft.Json` to serialize data structure.
 Configuration files are stored in the `./oxide/config folder` and
-user data files are stored in `./oxide/data`.  
+user data files<sup><a href="/glossary#data-files">[10]</a></sup> are stored in `./oxide/data`.  
 But default path can be modified to save in subfolder.
 
 the basic data structure
@@ -30,7 +30,7 @@ will be serialised to
 ```
 
 Using the variable name as the key, which is not good for readability and clarity.  
-Best practice is to use [NewtonSoft serialization attributes](https://www.newtonsoft.com/json/help/html/SerializeObject.htm) attributes, to improve clarity of the information given to the user. Most commonly use attributes are JsonProperty and JsonIgnore:
+Best practice is to use [NewtonSoft serialization attributes](https://www.newtonsoft.com/json<sup><a href="/glossary#json">[8]</a></sup>/help/html/SerializeObject.htm) attributes, to improve clarity of the information given to the user. Most commonly use attributes are JsonProperty and JsonIgnore:
 
 ```csharp
 private class PluginData
@@ -156,7 +156,7 @@ private new void LoadDefaultMessages()
 }
 ```
 
-Ex: The previous test code would initialize a file ./oxide/lang/en/test.json that can be customized by server owners.
+Ex: The previous test code would initialize a file ./oxide/lang/en/test.json<sup><a href="/glossary#json">[8]</a></sup> that can be customized by server owners.
 
 ```json
 {
@@ -189,7 +189,7 @@ private string Lang(string key, string id = null, params object[] args) => strin
 
 ## Protobuf storage
 
-Protobuf store data in a binary format. Main advantage is a more compact and faster data storage, with the disadvantage to not be human readable like JSON.
+Protobuf store data in a binary format. Main advantage is a more compact and faster data storage, with the disadvantage to not be human readable like JSON<sup><a href="/glossary#json">[8]</a></sup>.
 
 `[ProtoContract]` : to indicates that this class will serialize.  
 `[ProtoMember(N)]` : where N represents the number in which order it will serialize  

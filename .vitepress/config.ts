@@ -73,7 +73,13 @@ export default defineConfig({
       { text: 'Guides', link: '/guides/' },
       { text: 'Core', link: '/core/' },
       { text: 'Hooks', link: '/hooks/' },
-      { text: 'Glossary', link: '/glossary' },
+      {
+        text: 'Other',
+        items: [
+          { text: 'Skins', link: '/skins' },
+          { text: 'Glossary', link: '/glossary' },
+        ],
+      },
     ],
 
     sidebar: {
@@ -150,6 +156,6 @@ export default defineConfig({
     },
   },
   sitemap: {
-    hostname: 'https://docs.oxidemod.com'
-  }
+    hostname: 'https://docs.oxidemod.com',
+  },
 });

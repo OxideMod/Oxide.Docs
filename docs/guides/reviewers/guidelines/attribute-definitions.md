@@ -64,4 +64,4 @@ Some examples of descriptions[^3]:
 
 [^2]: Contact information can be included in comments at the top of the plugin file. However, this should not be any personal information or anything that could be used to identify the user. (e.g. phone numbers, personal emails, personal social media accounts etc.)
 
-[^3]: This description does omit the extra information that the weapon can be spawned in, sold in a shop or placed in a custom vending machine, however this is information that can be inferred and it is generally understood that features like this are gated using permissions.
+[^3]: This description does omit the extra information that the weapon can be spawned in, sold in a shop or placed in a custom vending machine, however this is information that can be inferred and it is generally understood that features like this are gated using permissions<sup><a href="/glossary#permissions">[11]</a></sup>.

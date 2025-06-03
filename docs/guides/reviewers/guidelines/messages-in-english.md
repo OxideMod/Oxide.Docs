@@ -9,7 +9,7 @@ after: language-api
 
 ## Explanation
 
-This guideline requires that plugins that send messages to players that use the language API must have, by default, English messages.
+This guideline requires that plugins<sup><a href="/glossary#plugins">[3]</a></sup> that send messages to players that use the language API must have, by default, English messages.
 
 This guideline can be quickly checked by finding the `RegisterMessages()` override method in the plugin and making sure that there are English messages for each key.
 

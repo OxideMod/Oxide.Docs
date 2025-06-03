@@ -12,7 +12,9 @@
       "files": "*.md",
       "options": {
         "parser": "markdown",
-        "proseWrap": "preserve"
+        "proseWrap": "preserve",
+        "printWidth": 100000,
+        "embeddedLanguageFormatting": "auto"
       }
     }
   ]
