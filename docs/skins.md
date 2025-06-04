@@ -93,7 +93,9 @@ const {
               target="_blank"
               rel="noopener noreferrer nofollow"
               class="skin-link"
+              :class="{ 'blocked': item.skinType === 'Twitch Drop' }"
               :aria-label="`View ${item.skinName} on Steam Market`"
+              :style="item.skinType === 'Twitch Drop' ? 'pointer-events: none; cursor: not-allowed;' : ''"
             >
               <img src="/steam.svg" alt="" class="steam-icon" aria-hidden="true">
               <strong>Steam</strong>

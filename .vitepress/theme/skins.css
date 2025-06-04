@@ -118,7 +118,7 @@
 
 .skin-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   margin-top: 30px;
   padding: 0 40px;
@@ -131,7 +131,7 @@
   }
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1600px) {
   .skin-container {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -159,138 +159,166 @@
 @media (max-width: 800px) {
   .skin-container {
     grid-template-columns: 1fr;
-    gap: 4px;
+    gap: 12px;
   }
 
   .skins-header h1 {
     font-size: 2rem;
   }
 
-  /* Ultra compact mobile layout */
+  /* Modern mobile card design */
   .skin-item {
-    flex-direction: row;
-    min-height: 50px;
-    align-items: center;
-    padding: 6px;
+    flex-direction: column;
+    min-height: auto;
+    align-items: stretch;
+    padding: 0;
+    border-radius: 12px;
+    background: var(--skin-card-bg);
+    box-shadow: 0 3px 12px var(--skin-shadow);
+    overflow: hidden;
+  }
+
+  .skin-item:hover {
+    box-shadow: 0 6px 20px var(--skin-shadow-hover);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
   }
 
   .skin-image-container {
-    width: 38px;
-    min-width: 38px;
-    height: 38px;
-    border-radius: 6px;
-    flex-shrink: 0;
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dark .skin-image-container {
+    background: #1a191b;
   }
 
   .skin-image {
-    width: 28px;
-    height: 28px;
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+  }
+
+  .skin-item:hover .skin-image {
+    transform: scale(1.05);
   }
 
   .skin-content {
-    padding: 0 8px;
+    padding: 12px;
     flex-direction: column;
-    gap: 2px;
-    background: none;
-    align-items: flex-start;
-    flex: 1;
-    min-width: 0;
+    gap: 8px;
+    background: var(--skin-card-bg);
+    align-items: stretch;
   }
 
   .skin-info-section {
     width: 100%;
-    gap: 1px;
+    gap: 4px;
   }
 
   .skin-header-row {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 6px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
     width: 100%;
   }
 
   .skin-name {
-    font-size: 0.8rem;
-    -webkit-line-clamp: 1;
-    font-weight: 600;
-    flex: 1;
-    min-width: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
     line-height: 1.2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+    width: 100%;
+    color: var(--vp-c-text-1);
+    padding-bottom: 20px;
   }
 
+  /* Hide skin ID on mobile */
   .skin-id {
-    font-size: 0.5rem;
-    padding: 1px 4px;
-    flex-shrink: 0;
+    display: none;
   }
 
   .skin-meta-row {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 4px;
     width: 100%;
   }
 
   .skin-item-details {
-    gap: 0;
-    flex: 1;
-    min-width: 0;
+    gap: 2px;
+    width: 100%;
   }
 
   .skin-item-name {
-    font-size: 0.6rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    opacity: 0.8;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--vp-c-text-2);
+    line-height: 1.3;
   }
 
+  /* Hide skin type on mobile */
   .skin-type {
     display: none;
   }
 
+  /* Hide price on mobile */
   .skin-price {
     display: none;
   }
 
   .skin-buttons-container {
     flex-direction: row;
-    gap: 3px;
-    flex-shrink: 0;
+    gap: 8px;
+    margin-top: 6px;
   }
 
   .skin-link {
-    padding: 3px 6px;
-    font-size: 0.55rem;
-    min-height: 24px;
+    padding: 10px 16px;
+    font-size: 0.8rem;
+    min-height: 40px;
+    font-weight: 600;
+    border-radius: 8px;
+    flex: 1;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    font-weight: 700;
-    border-radius: 4px;
+    text-align: center;
   }
 
   .skin-link.rusthelp {
-    font-size: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
   }
 
   .steam-icon,
   .rusthelp-icon {
-    width: 8px;
-    height: 8px;
-    margin-right: 2px;
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
   }
 }
 
 @media (max-width: 600px) {
   .skin-container {
-    grid-template-columns: 1fr;
-    gap: 3px;
+    padding: 0 16px;
+    gap: 10px;
   }
 
   .skins-header {
-    padding: 0 20px;
-    margin-bottom: 15px;
+    padding: 0 16px;
+    margin-bottom: 20px;
   }
 
   .skins-header h1 {
@@ -298,7 +326,75 @@
   }
 
   .search-input-container {
-    margin-bottom: 15px;
+    padding: 0 16px;
+    margin-bottom: 20px;
+  }
+
+  .search-input {
+    padding: 12px 16px;
+    font-size: 0.95rem;
+  }
+
+  .skin-item {
+    border-radius: 10px;
+  }
+
+  .skin-image-container {
+    height: 100px;
+  }
+
+  .skin-image {
+    width: 75px;
+    height: 75px;
+  }
+
+  .skin-content {
+    padding: 10px;
+    gap: 6px;
+  }
+
+  .skin-name {
+    font-size: 1rem;
+  }
+
+  .skin-item-name {
+    font-size: 0.85rem;
+  }
+
+  .skin-link {
+    padding: 9px 14px;
+    font-size: 0.75rem;
+    min-height: 36px;
+  }
+
+  .skin-link.rusthelp {
+    font-size: 0.7rem;
+  }
+
+  .steam-icon,
+  .rusthelp-icon {
+    width: 14px;
+    height: 14px;
+    margin-right: 5px;
+  }
+}
+
+@media (max-width: 400px) {
+  .skin-container {
+    padding: 0 12px;
+    gap: 8px;
+  }
+
+  .skins-header {
+    padding: 0 12px;
+  }
+
+  .skins-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .search-input-container {
+    padding: 0 12px;
   }
 
   .search-input {
@@ -307,136 +403,56 @@
   }
 
   .skin-item {
-    min-height: 45px;
-    padding: 5px;
+    border-radius: 8px;
   }
 
   .skin-image-container {
-    width: 35px;
-    min-width: 35px;
-    height: 35px;
+    height: 90px;
   }
 
   .skin-image {
-    width: 25px;
-    height: 25px;
+    width: 65px;
+    height: 65px;
   }
 
   .skin-content {
-    padding: 0 6px;
-  }
-
-  .skin-name {
-    font-size: 0.75rem;
-  }
-
-  .skin-id {
-    font-size: 0.45rem;
-  }
-
-  .skin-item-name {
-    font-size: 0.55rem;
-  }
-
-  .skin-link {
-    padding: 2px 5px;
-    font-size: 0.5rem;
-    min-height: 22px;
-  }
-
-  .skin-link.rusthelp {
-    font-size: 0.45rem;
-  }
-
-  .steam-icon,
-  .rusthelp-icon {
-    width: 7px;
-    height: 7px;
-    margin-right: 1px;
-  }
-}
-
-@media (max-width: 400px) {
-  .skin-container {
-    grid-template-columns: 1fr;
-    padding: 0 15px;
-    gap: 3px;
-  }
-
-  .skins-header {
-    padding: 0 15px;
-  }
-
-  .skins-header h1 {
-    font-size: 1.6rem;
-  }
-
-  .search-input-container {
-    padding: 0 15px;
-  }
-
-  .search-input {
-    padding: 8px 12px;
-    font-size: 0.9rem;
-  }
-
-  .skin-item {
-    min-height: 42px;
-    padding: 4px;
-  }
-
-  .skin-image-container {
-    width: 32px;
-    min-width: 32px;
-    height: 32px;
-  }
-
-  .skin-image {
-    width: 22px;
-    height: 22px;
-  }
-
-  .skin-content {
-    padding: 0 5px;
-  }
-
-  .skin-header-row {
+    padding: 8px;
     gap: 4px;
   }
 
-  .skin-name {
-    font-size: 0.7rem;
+  .skin-header-row {
+    gap: 3px;
   }
 
-  .skin-id {
-    font-size: 0.4rem;
-    padding: 1px 3px;
+  .skin-name {
+    font-size: 0.95rem;
   }
 
   .skin-item-name {
-    font-size: 0.5rem;
+    font-size: 0.8rem;
   }
 
   .skin-buttons-container {
-    gap: 2px;
+    gap: 6px;
+    margin-top: 4px;
   }
 
   .skin-link {
-    padding: 2px 4px;
-    font-size: 0.45rem;
-    min-height: 20px;
-    border-radius: 3px;
+    padding: 8px 12px;
+    font-size: 0.7rem;
+    min-height: 34px;
+    border-radius: 6px;
   }
 
   .skin-link.rusthelp {
-    font-size: 0.4rem;
+    font-size: 0.65rem;
   }
 
   .steam-icon,
   .rusthelp-icon {
-    width: 6px;
-    height: 6px;
-    margin-right: 1px;
+    width: 12px;
+    height: 12px;
+    margin-right: 4px;
   }
 }
 
@@ -641,6 +657,15 @@
 
 .skin-link.rusthelp.blocked:hover {
   background: #6c757d;
+}
+
+.skin-link.blocked {
+  background: #6c757d !important;
+  opacity: 0.6;
+}
+
+.skin-link.blocked:hover {
+  background: #6c757d !important;
 }
 
 .skin-buttons-container {

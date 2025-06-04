@@ -213,10 +213,12 @@ export function useSkins(): UseSkins {
   const getImageUrl = (iconUrl?: string): string => {
     if (!iconUrl || typeof iconUrl !== 'string') return '';
 
-    // Validate URL format
+    // Validate URL format - include steamcommunity-a.akamaihd.net for scmm.json URLs
     if (
       iconUrl.startsWith('https://community.cloudflare.steamstatic.com/') ||
-      iconUrl.startsWith('https://steamcdn-a.akamaihd.net/')
+      iconUrl.startsWith('https://steamcdn-a.akamaihd.net/') ||
+      iconUrl.startsWith('https://steamcommunity-a.akamaihd.net/') ||
+      iconUrl.startsWith('https://files.facepunch.com/')
     ) {
       return iconUrl;
     }
@@ -294,12 +296,13 @@ export function useSkins(): UseSkins {
     nextTick(() => {
       const lazyImages = document.querySelectorAll('img[data-src]');
       lazyImages.forEach(img => {
-        const dataSrc = img.getAttribute('data-src');
+        const imageEl = img as HTMLImageElement;
+        const dataSrc = imageEl.getAttribute('data-src');
         if (dataSrc) {
           // Simple direct assignment - let browser handle lazy loading
-          img.src = dataSrc;
-          img.classList.add('loaded');
-          img.removeAttribute('data-src');
+          imageEl.src = dataSrc;
+          imageEl.classList.add('loaded');
+          imageEl.removeAttribute('data-src');
         }
       });
     });
@@ -316,7 +319,8 @@ export function useSkins(): UseSkins {
     textArea.select();
 
     try {
-      document.execCommand('copy');
+      // Using deprecated API as fallback for older browsers
+      (document.execCommand as any)('copy');
 
       // Visual feedback
       const element = (event.target as HTMLElement).closest('.skin-id') as HTMLElement;
