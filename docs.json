@@ -460,7 +460,8 @@
       "HookParameters": {
         "instance": "BuildingBlock",
         "id": "ulong",
-        "side": "int"
+        "side": "int",
+        "rotation": "float"
       },
       "ReturnBehavior": 1,
       "TargetType": "BuildingBlock",
@@ -470,10 +471,11 @@
         "ReturnType": "void",
         "Arguments": {
           "id": "ulong",
-          "side": "int"
+          "side": "int",
+          "rotation": "float"
         }
       },
-      "CodeAfterInjection": "public void SetWallpaper(ulong id, int side = 0)\r\n{\r\n\tif (Interface.CallHook(\"OnWallpaperSet\", this, id, side) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (side == 0)\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "public void SetWallpaper(ulong id, int side = 0, float rotation = 0f)\r\n{\r\n\tif (Interface.CallHook(\"OnWallpaperSet\", this, id, side, rotation) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (side == 0)\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -523,12 +525,12 @@
       "Name": "OnStructureDemolish [immediate = true]",
       "HookName": "OnStructureDemolish",
       "HookParameters": {
-        "instance": "StabilityEntity",
+        "instance": "DecayEntity",
         "player": "BasePlayer",
         "Unknown": "Unknown"
       },
       "ReturnBehavior": 1,
-      "TargetType": "StabilityEntity",
+      "TargetType": "DecayEntity",
       "Category": "Structure",
       "MethodData": {
         "MethodName": "DoImmediateDemolish",
@@ -537,7 +539,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (!msg.player.IsAdmin)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnStructureDemolish\", this, msg.player, null) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tFacepunch.Rust.Analytics.Azure.OnBuildingBlockDemolished(msg.player, this);\r\n\tbase.Kill(BaseNetworkable.DestroyMode.Gib);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (!msg.player.IsAdmin)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnStructureDemolish\", this, msg.player, true) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tStabilityEntity stabilityEntity = this as StabilityEntity;\r\n\tif (stabilityEntity != null)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -1593,12 +1595,12 @@
       "Name": "OnStructureDemolish [immediate = false]",
       "HookName": "OnStructureDemolish",
       "HookParameters": {
-        "instance": "StabilityEntity",
+        "instance": "DecayEntity",
         "player": "BasePlayer",
         "Unknown": "Unknown"
       },
       "ReturnBehavior": 1,
-      "TargetType": "StabilityEntity",
+      "TargetType": "DecayEntity",
       "Category": "Structure",
       "MethodData": {
         "MethodName": "DoDemolish",
@@ -1607,7 +1609,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (!this.CanDemolish(msg.player))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnStructureDemolish\", this, msg.player, null) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tFacepunch.Rust.Analytics.Azure.OnBuildingBlockDemolished(msg.player, this);\r\n\tbase.Kill(BaseNetworkable.DestroyMode.Gib);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (!this.CanDemolish(msg.player))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnStructureDemolish\", this, msg.player, false) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tStabilityEntity stabilityEntity = this as StabilityEntity;\r\n\tif (stabilityEntity != null)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -1711,7 +1713,7 @@
           "spawnPointEntity": "BaseEntity"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (this.IsConnected)\r\n\t{\r\n\t\tEACServer.OnStartLoading(this.net.connection);\r\n\t}\r\n\tInterface.CallHook(\"OnPlayerRespawned\", this);\r\n\tthis.ProcessMissionEvent(BaseMission.MissionEventType.RESPAWN, 0, 0f);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (this.IsConnected)\r\n\t{\r\n\t\tEACServer.OnStartLoading(this.net.connection);\r\n\t}\r\n\tInterface.CallHook(\"OnPlayerRespawned\", this);\r\n\tthis.ProcessMissionEvent(BaseMission.MissionEventType.RESPAWN, 0, 0f);\r\n\tthis.PlayerInjureState = this.GetInjureState();\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -2262,7 +2264,7 @@
           "itemDef": "ItemDefinition"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\tFunc<global::Item, int> arg_BD_1;\r\n\t\t\t\tif ((arg_BD_1 = global::VendingMachine.<>c.<>9__32_0) == null)\r\n\t\t\t\t{\r\n\t\t\t\t\targ_BD_1 = (global::VendingMachine.<>c.<>9__32_0 = new Func<global::Item, int>(global::VendingMachine.<>c.<>9.<RefreshSellOrderStockLevel>b__32_0));\r\n\t\t\t\t}\r\n\t\t\t\tInterface.CallHook(\"OnRefreshVendingStock\", this, itemDef);\r\n\t\t\t\targ_C5_1 = arg_BD_0.Sum(arg_BD_1) / num2;\r\n\t\t\t}\r\n\t\t\targ_C5_0.inStock = arg_C5_1;\r\n\t\t\tfloat itemCondition = 0f;\r\n\t\t\tfloat itemConditionMax = 0f;\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\tFunc<global::Item, int> arg_BD_1;\r\n\t\t\t\tif ((arg_BD_1 = global::VendingMachine.<>c.<>9__33_0) == null)\r\n\t\t\t\t{\r\n\t\t\t\t\targ_BD_1 = (global::VendingMachine.<>c.<>9__33_0 = new Func<global::Item, int>(global::VendingMachine.<>c.<>9.<RefreshSellOrderStockLevel>b__33_0));\r\n\t\t\t\t}\r\n\t\t\t\tInterface.CallHook(\"OnRefreshVendingStock\", this, itemDef);\r\n\t\t\t\targ_C5_1 = arg_BD_0.Sum(arg_BD_1) / num2;\r\n\t\t\t}\r\n\t\t\targ_C5_0.inStock = arg_C5_1;\r\n\t\t\tfloat itemCondition = 0f;\r\n\t\t\tfloat itemConditionMax = 0f;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -2382,7 +2384,7 @@
           "player": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "public virtual bool CanPickup(BasePlayer player)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"CanPickupEntity\", player, this);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\treturn this.pickup.enabled && (!this.pickup.requireBuildingPrivilege || player.CanBuild()) && (!this.pickup.requireHammer || player.IsHoldingEntity<Hammer>()) && player != null && !player.IsInTutorial;\r\n//---\r\n"
+      "CodeAfterInjection": "public virtual bool CanPickup(BasePlayer player)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"CanPickupEntity\", player, this);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\tbool flag = this.pickup.enabled && (!this.pickup.requireBuildingPrivilege || player.CanBuild()) && (!this.pickup.requireHammer || player.IsHoldingEntity<Hammer>()) && player != null && !player.IsInTutorial;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -2899,7 +2901,7 @@
         "ply": "BasePlayer",
         "type": "AntiHackType",
         "amount": "float",
-        "entity": "BaseEntity"
+        "gameObject": "GameObject"
       },
       "ReturnBehavior": 1,
       "TargetType": "AntiHack",
@@ -2911,10 +2913,10 @@
           "ply": "BasePlayer",
           "type": "AntiHackType",
           "amount": "float",
-          "entity": "BaseEntity"
+          "gameObject": "UnityEngine.GameObject"
         }
       },
-      "CodeAfterInjection": "public static void AddViolation(global::BasePlayer ply, global::AntiHackType type, float amount, global::BaseEntity entity = null)\r\n{\r\n\tif (Interface.CallHook(\"OnPlayerViolation\", ply, type, amount, entity) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tusing (TimeWarning.New(\"AntiHack.AddViolation\", 0))\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "public static void AddViolation(global::BasePlayer ply, global::AntiHackType type, float amount, GameObject gameObject = null)\r\n{\r\n\tif (Interface.CallHook(\"OnPlayerViolation\", ply, type, amount, gameObject) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tusing (TimeWarning.New(\"AntiHack.AddViolation\", 0))\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -2970,10 +2972,10 @@
       "HookName": "CanDemolish",
       "HookParameters": {
         "player": "BasePlayer",
-        "instance": "StabilityEntity"
+        "instance": "DecayEntity"
       },
       "ReturnBehavior": 1,
-      "TargetType": "StabilityEntity",
+      "TargetType": "DecayEntity",
       "Category": "Structure",
       "MethodData": {
         "MethodName": "CanDemolish",
@@ -2982,7 +2984,7 @@
           "player": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "private bool CanDemolish(global::BasePlayer player)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"CanDemolish\", player, this);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\treturn this.CanBeDemolished && this.IsDemolishable() && this.HasDemolishPrivilege(player);\r\n//---\r\n"
+      "CodeAfterInjection": "private bool CanDemolish(global::BasePlayer player)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"CanDemolish\", player, this);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\treturn this.IsDemolishSupported && this.IsDemolishable() && this.HasDemolishPrivilege(player);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -3896,36 +3898,6 @@
         "ReturnType": "void",
         "Arguments": {
           "info": "HitInfo"
-        }
-      }
-    },
-    {
-      "Type": 1,
-      "Name": "OnStructureDemolish [false, patch]",
-      "HookName": "OnStructureDemolish [false, patch]",
-      "ReturnBehavior": 0,
-      "TargetType": "StabilityEntity",
-      "Category": "_Patches",
-      "MethodData": {
-        "MethodName": "DoDemolish",
-        "ReturnType": "void",
-        "Arguments": {
-          "msg": "BaseEntity/RPCMessage"
-        }
-      }
-    },
-    {
-      "Type": 1,
-      "Name": "OnStructureDemolish [true, patch]",
-      "HookName": "OnStructureDemolish [true, patch]",
-      "ReturnBehavior": 0,
-      "TargetType": "StabilityEntity",
-      "Category": "_Patches",
-      "MethodData": {
-        "MethodName": "DoImmediateDemolish",
-        "ReturnType": "void",
-        "Arguments": {
-          "msg": "BaseEntity/RPCMessage"
         }
       }
     },
@@ -5301,7 +5273,7 @@
     },
     {
       "Type": 0,
-      "Name": "OnPayForPlacement",
+      "Name": "OnPayForPlacement [Planner]",
       "HookName": "OnPayForPlacement",
       "HookParameters": {
         "player": "BasePlayer",
@@ -5319,7 +5291,29 @@
           "component": "Construction"
         }
       },
-      "CodeAfterInjection": "public void PayForPlacement(global::BasePlayer player, global::Construction component)\r\n{\r\n\tif (Interface.CallHook(\"OnPayForPlacement\", player, this, component) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (player.IsInCreativeMode && ConVar.Creative.freeBuild)\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "public virtual void PayForPlacement(global::BasePlayer player, global::Construction component)\r\n{\r\n\tif (Interface.CallHook(\"OnPayForPlacement\", player, this, component) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (player.IsInCreativeMode && ConVar.Creative.freeBuild)\r\n\t{\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnPayForPlacement [WallpaperPlanner]",
+      "HookName": "OnPayForPlacement",
+      "HookParameters": {
+        "player": "BasePlayer",
+        "instance": "WallpaperPlanner",
+        "component": "Construction"
+      },
+      "ReturnBehavior": 1,
+      "TargetType": "WallpaperPlanner",
+      "Category": "Player",
+      "MethodData": {
+        "MethodName": "PayForPlacement",
+        "ReturnType": "void",
+        "Arguments": {
+          "player": "BasePlayer",
+          "component": "Construction"
+        }
+      },
+      "CodeAfterInjection": "public override void PayForPlacement(global::BasePlayer player, global::Construction component)\r\n{\r\n\tif (Interface.CallHook(\"OnPayForPlacement\", player, this, component) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (player.IsInCreativeMode && ConVar.Creative.freeBuild)\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -5807,7 +5801,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\tTargetName = text5,\r\n\t\tSubject = text,\r\n\t\tMessage = text2,\r\n\t\tType = text3\r\n\t});\r\n\tInterface.CallHook(\"OnPlayerReported\", this, text5, text4, text, text2, text3);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tTargetName = text6,\r\n\t\tSubject = text,\r\n\t\tMessage = text3,\r\n\t\tType = text4\r\n\t});\r\n\tInterface.CallHook(\"OnPlayerReported\", this, text5, text4, text, text2, text3);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -6809,7 +6803,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tglobal::BuildingPrivlidge buildingPrivilege = this.GetBuildingPrivilege();\r\n\t\tforeach (global::BaseEntity current in this.myTrigger.entityContents)\r\n\t\t{\r\n\t\t\tglobal::BasePlayer basePlayer = current as global::BasePlayer;\r\n\t\t\tif (basePlayer != null && Interface.CallHook(\"OnSensorDetect\", this, basePlayer) == null && !(basePlayer == null) && !basePlayer.IsDead() && !basePlayer.IsSleeping() && basePlayer.isServer)\r\n\t\t\t{\r\n\t\t\t\tbool flag = buildingPrivilege != null && buildingPrivilege.IsAuthed(basePlayer);\r\n\t\t\t\tif ((!flag || this.ShouldIncludeAuthorized()) && (flag || this.ShouldIncludeOthers()) && current.IsVisible(base.transform.position + base.transform.forward * 0.1f, 10f))\r\n\t\t\t\t{\r\n\t\t\t\t\tthis.detectedPlayers++;\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tglobal::BuildingPrivlidge buildingPrivilege = this.GetBuildingPrivilege();\r\n\t\tforeach (global::BaseEntity current in this.myTrigger.entityContents)\r\n\t\t{\r\n\t\t\tglobal::BasePlayer basePlayer = current as global::BasePlayer;\r\n\t\t\tif (basePlayer != null && Interface.CallHook(\"OnSensorDetect\", this, basePlayer) == null && !(basePlayer == null) && !basePlayer.IsDead() && !basePlayer.IsSleeping() && basePlayer.isServer)\r\n\t\t\t{\r\n\t\t\t\tbool flag = buildingPrivilege != null && buildingPrivilege.IsAuthed(basePlayer);\r\n\t\t\t\tif ((!flag || this.ShouldIncludeAuthorized()) && (flag || this.ShouldIncludeOthers()) && current.IsVisible(base.transform.position + base.transform.forward * 0.1f, (float)this.range))\r\n\t\t\t\t{\r\n\t\t\t\t\tthis.detectedPlayers++;\r\n//---\r\n"
     },
     {
       "Type": 1,
@@ -9703,7 +9697,7 @@
           "allowSwap": "bool"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\texpr_2A3(slot2, num2);\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\tthis.amount -= num2;\r\n\t\t\t\t\t\tslot2.MarkDirty();\r\n\t\t\t\t\t\tInterface.CallHook(\"OnItemStacked\", slot2, this, newcontainer, num2);\r\n\t\t\t\t\t\tthis.MarkDirty();\r\n\t\t\t\t\t\tthis.MigrateItemOwnership(slot2, num2);\r\n\t\t\t\t\t\tif (this.amount <= 0)\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\tthis.RemoveFromWorld();\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\texpr_2C9(slot2, num2);\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\tthis.amount -= num2;\r\n\t\t\t\t\t\t\tslot2.MarkDirty();\r\n\t\t\t\t\t\t\tInterface.CallHook(\"OnItemStacked\", slot2, this, newcontainer, num2);\r\n\t\t\t\t\t\t\tthis.MarkDirty();\r\n\t\t\t\t\t\t\tthis.MigrateItemOwnership(slot2, num2);\r\n\t\t\t\t\t\t\tif (this.amount <= 0)\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\tthis.RemoveFromWorld();\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -9812,7 +9806,8 @@
         "bp": "ItemBlueprint",
         "task": "ItemCraftTask",
         "amount": "int",
-        "player": "BasePlayer"
+        "player": "BasePlayer",
+        "takeBroken": "bool"
       },
       "ReturnBehavior": 1,
       "TargetType": "ItemCrafter",
@@ -9824,10 +9819,11 @@
           "bp": "ItemBlueprint",
           "task": "ItemCraftTask",
           "amount": "int",
-          "player": "BasePlayer"
+          "player": "BasePlayer",
+          "takeBroken": "bool"
         }
       },
-      "CodeAfterInjection": "private void CollectIngredients(global::ItemBlueprint bp, global::ItemCraftTask task, int amount = 1, global::BasePlayer player = null)\r\n{\r\n\tif (Interface.CallHook(\"OnIngredientsCollect\", this, bp, task, amount, player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tList<global::Item> list = new List<global::Item>();\r\n\tforeach (global::ItemAmount current in bp.GetIngredients())\r\n//---\r\n"
+      "CodeAfterInjection": "private void CollectIngredients(global::ItemBlueprint bp, global::ItemCraftTask task, int amount = 1, global::BasePlayer player = null, bool takeBroken = true)\r\n{\r\n\tif (Interface.CallHook(\"OnIngredientsCollect\", this, bp, task, amount, player, takeBroken) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tList<global::Item> list = new List<global::Item>();\r\n\tforeach (global::ItemAmount current in bp.GetIngredients())\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -9845,7 +9841,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\tthis.<SendRespawnOptions>g__CollectExternalAndSend|496_0();\r\n\t\treturn;\r\n\t}\r\n\tList<RespawnInformation.SpawnOptions> list = Pool.Get<List<RespawnInformation.SpawnOptions>>();\r\n\tglobal::BasePlayer.GetRespawnOptionsForPlayer(list, this.userID);\r\n\tInterface.CallHook(\"OnRespawnInformationGiven\", this, list);\r\n\tthis.<SendRespawnOptions>g__SendToPlayer|496_1(list, false);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tthis.<SendRespawnOptions>g__CollectExternalAndSend|498_0();\r\n\t\treturn;\r\n\t}\r\n\tList<RespawnInformation.SpawnOptions> list = Pool.Get<List<RespawnInformation.SpawnOptions>>();\r\n\tglobal::BasePlayer.GetRespawnOptionsForPlayer(list, this.userID);\r\n\tInterface.CallHook(\"OnRespawnInformationGiven\", this, list);\r\n\tthis.<SendRespawnOptions>g__SendToPlayer|498_1(list, false);\r\n}\r\n\r\n"
     },
     {
       "Type": 1,
@@ -11554,7 +11550,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\tglobal::ItemDefinition itemDefinition2 = null;\r\n\t\t\tulong skinID = global::ItemDefinition.FindSkin((itemDefinition.isRedirectOf != null) ? itemDefinition.isRedirectOf.itemid : itemDefinition.itemid, <>c__DisplayClass44_.targetSkin);\r\n\t\t\tglobal::ItemSkinDirectory.Skin skin = ((itemDefinition.isRedirectOf != null) ? itemDefinition.isRedirectOf : itemDefinition).skins.FirstOrDefault((global::ItemSkinDirectory.Skin x) => x.id == <>c__DisplayClass44_.targetSkin);\r\n\t\t\tif (Interface.CallHook(\"OnEntityReskin\", baseEntity, skin, msg.player) != null)\r\n\t\t\t{\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\tif (skin.invItem != null)\r\n\t\t\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\tglobal::ItemDefinition itemDefinition2 = null;\r\n\t\t\tulong skinID = global::ItemDefinition.FindSkin((itemDefinition.isRedirectOf != null) ? itemDefinition.isRedirectOf.itemid : itemDefinition.itemid, <>c__DisplayClass45_.targetSkin);\r\n\t\t\tglobal::ItemSkinDirectory.Skin skin = ((itemDefinition.isRedirectOf != null) ? itemDefinition.isRedirectOf : itemDefinition).skins.FirstOrDefault((global::ItemSkinDirectory.Skin x) => x.id == <>c__DisplayClass45_.targetSkin);\r\n\t\t\tif (Interface.CallHook(\"OnEntityReskin\", baseEntity, skin, msg.player) != null)\r\n\t\t\t{\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\tif (skin.invItem != null)\r\n\t\t\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -11601,7 +11597,7 @@
           "allowSwap": "bool"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\texpr_2A3(slot2, num2);\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\tthis.amount -= num2;\r\n\t\t\t\t\t\tslot2.MarkDirty();\r\n\t\t\t\t\t\tInterface.CallHook(\"OnItemStacked\", slot2, this, newcontainer, num2);\r\n\t\t\t\t\t\tthis.MarkDirty();\r\n\t\t\t\t\t\tthis.MigrateItemOwnership(slot2, num2);\r\n\t\t\t\t\t\tif (this.amount <= 0)\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\tthis.RemoveFromWorld();\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\texpr_2C9(slot2, num2);\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\tthis.amount -= num2;\r\n\t\t\t\t\t\t\tslot2.MarkDirty();\r\n\t\t\t\t\t\t\tInterface.CallHook(\"OnItemStacked\", slot2, this, newcontainer, num2);\r\n\t\t\t\t\t\t\tthis.MarkDirty();\r\n\t\t\t\t\t\t\tthis.MigrateItemOwnership(slot2, num2);\r\n\t\t\t\t\t\t\tif (this.amount <= 0)\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\tthis.RemoveFromWorld();\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -11706,7 +11702,8 @@
         "liquidDef": "ItemDefinition",
         "position": "Vector3",
         "radius": "float",
-        "amount": "int"
+        "amount": "int",
+        "funWater": "bool"
       },
       "ReturnBehavior": 1,
       "TargetType": "WaterBall",
@@ -11718,10 +11715,11 @@
           "position": "UnityEngine.Vector3",
           "radius": "float",
           "liquidDef": "ItemDefinition",
-          "amount": "int"
+          "amount": "int",
+          "funWater": "bool"
         }
       },
-      "CodeAfterInjection": "public static bool DoSplash(Vector3 position, float radius, global::ItemDefinition liquidDef, int amount)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"CanWaterBallSplash\", liquidDef, position, radius, amount);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\tList<global::BaseEntity> list = Pool.Get<List<global::BaseEntity>>();\r\n//---\r\n"
+      "CodeAfterInjection": "public static bool DoSplash(Vector3 position, float radius, global::ItemDefinition liquidDef, int amount, bool funWater = false)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"CanWaterBallSplash\", liquidDef, position, radius, amount, funWater);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\tList<global::BaseEntity> list = Pool.Get<List<global::BaseEntity>>();\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -12524,7 +12522,7 @@
         "instance": "BasePlayer",
         "text": "string",
         "text2": "string",
-        "reportType": "ReportType"
+        "text3": "string"
       },
       "ReturnBehavior": 0,
       "TargetType": "BasePlayer",
@@ -12536,7 +12534,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\tMessage = text2,\r\n\t\t\tSubject = text\r\n\t\t};\r\n\t\tfeedback.AppInfo.Image = image;\r\n\t\tFacepunch.Feedback.ServerReport(ConVar.Server.reportsServerEndpoint, this.userID, ConVar.Server.reportsServerEndpointKey, feedback);\r\n\t\tInterface.CallHook(\"OnFeedbackReported\", this, text, text2, reportType);\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\tSubject = text\r\n\t\t};\r\n\t\tfeedback.AppInfo.Image = image;\r\n\t\tFacepunch.Feedback.ServerReport(ConVar.Server.reportsServerEndpoint, this.userID, ConVar.Server.reportsServerEndpointKey, feedback);\r\n\t}\r\n\tInterface.CallHook(\"OnFeedbackReported\", this, text, text2, text3);\r\n}\r\n\r\n"
     },
     {
       "Type": 1,
@@ -12552,7 +12550,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\tMessage = text2,\r\n\t\t\tSubject = text\r\n\t\t};\r\n\t\tfeedback.AppInfo.Image = image;\r\n\t\tFacepunch.Feedback.ServerReport(ConVar.Server.reportsServerEndpoint, this.userID, ConVar.Server.reportsServerEndpointKey, feedback);\r\n\t\tInterface.CallHook(\"OnFeedbackReported\", this, text, text2, reportType);\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\tSubject = text\r\n\t\t};\r\n\t\tfeedback.AppInfo.Image = image;\r\n\t\tFacepunch.Feedback.ServerReport(ConVar.Server.reportsServerEndpoint, this.userID, ConVar.Server.reportsServerEndpointKey, feedback);\r\n\t}\r\n\tInterface.CallHook(\"OnFeedbackReported\", this, text, text2, text3);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -13373,7 +13371,7 @@
           "explosionFxPos": "UnityEngine.Vector3"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tglobal::Effect.server.Run(this.watersurfaceExplosionEffect.resourcePath, explosionFxPos.WithY(waterInfo.surfaceLevel), this.GetExplosionNormal(), null, true, null);\r\n\t}\r\n\tif (this.damageTypes.Count > 0)\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnTimedExplosiveExplode\", this, explosionFxPos) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tVector3 vector2 = this.ExplosionCenter();\r\n\t\tif (this.onlyDamageParent)\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tglobal::Effect.server.Run(this.watersurfaceExplosionEffect.resourcePath, explosionFxPos.WithY(waterInfo.surfaceLevel), this.GetExplosionNormal(), null, true, null);\r\n\t}\r\n\tif (this.GetDamageList(null).Count > 0)\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnTimedExplosiveExplode\", this, explosionFxPos) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tVector3 vector2 = this.ExplosionCenter();\r\n\t\tif (this.onlyDamageParent)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -15266,6 +15264,90 @@
         }
       },
       "CodeAfterInjection": "//---\r\n\t}\r\n\tif (this.rigidBody == null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnSiegeWeaponPull\", this, msg.player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (base.OnlyOwnerAccessible() && player != this.creatorEntity)\r\n\t{\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnGibsSpawned",
+      "HookName": "OnGibsSpawned",
+      "HookParameters": {
+        "list": "List`1",
+        "creator": "GameObject"
+      },
+      "ReturnBehavior": 0,
+      "TargetType": "ServerGib",
+      "Category": "Entity",
+      "MethodData": {
+        "MethodName": "CreateGibs",
+        "ReturnType": "System.Collections.Generic.List`1<ServerGib>",
+        "Arguments": {
+          "entityToCreatePath": "string",
+          "creator": "UnityEngine.GameObject",
+          "gibSource": "UnityEngine.GameObject",
+          "inheritVelocity": "UnityEngine.Vector3",
+          "spreadVelocity": "float"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t\t\t{\r\n\t\t\t\tPhysics.IgnoreCollision(current2.GetCollider(), current.GetCollider(), true);\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n\tInterface.CallHook(\"OnGibsSpawned\", list, creator);\r\n\treturn list;\r\n}\r\n\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnCrateSpawned [PatrolHelicopter]",
+      "HookName": "OnCrateSpawned",
+      "HookParameters": {
+        "instance": "PatrolHelicopter",
+        "baseEntity2": "BaseEntity"
+      },
+      "ReturnBehavior": 0,
+      "TargetType": "PatrolHelicopter",
+      "Category": "Entity",
+      "MethodData": {
+        "MethodName": "OnDied",
+        "ReturnType": "void",
+        "Arguments": {
+          "info": "HitInfo"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t\tbaseEntity2.SendMessage(\"SetLockingEnt\", fireBall.gameObject, SendMessageOptions.DontRequireReceiver);\r\n\t\tforeach (global::ServerGib current2 in list)\r\n\t\t{\r\n\t\t\tPhysics.IgnoreCollision(component2, current2.GetCollider(), true);\r\n\t\t}\r\n\t\tInterface.CallHook(\"OnCrateSpawned\", this, baseEntity2);\r\n\t}\r\n\tbase.OnDied(info);\r\n}\r\n\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnCrateSpawned [BradleyAPC]",
+      "HookName": "OnCrateSpawned",
+      "HookParameters": {
+        "instance": "BradleyAPC",
+        "baseEntity2": "BaseEntity"
+      },
+      "ReturnBehavior": 0,
+      "TargetType": "BradleyAPC",
+      "Category": "Entity",
+      "MethodData": {
+        "MethodName": "OnDied",
+        "ReturnType": "void",
+        "Arguments": {
+          "info": "HitInfo"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t\tbaseEntity2.SendMessage(\"SetLockingEnt\", fireBall.gameObject, SendMessageOptions.DontRequireReceiver);\r\n\t\tforeach (global::ServerGib current2 in list)\r\n\t\t{\r\n\t\t\tPhysics.IgnoreCollision(component2, current2.GetCollider(), true);\r\n\t\t}\r\n\t\tInterface.CallHook(\"OnCrateSpawned\", this, baseEntity2);\r\n\t}\r\n\tthis.KillSpawnedScientists();\r\n\tif (info != null && info.InitiatorPlayer != null && info.InitiatorPlayer.serverClan != null)\r\n\t{\r\n\t\tinfo.InitiatorPlayer.AddClanScore(ClanScoreEventType.DestroyedBradley, 1, null, null, null, null);\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "ICanPickupEntity [RFTimedExplosive]",
+      "HookName": "ICanPickupEntity",
+      "HookParameters": {
+        "player": "BasePlayer",
+        "instance": "RFTimedExplosive"
+      },
+      "ReturnBehavior": 4,
+      "TargetType": "RFTimedExplosive",
+      "Category": "Player",
+      "MethodData": {
+        "MethodName": "Pickup",
+        "ReturnType": "void",
+        "Arguments": {
+          "msg": "BaseEntity/RPCMessage"
+        }
+      },
+      "CodeAfterInjection": "[global::BaseEntity.RPC_Server, global::BaseEntity.RPC_Server.IsVisible(3f)]\r\npublic void Pickup(global::BaseEntity.RPCMessage msg)\r\n{\r\n\tif (Interface.CallHook(\"ICanPickupEntity\", msg.player, this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (!msg.player.CanInteract())\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
