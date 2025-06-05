@@ -27,10 +27,8 @@ jobs:
           pip install -r requirements.txt
           
       - name: Fetch Rust skins
-        run: python scripts/fetch_rust_skins.py --clear --max-items 15000 --timeout 2400
-        env:
-          STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
-        continue-on-error: false  # Fail the workflow if the script fails.
+        run: python scripts/scmmscript.py
+        continue-on-error: false  # Fail the workflow if the script fails
           
       - name: Commit and push changes
         run: |
