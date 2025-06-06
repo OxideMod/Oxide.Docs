@@ -5785,11 +5785,11 @@
       "HookName": "OnPlayerReported",
       "HookParameters": {
         "instance": "BasePlayer",
+        "text6": "string",
         "text5": "string",
-        "text4": "string",
         "text": "string",
-        "text2": "string",
-        "text3": "string"
+        "text3": "string",
+        "text4": "string"
       },
       "ReturnBehavior": 0,
       "TargetType": "BasePlayer",
@@ -5801,7 +5801,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\tTargetName = text6,\r\n\t\tSubject = text,\r\n\t\tMessage = text3,\r\n\t\tType = text4\r\n\t});\r\n\tInterface.CallHook(\"OnPlayerReported\", this, text5, text4, text, text2, text3);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tTargetName = text6,\r\n\t\tSubject = text,\r\n\t\tMessage = text3,\r\n\t\tType = text4\r\n\t});\r\n\tInterface.CallHook(\"OnPlayerReported\", this, text6, text5, text, text3, text4);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
