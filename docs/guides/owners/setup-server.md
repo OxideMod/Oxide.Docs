@@ -32,7 +32,7 @@ Once you've chosen a host, you need to determine the right hardware configuratio
 
 1. **CPU**: The Central Processing Unit (CPU) handles all of the computations your server needs to run the game. Rust can be quite CPU-intensive, especially on larger servers, so a powerful CPU is recommended.
 
-2. **RAM**: Random Access Memory (RAM) is used to store data that the server needs to access quickly. The more players and plugins you have on your server, the more RAM you'll need. A server with 50 players, for instance, should have at least 8GB of RAM.
+2. **RAM**: Random Access Memory (RAM) is used to store data that the server needs to access quickly. The more players and plugins<sup><a href="/glossary#plugins">[3]</a></sup> you have on your server, the more RAM you'll need. A server with 50 players, for instance, should have at least 8GB of RAM.
 
 Your host may have recommendations or calculators to help you decide on the right hardware for your needs. When in doubt, it's better to start with more resources than you think you'll need, as you can usually scale back if necessary.
 
@@ -144,4 +144,4 @@ After the server is started, you should see the console outputting log messages,
 
 ---
 
-Congratulations, you have now set up your own Rust server! Remember, server management is an ongoing process. Regular maintenance, updates, and adjustments may be necessary to ensure the best possible gaming experience for your players. With this guide, you should have a strong foundation to keep your server running smoothly. Should you encounter any issues, remember to refer back to this guide and the resources provided. Use the buttons below for guides on installing Oxide and plugins
+Congratulations, you have now set up your own Rust server! Remember, server management is an ongoing process. Regular maintenance, updates, and adjustments may be necessary to ensure the best possible gaming experience for your players. With this guide, you should have a strong foundation to keep your server running smoothly. Should you encounter any issues, remember to refer back to this guide and the resources provided. Use the buttons below for guides on installing Oxide and plugins<sup><a href="/glossary#plugins">[3]</a></sup>

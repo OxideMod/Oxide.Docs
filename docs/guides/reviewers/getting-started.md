@@ -9,11 +9,11 @@ after: 0
 
 ## Introduction
 
-Before you start reviewing submissions there are some things that are important to keep in mind while reviewing plugins.
+Before you start reviewing submissions there are some things that are important to keep in mind while reviewing plugins<sup><a href="/glossary#plugins">[3]</a></sup>.
 
 It is easy to get carried away obsessing over code quality, performance, coding conventions, and other technical aspects when reviewing a plugin. However, it is important to not lose sight of what we are really trying to achieve here.
 
-Above everything else, we are here to build and manage a happy and healthy community. While code quality is certainly important, and maintaining a base level of code quality is in out best interest for the sake of our reputation as a trustworthy place to find plugins and resources, it is far more important to avoid demoralising new (or even experienced) developers with harsh, scathing reviews of what might be their first ever Oxide plugin.
+Above everything else, we are here to build and manage a happy and healthy community. While code quality is certainly important, and maintaining a base level of code quality is in out best interest for the sake of our reputation as a trustworthy place to find plugins<sup><a href="/glossary#plugins">[3]</a></sup> and resources, it is far more important to avoid demoralising new (or even experienced) developers with harsh, scathing reviews of what might be their first ever Oxide plugin.
 
 ## Principles
 
@@ -21,7 +21,7 @@ It is important that, as a team, we are all aiming in the same direction with ou
 
 ### Balanced and fair
 
-It is likely that you will be reviewing plugins made by people you might already know or have an existing relationship with. We aim to provide unbiased, fair reviews **of the code** not the person, their reputation, or based on any personal grievances you might have.
+It is likely that you will be reviewing plugins<sup><a href="/glossary#plugins">[3]</a></sup> made by people you might already know or have an existing relationship with. We aim to provide unbiased, fair reviews **of the code** not the person, their reputation, or based on any personal grievances you might have.
 
 ### Professional
 
@@ -40,9 +40,9 @@ Our main goal is to build and manage a flourishing community of developers and s
 
 ### Quality over quantity
 
-While it is important to push plugins through the review process at a reasonable pace, it is more valuable to us to perform in-depth and thorough reviews despite the fact that this might mean a plugin sits in the queue for a little longer. This is for two reasons.
+While it is important to push plugins<sup><a href="/glossary#plugins">[3]</a></sup> through the review process at a reasonable pace, it is more valuable to us to perform in-depth and thorough reviews despite the fact that this might mean a plugin sits in the queue for a little longer. This is for two reasons.
 
-The first is to build and maintain our reputation as a place for quality plugins. We take pride in the plugins on our site and we want to avoid being known as a cesspool of poorly coded plugins.
+The first is to build and maintain our reputation as a place for quality plugins<sup><a href="/glossary#plugins">[3]</a></sup>. We take pride in the plugins<sup><a href="/glossary#plugins">[3]</a></sup> on our site and we want to avoid being known as a cesspool of poorly coded plugins<sup><a href="/glossary#plugins">[3]</a></sup>.
 
 Secondly, if we are more thorough with our reviews, we are able to provide more and better feedback to the author.
 
@@ -90,11 +90,11 @@ Essentially, what we mean by this is don't go into a review with a closed mind. 
 
 ## General Rules
 
-We have some general rules for our plugin reviews that help us maintain quality and a happy community of developers. Some rules that plugins must follow are:
+We have some general rules for our plugin reviews that help us maintain quality and a happy community of developers. Some rules that plugins<sup><a href="/glossary#plugins">[3]</a></sup> must follow are:
 
 - Submitter be the original author of the plugin.
-- No AIO (All In One) plugins.
-- No plugins that support or enable piracy, or enable bypassing paid (DLC) content.
+- No AIO (All In One) plugins<sup><a href="/glossary#plugins">[3]</a></sup>.
+- No plugins<sup><a href="/glossary#plugins">[3]</a></sup> that support or enable piracy, or enable bypassing paid (DLC) content.
 
 There are also some general rules we have for what can be included in the code.
 

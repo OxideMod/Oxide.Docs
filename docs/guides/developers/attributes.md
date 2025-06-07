@@ -13,7 +13,7 @@ Custom commands are easily implemented with minimal boilerplate for both in-game
 
 Chat commands are in-game commands entered via the game client's chat, prefixed by a forward slash (/).
 
-when using covalence
+when using covalence<sup><a href="/glossary#covalence">[1]</a></sup>
 
 ```csharp
 [Command("test")]
@@ -23,7 +23,7 @@ private void TestCommand(IPlayer player, string command, string[] args)
 }
 ```
 
-when using Rustplugin
+when using Rustplugin<sup><a href="/glossary#rustplugin">[5]</a></sup>
 
 ```csharp
 [ChatCommand("test")]
@@ -37,7 +37,7 @@ void cmdTest (BasePlayer player, string command, string [] args)
 
 Console commands may be executed from the server console and in-game interfaces F1 (where applicable).
 
-when using covalence
+when using covalence<sup><a href="/glossary#covalence">[1]</a></sup>
 
 ```csharp
 [Command("test")]
@@ -47,7 +47,7 @@ private void TestCommand(IPlayer player, string command, string[] args)
 }
 ```
 
-when using Rustplugin
+when using Rustplugin<sup><a href="/glossary#rustplugin">[5]</a></sup>
 
 ```csharp
 [ConsoleCommand("test")]
@@ -87,7 +87,7 @@ A short description of what the plugin does
 
 ## PluginReference
 
-Reference to other plugin, when this plugin need to use functions from other plugins.
+Reference to other plugin, when this plugin need to use functions from other plugins<sup><a href="/glossary#plugins">[3]</a></sup>.
 
 ```csharp
 [PluginReference] private Plugin Vanish, Backpacks;

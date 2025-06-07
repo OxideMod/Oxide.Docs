@@ -10,7 +10,7 @@ after: miscellaneous
 **Usage:** `oxide.plugins`  
 **Aliases:** `o.plugins`, `plugins`
 
-Lists all plugins including ones that failed to load. Shows the plugin name, version, author, total hooktime and filename. If a plugin failed to load, the reason will be shown.
+Lists all plugins<sup><a href="/glossary#plugins">[3]</a></sup> including ones that failed to load. Shows the plugin name, version, author, total hooktime and filename. If a plugin failed to load, the reason will be shown.
 
 ### Example `oxide.plugins`
 

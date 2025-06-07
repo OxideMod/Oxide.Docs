@@ -5,13 +5,13 @@ after: unique
 
 # Uses permission system (if applicable)
 
-1. Features should generally be gated by one or more permissions.
+1. Features should generally be gated by one or more permissions<sup><a href="/glossary#permissions">[11]</a></sup>.
 
 ## Explanation
 
-This guideline requires that developers implement sufficient permissions that users can use to grant certain users access to the plugin features.
+This guideline requires that developers implement sufficient permissions<sup><a href="/glossary#permissions">[11]</a></sup> that users can use to grant certain users access to the plugin features.
 
-An example of this would be `Vanish` or `Admin Radar` and their individual permissions for various features.
+An example of this would be `Vanish` or `Admin Radar` and their individual permissions<sup><a href="/glossary#permissions">[11]</a></sup> for various features.
 
 This is important because it allows users of the plugin to customise the use of the plugin to how they see fit on their servers. Whether that be only allow their admins to perform certain roles, require their players to perform actions, or to provide an incentive for players to donate.
 
