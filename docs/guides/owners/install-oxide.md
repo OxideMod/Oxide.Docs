@@ -67,3 +67,14 @@ After you have uploaded the Oxide files to your Rust server and restarted it, yo
 If you see Oxide messages in your server console and the `oxide.version` command returns a version number, then Oxide is installed correctly! If you don't see these indications, you may need to troubleshoot the installation.
 
 Continue to the next page for information on installing plugins!
+
+## 5. troubleshooting
+
+1. One common mistake is to update the server back to vanilla after installing Oxide. Make sure that the server start script does not execute `steamcmd.exe ...` 
+
+2. For every server update by Facepunch, there is an Oxide update. Don't mismatch version of Oxide and version of servers. You can track Facepunch server updates on [steamdb.info](https://steamdb.info/app/258550/depots/)
+
+3. When updating, `steamcmd.exe` command should include the `-beta public` switch. Don't use `release` branch because it is not alway in sync with the `public` branch.
+
+4- use the -logFile "Server.log" parameter on `RustDedicated`. It will provide info about what is going wrong. 
+
