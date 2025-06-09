@@ -106878,5 +106878,205 @@
             "tradable": 1,
             "marketable": 1
         }
+    },
+    {
+        "name": "Antique Hatchet",
+        "sell_price": 199,
+        "sell_price_text": "$1.99",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Antique Hatchet",
+            "type": "Hatchet",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Va5GLMfCk4nReh8DEiv5daOKE2pLQwRv-8H9xcJec",
+            "classid": "7149700377",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Antique Pick Axe",
+        "sell_price": 199,
+        "sell_price_text": "$1.99",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Antique Pick Axe",
+            "type": "Pickaxe",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Va5GLNfCk4nReh8DEiv5daOqE6qrc3Sfq7iO-CvDU",
+            "classid": "7149700376",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Croco AR",
+        "sell_price": 249,
+        "sell_price_text": "$2.49",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Croco AR",
+            "type": "Assault Rifle",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Va5GLCfCk4nReh8DEiv5dbMa8_qLc_Qfy_HD-UeP0",
+            "classid": "7149700375",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Ruin SMG",
+        "sell_price": 199,
+        "sell_price_text": "$1.99",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Ruin SMG",
+            "type": "Custom SMG",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Va5GLDfCk4nReh8DEiv5dYO6A-rb03RvC4qmmEiZc",
+            "classid": "7149700374",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Boneforged Facemask",
+        "sell_price": 199,
+        "sell_price_text": "$1.99",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Boneforged Facemask",
+            "type": "Metal Facemask",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Va5GLAfCk4nReh8DEiv5daPqA3qrc3QfqfNvIeRQ",
+            "classid": "7149700373",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Boneforged Chestplate",
+        "sell_price": 99,
+        "sell_price_text": "$0.99",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Boneforged Chestplate",
+            "type": "Metal Chest Plate",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Va5GLBfCk4nReh8DEiv5daMas9pLc0Rvq706KXD40",
+            "classid": "7149700372",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Night Hunters Door",
+        "sell_price": 249,
+        "sell_price_text": "$2.49",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Night Hunters Door",
+            "type": "Sheet Metal Door",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Va5GLGfCk4nReh8DEiv5dQPqE6rbM0Rv8-zTv5Og",
+            "classid": "7149700371",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Neon Farm Door",
+        "sell_price": 249,
+        "sell_price_text": "$2.49",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Neon Farm Door",
+            "type": "Garage Door",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Va5GLHfCk4nReh8DEiv5dbPq46rbM2Q_xkZ3euAA",
+            "classid": "7149700370",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Bamboo Cage Large",
+        "sell_price": 249,
+        "sell_price_text": "$2.49",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Bamboo Cage Large",
+            "type": "Large Wood Box",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Va5GLEfCk4nReh8DEiv5dbPKg5q7wzSPm-lQsURTE",
+            "classid": "7149700369",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Tempered Backpack",
+        "sell_price": 249,
+        "sell_price_text": "$2.49",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Tempered Backpack",
+            "type": "Large Backpack",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Va5GLFfCk4nReh8DEiv5dfPqo8qLM2SfFzegIarA",
+            "classid": "7149700368",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
     }
 ]

@@ -1,13 +1,13 @@
 {
   "metadata": {
-    "generated_at": "2025-06-04T14:05:19.058797",
-    "total_skins": 5266,
-    "skins_with_market_data": 5240,
-    "skins_with_price": 4663,
+    "generated_at": "2025-06-09T16:07:27.237630",
+    "total_skins": 5287,
+    "skins_with_market_data": 5261,
+    "skins_with_price": 4684,
     "twitch_drops_identified": 468,
     "coverage_percentage": 99.51,
     "source_files": [
-      "docs\\public\\data\\exporter_skins-2025-05-27.json",
+      "docs\\public\\data\\exporter_skins-2025-06-09.json",
       "docs\\public\\data\\scmm.json"
     ]
   },
@@ -1787,6 +1787,18 @@
       "foundInMarket": true,
       "matchedBy": "name",
       "marketClassId": "2126396717"
+    },
+    {
+      "skinId": 3492402650,
+      "skinType": "Workshop",
+      "skinName": "Croco AR",
+      "iconUrl": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Va5GLCfCk4nReh8DEiv5dbMa8_qLc_Qfy_HD-UeP0",
+      "sellingPrice": 249,
+      "sellingPriceText": "$2.49",
+      "itemName": "Assault Rifle",
+      "foundInMarket": true,
+      "matchedBy": "name",
+      "marketClassId": "7149700375"
     },
     {
       "skinId": 1306351416,
@@ -9121,6 +9133,18 @@
       "marketClassId": "4899757836"
     },
     {
+      "skinId": 3485300682,
+      "skinType": "Workshop",
+      "skinName": "Black Alligator Helmet",
+      "iconUrl": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Vd7WLMfCk4nReh8DEiv5dbO6E_q7YzRvq2lrN0cgE",
+      "sellingPrice": 199,
+      "sellingPriceText": "$1.99",
+      "itemName": "Coffee Can Helmet",
+      "foundInMarket": true,
+      "matchedBy": "name",
+      "marketClassId": "7128932389"
+    },
+    {
       "skinId": 3323219530,
       "skinType": "Workshop",
       "skinName": "Black Diamond Helmet",
@@ -12179,6 +12203,18 @@
       "foundInMarket": true,
       "matchedBy": "name",
       "marketClassId": "5494237240"
+    },
+    {
+      "skinId": 3492489288,
+      "skinType": "Workshop",
+      "skinName": "Ruin SMG",
+      "iconUrl": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Va5GLDfCk4nReh8DEiv5dYO6A-rb03RvC4qmmEiZc",
+      "sellingPrice": 199,
+      "sellingPriceText": "$1.99",
+      "itemName": "Custom SMG",
+      "foundInMarket": true,
+      "matchedBy": "name",
+      "marketClassId": "7149700374"
     },
     {
       "skinId": 1114032911,
@@ -17017,6 +17053,18 @@
       "marketClassId": "7080296363"
     },
     {
+      "skinId": 3484617792,
+      "skinType": "Workshop",
+      "skinName": "Neon Farm Door",
+      "iconUrl": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Va5GLHfCk4nReh8DEiv5dbPq46rbM2Q_xkZ3euAA",
+      "sellingPrice": 249,
+      "sellingPriceText": "$2.49",
+      "itemName": "Garage Door",
+      "foundInMarket": true,
+      "matchedBy": "name",
+      "marketClassId": "7149700370"
+    },
+    {
       "skinId": 3467037505,
       "skinType": "Workshop",
       "skinName": "Neon Jungle Rule Garage Door",
@@ -18527,6 +18575,18 @@
       "foundInMarket": true,
       "matchedBy": "name",
       "marketClassId": "2239454970"
+    },
+    {
+      "skinId": 3492275291,
+      "skinType": "Workshop",
+      "skinName": "Antique Hatchet",
+      "iconUrl": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Va5GLMfCk4nReh8DEiv5daOKE2pLQwRv-8H9xcJec",
+      "sellingPrice": 199,
+      "sellingPriceText": "$1.99",
+      "itemName": "Hatchet",
+      "foundInMarket": true,
+      "matchedBy": "name",
+      "marketClassId": "7149700377"
     },
     {
       "skinId": 2068589541,
@@ -25681,6 +25741,18 @@
       "marketClassId": "6562202450"
     },
     {
+      "skinId": 3488165488,
+      "skinType": "Workshop",
+      "skinName": "CocoKnight BackPack",
+      "iconUrl": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Vd7WLHfCk4nReh8DEiv5daPqw-rbExQP69meWcxqo",
+      "sellingPrice": 199,
+      "sellingPriceText": "$1.99",
+      "itemName": "Large Backpack",
+      "foundInMarket": true,
+      "matchedBy": "name",
+      "marketClassId": "7128932292"
+    },
+    {
       "skinId": 3457740857,
       "skinType": "Workshop",
       "skinName": "Colorful Sweety Easter Backpack",
@@ -25885,6 +25957,18 @@
       "marketClassId": "6452839742"
     },
     {
+      "skinId": 3484542114,
+      "skinType": "Workshop",
+      "skinName": "Tempered Backpack",
+      "iconUrl": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Va5GLFfCk4nReh8DEiv5dfPqo8qLM2SfFzegIarA",
+      "sellingPrice": 249,
+      "sellingPriceText": "$2.49",
+      "itemName": "Large Backpack",
+      "foundInMarket": true,
+      "matchedBy": "name",
+      "marketClassId": "7149700368"
+    },
+    {
       "skinId": 3369502755,
       "skinType": "Twitch Drop",
       "skinName": "Twitch Rivals Backpack",
@@ -25943,6 +26027,18 @@
       "foundInMarket": true,
       "matchedBy": "name",
       "marketClassId": "5348076388"
+    },
+    {
+      "skinId": 3488436982,
+      "skinType": "Workshop",
+      "skinName": "All or Nothing Large Box",
+      "iconUrl": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Vd7WLGfCk4nReh8DEiv5dYPaw7pbU-Rf9yC1Mr5A",
+      "sellingPrice": 199,
+      "sellingPriceText": "$1.99",
+      "itemName": "Large Wood Box",
+      "foundInMarket": true,
+      "matchedBy": "name",
+      "marketClassId": "7128932293"
     },
     {
       "skinId": 3037938069,
@@ -26063,6 +26159,18 @@
       "foundInMarket": true,
       "matchedBy": "name",
       "marketClassId": "2620553413"
+    },
+    {
+      "skinId": 3491881414,
+      "skinType": "Workshop",
+      "skinName": "Bamboo Cage Large",
+      "iconUrl": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Va5GLEfCk4nReh8DEiv5dbPKg5q7wzSPm-lQsURTE",
+      "sellingPrice": 249,
+      "sellingPriceText": "$2.49",
+      "itemName": "Large Wood Box",
+      "foundInMarket": true,
+      "matchedBy": "name",
+      "marketClassId": "7149700369"
     },
     {
       "skinId": 3280593492,
@@ -30865,6 +30973,18 @@
       "marketClassId": "6827552374"
     },
     {
+      "skinId": 3484454822,
+      "skinType": "Workshop",
+      "skinName": "Eyes of the Jungle LR",
+      "iconUrl": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Vd7WLFfCk4nReh8DEiv5dbO6w4pLw3Qf670DcLPEo",
+      "sellingPrice": 249,
+      "sellingPriceText": "$2.49",
+      "itemName": "LR-300 Assault Rifle",
+      "foundInMarket": true,
+      "matchedBy": "name",
+      "marketClassId": "7128932289"
+    },
+    {
       "skinId": 1883559335,
       "skinType": "Workshop",
       "skinName": "Flyboy LR",
@@ -32147,6 +32267,18 @@
       "foundInMarket": true,
       "matchedBy": "name",
       "marketClassId": "3672392327"
+    },
+    {
+      "skinId": 3487979488,
+      "skinType": "Workshop",
+      "skinName": "Boneforged Chestplate",
+      "iconUrl": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Va5GLBfCk4nReh8DEiv5daMas9pLc0Rvq706KXD40",
+      "sellingPrice": 99,
+      "sellingPriceText": "$0.99",
+      "itemName": "Metal Chest Plate",
+      "foundInMarket": true,
+      "matchedBy": "name",
+      "marketClassId": "7149700372"
     },
     {
       "skinId": 1711048020,
@@ -33983,6 +34115,18 @@
       "foundInMarket": true,
       "matchedBy": "name",
       "marketClassId": "3672392326"
+    },
+    {
+      "skinId": 3487981325,
+      "skinType": "Workshop",
+      "skinName": "Boneforged Facemask",
+      "iconUrl": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Va5GLAfCk4nReh8DEiv5daPqA3qrc3QfqfNvIeRQ",
+      "sellingPrice": 199,
+      "sellingPriceText": "$1.99",
+      "itemName": "Metal Facemask",
+      "foundInMarket": true,
+      "matchedBy": "name",
+      "marketClassId": "7149700373"
     },
     {
       "skinId": 835026584,
@@ -39157,6 +39301,18 @@
       "marketClassId": "2257399471"
     },
     {
+      "skinId": 3492273891,
+      "skinType": "Workshop",
+      "skinName": "Antique Pick Axe",
+      "iconUrl": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Va5GLNfCk4nReh8DEiv5daOqE6qrc3Sfq7iO-CvDU",
+      "sellingPrice": 199,
+      "sellingPriceText": "$1.99",
+      "itemName": "Pickaxe",
+      "foundInMarket": true,
+      "matchedBy": "name",
+      "marketClassId": "7149700376"
+    },
+    {
       "skinId": 2068591788,
       "skinType": "Workshop",
       "skinName": "Apocalyptic Pick Axe",
@@ -42313,6 +42469,18 @@
       "marketClassId": "4899757835"
     },
     {
+      "skinId": 3484287557,
+      "skinType": "Workshop",
+      "skinName": "Black Alligator Vest",
+      "iconUrl": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Vd7WLNfCk4nReh8DEiv5daPaA9qLM_Qfq8VR9RO8k",
+      "sellingPrice": 199,
+      "sellingPriceText": "$1.99",
+      "itemName": "Road Sign Jacket",
+      "foundInMarket": true,
+      "matchedBy": "name",
+      "marketClassId": "7128932299"
+    },
+    {
       "skinId": 3323217280,
       "skinType": "Workshop",
       "skinName": "Black Diamond Roadsign Vest",
@@ -43715,6 +43883,18 @@
       "foundInMarket": true,
       "matchedBy": "name",
       "marketClassId": "4899757834"
+    },
+    {
+      "skinId": 3477571853,
+      "skinType": "Workshop",
+      "skinName": "Black Alligator Kilt",
+      "iconUrl": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Vd7WPFfCk4nReh8DEiv5dYPK04r7Q1Q_G8-IHfp6g",
+      "sellingPrice": 199,
+      "sellingPriceText": "$1.99",
+      "itemName": "Road Sign Kilt",
+      "foundInMarket": true,
+      "matchedBy": "name",
+      "marketClassId": "7128932390"
     },
     {
       "skinId": 3323218274,
@@ -47845,6 +48025,18 @@
       "marketClassId": "5704762847"
     },
     {
+      "skinId": 3484361383,
+      "skinType": "Workshop",
+      "skinName": "Jungle Sword",
+      "iconUrl": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Vd7WLDfCk4nReh8DEiv5daPKo4qrwyQf66KfKGmFk",
+      "sellingPrice": 249,
+      "sellingPriceText": "$2.49",
+      "itemName": "Salvaged Sword",
+      "foundInMarket": true,
+      "matchedBy": "name",
+      "marketClassId": "7128932296"
+    },
+    {
       "skinId": 2852576093,
       "skinType": "Workshop",
       "skinName": "Katana Sword",
@@ -49919,6 +50111,18 @@
       "foundInMarket": true,
       "matchedBy": "name",
       "marketClassId": "3462251978"
+    },
+    {
+      "skinId": 3487711282,
+      "skinType": "Workshop",
+      "skinName": "Cock SAR",
+      "iconUrl": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Vd7WLAfCk4nReh8DEiv5daMKk8pLM1QP23Nv2_MaM",
+      "sellingPrice": 199,
+      "sellingPriceText": "$1.99",
+      "itemName": "Semi-Automatic Rifle",
+      "foundInMarket": true,
+      "matchedBy": "name",
+      "marketClassId": "7128932295"
     },
     {
       "skinId": 1616628843,
@@ -53629,6 +53833,18 @@
       "marketClassId": "6043219873"
     },
     {
+      "skinId": 3491713026,
+      "skinType": "Workshop",
+      "skinName": "Night Hunters Door",
+      "iconUrl": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Va5GLGfCk4nReh8DEiv5dQPqE6rbM0Rv8-zTv5Og",
+      "sellingPrice": 249,
+      "sellingPriceText": "$2.49",
+      "itemName": "Sheet Metal Door",
+      "foundInMarket": true,
+      "matchedBy": "name",
+      "marketClassId": "7149700371"
+    },
+    {
       "skinId": 1435254318,
       "skinType": "Workshop",
       "skinName": "Night Sky Door",
@@ -54479,6 +54695,18 @@
       "foundInMarket": true,
       "matchedBy": "name",
       "marketClassId": "5483120263"
+    },
+    {
+      "skinId": 3488341034,
+      "skinType": "Workshop",
+      "skinName": "Twisted Metal Door",
+      "iconUrl": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Vd7WLBfCk4nReh8DEiv5daPKo5pL0xQvG-TiL1Gk0",
+      "sellingPrice": 199,
+      "sellingPriceText": "$1.99",
+      "itemName": "Sheet Metal Door",
+      "foundInMarket": true,
+      "matchedBy": "name",
+      "marketClassId": "7128932294"
     },
     {
       "skinId": 3027110062,
@@ -58897,6 +59125,18 @@
       "marketClassId": "3222309131"
     },
     {
+      "skinId": 3486305311,
+      "skinType": "Workshop",
+      "skinName": "Heat Seeker Thompson",
+      "iconUrl": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Vd7WLEfCk4nReh8DEiv5dbOK8-r7A1Qvy6FSjwohI",
+      "sellingPrice": 299,
+      "sellingPriceText": "$2.99",
+      "itemName": "Thompson",
+      "foundInMarket": true,
+      "matchedBy": "name",
+      "marketClassId": "7128932290"
+    },
+    {
       "skinId": 2985446841,
       "skinType": "Workshop",
       "skinName": "HQM Thompson",
@@ -61043,6 +61283,18 @@
       "foundInMarket": true,
       "matchedBy": "name",
       "marketClassId": "3528734168"
+    },
+    {
+      "skinId": 3484612187,
+      "skinType": "Workshop",
+      "skinName": "Bamboo Cage",
+      "iconUrl": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Vd7WLCfCk4nReh8DEiv5dYOa08pL03SfG-Pq9WdmY",
+      "sellingPrice": 249,
+      "sellingPriceText": "$2.49",
+      "itemName": "Wood Storage Box",
+      "foundInMarket": true,
+      "matchedBy": "name",
+      "marketClassId": "7128932297"
     },
     {
       "skinId": 3480287973,

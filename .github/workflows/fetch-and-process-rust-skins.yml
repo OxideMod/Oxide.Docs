@@ -1,0 +1,76 @@
+name: Fetch and Process Rust Skins
+
+on:
+  schedule:
+    # Run every Thursday at 6:00 PM EST (UTC-5)
+    - cron: '0 23 * * 4'  # 23:00 UTC = 18:00 EST, day 4 = Thursday
+  workflow_dispatch:  # Allow manual triggering
+    inputs:
+      vm_api_endpoint:
+        description: 'VM API endpoint URL'
+        required: false
+        type: string
+      skip_scmm:
+        description: 'Skip SCMM data fetch and use existing file'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  fetch-and-process:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
+      - name: Fetch and process Rust skins
+        run: |
+          # Determine VM API endpoint
+          if [ -n "${{ github.event.inputs.vm_api_endpoint }}" ]; then
+            VM_ENDPOINT="${{ github.event.inputs.vm_api_endpoint }}"
+          else
+            VM_ENDPOINT="${{ secrets.VM_API_ENDPOINT }}"
+          fi
+          
+          # Determine if we should skip SCMM fetch
+          SKIP_SCMM=""
+          if [ "${{ github.event.inputs.skip_scmm }}" = "true" ]; then
+            SKIP_SCMM="--skip-scmm"
+          fi
+          
+          # Run the script with appropriate parameters
+          echo "Running fetch_skins.py with API endpoint: $VM_ENDPOINT"
+          python scripts/fetch_skins.py --api-url "$VM_ENDPOINT" $SKIP_SCMM
+        continue-on-error: false  # Fail the workflow if the script fails
+          
+      - name: Commit and push changes
+        run: |
+          # Get current date for commit message
+          CURRENT_DATE=$(date +%Y-%m-%d)
+          
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Add all relevant files
+          git add docs/public/data/scmm.json
+          git add docs/public/data/exporter_skins-*.json
+          git add docs/public/data/merged_skins.json
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update Rust skins data [$CURRENT_DATE] [skip ci]"
+            git push
+          fi 
