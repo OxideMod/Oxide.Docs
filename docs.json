@@ -9697,7 +9697,7 @@
           "allowSwap": "bool"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\texpr_2C9(slot2, num2);\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\tthis.amount -= num2;\r\n\t\t\t\t\t\t\tslot2.MarkDirty();\r\n\t\t\t\t\t\t\tInterface.CallHook(\"OnItemStacked\", slot2, this, newcontainer, num2);\r\n\t\t\t\t\t\t\tthis.MarkDirty();\r\n\t\t\t\t\t\t\tthis.MigrateItemOwnership(slot2, num2);\r\n\t\t\t\t\t\t\tif (this.amount <= 0)\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\tthis.RemoveFromWorld();\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\texpr_2D1(slot2, num2);\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\tthis.amount -= num2;\r\n\t\t\t\t\t\t\tslot2.MarkDirty();\r\n\t\t\t\t\t\t\tInterface.CallHook(\"OnItemStacked\", slot2, this, newcontainer, num2);\r\n\t\t\t\t\t\t\tthis.MarkDirty();\r\n\t\t\t\t\t\t\tthis.MigrateItemOwnership(slot2, num2);\r\n\t\t\t\t\t\t\tif (this.amount <= 0)\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\tthis.RemoveFromWorld();\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -11597,7 +11597,7 @@
           "allowSwap": "bool"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\texpr_2C9(slot2, num2);\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\tthis.amount -= num2;\r\n\t\t\t\t\t\t\tslot2.MarkDirty();\r\n\t\t\t\t\t\t\tInterface.CallHook(\"OnItemStacked\", slot2, this, newcontainer, num2);\r\n\t\t\t\t\t\t\tthis.MarkDirty();\r\n\t\t\t\t\t\t\tthis.MigrateItemOwnership(slot2, num2);\r\n\t\t\t\t\t\t\tif (this.amount <= 0)\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\tthis.RemoveFromWorld();\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\texpr_2D1(slot2, num2);\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\tthis.amount -= num2;\r\n\t\t\t\t\t\t\tslot2.MarkDirty();\r\n\t\t\t\t\t\t\tInterface.CallHook(\"OnItemStacked\", slot2, this, newcontainer, num2);\r\n\t\t\t\t\t\t\tthis.MarkDirty();\r\n\t\t\t\t\t\t\tthis.MigrateItemOwnership(slot2, num2);\r\n\t\t\t\t\t\t\tif (this.amount <= 0)\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\tthis.RemoveFromWorld();\r\n//---\r\n"
     },
     {
       "Type": 0,
