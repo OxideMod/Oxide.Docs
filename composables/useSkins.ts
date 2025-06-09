@@ -31,13 +31,21 @@ interface UseSkins {
   isInitialized: ReturnType<typeof ref<boolean>>;
   searchTerm: ReturnType<typeof ref<string>>;
   debouncedSearchTerm: ReturnType<typeof ref<string>>;
+  selectedItemTypes: ReturnType<typeof ref<string[]>>;
+  selectedItemNames: ReturnType<typeof ref<string[]>>;
+  priceRange: ReturnType<typeof ref<{ min: number; max: number }>>;
 
   // Computed
   filteredSkins: ReturnType<typeof computed<Skin[]>>;
-  allMatchingFilteredSkins: ReturnType<typeof computed<Skin[]>>;
+  allMatchingFilteredSkins: ReturnType<typeof ref<Skin[]>>;
+  itemTypes: ReturnType<typeof computed<string[]>>;
+  itemNames: ReturnType<typeof computed<string[]>>;
 
   // Methods
   updateSearch: (newValue: string) => void;
+  updateItemType: (itemType: string) => void;
+  updateItemName: (itemName: string) => void;
+  updatePriceRange: (newRange: { min: number; max: number }) => void;
   loadMore: () => void;
   copyToClipboard: (text: string, event: Event) => Promise<void>;
   getImageUrl: (iconUrl?: string) => string;
@@ -60,73 +68,81 @@ export function useSkins(): UseSkins {
   const searchTerm = ref('');
   const searchDebounceTimer = ref<NodeJS.Timeout | null>(null);
   const debouncedSearchTerm = ref('');
+  const selectedItemTypes = ref<string[]>([]);
+  const selectedItemNames = ref<string[]>([]);
+  const priceRange = ref({ min: 0, max: 500 }); // Default price range
 
-  // Enhanced performance: memoized filtered results
-  const filteredSkinsCache = ref(new Map<string, Skin[]>());
+  // A ref to hold the result of the full, unfiltered search and filter
+  const allMatchingFilteredSkins = ref<Skin[]>([]);
 
-  // Computed property to filter skins with caching
+  // A computed property for the visible slice of the filtered skins
   const filteredSkins = computed(() => {
+    return allMatchingFilteredSkins.value.slice(0, visibleItems.value);
+  });
+
+  const itemTypes = computed(() => {
     if (!skins.value.skins) return [];
+    const types = new Set(skins.value.skins.map(s => s.skinType).filter(Boolean) as string[]);
+    return ['All', ...Array.from(types).sort()];
+  });
 
-    const term = debouncedSearchTerm.value.toLowerCase().trim();
-    const cacheKey = `${term}_${visibleItems.value}`;
+  const itemNames = computed(() => {
+    if (!skins.value.skins) return [];
+    const names = new Set(skins.value.skins.map(s => s.itemName).filter(Boolean) as string[]);
+    return Array.from(names).sort();
+  });
 
-    // Check cache first
-    if (filteredSkinsCache.value.has(cacheKey)) {
-      return filteredSkinsCache.value.get(cacheKey)!;
-    }
-
-    // Filter market skins only once
-    const marketSkins = skins.value.skins.filter(skin => skin.foundInMarket === true);
-
-    let result: Skin[];
-    if (!term) {
-      result = marketSkins.slice(0, visibleItems.value);
-    } else {
-      // Enhanced search: search in multiple fields
-      const allFiltered = marketSkins.filter(skin => {
-        const skinName = (skin.skinName || '').toLowerCase();
-        const itemName = (skin.itemName || '').toLowerCase();
-        const skinType = (skin.skinType || '').toLowerCase();
-
-        return skinName.includes(term) || itemName.includes(term) || skinType.includes(term);
-      });
-      result = allFiltered.slice(0, visibleItems.value);
-    }
-
-    // Cache the result
-    filteredSkinsCache.value.set(cacheKey, result);
-
-    // Limit cache size to prevent memory leaks
-    if (filteredSkinsCache.value.size > 100) {
-      const firstKey = filteredSkinsCache.value.keys().next().value;
-      if (firstKey) {
-        filteredSkinsCache.value.delete(firstKey);
+  // Watch for changes in filters and update the full list of matching skins
+  watch(
+    [
+      debouncedSearchTerm,
+      selectedItemTypes,
+      selectedItemNames,
+      priceRange,
+      () => skins.value.skins,
+    ],
+    ([term, itemTypes, itemNames, range, skinsValue]) => {
+      if (!skinsValue) {
+        allMatchingFilteredSkins.value = [];
+        return;
       }
-    }
 
-    return result;
-  });
+      const lowerCaseTerm = (term as string).toLowerCase().trim();
 
-  // Computed property for the full list of filtered skins (not paginated by visibleItems)
-  const allMatchingFilteredSkins = computed(() => {
-    if (!skins.value.skins) return [];
+      let filtered = skinsValue.filter(skin => skin.foundInMarket === true);
 
-    const marketSkins = skins.value.skins.filter(skin => skin.foundInMarket === true);
-    const term = debouncedSearchTerm.value.toLowerCase().trim();
+      if (lowerCaseTerm) {
+        filtered = filtered.filter(skin => {
+          const skinName = (skin.skinName || '').toLowerCase();
+          const itemName = (skin.itemName || '').toLowerCase();
+          const skinType = (skin.skinType || '').toLowerCase();
+          return (
+            skinName.includes(lowerCaseTerm) ||
+            itemName.includes(lowerCaseTerm) ||
+            skinType.includes(lowerCaseTerm)
+          );
+        });
+      }
 
-    if (!term) {
-      return marketSkins;
-    }
+      if (itemTypes && (itemTypes as string[]).length > 0) {
+        filtered = filtered.filter(skin => (itemTypes as string[]).includes(skin.skinType || ''));
+      }
 
-    return marketSkins.filter(skin => {
-      const skinName = (skin.skinName || '').toLowerCase();
-      const itemName = (skin.itemName || '').toLowerCase();
-      const skinType = (skin.skinType || '').toLowerCase();
+      if (itemNames && (itemNames as string[]).length > 0) {
+        filtered = filtered.filter(skin => (itemNames as string[]).includes(skin.itemName || ''));
+      }
 
-      return skinName.includes(term) || itemName.includes(term) || skinType.includes(term);
-    });
-  });
+      const { min, max } = range as { min: number; max: number };
+      filtered = filtered.filter(skin => {
+        const price = parseFloat(skin.sellingPriceText?.replace('$', '') || '0');
+        return price >= min && price <= max;
+      });
+
+      allMatchingFilteredSkins.value = filtered;
+      resetPagination(); // Reset pagination whenever filters change
+    },
+    { deep: true } // Use deep watch for the priceRange object
+  );
 
   // Optimized scroll handler with better throttling
   let scrollTimeout: NodeJS.Timeout;
@@ -183,8 +199,6 @@ export function useSkins(): UseSkins {
   const resetPagination = () => {
     visibleItems.value = 50;
     allLoaded.value = false;
-    // Clear the cache when search changes
-    filteredSkinsCache.value.clear();
 
     nextTick(() => {
       if (allMatchingFilteredSkins.value.length <= visibleItems.value) {
@@ -205,8 +219,33 @@ export function useSkins(): UseSkins {
     // Set new timer for debounced search
     searchDebounceTimer.value = setTimeout(() => {
       debouncedSearchTerm.value = sanitizeInput(newValue);
-      resetPagination();
+      // resetPagination is now called by the watcher
     }, 300); // 300ms debounce
+  };
+
+  const updateItemType = (itemType: string) => {
+    const index = selectedItemTypes.value.indexOf(itemType);
+    if (index > -1) {
+      selectedItemTypes.value.splice(index, 1);
+    } else {
+      selectedItemTypes.value.push(itemType);
+    }
+    // resetPagination is now called by the watcher
+  };
+
+  const updateItemName = (itemName: string) => {
+    const index = selectedItemNames.value.indexOf(itemName);
+    if (index > -1) {
+      selectedItemNames.value.splice(index, 1);
+    } else {
+      selectedItemNames.value.push(itemName);
+    }
+    // resetPagination is called by the watcher
+  };
+
+  const updatePriceRange = (newRange: { min: number; max: number }) => {
+    priceRange.value = newRange;
+    // resetPagination is now called by the watcher
   };
 
   // Enhanced image URL function with validation
@@ -367,8 +406,12 @@ export function useSkins(): UseSkins {
 
   // Initialize skins data
   const initializeSkins = async (): Promise<void> => {
+    if (isInitialized.value) return; // Prevent re-initialization
+
+    loading.value = true;
+    error.value = null;
+
     try {
-      loading.value = true;
       const response = await fetch('/data/merged_skins.json');
       if (!response.ok) {
         throw new Error(`HTTP error ${response.status}`);
@@ -404,16 +447,14 @@ export function useSkins(): UseSkins {
 
   // Setup lifecycle hooks
   const setupLifecycle = () => {
-    onMounted(async () => {
-      document.body.setAttribute('data-skins-page', 'true');
-      await initializeSkins();
+    onMounted(() => {
+      initializeSkins();
       window.addEventListener('scroll', handleScroll, { passive: true });
       // Setup lazy loading once after initial load
       setupLazyLoading();
     });
 
     onUnmounted(() => {
-      document.body.removeAttribute('data-skins-page');
       window.removeEventListener('scroll', handleScroll);
 
       // Cleanup timers
@@ -440,13 +481,21 @@ export function useSkins(): UseSkins {
     isInitialized,
     searchTerm,
     debouncedSearchTerm,
+    selectedItemTypes,
+    selectedItemNames,
+    priceRange,
 
     // Computed
     filteredSkins,
     allMatchingFilteredSkins,
+    itemTypes,
+    itemNames,
 
     // Methods
     updateSearch,
+    updateItemType,
+    updateItemName,
+    updatePriceRange,
     loadMore,
     copyToClipboard,
     getImageUrl,

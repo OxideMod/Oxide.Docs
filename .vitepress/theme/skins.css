@@ -119,7 +119,7 @@
 .skin-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 16px;
   margin-top: 30px;
   padding: 0 40px;
 }
@@ -140,7 +140,7 @@
 @media (max-width: 1024px) {
   .skin-container {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 14px;
   }
 
   .skins-header h1 {
@@ -166,529 +166,322 @@
     font-size: 2rem;
   }
 
-  /* Modern mobile card design */
   .skin-item {
-    flex-direction: column;
-    min-height: auto;
-    align-items: stretch;
-    padding: 0;
-    border-radius: 12px;
-    background: var(--skin-card-bg);
-    box-shadow: 0 3px 12px var(--skin-shadow);
-    overflow: hidden;
-  }
-
-  .skin-item:hover {
-    box-shadow: 0 6px 20px var(--skin-shadow-hover);
-    transform: translateY(-2px);
-    transition: all 0.3s ease;
+    min-height: 100px;
   }
 
   .skin-image-container {
-    width: 100%;
-    height: 120px;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    border-radius: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .dark .skin-image-container {
-    background: #1a191b;
-  }
-
-  .skin-image {
     width: 90px;
+    min-width: 90px;
     height: 90px;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-  }
-
-  .skin-item:hover .skin-image {
-    transform: scale(1.05);
-  }
-
-  .skin-content {
-    padding: 12px;
-    flex-direction: column;
-    gap: 8px;
-    background: var(--skin-card-bg);
-    align-items: stretch;
-  }
-
-  .skin-info-section {
-    width: 100%;
-    gap: 4px;
-  }
-
-  .skin-header-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-    width: 100%;
-  }
-
-  .skin-name {
-    font-size: 1.1rem;
-    font-weight: 700;
-    line-height: 1.2;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    display: -webkit-box;
-    overflow: hidden;
-    width: 100%;
-    color: var(--vp-c-text-1);
-    padding-bottom: 20px;
-  }
-
-  /* Hide skin ID on mobile */
-  .skin-id {
-    display: none;
-  }
-
-  .skin-meta-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-    width: 100%;
-  }
-
-  .skin-item-details {
-    gap: 2px;
-    width: 100%;
-  }
-
-  .skin-item-name {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--vp-c-text-2);
-    line-height: 1.3;
-  }
-
-  /* Hide skin type on mobile */
-  .skin-type {
-    display: none;
-  }
-
-  /* Hide price on mobile */
-  .skin-price {
-    display: none;
-  }
-
-  .skin-buttons-container {
-    flex-direction: row;
-    gap: 8px;
-    margin-top: 6px;
-  }
-
-  .skin-link {
-    padding: 10px 16px;
-    font-size: 0.8rem;
-    min-height: 40px;
-    font-weight: 600;
-    border-radius: 8px;
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-
-  .skin-link.rusthelp {
-    font-size: 0.75rem;
-    font-weight: 700;
-  }
-
-  .steam-icon,
-  .rusthelp-icon {
-    width: 16px;
-    height: 16px;
-    margin-right: 6px;
-  }
-}
-
-@media (max-width: 600px) {
-  .skin-container {
-    padding: 0 16px;
-    gap: 10px;
-  }
-
-  .skins-header {
-    padding: 0 16px;
-    margin-bottom: 20px;
-  }
-
-  .skins-header h1 {
-    font-size: 1.8rem;
-  }
-
-  .search-input-container {
-    padding: 0 16px;
-    margin-bottom: 20px;
-  }
-
-  .search-input {
-    padding: 12px 16px;
-    font-size: 0.95rem;
-  }
-
-  .skin-item {
-    border-radius: 10px;
-  }
-
-  .skin-image-container {
-    height: 100px;
   }
 
   .skin-image {
-    width: 75px;
-    height: 75px;
+    width: 70px;
+    height: 70px;
   }
 
   .skin-content {
-    padding: 10px;
-    gap: 6px;
+    padding: 10px 12px;
+  }
+
+  .skin-info {
+    padding-right: 8px;
   }
 
   .skin-name {
     font-size: 1rem;
   }
 
-  .skin-item-name {
+  .skin-price {
     font-size: 0.85rem;
   }
 
-  .skin-link {
-    padding: 9px 14px;
+  .skin-type-info {
     font-size: 0.75rem;
-    min-height: 36px;
-  }
-
-  .skin-link.rusthelp {
-    font-size: 0.7rem;
-  }
-
-  .steam-icon,
-  .rusthelp-icon {
-    width: 14px;
-    height: 14px;
-    margin-right: 5px;
-  }
-}
-
-@media (max-width: 400px) {
-  .skin-container {
-    padding: 0 12px;
-    gap: 8px;
-  }
-
-  .skins-header {
-    padding: 0 12px;
-  }
-
-  .skins-header h1 {
-    font-size: 1.6rem;
-  }
-
-  .search-input-container {
-    padding: 0 12px;
-  }
-
-  .search-input {
-    padding: 10px 14px;
-    font-size: 0.9rem;
-  }
-
-  .skin-item {
-    border-radius: 8px;
-  }
-
-  .skin-image-container {
-    height: 90px;
-  }
-
-  .skin-image {
-    width: 65px;
-    height: 65px;
-  }
-
-  .skin-content {
-    padding: 8px;
-    gap: 4px;
-  }
-
-  .skin-header-row {
-    gap: 3px;
-  }
-
-  .skin-name {
-    font-size: 0.95rem;
-  }
-
-  .skin-item-name {
-    font-size: 0.8rem;
   }
 
   .skin-buttons-container {
     gap: 6px;
-    margin-top: 4px;
   }
 
   .skin-link {
-    padding: 8px 12px;
+    padding: 8px 10px;
     font-size: 0.7rem;
-    min-height: 34px;
-    border-radius: 6px;
+  }
+}
+
+@media (max-width: 600px) {
+  .skin-container {
+    padding: 0 16px;
   }
 
-  .skin-link.rusthelp {
+  .skins-header {
+    padding: 0 16px;
+  }
+
+  .search-input-container {
+    padding: 0 16px;
+  }
+
+  .skin-item {
+    min-height: 90px;
+  }
+
+  .skin-image-container {
+    width: 80px;
+    min-width: 80px;
+    height: 80px;
+  }
+
+  .skin-image {
+    width: 60px;
+    height: 60px;
+  }
+
+  .skin-content {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .skin-info {
+    padding-right: 6px;
+  }
+
+  .skin-name {
+    font-size: 0.9rem;
+  }
+
+  .skin-price {
+    font-size: 0.8rem;
+    margin-top: 2px;
+  }
+
+  .skin-type-info {
+    font-size: 0.7rem;
+  }
+
+  .skin-link {
+    padding: 6px 8px;
     font-size: 0.65rem;
-  }
-
-  .steam-icon,
-  .rusthelp-icon {
-    width: 12px;
-    height: 12px;
-    margin-right: 4px;
+    min-height: 28px;
   }
 }
 
 .skin-item {
-  border-radius: 8px;
-  background: var(--skin-card-bg);
-  box-shadow: 0 2px 8px var(--skin-shadow);
-  overflow: hidden;
-  transition: box-shadow 0.2s ease;
   display: flex;
-  flex-direction: row;
-  position: relative;
-  border: 1px solid var(--skin-card-border);
-  min-height: 100px;
   align-items: center;
+  background: var(--skin-card-bg);
+  border-radius: 8px;
+  border: 1px solid var(--skin-card-border);
+  box-shadow: 0 2px 6px var(--skin-shadow);
+  overflow: hidden;
+  position: relative;
+  padding: 2px;
+  margin-bottom: 1px;
+  transition: box-shadow 0.2s ease;
+  min-height: 90px;
 }
 
 .skin-item:hover {
-  box-shadow: 0 4px 12px var(--skin-shadow-hover);
-  border-color: var(--vp-c-brand-2);
+  box-shadow: 0 4px 8px var(--skin-shadow-hover);
 }
 
 .skin-image-container {
-  position: relative;
   width: 100px;
   min-width: 100px;
   height: 100px;
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  margin-right: 24px;
 }
 
 .skin-image {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   object-fit: contain;
-  transition: opacity 0.2s ease;
-  opacity: 1;
+}
+
+.skin-image.acoustic-guitar {
+  transform: rotate(-30deg);
 }
 
 .skin-content {
-  padding: 16px;
-  flex: 1;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  min-width: 0;
-  gap: 20px;
-}
-
-.skin-info-section {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  min-width: 0;
+  justify-content: center;
+  height: 100%;
+  padding-right: 24px;
 }
 
-.skin-header-row {
+.skin-header {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
+  align-items: center;
   gap: 12px;
-  min-width: 0;
+  margin-bottom: 8px;
 }
 
 .skin-name {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--vp-c-text-1);
-  line-height: 1.2;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  word-wrap: break-word;
-  hyphens: auto;
-  letter-spacing: -0.01em;
-  flex: 1;
-  min-width: 0;
-}
-
-.skin-id {
-  font-size: 0.65rem;
-  color: var(--vp-c-text-3);
-  opacity: 0.7;
-  font-family: monospace;
-  background: rgba(128, 128, 128, 0.1);
-  padding: 2px 6px;
-  border-radius: 4px;
-  flex-shrink: 0;
+  font-size: 1.4rem;
   font-weight: 600;
-  cursor: pointer;
-  transition: opacity 0.2s ease;
-  user-select: none;
-  position: relative;
+  margin: 0;
+  color: var(--vp-c-text-1);
 }
 
-.skin-id:hover {
-  opacity: 1;
-  background: rgba(247, 107, 21, 0.1);
-  color: var(--vp-c-brand-1);
-}
-
-.skin-id.copied {
-  background: rgba(76, 175, 80, 0.2);
-  color: #4caf50;
-  opacity: 1;
-}
-
-.skin-meta-row {
+.skin-icon-buttons {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  min-width: 0;
+  gap: 8px;
+  margin-left: 12px;
 }
 
-.skin-item-details {
+.skin-icon-link {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
-  flex: 1;
-  min-width: 0;
-}
-
-.skin-item-name {
-  font-size: 0.8rem;
-  color: var(--vp-c-text-2);
-  opacity: 0.9;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-weight: 500;
-}
-
-.skin-type {
-  font-size: 0.7rem;
-  color: var(--vp-c-brand-1);
-  opacity: 0.8;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.skin-price {
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: #4caf50;
-  flex-shrink: 0;
-  text-align: right;
-  min-width: fit-content;
-}
-
-.skin-price.unavailable {
-  color: var(--vp-c-text-3);
-  font-style: italic;
-}
-
-.skin-link {
-  display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #f76b15;
-  color: white !important;
-  padding: 8px 12px;
-  border-radius: 6px;
-  text-decoration: none !important;
-  font-weight: 600;
-  font-size: 0.75rem;
-  text-align: center;
-  transition: background-color 0.2s ease;
-  border: none;
-  min-height: 32px;
-  position: relative;
-  overflow: hidden;
-  white-space: nowrap;
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  transition: opacity 0.2s ease;
 }
 
-.skin-link:hover {
-  background: #e55a0c;
-  text-decoration: none;
-  color: white !important;
+.skin-icon-link:hover {
+  opacity: 0.85;
 }
 
-.skin-link.rusthelp {
-  background: #2c5aa0;
-  font-size: 0.65rem;
-  font-weight: 700;
+.skin-icon-link.steam {
+  background-color: #1b2838;
 }
 
-.skin-link.rusthelp:hover {
-  background: #1e3d6f;
+.skin-icon-link.rusthelp {
+  background-color: #f76b15;
 }
 
-.skin-link.rusthelp.blocked {
-  background: #6c757d;
-  opacity: 0.6;
-}
-
-.skin-link.rusthelp.blocked:hover {
-  background: #6c757d;
-}
-
-.skin-link.blocked {
-  background: #6c757d !important;
-  opacity: 0.6;
-}
-
-.skin-link.blocked:hover {
-  background: #6c757d !important;
-}
-
-.skin-buttons-container {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  flex-shrink: 0;
-  align-self: center;
+.steam-icon,
+.rusthelp-icon {
+  width: 20px;
+  height: 20px;
 }
 
 .steam-icon {
-  width: 14px;
-  height: 14px;
   filter: brightness(0) invert(1);
-  margin-right: 4px;
-  flex-shrink: 0;
 }
 
-.rusthelp-icon {
-  width: 14px;
-  height: 14px;
-  margin-right: 4px;
-  flex-shrink: 0;
+.skin-type-info {
+  font-size: 1rem;
+  color: var(--vp-c-text-2);
+  margin: 0 0 4px 0;
+}
+
+.skin-workshop {
+  font-size: 1rem;
+  color: var(--vp-c-text-2);
+  margin: 0;
+  font-weight: 500;
+}
+
+.skin-price {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #4caf50;
+  margin-left: auto;
+  white-space: nowrap;
+  align-self: flex-start;
+}
+
+.skin-buttons-container {
+  display: none; /* Hide the old buttons container */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .skin-item {
+    flex-wrap: nowrap;
+    padding: 16px;
+  }
+
+  .skin-image-container {
+    width: 80px;
+    min-width: 80px;
+    height: 80px;
+    margin-right: 16px;
+  }
+
+  .skin-image {
+    width: 70px;
+    height: 70px;
+  }
+
+  .skin-content {
+    padding-right: 16px;
+  }
+
+  .skin-header {
+    gap: 10px;
+  }
+
+  .skin-name {
+    font-size: 1.2rem;
+  }
+
+  .skin-icon-buttons {
+    margin-left: 10px;
+  }
+
+  .skin-icon-link {
+    width: 32px;
+    height: 32px;
+  }
+
+  .steam-icon,
+  .rusthelp-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .skin-type-info,
+  .skin-workshop {
+    font-size: 0.9rem;
+  }
+
+  .skin-price {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .skin-item {
+    padding: 16px;
+  }
+
+  .skin-image-container {
+    width: 80px;
+    min-width: 80px;
+    height: 80px;
+    margin-right: 16px;
+  }
+
+  .skin-header {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .skin-icon-buttons {
+    margin-left: 8px;
+  }
+
+  .skin-icon-link {
+    width: 28px;
+    height: 28px;
+  }
+
+  .steam-icon,
+  .rusthelp-icon {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 .loading-container {
