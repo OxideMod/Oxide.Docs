@@ -133,6 +133,11 @@
           </div>
         </div>
       </div>
+      <div class="rusthelp-info">
+        <a href="https://rusthelp.com/tools/skins/" target="_blank" rel="noopener noreferrer">
+          For the most up to date and accurate information on Rust skins please visit RustHelp
+        </a>
+      </div>
     </div>
 
     <div class="content">
@@ -293,11 +298,26 @@ const isDLCOnly = item => {
   );
 };
 
-// Filter the item names based on the search input
+// Items to exclude from the filter
+const excludedItemTypes = [
+  'Disco Floor',
+  'Rocking Chair',
+  'Sky Lantern',
+  'Sled',
+  'Snowmobile',
+  'Spray Can Decal',
+  'Wanted Poster',
+];
+
+// Filter the item names based on the search input and excluded items
 const filteredItemNames = computed(() => {
-  if (!itemNameFilter.value) return itemNames.value;
+  // First filter out excluded items
+  const filteredNames = itemNames.value.filter(name => !excludedItemTypes.includes(name));
+
+  // Then apply search filter if any
+  if (!itemNameFilter.value) return filteredNames;
   const search = itemNameFilter.value.toLowerCase();
-  return itemNames.value.filter(name => name.toLowerCase().includes(search));
+  return filteredNames.filter(name => name.toLowerCase().includes(search));
 });
 
 // Ensure no duplicate item names are shown
@@ -348,6 +368,26 @@ onMounted(() => {
 
 .sidebar-content {
   padding: 24px;
+}
+
+/* RustHelp Info */
+.rusthelp-info {
+  padding: 15px;
+  margin-top: 10px;
+  text-align: center;
+  border-top: 1px solid var(--vp-c-divider);
+  font-size: 14px;
+}
+
+.rusthelp-info a {
+  color: var(--vp-c-brand);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.rusthelp-info a:hover {
+  color: var(--vp-c-brand-dark);
+  text-decoration: underline;
 }
 
 .filter-group {
