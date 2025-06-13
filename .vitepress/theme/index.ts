@@ -7,6 +7,7 @@ import './skins.css';
 import HookSearch from '../../components/HookSearch.vue';
 import GlossaryLinker from './components/GlossaryLinker.vue';
 import SkinsLayout from './SkinsLayout.vue';
+import ItemsLayout from './ItemsLayout.vue';
 
 export default {
   extends: DefaultTheme,
@@ -18,5 +19,6 @@ export default {
   },
   enhanceApp({ app }) {
     app.component('SkinsLayout', SkinsLayout);
+    app.component('ItemsLayout', ItemsLayout);
   },
 } satisfies Theme;
