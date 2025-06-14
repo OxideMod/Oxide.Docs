@@ -77,6 +77,10 @@ To install staging, replace `-beta public` with  `-beta staging`
 
 Once you have Rust installed on your server, the next step is to configure the server. Server configuration involves setting up various parameters to customize your server's gameplay experience.
 
+### Command line parameters
+
+Some server parameters can be set in the server startup script, as an argument to `RustDedicated`, like the world seeds, map size, ports, etc.
+
 ### Server.cfg
 
 Rust servers use a configuration file called `server.cfg` to manage server settings. This file is typically located in the server install directory under the `YourServerName\cfg` folder. If the file does not exist, you can create it.
@@ -98,6 +102,22 @@ server.url "http://example.com"
 ```
 
 These are just a few of the many settings that can be customized in the `server.cfg` file. For a complete list of available server configurations, you can refer to the [official FacePunch documentation](https://wiki.facepunch.com/rust/Creating-a-server).
+
+### ServerAuto.cfg
+
+The file ServerAuto.cfg should not be edited by the server owner. It is updated automatically at server shutdown or when a server owner use the command `server.writecfg`. Not all parameters are written to `ServerAuto.cfg`.
+When testing and changing parameters in the RCon interface. There is no guarantee that a `server.writecfg` command will save setting to file. 
+Parameters should be put in the server.cfg or in the startup script. 
+::: info NOTE
+command `server.writecfg` only save some parameters to file `ServerAuto.cfg`  
+but command `server.readcfg` read both `ServerAuto.cfg` and `Server.cfg`
+:::
+
+### Priorities
+If a parameter is defined in multiple places, The place with highest priority will be used.
+1. Command line parameters  (highest)
+2. parameters in server.cfg
+3. parameters in ServerAuto.cfg (lowest)
 
 ## 4. Starting the Server
 
