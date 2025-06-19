@@ -1,6 +1,24 @@
 <template>
   <div class="skins-layout">
-    <div class="sidebar">
+    <!-- Mobile hamburger button -->
+    <button
+      class="mobile-menu-toggle"
+      @click="toggleMobileMenu"
+      :class="{ active: isMobileMenuOpen }"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <!-- Mobile overlay -->
+    <div
+      class="mobile-overlay"
+      :class="{ active: isMobileMenuOpen }"
+      @click="closeMobileMenu"
+    ></div>
+
+    <div class="sidebar" :class="{ 'mobile-open': isMobileMenuOpen }">
       <div class="sidebar-content">
         <div class="filter-group">
           <h3 class="filter-title">Search</h3>
@@ -280,6 +298,16 @@ const {
 const maxPrice = ref(1000);
 const itemNameFilter = ref('');
 const selectedSkinType = ref('');
+const isMobileMenuOpen = ref(false);
+
+// Mobile menu functions
+const toggleMobileMenu = () => {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value;
+};
+
+const closeMobileMenu = () => {
+  isMobileMenuOpen.value = false;
+};
 
 // Helper functions for conditional rendering
 const isAcousticGuitar = item => {
@@ -353,6 +381,72 @@ onMounted(() => {
 .skins-layout {
   display: flex;
   background-color: var(--vp-c-bg);
+  position: relative;
+}
+
+/* Mobile hamburger button */
+.mobile-menu-toggle {
+  display: none;
+  position: fixed;
+  top: calc(var(--vp-nav-height, 64px) + 10px);
+  left: 20px;
+  z-index: 1001;
+  width: 44px;
+  height: 44px;
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu-toggle.active {
+  left: calc(280px + 10px);
+}
+
+.mobile-menu-toggle span {
+  width: 20px;
+  height: 2px;
+  background: var(--vp-c-text-1);
+  transition: all 0.3s ease;
+  border-radius: 1px;
+}
+
+.mobile-menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Mobile overlay */
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-overlay.active {
+  opacity: 1;
+  pointer-events: all;
 }
 
 /* Sidebar */
@@ -360,9 +454,9 @@ onMounted(() => {
   width: 280px;
   flex-shrink: 0;
   border-right: 1px solid var(--vp-c-divider);
-  height: 100vh;
+  height: calc(100vh - var(--vp-nav-height, 64px));
   position: sticky;
-  top: 0;
+  top: var(--vp-nav-height, 64px);
   overflow-y: auto;
 }
 
@@ -602,10 +696,11 @@ onMounted(() => {
   background-color: var(--vp-c-bg-soft);
   transition: border-color 0.3s;
 }
-/* ... rest of skin-item and other styles are the same */
+
 .skin-item:hover {
   border-color: var(--vp-c-brand);
 }
+
 .skin-image-container {
   width: 128px;
   height: 128px;
@@ -616,11 +711,13 @@ onMounted(() => {
   justify-content: center;
   padding: 10px;
 }
+
 .skin-image {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
 }
+
 .skin-content {
   padding: 15px;
   display: flex;
@@ -628,21 +725,25 @@ onMounted(() => {
   justify-content: space-between;
   flex-grow: 1;
 }
+
 .skin-info-section {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
+
 .skin-header-row {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
 }
+
 .skin-name {
   font-size: 18px;
   font-weight: 600;
   margin: 0;
 }
+
 .skin-id {
   font-size: 12px;
   font-family: monospace;
@@ -651,35 +752,52 @@ onMounted(() => {
   padding: 2px 5px;
   border-radius: 4px;
 }
+
 .skin-meta-row {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
 }
-.skin-item-name,
-.skin-type {
+
+.skin-item-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skin-item-name {
   font-size: 14px;
   color: var(--vp-c-text-2);
   display: flex;
   align-items: center;
   gap: 8px;
 }
+
+.skin-type {
+  font-size: 14px;
+  color: var(--vp-c-text-2);
+}
+
 .skin-price {
   font-weight: 600;
 }
+
 .skin-price.unavailable {
   font-weight: normal;
   color: var(--vp-c-text-3);
 }
+
 .skin-price.dlc-only {
   font-weight: normal;
   color: var(--vp-c-text-3);
 }
+
 .skin-buttons-container {
   display: flex;
   gap: 10px;
   margin-top: 15px;
 }
+
 .skin-link {
   display: inline-flex;
   align-items: center;
@@ -691,18 +809,22 @@ onMounted(() => {
   font-size: 14px;
   border: 1px solid transparent;
 }
+
 .skin-link.rusthelp {
   background-color: #ce422b;
   color: white;
 }
+
 .skin-link:hover {
   opacity: 0.9;
 }
+
 .steam-icon,
 .rusthelp-icon {
   width: 16px;
   height: 16px;
 }
+
 .loading-container,
 .error-container,
 .no-results-container,
@@ -710,131 +832,153 @@ onMounted(() => {
   padding: 40px;
   text-align: center;
 }
+
 @media (max-width: 960px) {
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  .mobile-overlay {
+    display: block;
+  }
+
   .skins-layout {
-    flex-direction: column;
+    flex-direction: row;
   }
+
   .sidebar {
-    width: 100%;
-    height: auto;
-    position: static;
-    border-right: none;
-    border-bottom: 1px solid var(--vp-c-divider);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    border-right: 1px solid var(--vp-c-divider);
+    background: var(--vp-c-bg);
   }
 
-  .skin-container {
-    gap: 16px;
+  .sidebar.mobile-open {
+    transform: translateX(0);
   }
-}
 
-@media (max-width: 767px) {
   .content {
-    padding: 16px;
+    width: 100%;
+    padding: calc(var(--vp-nav-height, 64px) + 10px) 16px 16px;
   }
 
   .skin-container {
-    gap: 16px;
+    gap: 12px;
   }
 
   .skin-item {
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    border: 1px solid var(--vp-c-divider);
+    border-radius: 8px;
+    background-color: var(--vp-c-bg-soft);
+    overflow: hidden;
+    min-height: 80px;
   }
 
   .skin-image-container {
-    width: 100%;
-    height: auto;
-    min-height: 120px;
-    padding: 16px;
-    border-bottom: 1px solid var(--vp-c-divider);
     background-color: var(--vp-c-bg-mute);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+  }
+
+  .skin-image {
+    max-width: 50px;
+    max-height: 50px;
+    object-fit: contain;
+  }
+
+  .skin-content {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .skin-header-row {
+    display: block;
+  }
+
+  .skin-name {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+  }
+
+  .skin-id-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .skin-id {
+    font-size: 11px;
+    padding: 3px 6px;
+    background: var(--vp-c-bg-mute);
+    border-radius: 4px;
+    font-family: monospace;
+  }
+
+  .skin-meta-row {
+    display: block;
+  }
+
+  .skin-item-details {
+    display: none;
+  }
+
+  .skin-type {
+    display: none;
+  }
+
+  .skin-price {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--vp-c-brand);
+    margin: 0;
+  }
+
+  .skin-price.unavailable {
+    color: var(--vp-c-text-3);
+  }
+
+  .skin-buttons-container {
+    display: none;
+  }
+
+  .skin-icon-link {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  .skin-image {
-    max-width: 100px;
-    max-height: 100px;
-  }
-
-  .skin-content {
-    padding: 16px;
-  }
-
-  .skin-info-section {
-    gap: 12px;
-  }
-
-  .skin-header-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-
-  .skin-name {
-    font-size: 18px;
-    width: calc(100% - 50px);
-  }
-
-  .skin-id {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    font-size: 11px;
-    padding: 2px 6px;
-  }
-
-  .skin-meta-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  .skin-item-details {
-    width: 100%;
-  }
-
-  .skin-item-name {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 4px;
-  }
-
-  .skin-type {
-    font-size: 13px;
-  }
-
-  .skin-price {
-    font-size: 16px;
-    margin-top: 8px;
-    align-self: flex-start;
-  }
-
-  .skin-icon-link {
-    width: 28px;
-    height: 28px;
-    margin-left: 8px;
-  }
-
   .steam-icon,
   .rusthelp-icon {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
   }
 }
 
 @media (max-width: 480px) {
   .content {
-    padding: 12px;
+    padding: calc(var(--vp-nav-height, 64px) + 20px) 12px 12px;
   }
 
   .skin-container {
-    gap: 12px;
+    gap: 10px;
   }
 
   .skin-item {
@@ -842,14 +986,13 @@ onMounted(() => {
   }
 
   .skin-image-container {
-    min-height: 100px;
+    height: 100px;
     padding: 12px;
-    border-radius: 6px 6px 0 0;
   }
 
   .skin-image {
-    max-width: 80px;
-    max-height: 80px;
+    max-width: 76px;
+    max-height: 76px;
   }
 
   .skin-content {
@@ -857,30 +1000,25 @@ onMounted(() => {
   }
 
   .skin-name {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .skin-id {
     font-size: 10px;
-    padding: 1px 4px;
+    padding: 3px 6px;
   }
 
   .skin-item-name {
     font-size: 13px;
   }
 
-  .skin-type {
-    font-size: 12px;
-  }
-
   .skin-price {
-    font-size: 14px;
-    margin-top: 6px;
+    font-size: 15px;
   }
 
-  .skin-icon-link {
-    width: 26px;
-    height: 26px;
+  .skin-link {
+    width: 28px;
+    height: 28px;
   }
 
   .steam-icon,
@@ -926,7 +1064,7 @@ onMounted(() => {
   pointer-events: none;
 }
 
-.skin-icon-link {
+.skin-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -936,15 +1074,15 @@ onMounted(() => {
   transition: opacity 0.2s ease;
 }
 
-.skin-icon-link:hover {
+.skin-link:hover {
   opacity: 0.85;
 }
 
-.skin-icon-link.steam {
+.skin-link.steam {
   background-color: #1b2838;
 }
 
-.skin-icon-link.rusthelp {
+.skin-link.rusthelp {
   background-color: #f76b15;
 }
 </style>
