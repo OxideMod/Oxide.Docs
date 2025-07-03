@@ -431,7 +431,7 @@
           "delta": "float"
         }
       },
-      "CodeAfterInjection": "protected override void RunMetabolism(BaseCombatEntity ownerEntity, float delta)\r\n{\r\n\tif (Interface.CallHook(\"OnRunPlayerMetabolism\", this, ownerEntity, delta) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tBaseGameMode activeGameMode = BaseGameMode.GetActiveGameMode(true);\r\n\tfloat num = this.owner.currentTemperature;\r\n//---\r\n"
+      "CodeAfterInjection": "protected override void RunMetabolism(BaseCombatEntity ownerEntity, float delta)\r\n{\r\n\tif (Interface.CallHook(\"OnRunPlayerMetabolism\", this, ownerEntity, delta) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (this.owner.IsConnected)\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -3112,7 +3112,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\tglobal::BasePlayer.SpawnPoint spawnPoint = global::ServerMgr.FindSpawnPoint(this);\r\n\tif (ConVar.Server.respawnAtDeathPosition && this.ServerCurrentDeathNote != null)\r\n\t{\r\n\t\tspawnPoint.pos = this.ServerCurrentDeathNote.worldPosition;\r\n\t}\r\n\tobject returnvar = Interface.CallHook(\"OnPlayerRespawn\", this, spawnPoint);\r\n\tif (returnvar is global::BasePlayer.SpawnPoint)\r\n\t{\r\n\t\tspawnPoint = (global::BasePlayer.SpawnPoint)returnvar;\r\n\t}\r\n\tthis.RespawnAt(spawnPoint.pos, spawnPoint.rot, null);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tglobal::BasePlayer.SpawnPoint spawnPoint = global::ServerMgr.FindSpawnPoint(this, 0uL);\r\n\tif (ConVar.Server.respawnAtDeathPosition && this.ServerCurrentDeathNote != null)\r\n\t{\r\n\t\tspawnPoint.pos = this.ServerCurrentDeathNote.worldPosition;\r\n\t}\r\n\tobject returnvar = Interface.CallHook(\"OnPlayerRespawn\", this, spawnPoint);\r\n\tif (returnvar is global::BasePlayer.SpawnPoint)\r\n\t{\r\n\t\tspawnPoint = (global::BasePlayer.SpawnPoint)returnvar;\r\n\t}\r\n\tthis.RespawnAt(spawnPoint.pos, spawnPoint.rot, null);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -3422,7 +3422,7 @@
           "lite": "bool"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tplayer.ClientRPC<Vector3>(global::RpcTarget.Player(\"ForcePositionTo\", player), position);\r\n\t\tplayer.ClientRPC(global::RpcTarget.NetworkGroup(\"ForceResetRotation\", player));\r\n\t}\r\n\tFacepunch.Rust.Analytics.Azure.OnDismountEntity(player, this, baseVehicle);\r\n\tInterface.CallHook(\"OnEntityDismounted\", this, player);\r\n\tthis.OnPlayerDismounted(player);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tplayer.ClientRPC(global::RpcTarget.Player(\"ForcePositionTo\", player), position);\r\n\t\tplayer.ClientRPC(global::RpcTarget.NetworkGroup(\"ForceResetRotation\", player));\r\n\t}\r\n\tFacepunch.Rust.Analytics.Azure.OnDismountEntity(player, this, baseVehicle);\r\n\tInterface.CallHook(\"OnEntityDismounted\", this, player);\r\n\tthis.OnPlayerDismounted(player);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -3977,7 +3977,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "public void StartHacking()\r\n{\r\n\tInterface.CallHook(\"OnCrateHack\", this);\r\n\tbase.BroadcastEntityMessage(\"HackingStarted\", 20f, 256);\r\n\tbase.SetFlag(global::BaseEntity.Flags.Reserved1, true, false, true);\r\n\tbase.InvokeRepeating(new Action(this.HackProgress), 1f, 1f);\r\n\tbase.ClientRPC<int, int>(global::RpcTarget.NetworkGroup(\"UpdateHackProgress\"), 0, (int)global::HackableLockedCrate.requiredHackSeconds);\r\n\tthis.RefreshDecay();\r\n//---\r\n"
+      "CodeAfterInjection": "public void StartHacking()\r\n{\r\n\tInterface.CallHook(\"OnCrateHack\", this);\r\n\tbase.BroadcastEntityMessage(\"HackingStarted\", 20f, 256);\r\n\tbase.SetFlag(global::BaseEntity.Flags.Reserved1, true, false, true);\r\n\tbase.InvokeRepeating(new Action(this.HackProgress), 1f, 1f);\r\n\tbase.ClientRPC(global::RpcTarget.NetworkGroup(\"UpdateHackProgress\"), 0, (int)global::HackableLockedCrate.requiredHackSeconds);\r\n\tthis.RefreshDecay();\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -4222,7 +4222,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tif (player.inventory.loot.StartLootingEntity(this, true))\r\n\t{\r\n\t\tplayer.inventory.loot.AddContainer(this.inventory.containerMain);\r\n\t\tplayer.inventory.loot.AddContainer(this.inventory.containerWear);\r\n\t\tplayer.inventory.loot.AddContainer(this.inventory.containerBelt);\r\n\t\tInterface.CallHook(\"OnLootPlayer\", this, player);\r\n\t\tplayer.inventory.loot.SendImmediate();\r\n\t\tplayer.RadioactiveLootCheck(player.inventory.loot.containers);\r\n\t\tplayer.ClientRPC<string>(global::RpcTarget.Player(\"RPC_OpenLootPanel\", player), \"player_corpse\");\r\n\t}\r\n}\r\n"
+      "CodeAfterInjection": "//---\r\n\tif (player.inventory.loot.StartLootingEntity(this, true))\r\n\t{\r\n\t\tplayer.inventory.loot.AddContainer(this.inventory.containerMain);\r\n\t\tplayer.inventory.loot.AddContainer(this.inventory.containerWear);\r\n\t\tplayer.inventory.loot.AddContainer(this.inventory.containerBelt);\r\n\t\tInterface.CallHook(\"OnLootPlayer\", this, player);\r\n\t\tplayer.inventory.loot.SendImmediate();\r\n\t\tplayer.RadioactiveLootCheck(player.inventory.loot.containers);\r\n\t\tplayer.ClientRPC(global::RpcTarget.Player(\"RPC_OpenLootPanel\", player), \"player_corpse\");\r\n\t}\r\n}\r\n"
     },
     {
       "Type": 0,
@@ -4299,7 +4299,7 @@
           "delta": "float"
         }
       },
-      "CodeAfterInjection": "public override void ServerUpdate(global::BaseCombatEntity ownerEntity, float delta)\r\n{\r\n\tbase.ServerUpdate(ownerEntity, delta);\r\n\tInterface.CallHook(\"OnPlayerMetabolize\", this, ownerEntity, delta);\r\n\tthis.SendChangesToClient();\r\n}\r\n\r\n"
+      "CodeAfterInjection": "public override void ServerUpdate(global::BaseCombatEntity ownerEntity, float delta)\r\n{\r\n\tbase.ServerUpdate(ownerEntity, delta);\r\n\tInterface.CallHook(\"OnPlayerMetabolize\", this, ownerEntity, delta);\r\n\tif (this.owner.IsConnected)\r\n\t{\r\n\t\tthis.SendChangesToClient();\r\n\t}\r\n}\r\n"
     },
     {
       "Type": 0,
@@ -5375,7 +5375,7 @@
           "fullTeamUpdate": "bool"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\tforeach (MapNote current2 in playerState.pointsOfInterest)\r\n\t\t\t\t{\r\n\t\t\t\t\tplayerTeam2.leaderMapNotes.Add(current2);\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t\tif (Interface.CallHook(\"OnTeamUpdated\", this.currentTeam, playerTeam2, this) != null)\r\n\t\t\t{\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\tbase.ClientRPC<PlayerTeam>(global::RpcTarget.PlayerAndSpectators(\"CLIENT_ReceiveTeamInfo\", this), playerTeam2);\r\n\t\t\tif (playerTeam2.leaderMapNotes != null)\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\tforeach (MapNote current2 in playerState.pointsOfInterest)\r\n\t\t\t\t{\r\n\t\t\t\t\tplayerTeam2.leaderMapNotes.Add(current2);\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t\tif (Interface.CallHook(\"OnTeamUpdated\", this.currentTeam, playerTeam2, this) != null)\r\n\t\t\t{\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\tbase.ClientRPC(global::RpcTarget.PlayerAndSpectators(\"CLIENT_ReceiveTeamInfo\", this), playerTeam2);\r\n\t\t\tif (playerTeam2.leaderMapNotes != null)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -5781,30 +5781,6 @@
     },
     {
       "Type": 0,
-      "Name": "OnPlayerReported",
-      "HookName": "OnPlayerReported",
-      "HookParameters": {
-        "instance": "BasePlayer",
-        "text6": "string",
-        "text5": "string",
-        "text": "string",
-        "text3": "string",
-        "text4": "string"
-      },
-      "ReturnBehavior": 0,
-      "TargetType": "BasePlayer",
-      "Category": "Player",
-      "MethodData": {
-        "MethodName": "OnPlayerReported",
-        "ReturnType": "void",
-        "Arguments": {
-          "msg": "BaseEntity/RPCMessage"
-        }
-      },
-      "CodeAfterInjection": "//---\r\n\t\tTargetName = text6,\r\n\t\tSubject = text,\r\n\t\tMessage = text3,\r\n\t\tType = text4\r\n\t});\r\n\tInterface.CallHook(\"OnPlayerReported\", this, text6, text5, text, text3, text4);\r\n}\r\n\r\n"
-    },
-    {
-      "Type": 0,
       "Name": "CanNetworkTo [BasePlayer]",
       "HookName": "CanNetworkTo",
       "HookParameters": {
@@ -5955,7 +5931,7 @@
           "sleepingBag": "NetworkableId"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tglobal::SleepingBag sleepingBag2 = array.FirstOrDefault((global::SleepingBag x) => x.ValidForPlayer(player.userID, false) && x.net.ID == sleepingBag && x.unlockTime < Time.realtimeSinceStartup);\r\n\tif (sleepingBag2 == null)\r\n\t{\r\n\t\treturn false;\r\n\t}\r\n\tobject returnvar = Interface.CallHook(\"OnPlayerRespawn\", player2, sleepingBag2);\r\n\tif (returnvar is global::SleepingBag)\r\n\t{\r\n\t\tsleepingBag2 = (global::SleepingBag)returnvar;\r\n\t}\r\n\tif (sleepingBag2.GetRespawnState(player.userID) != RespawnInformation.SpawnOptions.RespawnState.OK)\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tglobal::SleepingBag sleepingBag2 = array.FirstOrDefault((global::SleepingBag x) => x.ValidForPlayer(player.userID, false) && x.net.ID == sleepingBag && x.unlockTime < Time.realtimeSinceStartup);\r\n\tif (sleepingBag2 == null)\r\n\t{\r\n\t\treturn false;\r\n\t}\r\n\tobject returnvar = Interface.CallHook(\"OnPlayerRespawn\", player2, sleepingBag2);\r\n\tif (returnvar is global::SleepingBag)\r\n\t{\r\n\t\tsleepingBag2 = (global::SleepingBag)returnvar;\r\n\t}\r\n\tglobal::StaticRespawnArea staticRespawnArea = sleepingBag2 as global::StaticRespawnArea;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -6019,7 +5995,7 @@
           "sourceConnection": "Network.Connection"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (this.net.group == null || base.limitNetworking)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnSignalBroadcast\", this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.ClientRPC<int, ulong>(global::RpcTarget.NetworkGroup(\"SignalFromServer\", this, SendMethod.Unreliable, Priority.Immediate), (int)signal, (sourceConnection != null) ? sourceConnection.userid : 0uL);\r\n}\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (this.net.group == null || base.limitNetworking)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnSignalBroadcast\", this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.ClientRPC(global::RpcTarget.NetworkGroup(\"SignalFromServer\", this, SendMethod.Unreliable, Priority.Immediate), (int)signal, (sourceConnection != null) ? sourceConnection.userid : 0uL);\r\n}\r\n"
     },
     {
       "Type": 1,
@@ -6037,7 +6013,7 @@
           "sourceConnection": "Network.Connection"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (this.net.group == null || base.limitNetworking)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnSignalBroadcast\", this, sourceConnection) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.ClientRPC<int, string, ulong>(global::RpcTarget.NetworkGroup(\"SignalFromServerEx\", this, SendMethod.Unreliable, Priority.Immediate), (int)signal, arg, (sourceConnection != null) ? sourceConnection.userid : 0uL);\r\n}\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (this.net.group == null || base.limitNetworking)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnSignalBroadcast\", this, sourceConnection) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.ClientRPC(global::RpcTarget.NetworkGroup(\"SignalFromServerEx\", this, SendMethod.Unreliable, Priority.Immediate), (int)signal, arg, (sourceConnection != null) ? sourceConnection.userid : 0uL);\r\n}\r\n"
     },
     {
       "Type": 0,
@@ -7090,7 +7066,7 @@
           "player": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tif (player == null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tstring text = this.GenerateControlBookmarkString();\r\n\tif (Interface.CallHook(\"OnBookmarksSendControl\", this, player, text) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tbase.ClientRPC<string>(global::RpcTarget.Player(\"ReceiveBookmarks\", player), text);\r\n}\r\n"
+      "CodeAfterInjection": "//---\r\n\tif (player == null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tstring text = this.GenerateControlBookmarkString();\r\n\tif (Interface.CallHook(\"OnBookmarksSendControl\", this, player, text) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tbase.ClientRPC(global::RpcTarget.Player(\"ReceiveBookmarks\", player), text);\r\n}\r\n"
     },
     {
       "Type": 0,
@@ -7221,7 +7197,7 @@
           "connection": "Network.Connection"
         }
       },
-      "CodeAfterInjection": "public global::BasePlayer SpawnNewPlayer(Connection connection)\r\n{\r\n\tglobal::BasePlayer.SpawnPoint spawnPoint = global::ServerMgr.FindSpawnPoint(null);\r\n\tglobal::BasePlayer basePlayer = global::GameManager.server.CreateEntity(\"assets/prefabs/player/player.prefab\", spawnPoint.pos, spawnPoint.rot, true).ToPlayer();\r\n\tif (Interface.CallHook(\"OnPlayerSpawn\", basePlayer, connection) != null)\r\n\t{\r\n\t\treturn basePlayer;\r\n\t}\r\n\tbasePlayer.health = 0f;\r\n\tbasePlayer.lifestate = global::BaseCombatEntity.LifeState.Dead;\r\n//---\r\n"
+      "CodeAfterInjection": "public global::BasePlayer SpawnNewPlayer(Connection connection)\r\n{\r\n\tglobal::RelationshipManager.PlayerTeam playerTeam = global::RelationshipManager.ServerInstance.FindPlayersTeam(connection.userid);\r\n\tglobal::BasePlayer.SpawnPoint spawnPoint = global::ServerMgr.FindSpawnPoint(null, (playerTeam != null) ? playerTeam.teamID : 0uL);\r\n\tglobal::BasePlayer basePlayer = global::GameManager.server.CreateEntity(\"assets/prefabs/player/player.prefab\", spawnPoint.pos, spawnPoint.rot, true).ToPlayer();\r\n\tif (Interface.CallHook(\"OnPlayerSpawn\", basePlayer, connection) != null)\r\n\t{\r\n\t\treturn spawnPoint;\r\n\t}\r\n\tbasePlayer.health = 0f;\r\n\tbasePlayer.lifestate = global::BaseCombatEntity.LifeState.Dead;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -8252,7 +8228,7 @@
         "instance": "NPCTalking",
         "player": "BasePlayer",
         "conversationFor": "ConversationData",
-        "responseNode": "ResponseNode"
+        "genericMissionById": "ResponseNode"
       },
       "ReturnBehavior": 1,
       "TargetType": "NPCTalking",
@@ -8264,7 +8240,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\treturn;\r\n\t}\r\n\tglobal::ConversationData.ResponseNode responseNode = conversationFor.speeches[num].responses[num2];\r\n\tif (responseNode != null)\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnNpcConversationRespond\", this, player, conversationFor, responseNode) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tif (responseNode.conditions.Length != 0)\r\n\t\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t}\r\n\t}\r\n\tglobal::ConversationData.ResponseNode responseNode = conversationFor.speeches[num].responses[num2];\r\n\tif (responseNode != null)\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnNpcConversationRespond\", this, player, conversationFor, responseNode) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tif (responseNode.conditions.Length != 0)\r\n\t\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -8274,7 +8250,7 @@
         "instance": "NPCTalking",
         "player": "BasePlayer",
         "conversationFor": "ConversationData",
-        "responseNode": "ResponseNode"
+        "genericMissionById": "ResponseNode"
       },
       "ReturnBehavior": 0,
       "TargetType": "NPCTalking",
@@ -9194,7 +9170,7 @@
           "reason": "Telephone/DialFailReason"
         }
       },
-      "CodeAfterInjection": "public void OnDialFailed(global::Telephone.DialFailReason reason)\r\n{\r\n\tif (Interface.CallHook(\"OnPhoneDialFail\", this, reason, this.currentPlayer) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.SetPhoneState(global::Telephone.CallState.Idle);\r\n\tbase.baseEntity.ClientRPC<int>(global::RpcTarget.NetworkGroup(\"ClientOnDialFailed\"), (int)reason);\r\n//---\r\n"
+      "CodeAfterInjection": "public void OnDialFailed(global::Telephone.DialFailReason reason)\r\n{\r\n\tif (Interface.CallHook(\"OnPhoneDialFail\", this, reason, this.currentPlayer) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.SetPhoneState(global::Telephone.CallState.Idle);\r\n\tbase.baseEntity.ClientRPC(global::RpcTarget.NetworkGroup(\"ClientOnDialFailed\"), (int)reason);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -9387,7 +9363,8 @@
       "Name": "OnFindSpawnPoint",
       "HookName": "OnFindSpawnPoint",
       "HookParameters": {
-        "forPlayer": "BasePlayer"
+        "forPlayer": "BasePlayer",
+        "teamId": "ulong"
       },
       "ReturnBehavior": 1,
       "TargetType": "ServerMgr",
@@ -9396,10 +9373,11 @@
         "MethodName": "FindSpawnPoint",
         "ReturnType": "BasePlayer/SpawnPoint",
         "Arguments": {
-          "forPlayer": "BasePlayer"
+          "forPlayer": "BasePlayer",
+          "teamId": "ulong"
         }
       },
-      "CodeAfterInjection": "public static global::BasePlayer.SpawnPoint FindSpawnPoint(global::BasePlayer forPlayer = null)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"OnFindSpawnPoint\", forPlayer);\r\n\tif (returnvar is global::BasePlayer.SpawnPoint)\r\n\t{\r\n\t\treturn (global::BasePlayer.SpawnPoint)returnvar;\r\n\t}\r\n\tbool flag = false;\r\n//---\r\n"
+      "CodeAfterInjection": "public static global::BasePlayer.SpawnPoint FindSpawnPoint(global::BasePlayer forPlayer = null, ulong teamId = 0uL)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"OnFindSpawnPoint\", forPlayer, teamId);\r\n\tif (returnvar is global::BasePlayer.SpawnPoint)\r\n\t{\r\n\t\treturn (global::BasePlayer.SpawnPoint)returnvar;\r\n\t}\r\n\tbool flag = false;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -9734,7 +9712,7 @@
           "timeCooked": "float"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\tif (slot != null && slot.amount >= slot.MaxStackable())\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t}\r\n\tif (Interface.CallHook(\"OnWaterPurify\", this, timeCooked) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tfloat num = timeCooked * ((float)this.waterToProcessPerMinute / 60f);\r\n\tthis.dirtyWaterProcssed += num;\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tglobal::Item slot = this.waterStorage.inventory.GetSlot(0);\r\n\tif (this.stopWhenOutputFull && slot != null && slot.amount >= slot.MaxStackable())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnWaterPurify\", this, timeCooked) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tfloat num = timeCooked * ((float)this.waterToProcessPerMinute / 60f);\r\n\tif (slot != null)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -9754,7 +9732,7 @@
           "timeCooked": "float"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t{\r\n\t\t\tslot3.amount += num3;\r\n\t\t\tslot3.amount = Mathf.Clamp(slot3.amount, 0, this.waterStorage.maxStackSize);\r\n\t\t\tthis.waterStorage.inventory.MarkDirty();\r\n\t\t}\r\n\t\tInterface.CallHook(\"OnWaterPurified\", this, timeCooked);\r\n\t\tthis.waterStorage.SendNetworkUpdate(global::BasePlayer.NetworkQueue.Update);\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t{\r\n\t\t\tslot3.amount += num4;\r\n\t\t\tslot3.amount = Mathf.Clamp(slot3.amount, 0, this.waterStorage.maxStackSize);\r\n\t\t\tthis.waterStorage.inventory.MarkDirty();\r\n\t\t}\r\n\t\tInterface.CallHook(\"OnWaterPurified\", this, timeCooked);\r\n\t\tthis.waterStorage.SendNetworkUpdate(global::BasePlayer.NetworkQueue.Update);\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -9841,7 +9819,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\tthis.<SendRespawnOptions>g__CollectExternalAndSend|496_0();\r\n\t\treturn;\r\n\t}\r\n\tList<RespawnInformation.SpawnOptions> list = Pool.Get<List<RespawnInformation.SpawnOptions>>();\r\n\tglobal::BasePlayer.GetRespawnOptionsForPlayer(list, this.userID);\r\n\tInterface.CallHook(\"OnRespawnInformationGiven\", this, list);\r\n\tthis.<SendRespawnOptions>g__SendToPlayer|496_1(list, false);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tthis.<SendRespawnOptions>g__CollectExternalAndSend|497_0();\r\n\t\treturn;\r\n\t}\r\n\tList<RespawnInformation.SpawnOptions> list = Pool.Get<List<RespawnInformation.SpawnOptions>>();\r\n\tglobal::BasePlayer.GetRespawnOptionsForPlayer(list, this.userID);\r\n\tInterface.CallHook(\"OnRespawnInformationGiven\", this, list);\r\n\tthis.<SendRespawnOptions>g__SendToPlayer|497_1(list, false);\r\n}\r\n\r\n"
     },
     {
       "Type": 1,
@@ -10995,7 +10973,7 @@
           "force": "bool"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tthis.modelState.mounted = this.isMounted;\r\n\tthis.modelState.ragdolling = this.IsRagdolling();\r\n\tthis.modelState.relaxed = this.IsRelaxed();\r\n\tthis.modelState.onPhone = (this.HasActiveTelephone && !this.activeTelephone.IsMobile);\r\n\tthis.modelState.crawling = this.IsCrawling();\r\n\tif (base.limitNetworking || Interface.CallHook(\"OnSendModelState\", this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.modelState.loading = this.IsLoadingAfterTransfer();\r\n\tbase.ClientRPC<ModelState>(global::RpcTarget.NetworkGroup(\"OnModelState\"), this.modelState);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tthis.modelState.mounted = this.isMounted;\r\n\tthis.modelState.ragdolling = this.IsRagdolling();\r\n\tthis.modelState.relaxed = this.IsRelaxed();\r\n\tthis.modelState.onPhone = (this.HasActiveTelephone && !this.activeTelephone.IsMobile);\r\n\tthis.modelState.crawling = this.IsCrawling();\r\n\tif (base.limitNetworking || Interface.CallHook(\"OnSendModelState\", this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.modelState.loading = this.IsLoadingAfterTransfer();\r\n\tbase.ClientRPC(global::RpcTarget.NetworkGroup(\"OnModelState\"), this.modelState);\r\n//---\r\n"
     },
     {
       "Type": 1,
@@ -11571,7 +11549,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\tif (sprayCallback != null)\r\n\t\t\t\t{\r\n\t\t\t\t\tsprayCallback.OnReskinned(msg.player);\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t\tInterface.CallHook(\"OnEntityReskinned\", baseEntity, skin, msg.player);\r\n\t\t\tbase.ClientRPC<int, NetworkableId>(global::RpcTarget.NetworkGroup(\"Client_ReskinResult\"), 1, baseEntity.net.ID);\r\n\t\t}\r\n\t}\r\n\tthis.LoseCondition(this.ConditionLossPerReskin);\r\n\tbase.ClientRPC<int>(global::RpcTarget.NetworkGroup(\"Client_ChangeSprayColour\"), -1);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\tif (decayEntity3 != null && !flag)\r\n\t\t\t\t{\r\n\t\t\t\t\tdecayEntity3.StopBeingDemolishable();\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t\tInterface.CallHook(\"OnEntityReskinned\", baseEntity, skin, msg.player);\r\n\t\t\tbase.ClientRPC(global::RpcTarget.NetworkGroup(\"Client_ReskinResult\"), 1, baseEntity.net.ID);\r\n\t\t}\r\n\t}\r\n\tthis.LoseCondition(this.ConditionLossPerReskin);\r\n\tbase.ClientRPC(global::RpcTarget.NetworkGroup(\"Client_ChangeSprayColour\"), -1);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -11840,7 +11818,7 @@
           "player": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "public void Knock(global::BasePlayer player)\r\n{\r\n\tbase.ClientRPC<Vector3>(global::RpcTarget.NetworkGroup(\"ClientKnock\"), player.transform.position);\r\n\tInterface.CallHook(\"OnDoorKnocked\", this, player);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "public void Knock(global::BasePlayer player)\r\n{\r\n\tbase.ClientRPC(global::RpcTarget.NetworkGroup(\"ClientKnock\"), player.transform.position);\r\n\tInterface.CallHook(\"OnDoorKnocked\", this, player);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -12513,44 +12491,6 @@
         }
       },
       "CodeAfterInjection": "private void Merge(global::BuildingManager.Building building1, global::BuildingManager.Building building2)\r\n{\r\n\tInterface.CallHook(\"OnBuildingMerge\", this, building1, building2);\r\n\twhile (building2.HasDecayEntities())\r\n\t{\r\n\t\tbuilding2.decayEntities[0].AttachToBuilding(building1.ID);\r\n\t}\r\n\tif (ConVar.AI.nav_carve_use_building_optimization)\r\n//---\r\n"
-    },
-    {
-      "Type": 0,
-      "Name": "OnFeedbackReported",
-      "HookName": "OnFeedbackReported",
-      "HookParameters": {
-        "instance": "BasePlayer",
-        "text": "string",
-        "text2": "string",
-        "text3": "string"
-      },
-      "ReturnBehavior": 0,
-      "TargetType": "BasePlayer",
-      "Category": "Player",
-      "MethodData": {
-        "MethodName": "OnFeedbackReport",
-        "ReturnType": "void",
-        "Arguments": {
-          "msg": "BaseEntity/RPCMessage"
-        }
-      },
-      "CodeAfterInjection": "//---\r\n\t\t\tSubject = text\r\n\t\t};\r\n\t\tfeedback.AppInfo.Image = image;\r\n\t\tFacepunch.Feedback.ServerReport(ConVar.Server.reportsServerEndpoint, this.userID, ConVar.Server.reportsServerEndpointKey, feedback);\r\n\t}\r\n\tInterface.CallHook(\"OnFeedbackReported\", this, text, text2, text3);\r\n}\r\n\r\n"
-    },
-    {
-      "Type": 1,
-      "Name": "OnFeedbackReported [patch]",
-      "HookName": "OnFeedbackReported",
-      "ReturnBehavior": 0,
-      "TargetType": "BasePlayer",
-      "Category": "_Patches",
-      "MethodData": {
-        "MethodName": "OnFeedbackReport",
-        "ReturnType": "void",
-        "Arguments": {
-          "msg": "BaseEntity/RPCMessage"
-        }
-      },
-      "CodeAfterInjection": "//---\r\n\t\t\tSubject = text\r\n\t\t};\r\n\t\tfeedback.AppInfo.Image = image;\r\n\t\tFacepunch.Feedback.ServerReport(ConVar.Server.reportsServerEndpoint, this.userID, ConVar.Server.reportsServerEndpointKey, feedback);\r\n\t}\r\n\tInterface.CallHook(\"OnFeedbackReported\", this, text, text2, text3);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -13286,7 +13226,7 @@
           "mountSlotIndex": "int"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tglobal::ItemDefinition ammoType = component.primaryMagazine.ammoType;\r\n\tcomponent.UnloadAmmo(slot, player);\r\n\tthis.SetSlotAmmoDetails(weaponAtIndex, slot);\r\n\tbase.SendNetworkUpdateImmediate(false);\r\n\tbase.ClientRPC<int, int>(global::RpcTarget.Player(\"PlayAmmoSound\", player), ammoType.itemid, 1);\r\n\tInterface.CallHook(\"OnRackedWeaponUnloaded\", slot, player, this);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\tglobal::ItemDefinition ammoType = component.primaryMagazine.ammoType;\r\n\tcomponent.UnloadAmmo(slot, player);\r\n\tthis.SetSlotAmmoDetails(weaponAtIndex, slot);\r\n\tbase.SendNetworkUpdateImmediate(false);\r\n\tbase.ClientRPC(global::RpcTarget.Player(\"PlayAmmoSound\", player), ammoType.itemid, 1);\r\n\tInterface.CallHook(\"OnRackedWeaponUnloaded\", slot, player, this);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -13330,7 +13270,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tcomponent.primaryMagazine.ammoType = itemDefinition;\r\n\tcomponent.TryReloadMagazine(player.inventory, -1);\r\n\tthis.SetSlotAmmoDetails(weaponAtIndex, slot);\r\n\tbase.SendNetworkUpdateImmediate(false);\r\n\tbase.ClientRPC<int, int>(global::RpcTarget.Player(\"PlayAmmoSound\", player), itemDefinition.itemid, 0);\r\n\tInterface.CallHook(\"OnRackedWeaponLoaded\", slot, itemDefinition, player, this);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\tcomponent.primaryMagazine.ammoType = itemDefinition;\r\n\tcomponent.TryReloadMagazine(player.inventory, -1);\r\n\tthis.SetSlotAmmoDetails(weaponAtIndex, slot);\r\n\tbase.SendNetworkUpdateImmediate(false);\r\n\tbase.ClientRPC(global::RpcTarget.Player(\"PlayAmmoSound\", player), itemDefinition.itemid, 0);\r\n\tInterface.CallHook(\"OnRackedWeaponLoaded\", slot, itemDefinition, player, this);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -13936,7 +13876,7 @@
           "attackWeapon": "AttackEntity"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tthis.ApplyItemOwnership(entity, item);\r\n\t\tthis.OverrideOwnership(item, attackWeapon);\r\n\t\tFacepunch.Rust.Analytics.Azure.OnGatherItem(item.info.shortname, item.amount, base.baseEntity, entity, attackWeapon);\r\n\t\tInterface.CallHook(\"OnDispenserGathered\", this, entity, item);\r\n\t\tentity.GiveItem(item, global::BaseEntity.GiveItemReason.ResourceHarvested);\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tthis.ApplyItemOwnership(entity, item);\r\n\t\tthis.OverrideOwnership(item, attackWeapon);\r\n\t\tFacepunch.Rust.Analytics.Azure.OnGatherItem(item.info.shortname, item.amount, base.baseEntity, entity, attackWeapon);\r\n\t\tInterface.CallHook(\"OnDispenserGathered\", this, entity, item);\r\n\t\twhile (item.amount > item.MaxStackable())\r\n\t\t{\r\n\t\t\tglobal::Item item2 = item.SplitItem(item.MaxStackable());\r\n\t\t\tentity.GiveItem(item2, global::BaseEntity.GiveItemReason.ResourceHarvested);\r\n\t\t}\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -13981,7 +13921,7 @@
           "weapon": "AttackEntity"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\t{\r\n\t\t\t\t\titem = (global::Item)returnvar;\r\n\t\t\t\t}\r\n\t\t\t\tthis.ApplyItemOwnership(player, item);\r\n\t\t\t\tFacepunch.Rust.Analytics.Azure.OnGatherItem(item.info.shortname, item.amount, base.baseEntity, player, weapon);\r\n\t\t\t\tInterface.CallHook(\"OnDispenserBonusReceived\", this, player, item);\r\n\t\t\t\tplayer.GiveItem(item, global::BaseEntity.GiveItemReason.ResourceHarvested);\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\t{\r\n\t\t\t\t\titem = (global::Item)returnvar;\r\n\t\t\t\t}\r\n\t\t\t\tthis.ApplyItemOwnership(player, item);\r\n\t\t\t\tFacepunch.Rust.Analytics.Azure.OnGatherItem(item.info.shortname, item.amount, base.baseEntity, player, weapon);\r\n\t\t\t\tInterface.CallHook(\"OnDispenserBonusReceived\", this, player, item);\r\n\t\t\t\twhile (item.amount > item.MaxStackable())\r\n\t\t\t\t{\r\n\t\t\t\t\tglobal::Item item2 = item.SplitItem(item.MaxStackable());\r\n\t\t\t\t\tplayer.GiveItem(item2, global::BaseEntity.GiveItemReason.ResourceHarvested);\r\n\t\t\t\t}\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -14040,7 +13980,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\t}\r\n\t\tif (this.State.pointsOfInterest != null)\r\n\t\t{\r\n\t\t\tmapNoteList.notes.AddRange(this.State.pointsOfInterest);\r\n\t\t}\r\n\t\tInterface.CallHook(\"OnPlayerMarkersSend\", this, mapNoteList);\r\n\t\tbase.ClientRPC<MapNoteList>(global::RpcTarget.Player(\"Client_ReceiveMarkers\", this), mapNoteList);\r\n\t\tmapNoteList.notes.Clear();\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t}\r\n\t\tif (this.State.pointsOfInterest != null)\r\n\t\t{\r\n\t\t\tmapNoteList.notes.AddRange(this.State.pointsOfInterest);\r\n\t\t}\r\n\t\tInterface.CallHook(\"OnPlayerMarkersSend\", this, mapNoteList);\r\n\t\tbase.ClientRPC(global::RpcTarget.Player(\"Client_ReceiveMarkers\", this), mapNoteList);\r\n\t\tmapNoteList.notes.Clear();\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -14059,7 +13999,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n{\r\n\tusing (MapNoteList mapNoteList = Pool.Get<MapNoteList>())\r\n\t{\r\n\t\tmapNoteList.notes = Pool.Get<List<MapNote>>();\r\n\t\tmapNoteList.notes.AddRange(this.State.pings);\r\n\t\tInterface.CallHook(\"OnPlayerPingsSend\", this, mapNoteList);\r\n\t\tbase.ClientRPC<MapNoteList>(global::RpcTarget.Player(\"Client_ReceivePings\", this), mapNoteList);\r\n\t\tmapNoteList.notes.Clear();\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n{\r\n\tusing (MapNoteList mapNoteList = Pool.Get<MapNoteList>())\r\n\t{\r\n\t\tmapNoteList.notes = Pool.Get<List<MapNote>>();\r\n\t\tmapNoteList.notes.AddRange(this.State.pings);\r\n\t\tInterface.CallHook(\"OnPlayerPingsSend\", this, mapNoteList);\r\n\t\tbase.ClientRPC(global::RpcTarget.Player(\"Client_ReceivePings\", this), mapNoteList);\r\n\t\tmapNoteList.notes.Clear();\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -14142,7 +14082,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\tulong assignedRadioBy = msg.player.userID.Get();\r\n\t\t\tthis.AssignedRadioBy = assignedRadioBy;\r\n\t\t}\r\n\t\tthis.CurrentRadioIp = text;\r\n\t\tbase.baseEntity.ClientRPC<string>(global::RpcTarget.NetworkGroup(\"OnRadioIPChanged\"), this.CurrentRadioIp);\r\n\t\tInterface.CallHook(\"OnBoomboxStationUpdated\", this, text, msg.player);\r\n\t\tif (this.IsOn())\r\n\t\t{\r\n\t\t\tthis.ServerTogglePlay(false);\r\n\t\t}\r\n\t}\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\tulong assignedRadioBy = msg.player.userID.Get();\r\n\t\t\tthis.AssignedRadioBy = assignedRadioBy;\r\n\t\t}\r\n\t\tthis.CurrentRadioIp = text;\r\n\t\tbase.baseEntity.ClientRPC(global::RpcTarget.NetworkGroup(\"OnRadioIPChanged\"), this.CurrentRadioIp);\r\n\t\tInterface.CallHook(\"OnBoomboxStationUpdated\", this, text, msg.player);\r\n\t\tif (this.IsOn())\r\n\t\t{\r\n\t\t\tthis.ServerTogglePlay(false);\r\n\t\t}\r\n\t}\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -14205,7 +14145,7 @@
           "info": "HitInfo"
         }
       },
-      "CodeAfterInjection": "//---\r\n{\r\n\tif (base.isServer)\r\n\t{\r\n\t\tif (global::StringPool.Get(info.HitBone) == \"laptopcollision\")\r\n\t\t{\r\n\t\t\tif (Interface.CallHook(\"OnCrateLaptopAttack\", this, info) != null)\r\n\t\t\t{\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\tglobal::Effect.server.Run(this.shockEffect.resourcePath, info.HitPositionWorld, Vector3.up, null, false, null);\r\n\t\t\tthis.hackSeconds -= 8f * (info.damageTypes.Total() / 50f);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n{\r\n\tif (base.isServer)\r\n\t{\r\n\t\tif (global::StringPool.Get(info.HitBone) == \"laptopcollision\")\r\n\t\t{\r\n\t\t\tif (Interface.CallHook(\"OnCrateLaptopAttack\", this, info) != null)\r\n\t\t\t{\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\tglobal::Effect.server.Run(this.shockEffect.resourcePath, this, info.HitBone, info.HitPositionLocal, Vector3.up, null, false, null);\r\n\t\t\tthis.hackSeconds -= 8f * (info.damageTypes.Total() / 50f);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -14337,7 +14277,7 @@
           "zone": "PatrolHelicopterAI/DangerZone"
         }
       },
-      "CodeAfterInjection": "//---\r\n{\r\n\tif (!global::PatrolHelicopterAI.use_danger_zones)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnNoGoZoneAdded\", this, zone) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (zone.IsPointInside(base.transform.position))\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n{\r\n\tif (!global::PatrolHelicopterAI.use_danger_zones)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnNoGoZoneAdded\", this, zone) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (zone.IsInMonument)\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -14863,7 +14803,7 @@
           "handcuffer": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\tConVar.Inventory.EquipItemInSlot(victim, 0);\r\n\t}\r\n\tvictim.ClientRPC<int, ItemId>(global::RpcTarget.Player(\"SetActiveBeltSlot\", victim), ownerItem.position, ownerItem.uid);\r\n\tthis.SetLocked(true, victim, ownerItem);\r\n\tglobal::Effect.server.Run(this.lockEffect.resourcePath, victim, 0u, Vector3.zero, Vector3.zero, null, false, null);\r\n\tInterface.CallHook(\"OnPlayerHandcuffed\", victim, handcuffer);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tConVar.Inventory.EquipItemInSlot(victim, 0);\r\n\t}\r\n\tvictim.ClientRPC(global::RpcTarget.Player(\"SetActiveBeltSlot\", victim), ownerItem.position, ownerItem.uid);\r\n\tthis.SetLocked(true, victim, ownerItem);\r\n\tglobal::Effect.server.Run(this.lockEffect.resourcePath, victim, 0u, Vector3.zero, Vector3.zero, null, false, null);\r\n\tInterface.CallHook(\"OnPlayerHandcuffed\", victim, handcuffer);\r\n}\r\n\r\n"
     },
     {
       "Type": 1,
@@ -15348,6 +15288,62 @@
         }
       },
       "CodeAfterInjection": "[global::BaseEntity.RPC_Server, global::BaseEntity.RPC_Server.IsVisible(3f)]\r\npublic void Pickup(global::BaseEntity.RPCMessage msg)\r\n{\r\n\tif (Interface.CallHook(\"ICanPickupEntity\", msg.player, this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (!msg.player.CanInteract())\r\n\t{\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnFeedbackReported",
+      "HookName": "OnFeedbackReported",
+      "HookParameters": {
+        "basePlayer": "BasePlayer",
+        "text": "string",
+        "text2": "string",
+        "reportType": "ReportType"
+      },
+      "ReturnBehavior": 0,
+      "TargetType": "BasePlayer/<OnFeedbackReport>d__598",
+      "Category": "Player",
+      "MethodData": {
+        "MethodName": "MoveNext",
+        "ReturnType": "void",
+        "Arguments": {}
+      },
+      "CodeAfterInjection": "//---\r\n\t\t\t\t\t\tSubject = text,\r\n\t\t\t\t\t\tMessage = text3,\r\n\t\t\t\t\t\tType = reportType\r\n\t\t\t\t\t});\r\n\t\t\t\t}\r\n\t\t\t\tInterface.CallHook(\"OnFeedbackReported\", basePlayer, text, text2, reportType);\r\n\t\t\t\tif (string.IsNullOrEmpty(ConVar.Server.reportsServerEndpoint))\r\n\t\t\t\t{\r\n\t\t\t\t\tgoto IL_1DF;\r\n\t\t\t\t}\r\n\t\t\t\tstring image = this.msg.read.StringMultiLine(60000, false);\r\n//---\r\n"
+    },
+    {
+      "Type": 1,
+      "Name": "OnFeedbackReported [patch]",
+      "HookName": "OnFeedbackReported",
+      "ReturnBehavior": 0,
+      "TargetType": "BasePlayer/<OnFeedbackReport>d__598",
+      "Category": "_Patches",
+      "MethodData": {
+        "MethodName": "MoveNext",
+        "ReturnType": "void",
+        "Arguments": {}
+      },
+      "CodeAfterInjection": "//---\r\n\t\t\t\t\t\tSubject = text,\r\n\t\t\t\t\t\tMessage = text3,\r\n\t\t\t\t\t\tType = reportType\r\n\t\t\t\t\t});\r\n\t\t\t\t}\r\n\t\t\t\tInterface.CallHook(\"OnFeedbackReported\", basePlayer, text, text2, reportType);\r\n\t\t\t\tif (string.IsNullOrEmpty(ConVar.Server.reportsServerEndpoint))\r\n\t\t\t\t{\r\n\t\t\t\t\tgoto IL_1C7;\r\n\t\t\t\t}\r\n\t\t\t\tstring image = this.msg.read.StringMultiLine(60000, false);\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnPlayerReported",
+      "HookName": "OnPlayerReported",
+      "HookParameters": {
+        "basePlayer": "BasePlayer",
+        "text5": "string",
+        "text4": "string",
+        "text": "string",
+        "text2": "string",
+        "text3": "string"
+      },
+      "ReturnBehavior": 0,
+      "TargetType": "BasePlayer/<OnPlayerReported>d__597",
+      "Category": "Player",
+      "MethodData": {
+        "MethodName": "MoveNext",
+        "ReturnType": "void",
+        "Arguments": {}
+      },
+      "CodeAfterInjection": "//---\r\n\t\t\t\t\tTargetName = text5,\r\n\t\t\t\t\tSubject = text,\r\n\t\t\t\t\tMessage = message,\r\n\t\t\t\t\tType = text3\r\n\t\t\t\t});\r\n\t\t\t\tInterface.CallHook(\"OnPlayerReported\", basePlayer, text5, text4, text, text2, text3);\r\n\t\t\t\tif (string.IsNullOrEmpty(ConVar.Server.reportsServerEndpoint))\r\n\t\t\t\t{\r\n\t\t\t\t\tgoto IL_207;\r\n\t\t\t\t}\r\n\t\t\t\tReportType type = ReportType.Abuse;\r\n//---\r\n"
     },
     {
       "Type": 0,
