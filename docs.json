@@ -2378,13 +2378,13 @@
       "TargetType": "BaseCombatEntity",
       "Category": "Player",
       "MethodData": {
-        "MethodName": "CanPickup",
+        "MethodName": "CanCompletePickup",
         "ReturnType": "bool",
         "Arguments": {
           "player": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "public virtual bool CanPickup(BasePlayer player)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"CanPickupEntity\", player, this);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\tbool flag = this.pickup.enabled && (!this.pickup.requireBuildingPrivilege || player.CanBuild()) && (!this.pickup.requireHammer || player.IsHoldingEntity<Hammer>()) && player != null && !player.IsInTutorial;\r\n//---\r\n"
+      "CodeAfterInjection": "protected virtual bool CanCompletePickup(BasePlayer player)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"CanPickupEntity\", player, this);\r\n\treturn !(returnvar is bool) || (bool)returnvar;\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -4454,7 +4454,7 @@
           "arg": "ConsoleSystem/Arg"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\tfloat num = 7f;\r\n\t\tif (Vector3.Distance(basePlayer2.transform.position, basePlayer.transform.position) > num)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tif (Interface.CallHook(\"OnTeamInvite\", basePlayer, basePlayer2) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tplayerTeam.SendInvite(basePlayer2);\r\n\t}\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tif (Vector3.Distance(basePlayer2.transform.position, basePlayer.transform.position) > num)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tDateTime hookExpireDate = new DateTime(2025, 12, 31);\r\n\t\tif (Interface.CallDeprecatedHook(\"OnTeamInvite\", \"OnTeamMemberInvite( PlayerTeam playerTeam, BasePlayer basePlayer, ulong PlayerID )\", hookExpireDate, basePlayer, basePlayer2) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tplayerTeam.SendInvite(basePlayer2);\r\n\t}\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -9692,7 +9692,7 @@
           "timeCooked": "float"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tglobal::Item slot = this.waterStorage.inventory.GetSlot(0);\r\n\tif (this.stopWhenOutputFull && slot != null && slot.amount >= slot.MaxStackable())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnWaterPurify\", this, timeCooked) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tfloat num = timeCooked * ((float)this.waterToProcessPerMinute / 60f);\r\n\tif (slot != null)\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tglobal::Item slot = this.purifiedWaterStorage.inventory.GetSlot(0);\r\n\tif (this.stopWhenOutputFull && slot != null && slot.amount >= slot.MaxStackable())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnWaterPurify\", this, timeCooked) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tfloat num = timeCooked * ((float)this.waterToProcessPerMinute / 60f);\r\n\tif (slot != null)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -9712,7 +9712,7 @@
           "timeCooked": "float"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t{\r\n\t\t\tslot3.amount += num4;\r\n\t\t\tslot3.amount = Mathf.Clamp(slot3.amount, 0, this.waterStorage.maxStackSize);\r\n\t\t\tthis.waterStorage.inventory.MarkDirty();\r\n\t\t}\r\n\t\tInterface.CallHook(\"OnWaterPurified\", this, timeCooked);\r\n\t\tthis.waterStorage.SendNetworkUpdate(global::BasePlayer.NetworkQueue.Update);\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t{\r\n\t\t\tslot3.amount += num4;\r\n\t\t\tslot3.amount = Mathf.Clamp(slot3.amount, 0, this.purifiedWaterStorage.maxStackSize);\r\n\t\t\tthis.purifiedWaterStorage.inventory.MarkDirty();\r\n\t\t}\r\n\t\tInterface.CallHook(\"OnWaterPurified\", this, timeCooked);\r\n\t\tthis.purifiedWaterStorage.SendNetworkUpdate(global::BasePlayer.NetworkQueue.Update);\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -11508,7 +11508,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\tglobal::ItemDefinition itemDefinition2 = null;\r\n\t\t\tulong skinID = global::ItemDefinition.FindSkin((itemDefinition.isRedirectOf != null) ? itemDefinition.isRedirectOf.itemid : itemDefinition.itemid, <>c__DisplayClass46_.targetSkin);\r\n\t\t\tglobal::ItemSkinDirectory.Skin skin = ((itemDefinition.isRedirectOf != null) ? itemDefinition.isRedirectOf : itemDefinition).skins.FirstOrDefault((global::ItemSkinDirectory.Skin x) => x.id == <>c__DisplayClass46_.targetSkin);\r\n\t\t\tif (Interface.CallHook(\"OnEntityReskin\", baseEntity, skin, msg.player) != null)\r\n\t\t\t{\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\tif (skin.invItem != null)\r\n\t\t\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\tglobal::ItemDefinition itemDefinition2 = null;\r\n\t\t\tulong skinID = global::ItemDefinition.FindSkin((itemDefinition.isRedirectOf != null) ? itemDefinition.isRedirectOf.itemid : itemDefinition.itemid, <>c__DisplayClass48_.targetSkin);\r\n\t\t\tglobal::ItemSkinDirectory.Skin skin = ((itemDefinition.isRedirectOf != null) ? itemDefinition.isRedirectOf : itemDefinition).skins.FirstOrDefault((global::ItemSkinDirectory.Skin x) => x.id == <>c__DisplayClass48_.targetSkin);\r\n\t\t\tif (Interface.CallHook(\"OnEntityReskin\", baseEntity, skin, msg.player) != null)\r\n\t\t\t{\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\tif (skin.invItem != null)\r\n\t\t\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -15363,6 +15363,43 @@
         "Arguments": {}
       },
       "CodeAfterInjection": "//---\r\n\t\t\tDebug.LogWarning(string.Format(\"UpdateSteamPlayer: inventory belongs to someone else (userID={0})\", steamInventory.baseEntity.userID.Get()));\r\n\t\t}\r\n\t\telse if (steamInventory.gameObject)\r\n\t\t{\r\n\t\t\tsteamInventory.Items = result.Items.ToArray<IPlayerItem>();\r\n\t\t\tInterface.CallHook(\"OnSteamInventoryUpdated\", steamInventory);\r\n\t\t\tresult.Dispose();\r\n\t\t}\r\n\t}\r\n\tcatch (Exception exception)\r\n\t{\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnTeamMemberInvite [sendofflineinvite]",
+      "HookName": "OnTeamMemberInvite",
+      "HookParameters": {
+        "playerTeam": "PlayerTeam",
+        "basePlayer": "BasePlayer",
+        "uLong": "ulong"
+      },
+      "ReturnBehavior": 1,
+      "TargetType": "RelationshipManager",
+      "Category": "Team",
+      "MethodData": {
+        "MethodName": "sendofflineinvite",
+        "ReturnType": "void",
+        "Arguments": {
+          "arg": "ConsoleSystem/Arg"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t\tbasePlayer.ShowToast(global::GameTip.Styles.Error, global::RelationshipManager.RemoteInvitesBlocked, false, Array.Empty<string>());\r\n\t\treturn;\r\n\t}\r\n\tif (basePlayer2 == null || (!basePlayer2.IsNpc && basePlayer2.currentTeam == 0uL))\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnTeamMemberInvite\", playerTeam, basePlayer, uLong) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tplayerTeam.SendInvite(basePlayer2, uLong);\r\n\t}\r\n//---\r\n"
+    },
+    {
+      "Type": 1,
+      "Name": "OnTeamMemberInvite [sendinvite]",
+      "HookName": "OnTeamMemberInvite",
+      "ReturnBehavior": 0,
+      "TargetType": "RelationshipManager",
+      "Category": "Team",
+      "MethodData": {
+        "MethodName": "sendinvite",
+        "ReturnType": "void",
+        "Arguments": {
+          "arg": "ConsoleSystem/Arg"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t\tDateTime hookExpireDate = new DateTime(2025, 12, 31);\r\n\t\tif (Interface.CallDeprecatedHook(\"OnTeamInvite\", \"OnTeamMemberInvite( PlayerTeam playerTeam, BasePlayer basePlayer, ulong PlayerID )\", hookExpireDate, basePlayer, basePlayer2) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tif (Interface.CallHook(\"OnTeamMemberInvite\", playerTeam, basePlayer, basePlayer2.userID.Get()) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tplayerTeam.SendInvite(basePlayer2);\r\n\t}\r\n//---\r\n"
     },
     {
       "Type": 0,
