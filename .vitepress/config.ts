@@ -77,6 +77,7 @@ export default defineConfig({
         text: 'Other',
         items: [
           { text: 'Skins', link: '/skins' },
+          { text: 'Items', link: '/items' },
           { text: 'Glossary', link: '/glossary' },
         ],
       },
