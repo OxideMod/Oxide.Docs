@@ -219,8 +219,105 @@ function addGlossaryReferences(filePath, terms) {
   }
 }
 
+// Remove all glossary references from a markdown file (unified remove mode)
+function removeGlossaryReferences(filePath) {
+  try {
+    console.log(`Processing: ${path.relative(process.cwd(), filePath)}`);
+
+    let content = fs.readFileSync(filePath, 'utf8');
+    const { data, content: markdownContent } = matter(content);
+
+    // Use comprehensive regexes to remove all glossary references
+    // Standard format
+    let processedContent = markdownContent.replace(
+      /<sup><a href="\/glossary#[^"]+"\>\[[0-9]+\]<\/a><\/sup>/g,
+      ''
+    );
+
+    // Handle special cases that may appear within home page markdown content
+    processedContent = processedContent.replace(
+      /plugin<sup><a\s+href="\/glossary#[^"]+"\>\[[0-9]+\]<\/a><\/sup>/g,
+      'plugin'
+    );
+    processedContent = processedContent.replace(
+      /hooks<sup><a\s+href="\/glossary#[^"]+"\>\[[0-9]+\]<\/a><\/sup>/g,
+      'hooks'
+    );
+    processedContent = processedContent.replace(
+      /permissions<sup><a\s+href="\/glossary#[^"]+"\>\[[0-9]+\]<\/a><\/sup>/g,
+      'permissions'
+    );
+    processedContent = processedContent.replace(
+      /extensions<sup><a\s+href="\/glossary#[^"]+"\>\[[0-9]+\]<\/a><\/sup>/g,
+      'extensions'
+    );
+
+    // Generic pattern (fallback) for glossary links
+    processedContent = processedContent.replace(
+      /<sup><a\s+href="\/glossary#[^"]+"\>\[[0-9]+\]<\/a><\/sup>/g,
+      ''
+    );
+
+    // Reassemble the file with frontmatter
+    const updatedContent = matter.stringify(processedContent, data);
+    fs.writeFileSync(filePath, updatedContent);
+
+    return true;
+  } catch (error) {
+    console.error(`Error processing file ${filePath}:`, error);
+    return false;
+  }
+}
+
 // Main function
 async function main() {
+  // CLI modes:
+  //   Default (no args): add references across docs
+  //   Patterns (args): add references in specified files/patterns
+  //   remove [patterns...]: remove references across docs or in specified patterns
+
+  const args = process.argv.slice(2);
+
+  // Removal mode
+  if (args[0] === 'remove' || args[0] === '--remove' || args[0] === '-r') {
+    console.log('Removing all glossary references from markdown files...');
+
+    const patterns = args.length > 1 ? args.slice(1) : ['**/*.md'];
+    const specificFileMode = args.length > 1;
+
+    const files = globSync(patterns, {
+      cwd: specificFileMode ? process.cwd() : DOCS_DIR,
+      absolute: true,
+    });
+
+    console.log(`Found ${files.length} markdown files to process`);
+
+    let successCount = 0;
+    let errorCount = 0;
+
+    for (const file of files) {
+      try {
+        const success = removeGlossaryReferences(file);
+        if (success) {
+          successCount++;
+        } else {
+          errorCount++;
+        }
+      } catch (error) {
+        console.error(`Error processing ${file}: ${error.message}`);
+        errorCount++;
+      }
+    }
+
+    console.log(`Successfully processed ${successCount} out of ${files.length} files`);
+    if (errorCount > 0) {
+      console.error(`Failed to process ${errorCount} files`);
+      process.exit(1);
+    }
+    return;
+  }
+
+  // Add/link mode
   console.log('Extracting glossary terms...');
   const terms = extractGlossaryTerms();
   console.log(`Found ${terms.length} glossary terms`);
@@ -232,12 +329,9 @@ async function main() {
 
   console.log('Processing markdown files...');
 
-  // Get command line args - if a specific file is provided, only process that
-  const args = process.argv.slice(2);
   let filePatterns = ['**/*.md'];
-
   if (args.length > 0) {
-    // If files are specified on command line, use those
+    // If files/patterns are specified on command line, use those
     filePatterns = args;
     console.log(`Processing only specific files/patterns: ${filePatterns.join(', ')}`);
   }

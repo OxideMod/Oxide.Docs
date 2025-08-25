@@ -17,8 +17,6 @@ DELAY = 1.0
 OUTPUT_DIR = os.path.join('docs', 'public', 'data')
 SCMM_FILE = 'scmm.json'
 SCMM_PATH = os.path.join(OUTPUT_DIR, SCMM_FILE)
-MERGED_FILE = 'merged_skins.json'
-MERGED_PATH = os.path.join(OUTPUT_DIR, MERGED_FILE)
 MAX_RETRIES = 5
 
 # Set up logging
@@ -223,275 +221,27 @@ def fetch_scmm_data():
     logger.info(f"All SCMM data has been saved to {SCMM_PATH}")
     return all_items
 
-#
-# ADDITIONAL FUNCTIONALITY - FETCH EXPORTER DATA FROM API
-#
-
-def fetch_exporter_data(api_url: str) -> Tuple[Dict, str]:
-    """
-    Fetch exporter data from specified API URL and save it to the output directory.
-    Returns the loaded JSON data and the path to the saved file.
-    """
-    logger.info(f"Fetching exporter data from: {api_url}")
-    
-    # Generate the output filename based on current date
-    current_date = datetime.now().strftime('%Y-%m-%d')
-    exporter_filename = f"exporter_skins-{current_date}.json"
-    exporter_path = os.path.join(OUTPUT_DIR, exporter_filename)
-    
-    for attempt in range(MAX_RETRIES):
-        try:
-            response = requests.get(api_url)
-            if response.status_code == 200:
-                # Save the downloaded file
-                with open(exporter_path, 'wb') as f:
-                    f.write(response.content)
-                
-                logger.info(f"Successfully saved exporter data to {exporter_path}")
-                
-                # Try to load the saved file to verify it's valid JSON
-                try:
-                    with open(exporter_path, 'r', encoding='utf-8') as f:
-                        data = json.load(f)
-                    logger.info(f"Successfully loaded exporter data from {exporter_path}")
-                    return data, exporter_path
-                except json.JSONDecodeError:
-                    logger.error(f"Downloaded file is not valid JSON, trying to parse with different encoding")
-                    # Try different encodings
-                    data = load_json_file(exporter_path)
-                    if data:
-                        return data, exporter_path
-                    else:
-                        raise ValueError(f"Could not parse downloaded file as JSON")
-            else:
-                logger.warning(f"Failed to fetch exporter data: HTTP {response.status_code}")
-                time.sleep(5)
-        except Exception as e:
-            logger.error(f"Error fetching exporter data: {e}")
-            time.sleep(5)
-    
-    logger.error("Failed to fetch exporter data after retries")
-    return None, None
-
-#
-# MERGE SKINS FUNCTIONALITY
-#
-
-def load_json_file(file_path):
-    """Load and return JSON data from file."""
-    # Try different encodings to handle BOM issues
-    encodings = ['utf-8-sig', 'utf-8', 'utf-16']
-    
-    for encoding in encodings:
-        try:
-            with open(file_path, 'r', encoding=encoding) as f:
-                return json.load(f)
-        except UnicodeDecodeError:
-            continue
-        except Exception as e:
-            if encoding == encodings[-1]:  # Last encoding attempt
-                logger.error(f"Error loading {file_path}: {e}")
-                return None
-            continue
-    
-    logger.error(f"Failed to load {file_path} with any encoding")
-    return None
-
-def merge_skin_data(exporter_data, scmm_data):
-    """Merge data from both sources and extract required fields."""
-    merged_skins = []
-    
-    # Create a lookup dictionary from scmm data using name as key
-    scmm_lookup_by_name = {}
-    scmm_lookup_by_classid = {}
-    
-    # scmm_data is always an array format
-    items_list = []
-    if isinstance(scmm_data, list):
-        items_list = scmm_data
-        logger.info("Detected scmm data as array format")
-    else:
-        logger.warning("Warning: Unknown scmm data format, expected array")
-        return merged_skins
-    
-    for item in items_list:
-        asset_desc = item.get('asset_description', {})
-        classid = asset_desc.get('classid')
-        name = item.get('name', '').strip()
-        
-        # Store by name for name-based matching
-        if name:
-            scmm_lookup_by_name[name] = {
-                'name': name,
-                'sell_price': item.get('sell_price', 0),
-                'sell_price_text': item.get('sell_price_text', ''),
-                'icon_url': asset_desc.get('icon_url', ''),
-                'classid': classid
-            }
-        
-        # Store by classid for direct ID matching (only if classid is not "0")
-        if classid and classid != "0":
-            scmm_lookup_by_classid[classid] = {
-                'name': name,
-                'sell_price': item.get('sell_price', 0),
-                'sell_price_text': item.get('sell_price_text', ''),
-                'icon_url': asset_desc.get('icon_url', ''),
-                'classid': classid
-            }
-    
-    logger.info(f"Loaded {len(scmm_lookup_by_name)} skins from SCMM data (by name)")
-    logger.info(f"Loaded {len(scmm_lookup_by_classid)} skins from SCMM data (by classid, excluding non-tradeable)")
-    
-    # Process exporter_skins data
-    if exporter_data and 'Items' in exporter_data:
-        for item in exporter_data['Items']:
-            item_name = item.get('ItemDisplayName', '')
-            skins = item.get('Skins', [])
-            
-            for skin in skins:
-                skin_id = skin.get('SkinId')
-                skin_name = skin.get('SkinName', '').strip()
-                skin_type = skin.get('SkinType', '')
-                
-                if skin_id:
-                    # Try matching by SkinId first
-                    skin_id_str = str(skin_id)
-                    skin_market_data = scmm_lookup_by_classid.get(skin_id_str, {})
-                    
-                    # If no direct match, try matching by name
-                    if not skin_market_data and skin_name:
-                        skin_market_data = scmm_lookup_by_name.get(skin_name, {})
-                    
-                    found_in_market = bool(skin_market_data)
-                    
-                    # Determine the skin type for display
-                    display_skin_type = skin_type
-                    
-                    # Check if this should be labeled as Twitch Drop
-                    # Look for items in scmm.json that have this name and sell_price = 0
-                    scmm_item_by_name = scmm_lookup_by_name.get(skin_name, {})
-                    if scmm_item_by_name and scmm_item_by_name.get('sell_price', 0) == 0:
-                        # Additional check: if it's already "Workshop" and has zero price, it's likely a Twitch Drop
-                        if skin_type == "Workshop":
-                            display_skin_type = "Twitch Drop"
-                    
-                    merged_skin = {
-                        'skinId': skin_id,
-                        'skinType': display_skin_type,
-                        'skinName': skin_name,
-                        'iconUrl': skin_market_data.get('icon_url', ''),
-                        'sellingPrice': skin_market_data.get('sell_price', 0),
-                        'sellingPriceText': skin_market_data.get('sell_price_text', ''),
-                        'itemName': item_name,
-                        'foundInMarket': found_in_market,
-                        'matchedBy': 'classid' if (skin_id_str in scmm_lookup_by_classid) else ('name' if (skin_name in scmm_lookup_by_name) else 'none'),
-                        'marketClassId': skin_market_data.get('classid', '')
-                    }
-                    
-                    merged_skins.append(merged_skin)
-    
-    return merged_skins
-
-def save_merged_data(merged_skins, exporter_file, scmm_file):
-    """Save merged skin data to output file with metadata."""
-    # Create summary statistics
-    total_skins = len(merged_skins)
-    skins_with_market_data = sum(1 for skin in merged_skins if skin['foundInMarket'])
-    skins_with_price = sum(1 for skin in merged_skins if skin['sellingPrice'] > 0)
-    twitch_drops = sum(1 for skin in merged_skins if skin['skinType'] == 'Twitch Drop')
-    
-    logger.info(f"\nMerge Summary:")
-    logger.info(f"Total skins processed: {total_skins}")
-    logger.info(f"Skins found in market data: {skins_with_market_data}")
-    logger.info(f"Skins with pricing data: {skins_with_price}")
-    logger.info(f"Twitch Drop skins identified: {twitch_drops}")
-    coverage_percentage = round(skins_with_market_data/total_skins*100, 2) if total_skins > 0 else 0
-    logger.info(f"Coverage: {coverage_percentage}%")
-    
-    # Create output data structure
-    output_data = {
-        'metadata': {
-            'generated_at': datetime.now().isoformat(),
-            'total_skins': total_skins,
-            'skins_with_market_data': skins_with_market_data,
-            'skins_with_price': skins_with_price,
-            'twitch_drops_identified': twitch_drops,
-            'coverage_percentage': coverage_percentage,
-            'source_files': [
-                str(exporter_file),
-                str(scmm_file)
-            ]
-        },
-        'skins': merged_skins
-    }
-    
-    # Save merged data
-    logger.info(f"\nSaving merged data to {MERGED_PATH}...")
-    try:
-        with open(MERGED_PATH, 'w', encoding='utf-8') as f:
-            json.dump(output_data, f, indent=2, ensure_ascii=False)
-        logger.info(f"Successfully saved {total_skins} skins to {MERGED_PATH}")
-    except Exception as e:
-        logger.error(f"Error saving file: {e}")
-        return False
-    
-    # Show some examples
-    if skins_with_market_data > 0:
-        logger.info(f"\nFirst 5 skins with market data:")
-        examples = [skin for skin in merged_skins if skin['foundInMarket']][:5]
-        for skin in examples:
-            logger.info(f"  - {skin['skinName']} (ID: {skin['skinId']}) - {skin['sellingPriceText']}")
-    
-    if twitch_drops > 0:
-        logger.info(f"\nFirst 5 Twitch Drop skins identified:")
-        twitch_examples = [skin for skin in merged_skins if skin['skinType'] == 'Twitch Drop'][:5]
-        for skin in twitch_examples:
-            logger.info(f"  - {skin['skinName']} (ID: {skin['skinId']}) - {skin['itemName']}")
-    
-    return True
-
 def main():
-    """Main function to process skins data from SCMM and exporter API."""
-    parser = argparse.ArgumentParser(description='Process Rust skins data from SCMM and exporter API')
-    parser.add_argument('--api-url', type=str, required=True, 
-                        help='URL to fetch exporter data from (e.g., http://192.168.1.100/exporter.json)')
-    parser.add_argument('--skip-scmm', action='store_true',
-                        help='Skip fetching from SCMM API and use existing file')
+    """Main function to fetch skins data from SCMM and save to docs/public/data/scmm.json."""
+    parser = argparse.ArgumentParser(description='Fetch Rust skins data from SCMM and save to JSON')
+    parser.add_argument('--fresh', action='store_true',
+                        help='Ignore existing scmm.json and fetch all pages from scratch')
     args = parser.parse_args()
     
-    # Step 1: Fetch SCMM data
-    if args.skip_scmm:
-        logger.info("Skipping SCMM data fetch, using existing file")
-        scmm_data = load_json_file(SCMM_PATH)
-        if not scmm_data:
-            logger.error(f"Failed to load existing SCMM data from {SCMM_PATH}")
-            sys.exit(1)
-    else:
-        logger.info("Fetching SCMM data...")
-        scmm_data = fetch_scmm_data()
-        if not scmm_data:
-            logger.error("Failed to fetch SCMM data")
-            sys.exit(1)
-    
-    # Step 2: Fetch exporter data from API and save it
-    logger.info(f"Fetching exporter data from API: {args.api_url}")
-    exporter_data, exporter_file_path = fetch_exporter_data(args.api_url)
-    if not exporter_data or not exporter_file_path:
-        logger.error("Failed to fetch or save exporter data from API")
+    # Fresh mode: remove existing file to force full fetch
+    if args.fresh and os.path.exists(SCMM_PATH):
+        try:
+            os.remove(SCMM_PATH)
+            logger.info(f"Removed existing file: {SCMM_PATH}")
+        except Exception as e:
+            logger.warning(f"Could not remove existing file: {e}")
+
+    logger.info("Fetching SCMM data...")
+    scmm_data = fetch_scmm_data()
+    if not scmm_data:
+        logger.error("Failed to fetch SCMM data")
         sys.exit(1)
-    
-    # Step 3: Merge the data
-    logger.info("Merging skin data...")
-    merged_skins = merge_skin_data(exporter_data, scmm_data)
-    
-    # Step 4: Save merged data
-    success = save_merged_data(merged_skins, exporter_file_path, SCMM_PATH)
-    
-    if success:
-        logger.info("Process completed successfully!")
-    else:
-        logger.error("Process completed with errors")
-        sys.exit(1)
+    logger.info("SCMM data fetch completed successfully!")
 
 if __name__ == "__main__":
     main() 

@@ -151,11 +151,6 @@
           </div>
         </div>
       </div>
-      <div class="rusthelp-info">
-        <a href="https://rusthelp.com/tools/skins/" target="_blank" rel="noopener noreferrer">
-          For the most up to date and accurate information on Rust skins please visit RustHelp
-        </a>
-      </div>
     </div>
 
     <div class="content">
@@ -168,7 +163,7 @@
         <p>{{ error }}</p>
       </div>
       <div v-else-if="uniqueFilteredSkins.length > 0" class="skin-container">
-        <div v-for="item in uniqueFilteredSkins" :key="item.skinId" class="skin-item">
+        <div v-for="item in uniqueFilteredSkins" :key="skinKey(item)" class="skin-item">
           <div class="skin-image-container">
             <img
               :src="getImageUrl(item.iconUrl)"
@@ -200,21 +195,14 @@
                         item.skinName &&
                         getSkinMarketplaceUrl(item) &&
                         !isTwitchDrop(item) &&
-                        !isDLCOnly(item)
+                        !isDLCOnly(item) &&
+                        item.skinType !== 'Twitch / DLC'
                       "
                       :href="getSkinMarketplaceUrl(item)"
                       target="_blank"
                       class="skin-icon-link steam"
                     >
                       <img src="/steam.svg" alt="Steam" class="steam-icon" />
-                    </a>
-                    <a
-                      v-if="!isAcousticGuitar(item) && !isDLCOnly(item)"
-                      :href="getRustHelpUrl(item)"
-                      target="_blank"
-                      class="skin-icon-link rusthelp"
-                    >
-                      <img src="/rust-help.svg" alt="RustHelp" class="rusthelp-icon" />
                     </a>
                   </div>
                   <div class="skin-type" v-text="item.skinType || 'Unknown'"></div>
@@ -229,28 +217,18 @@
                       isDLCOnly(item),
                   }"
                   v-text="
-                    isDLCOnly(item)
-                      ? 'DLC Only'
-                      : item.foundInMarket
-                        ? formatPrice(item.sellingPriceText)
-                        : 'Not available on market'
+                    item.skinType === 'Twitch / DLC'
+                      ? 'Twitch / DLC'
+                      : isDLCOnly(item)
+                        ? 'DLC Only'
+                        : item.foundInMarket
+                          ? formatPrice(item.sellingPriceText)
+                          : 'Not available on market'
                   "
                 ></div>
               </div>
             </div>
-            <div class="skin-buttons-container" style="display: none">
-              <a
-                v-if="item.foundInMarket && item.skinName && getSkinMarketplaceUrl(item)"
-                :href="getSkinMarketplaceUrl(item)"
-                target="_blank"
-                class="skin-link"
-              >
-                <img src="/steam.svg" alt="Steam" class="steam-icon" />
-              </a>
-              <a :href="getRustHelpUrl(item)" target="_blank" class="skin-link rusthelp">
-                <img src="/rust-help.svg" alt="RustHelp" class="rusthelp-icon" />
-              </a>
-            </div>
+            <div class="skin-buttons-container" style="display: none"></div>
           </div>
         </div>
       </div>
@@ -349,12 +327,29 @@ const filteredItemNames = computed(() => {
 });
 
 // Ensure no duplicate item names are shown
+const normalizeForKey = value => {
+  if (!value) return '';
+  return String(value)
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[\s\u00A0\u1680\u180E\u2000-\u200A\u202F\u205F\u3000]+/g, ' ')
+    .trim()
+    .toLowerCase();
+};
+
+const skinKey = item => {
+  // Prefer numeric skinId if present and not '0'; else fallback to normalized name+item
+  const id = item && item.skinId != null ? String(item.skinId) : '';
+  if (id && id !== '0') return `id:${id}`;
+  return `nk:${normalizeForKey(item.itemName)}|${normalizeForKey(item.skinName)}`;
+};
+
 const uniqueFilteredSkins = computed(() => {
-  const seenNames = new Set();
+  const seen = new Set();
   return filteredSkins.value.filter(skin => {
-    const key = `${skin.itemName}-${skin.skinName}`;
-    if (seenNames.has(key)) return false;
-    seenNames.add(key);
+    const key = `${normalizeForKey(skin.itemName)}|${normalizeForKey(skin.skinName)}`;
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
     return true;
   });
 });
@@ -462,26 +457,6 @@ onMounted(() => {
 
 .sidebar-content {
   padding: 24px;
-}
-
-/* RustHelp Info */
-.rusthelp-info {
-  padding: 15px;
-  margin-top: 10px;
-  text-align: center;
-  border-top: 1px solid var(--vp-c-divider);
-  font-size: 14px;
-}
-
-.rusthelp-info a {
-  color: var(--vp-c-brand);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.rusthelp-info a:hover {
-  color: var(--vp-c-brand-dark);
-  text-decoration: underline;
 }
 
 .filter-group {
@@ -810,11 +785,6 @@ onMounted(() => {
   border: 1px solid transparent;
 }
 
-.skin-link.rusthelp {
-  background-color: #ce422b;
-  color: white;
-}
-
 .skin-link:hover {
   opacity: 0.9;
 }
@@ -965,8 +935,7 @@ onMounted(() => {
     justify-content: center;
   }
 
-  .steam-icon,
-  .rusthelp-icon {
+  .steam-icon {
     width: 14px;
     height: 14px;
   }

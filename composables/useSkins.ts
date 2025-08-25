@@ -51,7 +51,6 @@ interface UseSkins {
   getImageUrl: (iconUrl?: string) => string;
   formatPrice: (priceText?: string) => string;
   getSkinMarketplaceUrl: (skin: Skin) => string | null;
-  getRustHelpUrl: (skin: Skin) => string;
   setupLazyLoading: () => void;
   initializeSkins: () => Promise<void>;
 }
@@ -79,6 +78,17 @@ export function useSkins(): UseSkins {
   const filteredSkins = computed(() => {
     return allMatchingFilteredSkins.value.slice(0, visibleItems.value);
   });
+
+  // Normalize strings for robust duplicate detection (handles unicode spaces/diacritics)
+  const normalizeForKey = (value: string | undefined | null): string => {
+    if (!value) return '';
+    return String(value)
+      .normalize('NFKD')
+      .replace(/[\u0300-\u036f]/g, '') // remove diacritics
+      .replace(/[\s\u00A0\u1680\u180E\u2000-\u200A\u202F\u205F\u3000]+/g, ' ') // collapse any whitespace incl NBSP
+      .trim()
+      .toLowerCase();
+  };
 
   const itemTypes = computed(() => {
     if (!skins.value.skins) return [];
@@ -109,7 +119,8 @@ export function useSkins(): UseSkins {
 
       const lowerCaseTerm = (term as string).toLowerCase().trim();
 
-      let filtered = skinsValue.filter(skin => skin.foundInMarket === true);
+      // Include all items (including Twitch / DLC with zero price)
+      let filtered = Array.isArray(skinsValue) ? [...skinsValue] : [];
 
       if (lowerCaseTerm) {
         filtered = filtered.filter(skin => {
@@ -298,26 +309,6 @@ export function useSkins(): UseSkins {
     }
   };
 
-  // Enhanced RustHelp URL function with validation
-  const getRustHelpUrl = (skin: Skin): string => {
-    const baseUrl = 'https://rusthelp.com/tools/skins';
-
-    if (!skin?.skinId) return baseUrl;
-
-    try {
-      // Validate skin ID (should be numeric)
-      const skinId = String(skin.skinId).trim();
-      if (!/^\d+$/.test(skinId) || skinId.length > 20) {
-        return baseUrl;
-      }
-
-      return `${baseUrl}/${skinId}`;
-    } catch (e) {
-      console.warn('Failed to generate RustHelp URL:', e);
-      return baseUrl;
-    }
-  };
-
   // Optimized shuffle function with bounds checking
   const shuffleArray = (array: any[]): void => {
     if (!Array.isArray(array) || array.length <= 1) return;
@@ -412,17 +403,41 @@ export function useSkins(): UseSkins {
     error.value = null;
 
     try {
-      const response = await fetch('/data/merged_skins.json');
+      const response = await fetch('/data/scmm.json');
       if (!response.ok) {
         throw new Error(`HTTP error ${response.status}`);
       }
       const jsonData = await response.json();
 
-      // Validate and sanitize the JSON data
-      const skinsArray = Array.isArray(jsonData.skins) ? jsonData.skins : [];
+      // Validate and sanitize the JSON data (SCMM array format)
+      const skinsArray = Array.isArray(jsonData)
+        ? jsonData.map(item => {
+            const price = Number(item?.sell_price || 0);
+            const isZeroPrice = !Number.isNaN(price) && price === 0;
+            const skinType = isZeroPrice ? 'Twitch / DLC' : 'Workshop';
+            return {
+              skinId: item?.asset_description?.classid || '',
+              skinName: item?.name || '',
+              itemName: item?.asset_description?.type || '',
+              skinType,
+              iconUrl: item?.asset_description?.icon_url || '',
+              foundInMarket: !isZeroPrice, // treat zero-price as non-market
+              sellingPriceText: item?.sell_price_text || '',
+            };
+          })
+        : [];
+
+      // De-duplicate by normalized itemName + skinName to avoid visual duplicates
+      const seenKeys = new Set<string>();
+      const dedupedSkins = skinsArray.filter(s => {
+        const key = `${normalizeForKey(s.itemName)}|${normalizeForKey(s.skinName)}`;
+        if (!key || seenKeys.has(key)) return false;
+        seenKeys.add(key);
+        return true;
+      });
 
       // Only shuffle a sample for initial display to improve performance
-      const shuffledSample = [...skinsArray];
+      const shuffledSample = [...dedupedSkins];
       if (shuffledSample.length > 1000) {
         // For large datasets, only shuffle the first 1000 items
         shuffleArray(shuffledSample.slice(0, 1000));
@@ -431,7 +446,7 @@ export function useSkins(): UseSkins {
       }
 
       skins.value = {
-        metadata: jsonData.metadata || {},
+        metadata: {},
         skins: shuffledSample,
       };
 
@@ -501,7 +516,6 @@ export function useSkins(): UseSkins {
     getImageUrl,
     formatPrice,
     getSkinMarketplaceUrl,
-    getRustHelpUrl,
     setupLazyLoading,
     initializeSkins,
   };
