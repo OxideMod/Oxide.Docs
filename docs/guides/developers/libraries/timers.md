@@ -7,7 +7,7 @@ after: Permissions
 
 ## Understanding Timers
 
-Timers are implemented through the Oxide framework, offering plugin developers the ability to effectively schedule and manage various tasks within their plugins<sup><a href="/glossary#plugins">[3]</a></sup>.
+Timers are implemented through the Oxide framework, offering plugin developers the ability to effectively schedule and manage various tasks within their plugins.
 
 ## Using a `Once` Timer
 

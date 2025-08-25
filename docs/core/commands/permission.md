@@ -49,7 +49,7 @@ Player 'OxideMod (76561199558781314)' revoked permission 'myawesomeplugin.use'
 **Usage:** `oxide.show <groups|perms>`  
 **Aliases:** `o.show`, `perm.show`
 
-Shows a list of all groups<sup><a href="/glossary#groups">[12]</a></sup> or permissions<sup><a href="/glossary#permissions">[11]</a></sup>.
+Shows a list of all groups<sup><a href="/glossary#groups">[11]</a></sup> or permissions<sup><a href="/glossary#permissions">[10]</a></sup>.
 
 ### Example `oxide.show groups`
 

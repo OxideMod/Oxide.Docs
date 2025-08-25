@@ -23,7 +23,7 @@ private void TestCommand(IPlayer player, string command, string[] args)
 }
 ```
 
-when using Rustplugin<sup><a href="/glossary#rustplugin">[5]</a></sup>
+when using Rustplugin<sup><a href="/glossary#rustplugin">[4]</a></sup>
 
 ```csharp
 [ChatCommand("test")]
@@ -47,7 +47,7 @@ private void TestCommand(IPlayer player, string command, string[] args)
 }
 ```
 
-when using Rustplugin<sup><a href="/glossary#rustplugin">[5]</a></sup>
+when using Rustplugin<sup><a href="/glossary#rustplugin">[4]</a></sup>
 
 ```csharp
 [ConsoleCommand("test")]
@@ -87,7 +87,7 @@ A short description of what the plugin does
 
 ## PluginReference
 
-Reference to other plugin, when this plugin need to use functions from other plugins<sup><a href="/glossary#plugins">[3]</a></sup>.
+Reference to other plugin, when this plugin need to use functions from other plugins.
 
 ```csharp
 [PluginReference] private Plugin Vanish, Backpacks;

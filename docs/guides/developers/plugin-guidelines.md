@@ -5,7 +5,7 @@ after: database
 
 # Plugin Guidelines
 
-Here, we will guide you through key practices and conventions that will set you up for success in developing plugins<sup><a href="/glossary#plugins">[3]</a></sup> for Rust using the Oxide Mod framework. Whether you're a seasoned developer or just starting your journey in plugin development, adhering to these guidelines can help you create clean, maintainable, and efficient plugins<sup><a href="/glossary#plugins">[3]</a></sup>. This guide will cover a range of topics, from naming conventions and error handling, to versioning, documentation, and respectfulness in coding practices. So let's dive in!
+Here, we will guide you through key practices and conventions that will set you up for success in developing plugins for Rust using the Oxide Mod framework. Whether you're a seasoned developer or just starting your journey in plugin development, adhering to these guidelines can help you create clean, maintainable, and efficient plugins. This guide will cover a range of topics, from naming conventions and error handling, to versioning, documentation, and respectfulness in coding practices. So let's dive in!
 
 ## 1. Naming Conventions
 
@@ -41,7 +41,7 @@ private void MyCommand(BasePlayer player, string command, string[] args)
 
 ### 1.3 Permissions
 
-Permissions<sup><a href="/glossary#permissions">[11]</a></sup> should follow a specific format: `pluginname.permission`. The plugin name should be in lowercase and the permission should clearly represent its function.
+Permissions<sup><a href="/glossary#permissions">[10]</a></sup> should follow a specific format: `pluginname.permission`. The plugin name should be in lowercase and the permission should clearly represent its function.
 
 For example:
 
@@ -166,7 +166,7 @@ In this example, `Puts` is a method provided by the Oxide framework for logging 
 
 ### Input Validation
 
-One common source of errors in plugins<sup><a href="/glossary#plugins">[3]</a></sup> is user input. Always validate input before using it. For instance, if you're expecting a number, check if the input can be parsed as a number:
+One common source of errors in plugins is user input. Always validate input before using it. For instance, if you're expecting a number, check if the input can be parsed as a number:
 
 ```csharp
 public void MyCommand(ConsoleSystem.Arg arg)
@@ -204,7 +204,7 @@ In this example, if the player is not found, `BasePlayer.Find` returns `null`, a
 
 ### 4.1 General
 
-When writing your plugins<sup><a href="/glossary#plugins">[3]</a></sup>, consider how they might impact the server's performance. It's crucial to use resources efficiently and avoid unnecessary operations that could slow down the server.
+When writing your plugins, consider how they might impact the server's performance. It's crucial to use resources efficiently and avoid unnecessary operations that could slow down the server.
 
 ### 4.2 Avoid Unnecessary Calculations
 
@@ -325,7 +325,7 @@ private void HelloCommand(IPlayer player, string command, string[] args)
 
 In this example, the `Init` method and the `HelloCommand` method are close together because they are related - the command is registered in the `Init` method and handled in the `HelloCommand` method.
 
-Regions can be very useful to group related code together, especially in large code files. In Rust plugins<sup><a href="/glossary#plugins">[3]</a></sup>, it's common to use regions to separate different sections of your code, such as command handlers, hooks<sup><a href="/glossary#hooks">[7]</a></sup>, and helper methods.
+Regions can be very useful to group related code together, especially in large code files. In Rust plugins, it's common to use regions to separate different sections of your code, such as command handlers, hooks<sup><a href="/glossary#hooks">[6]</a></sup>, and helper methods.
 
 ```csharp
 #region Command Handlers
@@ -362,7 +362,7 @@ private void BroadcastServerRestart(BasePlayer player)
 #endregion
 ```
 
-In this example, the code is organized into three regions: Command Handlers, Hooks<sup><a href="/glossary#hooks">[7]</a></sup>, and Helper Methods. This organization makes it easier to navigate through the code.
+In this example, the code is organized into three regions: Command Handlers, Hooks<sup><a href="/glossary#hooks">[6]</a></sup>, and Helper Methods. This organization makes it easier to navigate through the code.
 
 ## 6. Versioning
 
@@ -413,7 +413,7 @@ Remember, each entry in your changelog should document any changes to the functi
 
 ## 7. Documentation
 
-Documentation is a critical part of any software development project, including Oxide plugins<sup><a href="/glossary#plugins">[3]</a></sup>. Clear, comprehensive documentation helps other developers understand your code and users use your plugin effectively. Here are some guidelines to keep in mind when documenting your Rust plugin:
+Documentation is a critical part of any software development project, including Oxide plugins. Clear, comprehensive documentation helps other developers understand your code and users use your plugin effectively. Here are some guidelines to keep in mind when documenting your Rust plugin:
 
 ### 7.1 Plugin Description
 
@@ -477,11 +477,11 @@ if (!player.HasPermission("exampleplugin.use"))
 
 ### 7.4 API Documentation
 
-If your plugin provides an API for other plugins<sup><a href="/glossary#plugins">[3]</a></sup> to use, make sure to document that API thoroughly. Include explanations of what each method and property does, what arguments it accepts (if any), and what it returns (if anything).
+If your plugin provides an API for other plugins to use, make sure to document that API thoroughly. Include explanations of what each method and property does, what arguments it accepts (if any), and what it returns (if anything).
 
 ## 8. Respectfulness
 
-While developing plugins<sup><a href="/glossary#plugins">[3]</a></sup>, it's important to keep in mind that your software will be running on other people's servers, impacting their resources, performance, and the overall player experience. Therefore, you should follow a set of best practices to ensure that your plugin behaves respectfully. Here are some guidelines:
+While developing plugins, it's important to keep in mind that your software will be running on other people's servers, impacting their resources, performance, and the overall player experience. Therefore, you should follow a set of best practices to ensure that your plugin behaves respectfully. Here are some guidelines:
 
 ### 8.1 Avoid Malicious Code
 
@@ -509,12 +509,12 @@ Avoid creating unnecessary load on the server. This includes:
 
 ### 8.4 Stay Updated with Oxide Updates
 
-Oxide Mod and game updates can often cause plugins<sup><a href="/glossary#plugins">[3]</a></sup> to break. Keeping your plugin updated ensures your users don't experience unexpected downtime. If you're aware of an update that may take some time to adjust to, communicate this to your users to manage expectations.
+Oxide Mod and game updates can often cause plugins to break. Keeping your plugin updated ensures your users don't experience unexpected downtime. If you're aware of an update that may take some time to adjust to, communicate this to your users to manage expectations.
 
-You've now walked through the key guidelines for developing Rust plugins<sup><a href="/glossary#plugins">[3]</a></sup> using the Oxide Mod framework. These guidelines cover important areas including naming conventions, commenting, error handling, efficiency, code structure, versioning, documentation, and respectfulness in coding practices.
+You've now walked through the key guidelines for developing Rust plugins using the Oxide Mod framework. These guidelines cover important areas including naming conventions, commenting, error handling, efficiency, code structure, versioning, documentation, and respectfulness in coding practices.
 
-Writing plugins<sup><a href="/glossary#plugins">[3]</a></sup> is not just about making something functional; it also involves creating code that's clean, efficient, easy to read, and respectful of the game environment. By adhering to these guidelines, you will produce plugins<sup><a href="/glossary#plugins">[3]</a></sup> that are robust, maintainable, and provide a positive experience for both server admins and players.
+Writing plugins is not just about making something functional; it also involves creating code that's clean, efficient, easy to read, and respectful of the game environment. By adhering to these guidelines, you will produce plugins that are robust, maintainable, and provide a positive experience for both server admins and players.
 
-Don't forget to also check out our "Best Practices" section of the documentation for further insights on writing excellent plugins<sup><a href="/glossary#plugins">[3]</a></sup>.
+Don't forget to also check out our "Best Practices" section of the documentation for further insights on writing excellent plugins.
 
-Congratulations on reaching the end of this guide! You're now ready to develop your own Rust plugins<sup><a href="/glossary#plugins">[3]</a></sup> with the Oxide Mod framework in an effective and respectful manner. Happy coding!
+Congratulations on reaching the end of this guide! You're now ready to develop your own Rust plugins with the Oxide Mod framework in an effective and respectful manner. Happy coding!

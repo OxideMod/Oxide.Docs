@@ -9,7 +9,7 @@ Commands are a fundamental aspect of managing a Rust server. They allow you to m
 
 ## Prerequisites
 
-Before proceeding with this guide, ensure that you have Moderator or administrator permissions<sup><a href="/glossary#permissions">[11]</a></sup> on your Rust server. If you are not already an admin or moderator on your server, you can grant yourself these permissions<sup><a href="/glossary#permissions">[11]</a></sup>. Here are the steps to do this:
+Before proceeding with this guide, ensure that you have Moderator or administrator permissions<sup><a href="/glossary#permissions">[10]</a></sup> on your Rust server. If you are not already an admin or moderator on your server, you can grant yourself these permissions<sup><a href="/glossary#permissions">[10]</a></sup>. Here are the steps to do this:
 
 1. First, you need your Steam64ID. You can get this by going to a site like [SteamID.io](https://steamid.io/), entering your steam profile URL, and copying the steamID64.
 2. Navigate to the `users.cfg` file. This will be in the same location as your server's `server.cfg` file, which is in the `/server/my_server_identity/cfg/` directory (replace `my_server_identity` with your server's identity).
@@ -54,7 +54,7 @@ When a command is executed, Oxide:
 4. Passes the command to the appropriate handler
 5. Returns feedback to the player based on the command result
 
-All commands and permissions<sup><a href="/glossary#permissions">[11]</a></sup> in Oxide are handled in a case-insensitive manner, so `OXIDE.VERSION` and `oxide.version` are treated as the same command.
+All commands and permissions<sup><a href="/glossary#permissions">[10]</a></sup> in Oxide are handled in a case-insensitive manner, so `OXIDE.VERSION` and `oxide.version` are treated as the same command.
 :::
 
 ## Common Server Commands
@@ -67,33 +67,33 @@ While this guide is primarily focused on Oxide and plugin commands, it's essenti
 - `server.save`: Manually saves the server.
 
 :::tip NOTE
-To execute these commands, you must have admin or moderator permissions<sup><a href="/glossary#permissions">[11]</a></sup> on the server.
+To execute these commands, you must have admin or moderator permissions<sup><a href="/glossary#permissions">[10]</a></sup> on the server.
 :::
 
 ## Oxide Commands
 
-Oxide commands are specific to the Oxide plugin system. They allow you to control various aspects of Oxide and the plugins<sup><a href="/glossary#plugins">[3]</a></sup> you have installed. Oxide commands are executed in the same way as server commands - either through the in-game F1 console or the server console.
+Oxide commands are specific to the Oxide plugin system. They allow you to control various aspects of Oxide and the plugins you have installed. Oxide commands are executed in the same way as server commands - either through the in-game F1 console or the server console.
 
-Here is a list of common Oxide commands that you will find useful in managing your server and its plugins<sup><a href="/glossary#plugins">[3]</a></sup>:
+Here is a list of common Oxide commands that you will find useful in managing your server and its plugins:
 
 - `oxide.version`: This command shows the version of Oxide being used on the server.
 - `oxide.reload PluginName`: This command will unload and then load the specified plugin. This is useful when you have updated a plugin's configuration and need the changes to take effect.
 - `oxide.load PluginName`: This command will load the specified plugin if it's not already loaded.
 - `oxide.unload PluginName`: This command will unload the specified plugin.
 
-In addition to plugin management, Oxide provides an additional permissions<sup><a href="/glossary#permissions">[11]</a></sup> system for managing permissions<sup><a href="/glossary#permissions">[11]</a></sup> on your server:
+In addition to plugin management, Oxide provides an additional permissions<sup><a href="/glossary#permissions">[10]</a></sup> system for managing permissions<sup><a href="/glossary#permissions">[10]</a></sup> on your server:
 
 - `oxide.group add "Group Name"`: This command creates a new group with the specified name.
 - `oxide.usergroup add "Username" "Group Name"`: This command adds the specified user to the specified group.
 
 :::tip NOTE
-More information on Oxide Permissions<sup><a href="/glossary#permissions">[11]</a></sup> can be found in the [Oxide Permissions<sup><a href="/glossary#permissions">[11]</a></sup> Docs](/core/commands/permission).
+More information on Oxide Permissions<sup><a href="/glossary#permissions">[10]</a></sup> can be found in the [Oxide Permissions<sup><a href="/glossary#permissions">[10]</a></sup> Docs](/core/commands/permission).
 :::
 
-Each plugin can come with its own set of commands. For instance, if you have a plugin called "MyPlugin", it might have a command called "myplugin.mycommand". To allow a user to run this command, you would need to give them the necessary permission using the Oxide permissions<sup><a href="/glossary#permissions">[11]</a></sup> system:
+Each plugin can come with its own set of commands. For instance, if you have a plugin called "MyPlugin", it might have a command called "myplugin.mycommand". To allow a user to run this command, you would need to give them the necessary permission using the Oxide permissions<sup><a href="/glossary#permissions">[10]</a></sup> system:
 
 `oxide.grant user Username myplugin.mycommand`: This command gives the specified user permission to run the command **myplugin.mycommand**.
-Ensure you're familiar with your plugins<sup><a href="/glossary#plugins">[3]</a></sup>' commands as they will help you configure and manage the plugin.
+Ensure you're familiar with your plugins' commands as they will help you configure and manage the plugin.
 
 ## Command Callbacks and Security
 
@@ -103,16 +103,16 @@ Behind the scenes, Oxide uses a system of command callbacks to process commands.
 - The command name
 - An array of arguments passed to the command
 
-For security purposes, Oxide also supports command filtering, which can prevent malicious commands from being executed. Plugins<sup><a href="/glossary#plugins">[3]</a></sup> can implement filters that validate commands before they're processed.
+For security purposes, Oxide also supports command filtering, which can prevent malicious commands from being executed. Plugins can implement filters that validate commands before they're processed.
 
 ## Cross-Game Command Support
 
-One of the powerful features of Oxide's Covalence<sup><a href="/glossary#covalence">[1]</a></sup> command system is that it allows plugins<sup><a href="/glossary#plugins">[3]</a></sup> to be compatible across different games. Developers can create plugins<sup><a href="/glossary#plugins">[3]</a></sup> that register commands using the Covalence<sup><a href="/glossary#covalence">[1]</a></sup> API, and these commands will work the same way regardless of whether the server is running Rust, Hurtworld, or any other supported game.
+One of the powerful features of Oxide's Covalence<sup><a href="/glossary#covalence">[1]</a></sup> command system is that it allows plugins to be compatible across different games. Developers can create plugins that register commands using the Covalence<sup><a href="/glossary#covalence">[1]</a></sup> API, and these commands will work the same way regardless of whether the server is running Rust, Hurtworld, or any other supported game.
 
 This cross-game functionality is particularly useful for:
 
 - Server owners who run multiple types of game servers
-- Plugin developers who want to create plugins<sup><a href="/glossary#plugins">[3]</a></sup> that work on different games
+- Plugin developers who want to create plugins that work on different games
 - Communities that operate across multiple games and want consistent command syntax
 
 ## Troubleshooting Commands
@@ -123,6 +123,6 @@ If you're experiencing issues with commands:
 2. **Try using the global prefix**: If a command isn't recognized, try prefixing it with `global.`
 3. **Verify syntax**: Check that you're using the correct syntax, especially for commands with multiple arguments
 4. **Check console output**: The server console may provide error messages explaining why a command failed
-5. **Ensure the plugin is loaded**: Commands from plugins<sup><a href="/glossary#plugins">[3]</a></sup> are only available when the plugin is loaded
+5. **Ensure the plugin is loaded**: Commands from plugins are only available when the plugin is loaded
 
 For complex command issues, server logs are often the best source of diagnostic information.

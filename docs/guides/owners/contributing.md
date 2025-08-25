@@ -15,7 +15,7 @@ Aside from individual game distributions, our core platform is comprised of the 
 - **Compiler**: Plugin compilation system
 - **References**: API reference documentation
 - **Patcher**: Game patching systems
-- **Unity**: Unity game-specific hooks<sup><a href="/glossary#hooks">[7]</a></sup> and extensions<sup><a href="/glossary#extensions">[2]</a></sup>
+- **Unity**: Unity game-specific hooks<sup><a href="/glossary#hooks">[6]</a></sup> and extensions<sup><a href="/glossary#extensions">[2]</a></sup>
 - **SQLite**: Database integration for SQLite
 - **MySql**: Database integration for MySQL
 

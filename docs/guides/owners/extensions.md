@@ -7,7 +7,7 @@ after: configure-plugins
 
 ## Introduction
 
-Extensions<sup><a href="/glossary#extensions">[2]</a></sup> are class libraries (.dll files) that extend the functionality of Oxide, allowing your Rust server to integrate with other software or offer additional features. Extensions<sup><a href="/glossary#extensions">[2]</a></sup> are more powerful than plugins<sup><a href="/glossary#plugins">[3]</a></sup> as they have deeper integration with the game and can provide fundamental services that plugins<sup><a href="/glossary#plugins">[3]</a></sup> rely on. Common extensions<sup><a href="/glossary#extensions">[2]</a></sup> used in Rust servers include [RustEdit](https://www.rustedit.io/) for custom map making and [Discord](https://discord.com/) for enabling chat synchronization between a Rust server and a Discord channel.
+Extensions<sup><a href="/glossary#extensions">[2]</a></sup> are class libraries (.dll files) that extend the functionality of Oxide, allowing your Rust server to integrate with other software or offer additional features. Extensions<sup><a href="/glossary#extensions">[2]</a></sup> are more powerful than plugins as they have deeper integration with the game and can provide fundamental services that plugins rely on. Common extensions<sup><a href="/glossary#extensions">[2]</a></sup> used in Rust servers include [RustEdit](https://www.rustedit.io/) for custom map making and [Discord](https://discord.com/) for enabling chat synchronization between a Rust server and a Discord channel.
 
 ## Extension Types
 
@@ -15,7 +15,7 @@ Oxide extensions<sup><a href="/glossary#extensions">[2]</a></sup> fall into seve
 
 1. **Core Extensions**: These are fundamental extensions<sup><a href="/glossary#extensions">[2]</a></sup> built into Oxide that provide essential functionality. Core extensions<sup><a href="/glossary#extensions">[2]</a></sup> can't be unloaded and are maintained by the Oxide team.
 
-2. **Game Extensions**: These are extensions<sup><a href="/glossary#extensions">[2]</a></sup> specific to a particular game (like Rust, Hurtworld, etc.). They provide game-specific APIs that plugins<sup><a href="/glossary#plugins">[3]</a></sup> can use.
+2. **Game Extensions**: These are extensions<sup><a href="/glossary#extensions">[2]</a></sup> specific to a particular game (like Rust, Hurtworld, etc.). They provide game-specific APIs that plugins can use.
 
 3. **Third-Party Extensions**: These are created by the community to add specific functionality like Discord integration or analytics.
 
@@ -27,14 +27,14 @@ Modern Oxide extensions<sup><a href="/glossary#extensions">[2]</a></sup> include
 
 - **Branch Information**: Extensions<sup><a href="/glossary#extensions">[2]</a></sup> include metadata about which branch they belong to (e.g., "master", "develop"), helping to identify their development stage.
 
-- **Plugin Support**: Extensions<sup><a href="/glossary#extensions">[2]</a></sup> often provide libraries, references, and APIs that plugins<sup><a href="/glossary#plugins">[3]</a></sup> can use. They can define:
+- **Plugin Support**: Extensions<sup><a href="/glossary#extensions">[2]</a></sup> often provide libraries, references, and APIs that plugins can use. They can define:
 
-  - Default references for plugins<sup><a href="/glossary#plugins">[3]</a></sup>
+  - Default references for plugins
   - Whitelisted assemblies (allowed .NET libraries)
   - Whitelisted namespaces (allowed code namespaces)
   - Preprocessor directives for conditional compilation
 
-- **Plugin Watchers**: Extensions<sup><a href="/glossary#extensions">[2]</a></sup> can implement plugin watchers that automatically detect and load/reload plugins<sup><a href="/glossary#plugins">[3]</a></sup> when they're added or modified.
+- **Plugin Watchers**: Extensions<sup><a href="/glossary#extensions">[2]</a></sup> can implement plugin watchers that automatically detect and load/reload plugins when they're added or modified.
 
 ## Prerequisites
 
@@ -48,7 +48,7 @@ Before you can install extensions<sup><a href="/glossary#extensions">[2]</a></su
 To install an extension:
 
 1. Download the extension file, which will be a `.dll` file.
-2. **Stop your Rust server!** Unlike plugins<sup><a href="/glossary#plugins">[3]</a></sup>, most extensions<sup><a href="/glossary#extensions">[2]</a></sup> are not loaded at runtime and require a server restart to take effect (unless they specifically support reloading).
+2. **Stop your Rust server!** Unlike plugins, most extensions<sup><a href="/glossary#extensions">[2]</a></sup> are not loaded at runtime and require a server restart to take effect (unless they specifically support reloading).
 3. Navigate to your server's Application extensions<sup><a href="/glossary#extensions">[2]</a></sup> directory: `/<your_server_directory>/RustDedicated_Data/Managed/`.
 4. Upload the `.dll` file into the `Managed` directory.
 5. Start your Rust server. The server will now load the extension on startup.
@@ -77,7 +77,7 @@ If you encounter issues with an extension:
 1. **Check server logs**: Extension loading errors will be logged in the server console.
 2. **Version compatibility**: Ensure the extension is compatible with your version of Oxide and the game.
 3. **Dependencies**: Some extensions<sup><a href="/glossary#extensions">[2]</a></sup> depend on other extensions<sup><a href="/glossary#extensions">[2]</a></sup> or libraries, make sure all required components are installed.
-4. **Permissions**: Verify the extension file has appropriate read/execute permissions<sup><a href="/glossary#permissions">[11]</a></sup>.
+4. **Permissions**: Verify the extension file has appropriate read/execute permissions<sup><a href="/glossary#permissions">[10]</a></sup>.
 5. **Conflicts**: Extensions<sup><a href="/glossary#extensions">[2]</a></sup> may conflict with each other. Try disabling other extensions<sup><a href="/glossary#extensions">[2]</a></sup> to isolate the issue.
 
 ## Common Extension Commands
@@ -90,4 +90,4 @@ While most extensions<sup><a href="/glossary#extensions">[2]</a></sup> don't pro
 
 ## Conclusion
 
-Extensions<sup><a href="/glossary#extensions">[2]</a></sup> add a whole new level of functionality to your Rust server, allowing for customization and integration that go beyond the capabilities of standard plugins<sup><a href="/glossary#plugins">[3]</a></sup>. They provide the foundation that plugins<sup><a href="/glossary#plugins">[3]</a></sup> build upon, expanding what's possible with your Oxide-powered server. For more guidance on managing your Rust server, check out our other guides on installing plugins<sup><a href="/glossary#plugins">[3]</a></sup>, configuring plugins<sup><a href="/glossary#plugins">[3]</a></sup>, and more.
+Extensions<sup><a href="/glossary#extensions">[2]</a></sup> add a whole new level of functionality to your Rust server, allowing for customization and integration that go beyond the capabilities of standard plugins. They provide the foundation that plugins build upon, expanding what's possible with your Oxide-powered server. For more guidance on managing your Rust server, check out our other guides on installing plugins, configuring plugins, and more.

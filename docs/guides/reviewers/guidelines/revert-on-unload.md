@@ -5,7 +5,7 @@ after: permission-system
 
 # Reverts modifications on unload
 
-1. Plugins<sup><a href="/glossary#plugins">[3]</a></sup> that alter the state of the game world should revert those changes on unload when possible and if not intrusive to players.
+1. Plugins that alter the state of the game world should revert those changes on unload when possible and if not intrusive to players.
 
 ## Explanation
 

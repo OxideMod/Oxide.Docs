@@ -19,7 +19,7 @@ Before submitting a bug report, take these preliminary steps:
 
 2. **Update your software**
 
-   - Make sure Oxide, your plugins<sup><a href="/glossary#plugins">[3]</a></sup>, and other extensions<sup><a href="/glossary#extensions">[2]</a></sup> are up to date
+   - Make sure Oxide, your plugins, and other extensions<sup><a href="/glossary#extensions">[2]</a></sup> are up to date
    - Your bug may already be fixed in a newer version
 
 3. **Check if others have the same issue**
@@ -75,7 +75,7 @@ Include these details to help developers understand and fix the issue:
    - Game Version (run `version` or comparable command)
    - Oxide Version (run `oxide.version`)
    - Plugin Version (found inside of the plugin file, log file, or with `oxide.show`)
-   - Plugin Configuration JSON<sup><a href="/glossary#json">[8]</a></sup> file (found in oxide/config or umod/config directory)
+   - Plugin Configuration JSON<sup><a href="/glossary#json">[7]</a></sup> file (found in oxide/config or umod/config directory)
 
 3. **Logs**
 
@@ -87,7 +87,7 @@ Include these details to help developers understand and fix the issue:
 
 ## Where to Report Issues
 
-- **Plugin Issues**: Submit issues related to specific plugins<sup><a href="/glossary#plugins">[3]</a></sup> directly to the plugin author through the support thread for that individual plugin
+- **Plugin Issues**: Submit issues related to specific plugins directly to the plugin author through the support thread for that individual plugin
 - **Oxide Issues**: Report issues with Oxide itself on the appropriate forum for the game you are running
 - **General Questions**: Ask in the community forums or Discord server
 

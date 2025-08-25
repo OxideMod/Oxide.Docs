@@ -7,7 +7,7 @@ after: attribute-definitions
 
 1. Documentation must be filled out in detail.
 2. Must provide a base explanation plugin features.
-3. Must explain any available permissions<sup><a href="/glossary#permissions">[11]</a></sup>.
+3. Must explain any available permissions<sup><a href="/glossary#permissions">[10]</a></sup>.
 4. Must explain any available chat and console commands.
 
 ## Explanation
@@ -17,7 +17,7 @@ This guideline requires that the documentation is filled out to an acceptable st
 The documentation **must** include:
 
 - A small description about the plugin's functionality and features.
-- All Oxide permissions<sup><a href="/glossary#permissions">[11]</a></sup> used by the plugin and ideally a brief description about what each of these permissions<sup><a href="/glossary#permissions">[11]</a></sup> do, under a `## Permissions` heading.
+- All Oxide permissions<sup><a href="/glossary#permissions">[10]</a></sup> used by the plugin and ideally a brief description about what each of these permissions<sup><a href="/glossary#permissions">[10]</a></sup> do, under a `## Permissions` heading.
 - All available Oxide chat and console commands (not including console commands used for UI) and what these do.
 - If the plugin is configurable, should include a description about what each config option does and ideally a default config under a `## Configuration` heading.
 - If the plugin contains the Oxide localisation API, it should include a default lang file under a `## Localization` heading.

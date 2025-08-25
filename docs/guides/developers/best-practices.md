@@ -7,11 +7,11 @@ after: plugin-guidelines
 
 ## 1. Regular Updates
 
-Keeping your Rust plugins<sup><a href="/glossary#plugins">[3]</a></sup> updated is crucial for many reasons. Regular updates not only fix bugs but also add new features, improve performance and compatibility, and enhance security.
+Keeping your Rust plugins updated is crucial for many reasons. Regular updates not only fix bugs but also add new features, improve performance and compatibility, and enhance security.
 
 ### 1.1 Fixing Bugs
 
-The primary reason for updates is to fix bugs. Bugs are inevitable in any software project, and Rust plugins<sup><a href="/glossary#plugins">[3]</a></sup> are no exception. Regularly updating your plugin will ensure any identified bugs are fixed and won't affect the plugin's functionality or the gameplay of users.
+The primary reason for updates is to fix bugs. Bugs are inevitable in any software project, and Rust plugins are no exception. Regularly updating your plugin will ensure any identified bugs are fixed and won't affect the plugin's functionality or the gameplay of users.
 
 ### 1.2 Adding New Features
 
@@ -72,7 +72,7 @@ Remember, a well-managed source control process can make the difference between 
 
 ## 3. Community Interaction
 
-Engaging with your user community is an integral part of plugin development. It can lead to improved plugins<sup><a href="/glossary#plugins">[3]</a></sup>, increased user satisfaction, and a stronger sense of community.
+Engaging with your user community is an integral part of plugin development. It can lead to improved plugins, increased user satisfaction, and a stronger sense of community.
 
 ### 3.1 Gathering Feedback
 
@@ -84,17 +84,17 @@ Users may encounter difficulties while using your plugin. Establish clear channe
 
 ### 3.3 Involving Users in Development
 
-Consider involving your user community in the development process. This could be through beta testing, suggestion forums, or even collaborative development for open-source plugins<sup><a href="/glossary#plugins">[3]</a></sup>.
+Consider involving your user community in the development process. This could be through beta testing, suggestion forums, or even collaborative development for open-source plugins.
 
 ### 3.4 Building a Community
 
 Foster a sense of community among your users. This could involve organizing events, providing a platform for discussion, or even just maintaining a friendly and welcoming tone in all your communications.
 
-Engaging with your user community is not just good manners - it's a strategy that can lead to better plugins<sup><a href="/glossary#plugins">[3]</a></sup> and happier users. By listening to and involving your users, you can ensure your plugin meets their needs and continues to improve over time.
+Engaging with your user community is not just good manners - it's a strategy that can lead to better plugins and happier users. By listening to and involving your users, you can ensure your plugin meets their needs and continues to improve over time.
 
 ## 4. Testing
 
-Thorough testing is essential in any development process and creating plugins<sup><a href="/glossary#plugins">[3]</a></sup> for Rust is no exception. A good testing strategy will help you catch and fix bugs, improve the performance of your plugin, and ensure that your plugin behaves as expected.
+Thorough testing is essential in any development process and creating plugins for Rust is no exception. A good testing strategy will help you catch and fix bugs, improve the performance of your plugin, and ensure that your plugin behaves as expected.
 
 ### 4.1 Unit Testing
 
@@ -125,7 +125,7 @@ The example above shows a unit test for a hypothetical `MyCommand` in `MyPlugin`
 
 ### 4.2 Load Testing
 
-Load testing involves testing your plugin under heavy or maximum workload to evaluate its performance and stability under such conditions. This kind of testing is especially important for multiplayer game plugins<sup><a href="/glossary#plugins">[3]</a></sup> like Rust, where the server might need to handle many players simultaneously.
+Load testing involves testing your plugin under heavy or maximum workload to evaluate its performance and stability under such conditions. This kind of testing is especially important for multiplayer game plugins like Rust, where the server might need to handle many players simultaneously.
 
 For load testing, you might simulate many players performing actions that use your plugin. Depending on your plugin's functionality, consider testing with a realistic number of players and actions that those players might perform.
 
@@ -187,13 +187,13 @@ Design patterns are established solutions to common programming problems. They'r
 
 In Rust plugin development, the Singleton pattern can be utilized to provide a single point of access to a class or resource. This is typically used when you need exactly one instance of a class to coordinate actions in the game system.
 
-An example in the context of Rust plugins<sup><a href="/glossary#plugins">[3]</a></sup> might be a configuration manager or a data manager.
+An example in the context of Rust plugins might be a configuration manager or a data manager.
 
 ### 6.2 Observer Pattern
 
 The Observer pattern is a software design pattern in which an object, named the subject, maintains a list of its dependents, called observers, and notifies them automatically of any state changes, usually by calling one of their methods.
 
-In the context of a Rust plugin, Oxide's hook system can be seen as a form of the Observer pattern. Your plugin "observes" the game server and reacts when certain events (hooks<sup><a href="/glossary#hooks">[7]</a></sup>) occur.
+In the context of a Rust plugin, Oxide's hook system can be seen as a form of the Observer pattern. Your plugin "observes" the game server and reacts when certain events (hooks<sup><a href="/glossary#hooks">[6]</a></sup>) occur.
 
 ```csharp
 // An example of the Observer pattern with an Oxide hook
@@ -218,15 +218,15 @@ Design patterns can dramatically improve the structure and efficiency of your co
 
 ## 7. Security
 
-Developing secure plugins<sup><a href="/glossary#plugins">[3]</a></sup> is crucial to protect both the server where they are deployed and the players using them. Here are a few best practices to consider:
+Developing secure plugins is crucial to protect both the server where they are deployed and the players using them. Here are a few best practices to consider:
 
 ### 7.1 Protect Sensitive Information
 
-Ensure that your plugin doesn't expose sensitive information. This could be information about the server, other plugins<sup><a href="/glossary#plugins">[3]</a></sup>, or the players. Never log sensitive information to the console or save it in an insecure manner.
+Ensure that your plugin doesn't expose sensitive information. This could be information about the server, other plugins, or the players. Never log sensitive information to the console or save it in an insecure manner.
 
 ### 7.2 Validate Input
 
-Always validate input from users and other plugins<sup><a href="/glossary#plugins">[3]</a></sup>. This can prevent potential exploits that could harm the server or disrupt gameplay.
+Always validate input from users and other plugins. This can prevent potential exploits that could harm the server or disrupt gameplay.
 
 ### 7.3 Update Dependencies
 
@@ -240,7 +240,7 @@ Security should be a priority throughout the plugin development process. A secur
 
 ## 8. Documentation
 
-Effective and clear documentation is a key aspect of developing high-quality plugins<sup><a href="/glossary#plugins">[3]</a></sup>. Here's why:
+Effective and clear documentation is a key aspect of developing high-quality plugins. Here's why:
 
 8.1 User Understanding
 Good documentation helps users understand what your plugin does and how to use it. It provides instructions on how to install the plugin, what each command does, and how to configure it to suit their needs.

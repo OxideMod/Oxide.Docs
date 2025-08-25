@@ -13,7 +13,7 @@ The callback is called with 2 parameters - an integer HTTP response code and a s
 
 ## GET web request
 
-The HTTP GET method is used to retrieve a resource, usually represented as XML or JSON<sup><a href="/glossary#json">[8]</a></sup>. HTTP status code 200 (OK) is expected in response to a successful GET request.
+The HTTP GET method is used to retrieve a resource, usually represented as XML or JSON<sup><a href="/glossary#json">[7]</a></sup>. HTTP status code 200 (OK) is expected in response to a successful GET request.
 
 ```csharp
 webrequest.Enqueue("http://www.google.com/search?q=umod", null, (code, response) =>

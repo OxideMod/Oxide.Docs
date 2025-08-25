@@ -8,7 +8,6 @@ export const glossaryTerms = [
   // Core Concepts
   { term: 'covalence', url: '/glossary#covalence' },
   { term: 'extensions', url: '/glossary#extensions' },
-  { term: 'plugins', url: '/glossary#plugins' },
 
   // Plugin Development
   { term: 'covalenceplugin', url: '/glossary#covalenceplugin' },

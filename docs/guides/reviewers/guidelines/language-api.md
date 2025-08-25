@@ -27,4 +27,4 @@ These method calls should have the message string localised using `lang.GetMessa
 
 Messages that are sent where a player instance or user ID is not able to be referenced do not need to be localised.
 
-[^1]: Often, plugins<sup><a href="/glossary#plugins">[3]</a></sup> use wrapper methods around the `lang.GetMessage()` method, make sure to check for these.
+[^1]: Often, plugins use wrapper methods around the `lang.GetMessage()` method, make sure to check for these.

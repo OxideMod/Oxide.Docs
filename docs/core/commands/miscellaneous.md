@@ -23,7 +23,7 @@ Server language set to en
 **Usage:** `oxide.save`  
 **Aliases:** `o.save`
 
-Saves all data files<sup><a href="/glossary#data-files">[10]</a></sup>.
+Saves all data files<sup><a href="/glossary#data-files">[9]</a></sup>.
 
 ### Example `oxide.save`
 

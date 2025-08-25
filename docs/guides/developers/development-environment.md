@@ -9,7 +9,7 @@ Building mods for Rust using the Oxide framework requires a robust development e
 
 ## Integrated Development Environment (IDE)
 
-An Integrated Development Environment, or IDE, is a software application that provides comprehensive facilities to programmers for software development. An IDE typically consists of a code editor, build automation tools, and a debugger. Here are some popular IDEs you can use for developing Oxide plugins<sup><a href="/glossary#plugins">[3]</a></sup>:
+An Integrated Development Environment, or IDE, is a software application that provides comprehensive facilities to programmers for software development. An IDE typically consists of a code editor, build automation tools, and a debugger. Here are some popular IDEs you can use for developing Oxide plugins:
 
 - **[Visual Studio](https://visualstudio.microsoft.com/)**: A powerful IDE by Microsoft. It offers excellent features for C# development, including IntelliSense (code completion), debugging tools, code navigation, and more. In Visual Studio, you can manage your dependencies through the NuGet Package Manager.
 - **[Visual Studio Code](https://code.visualstudio.com/)**: A lightweight but powerful source code editor by Microsoft. It comes with built-in support for C#, JavaScript, TypeScript, and Node.js. You can also add other languages, themes, and tools via extensions<sup><a href="/glossary#extensions">[2]</a></sup>. Dependency management in Visual Studio Code can be handled using the .NET Core CLI.
@@ -19,13 +19,13 @@ Choose the IDE that suits your preferences and needs.
 
 ## Oxide for Rust
 
-To develop plugins<sup><a href="/glossary#plugins">[3]</a></sup> for Rust, you need to install Oxide for Rust. You can download it from the [GitHub repository](https://github.com/OxideMod/Oxide.Rust).
+To develop plugins for Rust, you need to install Oxide for Rust. You can download it from the [GitHub repository](https://github.com/OxideMod/Oxide.Rust).
 
 To install Oxide for Rust:
 
 1. Download Oxide for Rust from the repository.
 2. Follow the instructions in the repository's README to install Oxide for Rust.
-3. After you've installed Oxide, you need to add its libraries and assemblies to your project in your IDE. This allows you to use Oxide's features in your plugins<sup><a href="/glossary#plugins">[3]</a></sup>. The process for this will vary depending on your IDE, but it generally involves adding a reference to the Oxide libraries in your project's settings.
+3. After you've installed Oxide, you need to add its libraries and assemblies to your project in your IDE. This allows you to use Oxide's features in your plugins. The process for this will vary depending on your IDE, but it generally involves adding a reference to the Oxide libraries in your project's settings.
 
 ## Adding Libraries and Assemblies
 
@@ -78,7 +78,7 @@ Extensions<sup><a href="/glossary#extensions">[2]</a></sup> are community-create
 - **RustEdit**: This extension allows for more complex custom map creation.
 - **Discord extension**: This extension allows your plugin to interact with Discord servers.
 
-These extensions<sup><a href="/glossary#extensions">[2]</a></sup> can be installed separately and used in conjunction with the Oxide framework. To use them in your plugins<sup><a href="/glossary#plugins">[3]</a></sup>, you need to add their libraries to your project in the same way you added the Oxide libraries. Refer to the individual extension documentation for installation and usage instructions.
+These extensions<sup><a href="/glossary#extensions">[2]</a></sup> can be installed separately and used in conjunction with the Oxide framework. To use them in your plugins, you need to add their libraries to your project in the same way you added the Oxide libraries. Refer to the individual extension documentation for installation and usage instructions.
 
 ## Unity and Rust
 
@@ -88,7 +88,7 @@ As Rust is built using the Unity game engine, you might need to refer to the Uni
 
 During your development journey, you will be using several tools and techniques. Here are a few key ones:
 
-- **Debugging**: Debugging is an essential part of software development. Learn how to use debugging tools in your IDE effectively to identify and fix issues in your plugins<sup><a href="/glossary#plugins">[3]</a></sup>.
+- **Debugging**: Debugging is an essential part of software development. Learn how to use debugging tools in your IDE effectively to identify and fix issues in your plugins.
 - **Source Control**: Using source control, such as Git, is crucial for managing your code, especially when collaborating with other developers. Learn how to use Git or another version control system to manage your plugin's code.
 - **Unit Testing**: Unit tests help you ensure that your code behaves as expected. They are crucial for maintaining the quality of your code as you make changes over time.
 - **Clean Code and Documentation**: Writing clean, easy-to-read code is important for maintainability. Likewise, writing meaningful comments and maintaining good documentation is key for understanding the function and flow of your code.

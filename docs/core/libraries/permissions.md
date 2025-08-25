@@ -133,7 +133,7 @@ The `GetUserGroups` method will return every group `playerId` is assigned to.
 
 ## `GetUserPermissions`
 
-The `GetUserPermissions` method will return the permissions<sup><a href="/glossary#permissions">[11]</a></sup> assigned to `playerId`
+The `GetUserPermissions` method will return the permissions<sup><a href="/glossary#permissions">[10]</a></sup> assigned to `playerId`
 
 ::: details Github Location
 [`GetUserPermissions`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L575)
@@ -205,7 +205,7 @@ The `PermissionExists` method will return `true` if `permission` has been regist
 
 ## `RegisterPermission`
 
-The `RegisterPermission` method will register `permission` for use in plugins<sup><a href="/glossary#plugins">[3]</a></sup>/assignability to players _and/or_ groups<sup><a href="/glossary#groups">[12]</a></sup>
+The `RegisterPermission` method will register `permission` for use in plugins/assignability to players _and/or_ groups<sup><a href="/glossary#groups">[11]</a></sup>
 
 ::: details Github Location
 [`RegisterPermission`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/Permission.cs#L347)

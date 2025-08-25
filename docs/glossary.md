@@ -19,10 +19,6 @@ Covalence is a cross-game compatibility layer in Oxide that provides unified API
 
 Extensions are generally large projects which add functionality to Oxide or make substantial changes to a server. Unlike plugins, extensions typically modify core functionality or add significant features to the Oxide framework itself.
 
-### Plugins
-
-Plugins are self-contained bits of code written in C# which modify game server behavior. Plugins hook into game events, add commands, and can make a wide range of changes to how a game server functions.
-
 ## Plugin Development
 
 ### CovalencePlugin
