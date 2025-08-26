@@ -19,7 +19,7 @@ The first initialization state generally occurs very early during the start-up p
 1. Load the game extension.
 1. Initialize logging.
 1. Load user and group data.
-1. Load extensions<sup><a href="/glossary#extensions">[2]</a></sup> and plugins.
+1. Load <a href="/glossary#extensions" class="glossary-term">extensions</a> and plugins.
 
 ### Shutdown
 
@@ -27,7 +27,7 @@ When a server receives a shutdown signal, the following steps occur...
 
 1. Group/Permission data is saved
 1. Plugins are unloaded
-1. Extensions<sup><a href="/glossary#extensions">[2]</a></sup> are unloaded
+1. <a href="/glossary#extensions" class="glossary-term"><span class="glossary-term__word">Extensions</span></a> are unloaded
 1. Core libraries are unloaded
 1. Standalone applications are shutdown
 1. Logging is stopped
@@ -74,7 +74,7 @@ uMod does not support player client modification, except when the game networkin
 
 ### Handshake
 
-The following hooks<sup><a href="/glossary#hooks">[6]</a></sup> allow plugins to intercept or listen to connection events.
+The following <a href="/glossary#hooks" class="glossary-term">hooks</a> allow plugins to intercept or listen to connection events.
 
 ```csharp
 bool CanPlayerLogin(string playerName, string playerId, string playerIp)

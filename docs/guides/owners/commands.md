@@ -9,7 +9,7 @@ Commands are a fundamental aspect of managing a Rust server. They allow you to m
 
 ## Prerequisites
 
-Before proceeding with this guide, ensure that you have Moderator or administrator permissions<sup><a href="/glossary#permissions">[10]</a></sup> on your Rust server. If you are not already an admin or moderator on your server, you can grant yourself these permissions<sup><a href="/glossary#permissions">[10]</a></sup>. Here are the steps to do this:
+Before proceeding with this guide, ensure that you have Moderator or administrator <a href="/glossary#permissions" class="glossary-term">permissions</a> on your Rust server. If you are not already an admin or moderator on your server, you can grant yourself these <a href="/glossary#permissions" class="glossary-term"><span class="glossary-term__word">permissions</span></a>. Here are the steps to do this:
 
 1. First, you need your Steam64ID. You can get this by going to a site like [SteamID.io](https://steamid.io/), entering your steam profile URL, and copying the steamID64.
 2. Navigate to the `users.cfg` file. This will be in the same location as your server's `server.cfg` file, which is in the `/server/my_server_identity/cfg/` directory (replace `my_server_identity` with your server's identity).
@@ -32,7 +32,7 @@ Note: Depending on your server setup, you might be accessing the server console 
 
 ## Command Types and Handling
 
-Oxide uses a sophisticated command handling system called Covalence<sup><a href="/glossary#covalence">[1]</a></sup>, which provides cross-game compatibility. There are two primary types of commands:
+Oxide uses a sophisticated command handling system called <a href="/glossary#covalence" class="glossary-term">Covalence</a>, which provides cross-game compatibility. There are two primary types of commands:
 
 1. **Chat Commands**: These are entered in the game chat and typically start with a prefix like `/` or `!`. The specific prefixes that trigger chat commands are configurable in the Oxide configuration.
 
@@ -54,7 +54,7 @@ When a command is executed, Oxide:
 4. Passes the command to the appropriate handler
 5. Returns feedback to the player based on the command result
 
-All commands and permissions<sup><a href="/glossary#permissions">[10]</a></sup> in Oxide are handled in a case-insensitive manner, so `OXIDE.VERSION` and `oxide.version` are treated as the same command.
+All commands and permissions in Oxide are handled in a case-insensitive manner, so `OXIDE.VERSION` and `oxide.version` are treated as the same command.
 :::
 
 ## Common Server Commands
@@ -67,7 +67,7 @@ While this guide is primarily focused on Oxide and plugin commands, it's essenti
 - `server.save`: Manually saves the server.
 
 :::tip NOTE
-To execute these commands, you must have admin or moderator permissions<sup><a href="/glossary#permissions">[10]</a></sup> on the server.
+To execute these commands, you must have admin or moderator permissions on the server.
 :::
 
 ## Oxide Commands
@@ -81,16 +81,16 @@ Here is a list of common Oxide commands that you will find useful in managing yo
 - `oxide.load PluginName`: This command will load the specified plugin if it's not already loaded.
 - `oxide.unload PluginName`: This command will unload the specified plugin.
 
-In addition to plugin management, Oxide provides an additional permissions<sup><a href="/glossary#permissions">[10]</a></sup> system for managing permissions<sup><a href="/glossary#permissions">[10]</a></sup> on your server:
+In addition to plugin management, Oxide provides an additional permissions system for managing permissions on your server:
 
 - `oxide.group add "Group Name"`: This command creates a new group with the specified name.
 - `oxide.usergroup add "Username" "Group Name"`: This command adds the specified user to the specified group.
 
 :::tip NOTE
-More information on Oxide Permissions<sup><a href="/glossary#permissions">[10]</a></sup> can be found in the [Oxide Permissions<sup><a href="/glossary#permissions">[10]</a></sup> Docs](/core/commands/permission).
+More information on Oxide Permissions can be found in the [Oxide Permissions Docs](/core/commands/permission).
 :::
 
-Each plugin can come with its own set of commands. For instance, if you have a plugin called "MyPlugin", it might have a command called "myplugin.mycommand". To allow a user to run this command, you would need to give them the necessary permission using the Oxide permissions<sup><a href="/glossary#permissions">[10]</a></sup> system:
+Each plugin can come with its own set of commands. For instance, if you have a plugin called "MyPlugin", it might have a command called "myplugin.mycommand". To allow a user to run this command, you would need to give them the necessary permission using the Oxide permissions system:
 
 `oxide.grant user Username myplugin.mycommand`: This command gives the specified user permission to run the command **myplugin.mycommand**.
 Ensure you're familiar with your plugins' commands as they will help you configure and manage the plugin.
@@ -107,7 +107,7 @@ For security purposes, Oxide also supports command filtering, which can prevent 
 
 ## Cross-Game Command Support
 
-One of the powerful features of Oxide's Covalence<sup><a href="/glossary#covalence">[1]</a></sup> command system is that it allows plugins to be compatible across different games. Developers can create plugins that register commands using the Covalence<sup><a href="/glossary#covalence">[1]</a></sup> API, and these commands will work the same way regardless of whether the server is running Rust, Hurtworld, or any other supported game.
+One of the powerful features of Oxide's <a href="/glossary#covalence" class="glossary-term"><span class="glossary-term__word"><a href="/glossary#covalence" class="glossary-term">Covalence</a></span></a> command system is that it allows plugins to be compatible across different games. Developers can create plugins that register commands using the <a href="/glossary#covalence" class="glossary-term">Covalence</a> API, and these commands will work the same way regardless of whether the server is running Rust, Hurtworld, or any other supported game.
 
 This cross-game functionality is particularly useful for:
 

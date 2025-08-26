@@ -5,15 +5,15 @@ after: install-plugins
 
 # Configuring Plugins
 
-Most plugins will generate a JSON<sup><a href="/glossary#json">[7]</a></sup> configuration file once loaded. With these files, you can adjust how plugins behave to customize your server experience. This guide will help you understand how to locate, edit, and apply configuration changes.
+Most plugins will generate a <a href="/glossary#json" class="glossary-term">JSON</a> configuration file once loaded. With these files, you can adjust how plugins behave to customize your server experience. This guide will help you understand how to locate, edit, and apply configuration changes.
 
 :::warning ⚠️Important Note
-Always make backups of your configuration files before making changes. It's easy to make mistakes when editing JSON<sup><a href="/glossary#json">[7]</a></sup> files, and having a backup allows you to restore the original settings if something goes wrong.
+Always make backups of your configuration files before making changes. It's easy to make mistakes when editing <a href="/glossary#json" class="glossary-term">JSON</a> files, and having a backup allows you to restore the original settings if something goes wrong.
 :::
 
 ## 1. Understanding Configuration Files
 
-Configuration files are saved as JSON<sup><a href="/glossary#json">[7]</a></sup> (JavaScript Object Notation), a lightweight data-interchange format that is both human-readable and machine-parsable. Here's an example of what a simple configuration file might look like:
+Configuration files are saved as <a href="/glossary#json" class="glossary-term">JSON</a> (JavaScript Object Notation), a lightweight data-interchange format that is both human-readable and machine-parsable. Here's an example of what a simple configuration file might look like:
 
 ```json
 {
@@ -41,7 +41,7 @@ Configuration files are found in the `config` folder which is located by default
 
 ### File Name
 
-A plugin configuration file will have the same name as the plugin itself. For example, a plugin that is installed as `MyPlugin.cs` (if it's configurable) will be accompanied by a JSON<sup><a href="/glossary#json">[7]</a></sup> file named `MyPlugin.json`.
+A plugin configuration file will have the same name as the plugin itself. For example, a plugin that is installed as `MyPlugin.cs` (if it's configurable) will be accompanied by a JSON file named `MyPlugin.json`.
 
 :::tip
 Do not rename the configuration file or change the file extension.
@@ -66,14 +66,14 @@ Depending on your server setup, you can access these files through:
 
 1. Open the configuration file with any text editor (Notepad, Visual Studio Code, etc.)
 2. Make your desired changes to the values
-3. Ensure the file remains valid JSON<sup><a href="/glossary#json">[7]</a></sup>
+3. Ensure the file remains valid JSON
 4. Save the file
 
 ### Validating JSON
 
-All plugin configuration files must be valid JSON<sup><a href="/glossary#json">[7]</a></sup>. Use a validator such as [jsonlint.com](https://jsonlint.com) to ensure the configuration is valid JSON<sup><a href="/glossary#json">[7]</a></sup> if you're unsure about your edits.
+All plugin configuration files must be valid JSON. Use a validator such as [jsonlint.com](https://jsonlint.com) to ensure the configuration is valid JSON if you're unsure about your edits.
 
-Common JSON<sup><a href="/glossary#json">[7]</a></sup> errors include:
+Common JSON errors include:
 
 - Missing or extra commas
 - Unclosed quotes or brackets
@@ -96,7 +96,7 @@ Even when following proper procedures, you might encounter issues:
 
 ### Invalid JSON
 
-If your configuration file contains syntax errors, the plugin might fail to load or use default values. Always validate your JSON<sup><a href="/glossary#json">[7]</a></sup> after making changes.
+If your configuration file contains syntax errors, the plugin might fail to load or use default values. Always validate your JSON after making changes.
 
 ### Plugin Saves Configuration on Unload
 
@@ -114,7 +114,7 @@ Some plugins save their current configuration to disk when they are unloaded. If
 
 ### Plugin Data Files
 
-In addition to configuration files, plugins may create data files<sup><a href="/glossary#data-files">[9]</a></sup> in the `oxide/data` directory. These store information the plugin needs to persist across server restarts. Generally, you shouldn't modify these files unless you know exactly what you're doing.
+In addition to configuration files, plugins may create <a href="/glossary#data-files" class="glossary-term">data files</a> in the `oxide/data` directory. These store information the plugin needs to persist across server restarts. Generally, you shouldn't modify these files unless you know exactly what you're doing.
 
 ## Conclusion
 
@@ -123,6 +123,6 @@ Understanding how to properly configure plugins allows you to tailor your server
 Remember to always:
 
 1. Make backups before editing
-2. Ensure your JSON<sup><a href="/glossary#json">[7]</a></sup> is valid
+2. Ensure your JSON is valid
 3. Reload plugins after making changes
 4. Check logs if you encounter issues

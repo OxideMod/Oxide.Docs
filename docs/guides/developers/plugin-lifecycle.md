@@ -21,7 +21,7 @@ Assuming all of the above operations complete successfully, then a plugin is con
 
 ## Initialization
 
-Init is the earliest hook in the plugin lifecycle, occuring immediately after a plugin has resolved. Init occurs before dependencies are available. Any exceptions caused by initialization hooks<sup><a href="/glossary#hooks">[6]</a></sup> will prevent further initialization, rollback compiliation, and emit an error.
+Init is the earliest hook in the plugin lifecycle, occuring immediately after a plugin has resolved. Init occurs before dependencies are available. Any exceptions caused by initialization <a href="/glossary#hooks" class="glossary-term">hooks</a> will prevent further initialization, rollback compiliation, and emit an error.
 
 ```csharp
 void Init()
@@ -32,7 +32,7 @@ void Init()
 
 ## Loaded
 
-Loaded occurs after successful plugin initialization, but just before the plugin is registered to the service container. Any exceptions caused during loading hooks<sup><a href="/glossary#hooks">[6]</a></sup> will prevent plugin registration, rollback compilation, and emit an error.
+Loaded occurs after successful plugin initialization, but just before the plugin is registered to the service container. Any exceptions caused during loading <a href="/glossary#hooks" class="glossary-term"><span class="glossary-term__word">hooks</span></a> will prevent plugin registration, rollback compilation, and emit an error.
 
 The loaded hook is considered the correct place to obtain asynchronously loaded configuration and localization data.
 
@@ -61,7 +61,7 @@ When a plugin is unloaded by the plugin manager, the Unload hook is called immed
 
 ## Shutdown
 
-If the game provider supports Advanced Hooks<sup><a href="/glossary#hooks">[6]</a></sup> and receives a Shutdown event, the Shutdown hook will be invoked before the Unload hook, which will also be called.
+If the game provider supports Advanced Hooks and receives a Shutdown event, the Shutdown hook will be invoked before the Unload hook, which will also be called.
 
 ## Hotloading
 

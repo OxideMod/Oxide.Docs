@@ -193,7 +193,7 @@ An example in the context of Rust plugins might be a configuration manager or a 
 
 The Observer pattern is a software design pattern in which an object, named the subject, maintains a list of its dependents, called observers, and notifies them automatically of any state changes, usually by calling one of their methods.
 
-In the context of a Rust plugin, Oxide's hook system can be seen as a form of the Observer pattern. Your plugin "observes" the game server and reacts when certain events (hooks<sup><a href="/glossary#hooks">[6]</a></sup>) occur.
+In the context of a Rust plugin, Oxide's hook system can be seen as a form of the Observer pattern. Your plugin "observes" the game server and reacts when certain events (<a href="/glossary#hooks" class="glossary-term">hooks</a>) occur.
 
 ```csharp
 // An example of the Observer pattern with an Oxide hook

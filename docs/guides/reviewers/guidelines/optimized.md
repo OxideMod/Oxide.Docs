@@ -19,7 +19,7 @@ Developers should avoid using slow methods like `FindObjectsOfType<T>()`. There 
 
 ### Data files
 
-Developers should consider how much data they are going to be storing when using data files<sup><a href="/glossary#data-files">[9]</a></sup>. Plugins should be designed to work smoothly on high population servers where there are likely to be a high volume of unique players, which can mean storing large amounts of data.
+Developers should consider how much data they are going to be storing when using <a href="/glossary#data-files" class="glossary-term">data files</a>. Plugins should be designed to work smoothly on high population servers where there are likely to be a high volume of unique players, which can mean storing large amounts of data.
 
 If the plugin is likely to be storing large amounts of data, then the developer should use a database, proto storage or split the data into multiple files to reduce write times.
 
@@ -33,7 +33,7 @@ Something to look out for is frequent usage of the LINQ library. While this libr
 
 ### Frequently called hooks
 
-Developers should avoid using hooks<sup><a href="/glossary#hooks">[6]</a></sup> that are called frequently unless it is absolutely necessary. If the plugin requires a frequently called hook, then there should be some logic in place that dynamically subscribes and unsubscribes from the hook so the plugin is only subscribed when it is needed.
+Developers should avoid using <a href="/glossary#hooks" class="glossary-term">hooks</a> that are called frequently unless it is absolutely necessary. If the plugin requires a frequently called hook, then there should be some logic in place that dynamically subscribes and unsubscribes from the hook so the plugin is only subscribed when it is needed.
 
 ### Caching
 

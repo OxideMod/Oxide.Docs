@@ -19,12 +19,12 @@ Before submitting a bug report, take these preliminary steps:
 
 2. **Update your software**
 
-   - Make sure Oxide, your plugins, and other extensions<sup><a href="/glossary#extensions">[2]</a></sup> are up to date
+   - Make sure Oxide, your plugins, and other <a href="/glossary#extensions" class="glossary-term">extensions</a> are up to date
    - Your bug may already be fixed in a newer version
 
 3. **Check if others have the same issue**
 
-   - If the bug only happens in your existing setup, try to figure out what settings, extensions<sup><a href="/glossary#extensions">[2]</a></sup>, or files are needed to reproduce the bug
+   - If the bug only happens in your existing setup, try to figure out what settings, <a href="/glossary#extensions" class="glossary-term"><span class="glossary-term__word">extensions</span></a>, or files are needed to reproduce the bug
    - If the bug seems egregious (obviously affecting many users), there is probably something unusual happening, perhaps related to a recent game update
 
 4. **Search existing resources**
@@ -75,7 +75,7 @@ Include these details to help developers understand and fix the issue:
    - Game Version (run `version` or comparable command)
    - Oxide Version (run `oxide.version`)
    - Plugin Version (found inside of the plugin file, log file, or with `oxide.show`)
-   - Plugin Configuration JSON<sup><a href="/glossary#json">[7]</a></sup> file (found in oxide/config or umod/config directory)
+   - Plugin Configuration <a href="/glossary#json" class="glossary-term">JSON</a> file (found in oxide/config or umod/config directory)
 
 3. **Logs**
 

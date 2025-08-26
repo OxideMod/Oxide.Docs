@@ -98,7 +98,7 @@ If you run into issues while installing plugins:
 
 - **Verify plugin compatibility**: Make sure the plugin is compatible with your game version and Oxide version.
 
-- **Check for dependencies**: Some plugins require additional extensions<sup><a href="/glossary#extensions">[2]</a></sup> or other plugins to function properly.
+- **Check for dependencies**: Some plugins require additional <a href="/glossary#extensions" class="glossary-term">extensions</a> or other plugins to function properly.
 
 - **Seek help**: Consult the plugin's documentation or ask for assistance in the Oxide or uMod community forums.
 

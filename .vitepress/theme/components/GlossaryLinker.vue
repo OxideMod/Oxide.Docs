@@ -67,6 +67,7 @@ function processTextNode(node, terms) {
   let fragments = [];
   let lastIndex = 0;
   let changed = false;
+  const linkedTerms = new Set(); // ensure first occurrence per term per page
 
   for (const { term, url } of terms) {
     // Create a case-insensitive regular expression with word boundaries
@@ -79,6 +80,11 @@ function processTextNode(node, terms) {
     let searchStart = 0;
 
     while ((match = regex.exec(content.substring(searchStart))) !== null) {
+      if (linkedTerms.has(term)) {
+        // Skip additional occurrences of this term within the page
+        searchStart = match.index + searchStart + match[0].length;
+        continue;
+      }
       changed = true;
       const absoluteIndex = match.index + searchStart;
 
@@ -93,17 +99,12 @@ function processTextNode(node, terms) {
       link.classList.add('glossary-term');
       link.textContent = content.substring(absoluteIndex, absoluteIndex + match[0].length);
 
-      // Add superscript element with reference number
-      const sup = document.createElement('sup');
-      const referenceNumber = document.createTextNode('[G]');
-      sup.appendChild(referenceNumber);
-      link.appendChild(sup);
-
       link.setAttribute('title', `Glossary: ${term}`);
       fragments.push(link);
 
       lastIndex = absoluteIndex + match[0].length;
       searchStart = lastIndex;
+      linkedTerms.add(term);
     }
   }
 
@@ -128,7 +129,7 @@ function processTextNode(node, terms) {
 <style>
 /* Basic styling for glossary term links */
 a.glossary-term {
-  text-decoration: none;
+  text-decoration: underline dotted;
   color: inherit;
   position: relative;
 }

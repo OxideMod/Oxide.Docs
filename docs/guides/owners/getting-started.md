@@ -19,7 +19,7 @@ In the following guides, you'll learn about the various aspects of using Oxide t
 
 - **[Commands](commands)**: This guide covers the various Oxide and server commands you'll be using to manage your server and plugins.
 
-- **[Permissions](permissions)**: Here, we dive into Oxide's permissions<sup><a href="/glossary#permissions">[10]</a></sup> system, allowing for granular control over who can do what on your server.
+- **[Permissions](permissions)**: Here, we dive into Oxide's <a href="/glossary#permissions" class="glossary-term">permissions</a> system, allowing for granular control over who can do what on your server.
 
 - **[Localization](localization)**: Understand how to customize your server's language to best suit your player base.
 
@@ -27,7 +27,7 @@ In the following guides, you'll learn about the various aspects of using Oxide t
 
 - **[Configuring Plugins](configure-plugins)**: Each plugin comes with its own set of configurations. This guide will walk you through how to customize your plugins to your liking.
 
-- **[Extensions](extensions)**: Extensions<sup><a href="/glossary#extensions">[2]</a></sup> add additional functionality to Oxide. Learn how to install and manage these extensions<sup><a href="/glossary#extensions">[2]</a></sup> to get even more out of Oxide.
+- **[Extensions](extensions)**: <a href="/glossary#extensions" class="glossary-term">Extensions</a> add additional functionality to Oxide. Learn how to install and manage these <a href="/glossary#extensions" class="glossary-term"><span class="glossary-term__word">extensions</span></a> to get even more out of Oxide.
 
 ## Getting Help
 

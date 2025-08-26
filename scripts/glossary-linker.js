@@ -162,9 +162,15 @@ function addGlossaryReferences(filePath, terms) {
       const regex = new RegExp(`\\b${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'gi');
 
       let match;
+      let occurrenceCount = 0;
       while ((match = regex.exec(processedContent)) !== null) {
         const matchedTerm = match[0];
         const position = match.index;
+
+        // Only link the first occurrence per term per file
+        if (occurrenceCount >= 1) {
+          continue;
+        }
 
         // Skip if we've already processed this exact position (but not nearby positions)
         let shouldSkip = false;
@@ -184,27 +190,27 @@ function addGlossaryReferences(filePath, terms) {
           continue;
         }
 
-        // Check if the term already has a glossary reference
-        const nextChars = processedContent.substring(
-          position + matchedTerm.length,
-          position + matchedTerm.length + 30
-        );
-        if (nextChars.includes('<sup><a href="/glossary#')) {
+        // Check if the term is already wrapped in a glossary link
+        const windowStart = Math.max(0, position - 50);
+        const windowEnd = Math.min(processedContent.length, position + matchedTerm.length + 50);
+        const surrounding = processedContent.substring(windowStart, windowEnd);
+        if (surrounding.includes('class="glossary-term"')) {
           continue;
         }
 
-        // Add the reference
-        const reference = `<sup><a href="/glossary#${anchor}">[${index}]</a></sup>`;
+        // Add the reference: wrap the matched term with a glossary link (no numeric superscript)
+        const wrapped = `<a href="/glossary#${anchor}" class="glossary-term">${matchedTerm}</a>`;
         processedContent =
-          processedContent.substring(0, position + matchedTerm.length) +
-          reference +
+          processedContent.substring(0, position) +
+          wrapped +
           processedContent.substring(position + matchedTerm.length);
 
         // Update the regex lastIndex to avoid infinite loop due to the insertion
-        regex.lastIndex = position + matchedTerm.length + reference.length;
+        regex.lastIndex = position + wrapped.length;
 
         // Mark this position as processed
         processedPositions.add(position);
+        occurrenceCount += 1;
       }
     }
 
@@ -250,6 +256,13 @@ function removeGlossaryReferences(filePath) {
     processedContent = processedContent.replace(
       /extensions<sup><a\s+href="\/glossary#[^"]+"\>\[[0-9]+\]<\/a><\/sup>/g,
       'extensions'
+    );
+
+    // Remove superscripts inside glossary anchors while keeping the link (new format)
+    // Pattern: <a ... href="/glossary#..." ...>TERM<sup>...</sup></a> → <a ...>TERM</a>
+    processedContent = processedContent.replace(
+      /(<a[^>]*href="\/glossary#[^"]+"[^>]*>)([\s\S]*?)(<sup[^>]*>[\s\S]*?<\/sup>)([\s\S]*?<\/a>)/g,
+      (_m, p1, p2, _p3, p4) => `${p1}${p2}${p4}`
     );
 
     // Generic pattern (fallback) for glossary links

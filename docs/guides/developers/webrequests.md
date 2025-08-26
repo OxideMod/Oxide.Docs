@@ -13,7 +13,7 @@ The callback is called with 2 parameters - an integer HTTP response code and a s
 
 ## GET web request
 
-The HTTP GET method is used to retrieve a resource, usually represented as XML or JSON<sup><a href="/glossary#json">[7]</a></sup>. HTTP status code 200 (OK) is expected in response to a successful GET request.
+The HTTP GET method is used to retrieve a resource, usually represented as XML or <a href="/glossary#json" class="glossary-term">JSON</a>. HTTP status code 200 (OK) is expected in response to a successful GET request.
 
 ```csharp
 webrequest.Enqueue("http://www.google.com/search?q=umod", null, (code, response) =>
@@ -77,6 +77,7 @@ webrequest.Enqueue("http://www.google.com/search?q=umod", "param1=value1", (code
 
 The HTTP PUT is generally used to update existing resources. The request body of a PUT request generally contains an updated representation of the original resource. HTTP status code 200 (OK) OR HTTP status code 204 (No Content) are expected in response to a successful PUT request.
 
+```csharp
 webrequest.Enqueue("http://www.google.com/search?q=umod", null, (code, response) =>
 {
 if (code != 200 || response == null)
@@ -86,6 +87,7 @@ Puts($"Couldn't get an answer from Google!");
     }
     Puts($"Google answered: {response}");
 }, this, RequestMethod.PUT);
+```
 
 ## POST and PUT body
 

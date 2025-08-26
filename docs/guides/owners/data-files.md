@@ -5,21 +5,21 @@ after: configure-plugins
 
 # Data Files
 
-Data files<sup><a href="/glossary#data-files">[9]</a></sup> are JSON<sup><a href="/glossary#json">[7]</a></sup> files that plugins may use to store arbitrary data. They help plugins persist information between server restarts or plugin reloads. Understanding how data files<sup><a href="/glossary#data-files">[9]</a></sup> work is important for server administrators who need to manage or troubleshoot their servers.
+<a href="/glossary#data-files" class="glossary-term">Data files</a> are <a href="/glossary#json" class="glossary-term">JSON</a> files that plugins may use to store arbitrary data. They help plugins persist information between server restarts or plugin reloads. Understanding how <a href="/glossary#data-files" class="glossary-term">data files</a> work is important for server administrators who need to manage or troubleshoot their servers.
 
 ## Data Directory
 
-Data files<sup><a href="/glossary#data-files">[9]</a></sup> may be found in the `data` folder which is located by default in `oxide/data` (unless the server host has moved it).
+<a href="/glossary#data-files" class="glossary-term">Data files</a> may be found in the `data` folder which is located by default in `oxide/data` (unless the server host has moved it).
 
 ## File Names
 
-Data files<sup><a href="/glossary#data-files">[9]</a></sup> do not follow any standard naming convention - a plugin author may specify any name when creating a data file. This means you might find various file names in the data directory, all with the `.json` extension.
+Data files do not follow any standard naming convention - a plugin author may specify any name when creating a data file. This means you might find various file names in the data directory, all with the `.json` extension.
 
-It is recommended for plugin authors, when creating a large number of data files<sup><a href="/glossary#data-files">[9]</a></sup>, to organize them in a subdirectory specific to their plugin. For example, a plugin named "EconomySystem" might store its data files<sup><a href="/glossary#data-files">[9]</a></sup> in `oxide/data/EconomySystem/`.
+It is recommended for plugin authors, when creating a large number of data files, to organize them in a subdirectory specific to their plugin. For example, a plugin named "EconomySystem" might store its data files in `oxide/data/EconomySystem/`.
 
 ## File Structure
 
-All plugin data files<sup><a href="/glossary#data-files">[9]</a></sup> are saved as JSON<sup><a href="/glossary#json">[7]</a></sup> (JavaScript Object Notation). The structure of each data file depends entirely on what the plugin needs to store. Common types of data stored include:
+All plugin data files are saved as <a href="/glossary#json" class="glossary-term">JSON</a> (JavaScript Object Notation). The structure of each data file depends entirely on what the plugin needs to store. Common types of data stored include:
 
 - Player information and statistics
 - Game world state
@@ -29,11 +29,11 @@ All plugin data files<sup><a href="/glossary#data-files">[9]</a></sup> are saved
 
 ## Valid JSON
 
-Like configuration files, data files<sup><a href="/glossary#data-files">[9]</a></sup> must be valid JSON<sup><a href="/glossary#json">[7]</a></sup>. If you need to edit a data file manually (which is generally not recommended unless you know exactly what you're doing), use a validator such as [jsonlint.com](https://jsonlint.com) to ensure the data file remains valid JSON<sup><a href="/glossary#json">[7]</a></sup>.
+Like configuration files, data files must be valid <a href="/glossary#json" class="glossary-term">JSON</a>. If you need to edit a data file manually (which is generally not recommended unless you know exactly what you're doing), use a validator such as [jsonlint.com](https://jsonlint.com) to ensure the data file remains valid JSON.
 
 ## Differences Between Data Files and Configuration Files
 
-It's important to understand the difference between data files<sup><a href="/glossary#data-files">[9]</a></sup> and configuration files:
+It's important to understand the difference between data files and configuration files:
 
 - **Configuration files** (`oxide/config/`): Intended to be edited by server administrators to change plugin behavior. These usually contain settings that affect how the plugin functions.
 
@@ -43,7 +43,7 @@ It's important to understand the difference between data files<sup><a href="/glo
 
 When making server backups, it's crucial to include the `oxide/data/` directory. This ensures that if you need to restore your server, all the data that plugins have stored will be preserved.
 
-Some important data files<sup><a href="/glossary#data-files">[9]</a></sup> to back up include:
+Some important data files to back up include:
 
 - Player economy data
 - Player stats and progress
@@ -52,7 +52,7 @@ Some important data files<sup><a href="/glossary#data-files">[9]</a></sup> to ba
 
 ## Troubleshooting
 
-If a plugin is experiencing issues related to its data files<sup><a href="/glossary#data-files">[9]</a></sup>, here are some common troubleshooting steps:
+If a plugin is experiencing issues related to its data files, here are some common troubleshooting steps:
 
 1. **Check file permissions**: Ensure the data directory and files are writable by the server process.
 
@@ -64,4 +64,4 @@ If a plugin is experiencing issues related to its data files<sup><a href="/gloss
 
 ## Conclusion
 
-Understanding how plugins use data files<sup><a href="/glossary#data-files">[9]</a></sup> can help you better manage your server and troubleshoot issues. While you should generally avoid directly editing data files<sup><a href="/glossary#data-files">[9]</a></sup>, knowing where they're stored and how they're used is valuable knowledge for any server administrator.
+Understanding how plugins use data files can help you better manage your server and troubleshoot issues. While you should generally avoid directly editing data files, knowing where they're stored and how they're used is valuable knowledge for any server administrator.

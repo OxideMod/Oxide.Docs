@@ -12,7 +12,7 @@ Building mods for Rust using the Oxide framework requires a robust development e
 An Integrated Development Environment, or IDE, is a software application that provides comprehensive facilities to programmers for software development. An IDE typically consists of a code editor, build automation tools, and a debugger. Here are some popular IDEs you can use for developing Oxide plugins:
 
 - **[Visual Studio](https://visualstudio.microsoft.com/)**: A powerful IDE by Microsoft. It offers excellent features for C# development, including IntelliSense (code completion), debugging tools, code navigation, and more. In Visual Studio, you can manage your dependencies through the NuGet Package Manager.
-- **[Visual Studio Code](https://code.visualstudio.com/)**: A lightweight but powerful source code editor by Microsoft. It comes with built-in support for C#, JavaScript, TypeScript, and Node.js. You can also add other languages, themes, and tools via extensions<sup><a href="/glossary#extensions">[2]</a></sup>. Dependency management in Visual Studio Code can be handled using the .NET Core CLI.
+- **[Visual Studio Code](https://code.visualstudio.com/)**: A lightweight but powerful source code editor by Microsoft. It comes with built-in support for C#, JavaScript, TypeScript, and Node.js. You can also add other languages, themes, and tools via <a href="/glossary#extensions" class="glossary-term">extensions</a>. Dependency management in Visual Studio Code can be handled using the .NET Core CLI.
 - **[JetBrains Rider](https://www.jetbrains.com/rider/)**: A cross-platform .NET IDE by JetBrains. It provides many tools for .NET development, such as a decompiler, templates for Unity tests, seamless Unity integration, and more. In JetBrains Rider, dependencies can be managed via the NuGet tab.
 
 Choose the IDE that suits your preferences and needs.
@@ -47,7 +47,7 @@ Here's how you can add these dependencies to your project in the different IDEs:
 1. Right-click on your project in the Solution Explorer and select "Add Reference".
 2. Navigate to the "Browse" tab, and click the "Browse" button.
 3. Locate the Oxide libraries (usually in the form of `.dll` files) in your Oxide installation directory and select them. For Rust, you would add the `Assembly-CSharp.dll` and `UnityEngine.dll` files from your Rust installation directory.
-4. For the extensions<sup><a href="/glossary#extensions">[2]</a></sup>, follow the same process. Locate the extension libraries in your extension installation directories and select them.
+4. For the <a href="/glossary#extensions" class="glossary-term"><span class="glossary-term__word">extensions</span></a>, follow the same process. Locate the extension libraries in your extension installation directories and select them.
 
 Alternatively, you can manually edit the `.csproj` file and add the path to your libraries in the form of: `<Reference Include="path_to_your_dll_file" />`.
 
@@ -63,7 +63,7 @@ Visual Studio Code does not support GUI based reference addition. However, it us
 1. Right-click on your project in the Solution Explorer and select "Add Reference".
 2. Click on the "+" button and select "From disk".
 3. Locate the Oxide libraries in your Oxide installation directory and select them. For Rust, you would add the `Assembly-CSharp.dll` and `UnityEngine.dll` files from your Rust installation directory.
-4. For the extensions<sup><a href="/glossary#extensions">[2]</a></sup>, follow the same process. Locate the extension libraries in your extension installation directories and select them.
+4. For the extensions, follow the same process. Locate the extension libraries in your extension installation directories and select them.
 
 Alternatively, you can manually edit the `.csproj` file and add the path to your libraries in the form of: `<Reference Include="path_to_your_dll_file" />`.
 
@@ -73,12 +73,12 @@ Remember to add references for both Oxide and Rust libraries, as well as any oth
 
 ## Oxide Extensions
 
-Extensions<sup><a href="/glossary#extensions">[2]</a></sup> are community-created tools that provide additional functionalities to the Oxide framework. Some commonly used ones include:
+Extensions are community-created tools that provide additional functionalities to the Oxide framework. Some commonly used ones include:
 
 - **RustEdit**: This extension allows for more complex custom map creation.
 - **Discord extension**: This extension allows your plugin to interact with Discord servers.
 
-These extensions<sup><a href="/glossary#extensions">[2]</a></sup> can be installed separately and used in conjunction with the Oxide framework. To use them in your plugins, you need to add their libraries to your project in the same way you added the Oxide libraries. Refer to the individual extension documentation for installation and usage instructions.
+These extensions can be installed separately and used in conjunction with the Oxide framework. To use them in your plugins, you need to add their libraries to your project in the same way you added the Oxide libraries. Refer to the individual extension documentation for installation and usage instructions.
 
 ## Unity and Rust
 

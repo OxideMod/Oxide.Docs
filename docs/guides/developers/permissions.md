@@ -5,12 +5,12 @@ after: attributes
 
 # Permissions
 
-Oxide offers a substantial API to control user access with permissions<sup><a href="/glossary#permissions">[10]</a></sup> and groups<sup><a href="/glossary#groups">[11]</a></sup>
+Oxide offers a substantial API to control user access with <a href="/glossary#permissions" class="glossary-term">permissions</a> and <a href="/glossary#groups" class="glossary-term">groups</a>
 Basic usage
 
-For a primer on how to use permissions<sup><a href="/glossary#permissions">[10]</a></sup> as a server owner, please consult the Using the Oxide permissions<sup><a href="/glossary#permissions">[10]</a></sup> system tutorial.
+For a primer on how to use <a href="/glossary#permissions" class="glossary-term"><span class="glossary-term__word">permissions</span></a> as a server owner, please consult the Using the Oxide permissions system tutorial.
 
-Most plugins can benefit from some permissions<sup><a href="/glossary#permissions">[10]</a></sup>. Below is a basic example of how to register a permission and check if a player has that permission assigned to them.
+Most plugins can benefit from some permissions. Below is a basic example of how to register a permission and check if a player has that permission assigned to them.
 
 ```csharp
 using Oxide.Core.Libraries.Covalence;
@@ -38,7 +38,7 @@ class EpicStuff : CovalencePlugin
 
 ## Groups
 
-Get all groups<sup><a href="/glossary#groups">[11]</a></sup>
+Get all <a href="/glossary#groups" class="glossary-term"><span class="glossary-term__word"><a href="/glossary#groups" class="glossary-term">groups</a></span></a>
 
 ```csharp
 string[] groups = permission.GetGroups();
@@ -98,7 +98,7 @@ Get parent group for a group
 string GroupParent = permission.GetGroupParent("GroupName");
 ```
 
-Get permissions<sup><a href="/glossary#permissions">[10]</a></sup> for a group
+Get <a href="/glossary#permissions" class="glossary-term">permissions</a> for a group
 
 ```csharp
 string[] permissions = permission.GetGroupPermissions("GroupName", false);
@@ -112,7 +112,7 @@ permission.MigrateGroup("OldGroupName", "NewGroupName");
 
 ## Users
 
-Get permissions<sup><a href="/glossary#permissions">[10]</a></sup> granted to player
+Get <a href="/glossary#permissions" class="glossary-term">permissions</a> granted to player
 
 ```csharp
 string[] UserPermissions = permission.GetUserPermissions("playerID");
@@ -156,7 +156,7 @@ permission.RevokeUserPermission("playerID", "epicstuff.use");
 
 ## Server
 
-Get all registered permissions<sup><a href="/glossary#permissions">[10]</a></sup>
+Get all registered permissions
 
 ```csharp
 string[] permissions = permission.GetPermissions();

@@ -16,7 +16,7 @@ Before you start, ensure you have the following:
 
 ## Understanding Plugins and Extensions
 
-In the Oxide modding framework, plugins and extensions<sup><a href="/glossary#extensions">[2]</a></sup> serve different roles:
+In the Oxide modding framework, plugins and <a href="/glossary#extensions" class="glossary-term">extensions</a> serve different roles:
 
 - **Plugins** are .cs files that are compiled at runtime by the Oxide framework. These are typically game-specific and provide unique gameplay features or modifications.
 
@@ -55,7 +55,7 @@ using UnityEngine;
 - `Oxide.Core` contains fundamental functionalities of the Oxide modding framework.
 - `UnityEngine` is a library provided by Unity, the game engine Rust is built on.
 
-Next, we'll define our namespace and create a class MyFirstPlugin that inherits from RustPlugin<sup><a href="/glossary#rustplugin">[4]</a></sup>. Every Oxide plugin should have metadata defined. This metadata includes the `plugin name`, `author`, and `version`. This is done using attributes at the start of your plugin class.
+Next, we'll define our namespace and create a class MyFirstPlugin that inherits from <a href="/glossary#rustplugin" class="glossary-term">RustPlugin</a>. Every Oxide plugin should have metadata defined. This metadata includes the `plugin name`, `author`, and `version`. This is done using attributes at the start of your plugin class.
 
 ```csharp
 namespace Oxide.Plugins;
@@ -99,7 +99,7 @@ Join your server and use the `/hello` command in chat. If everything is working 
 
 ### Step 4: Implementing Permissions
 
-Let's enhance our plugin by implementing permissions<sup><a href="/glossary#permissions">[10]</a></sup>. We'll require players to have a specific permission (`myfirstplugin.hello`) to use the `/hello` chat command.
+Let's enhance our plugin by implementing <a href="/glossary#permissions" class="glossary-term">permissions</a>. We'll require players to have a specific permission (`myfirstplugin.hello`) to use the `/hello` chat command.
 
 ```csharp
 namespace Oxide.Plugins;
@@ -128,11 +128,11 @@ public class MyFirstPlugin : RustPlugin
 
 Here we have added a condition that checks if the user has the `myfirstplugin.hello` permission. If the calling player does not have the required permission they will receive a different message from our greeting.
 
-After making these changes, save and reupload your plugin to your server. You should now be able to grant permissions<sup><a href="/glossary#permissions">[10]</a></sup> using the command `grant <user or group> <permission>`. Try using the `/hello` command in chat as a user with and without the `myfirstplugin.hello` permission. You'll see the different responses!
+After making these changes, save and reupload your plugin to your server. You should now be able to grant <a href="/glossary#permissions" class="glossary-term"><span class="glossary-term__word">permissions</span></a> using the command `grant <user or group> <permission>`. Try using the `/hello` command in chat as a user with and without the `myfirstplugin.hello` permission. You'll see the different responses!
 
 ### Step 5: Using Hooks
 
-Oxide provides a system of hooks<sup><a href="/glossary#hooks">[6]</a></sup> that your plugins can use to interact with the game. Hooks<sup><a href="/glossary#hooks">[6]</a></sup> are methods that get called when specific events happen in the game, such as a player connecting, a player being hurt, an entity being spawned, etc.
+Oxide provides a system of <a href="/glossary#hooks" class="glossary-term">hooks</a> that your plugins can use to interact with the game. <a href="/glossary#hooks" class="glossary-term"><span class="glossary-term__word"><a href="/glossary#hooks" class="glossary-term">Hooks</a></span></a> are methods that get called when specific events happen in the game, such as a player connecting, a player being hurt, an entity being spawned, etc.
 
 In this section, we'll use the OnPlayerConnected hook to print a message to the server console when a player connects.
 
@@ -201,7 +201,7 @@ After defining your configuration class and the reference pointing to the config
   - _For avoiding duplicate code, and calls the **GetDefaultConfig** method_
 
 - `SaveConfig`
-  - _Writes the plugin configuration to a JSON<sup><a href="/glossary#json">[7]</a></sup> File in **oxide/config** directory_
+  - _Writes the plugin configuration to a <a href="/glossary#json" class="glossary-term">JSON</a> File in **oxide/config** directory_
 
 ```csharp
     // Existing Code...
@@ -261,7 +261,7 @@ This configuration will be saved in the `oxide/config` directory as a config fil
 
 ### Step 7: Using Data Files
 
-In Oxide, data files<sup><a href="/glossary#data-files">[9]</a></sup> are used to store information that persists between server restarts. Let's add functionality to store the last time a player used the `/hello` command.
+In Oxide, <a href="/glossary#data-files" class="glossary-term">data files</a> are used to store information that persists between server restarts. Let's add functionality to store the last time a player used the `/hello` command.
 
 ```csharp
 // Existing code...
@@ -322,11 +322,11 @@ This code:
 3. Saves the data when the server saves or when the plugin unloads
 4. Updates the dictionary and tells the player when they last used the command
 
-The data file will be saved as a JSON<sup><a href="/glossary#json">[7]</a></sup> file in the `oxide/data` directory.
+The data file will be saved as a <a href="/glossary#json" class="glossary-term"><span class="glossary-term__word">JSON</span></a> file in the `oxide/data` directory.
 
 ### Step 8: Working with Groups
 
-Oxide has a built-in groups<sup><a href="/glossary#groups">[11]</a></sup> system that works with permissions<sup><a href="/glossary#permissions">[10]</a></sup>. Let's enhance our plugin to give a different message based on the player's group.
+Oxide has a built-in <a href="/glossary#groups" class="glossary-term">groups</a> system that works with permissions. Let's enhance our plugin to give a different message based on the player's group.
 
 ```csharp
 [ChatCommand("hello")]
@@ -364,7 +364,7 @@ This checks if the player is in the "admin" group and gives them a special greet
 
 ### Step 9: Using Covalence for Cross-Game Compatibility
 
-If you want your plugin to work across multiple games, you can use the Covalence<sup><a href="/glossary#covalence">[1]</a></sup> system. Let's convert our plugin to use Covalence<sup><a href="/glossary#covalence">[1]</a></sup>:
+If you want your plugin to work across multiple games, you can use the <a href="/glossary#covalence" class="glossary-term">Covalence</a> system. Let's convert our plugin to use <a href="/glossary#covalence" class="glossary-term"><span class="glossary-term__word"><a href="/glossary#covalence" class="glossary-term">Covalence</a></span></a>:
 
 ```csharp
 using Oxide.Core;
@@ -460,7 +460,7 @@ namespace Oxide.Plugins
 }
 ```
 
-By using the Covalence<sup><a href="/glossary#covalence">[1]</a></sup> API, this plugin can now work across different games supported by Oxide, not just Rust. Notice the changes:
+By using the <a href="/glossary#covalence" class="glossary-term">Covalence</a> API, this plugin can now work across different games supported by Oxide, not just Rust. Notice the changes:
 
 1. Inheriting from `CovalencePlugin` instead of `RustPlugin`
 2. Using `[Command]` instead of `[ChatCommand]`
@@ -474,11 +474,11 @@ Congratulations! You've created your first Oxide plugin. In this guide, you've l
 
 1. How to set up a basic plugin structure
 2. How to implement chat commands
-3. How to work with permissions<sup><a href="/glossary#permissions">[10]</a></sup>
-4. How to use hooks<sup><a href="/glossary#hooks">[6]</a></sup> to respond to game events
+3. How to work with <a href="/glossary#permissions" class="glossary-term">permissions</a>
+4. How to use <a href="/glossary#hooks" class="glossary-term">hooks</a> to respond to game events
 5. How to implement configuration files for your plugin
-6. How to use data files<sup><a href="/glossary#data-files">[9]</a></sup> to store persistent information
-7. How to work with groups<sup><a href="/glossary#groups">[11]</a></sup>
-8. How to use Covalence<sup><a href="/glossary#covalence">[1]</a></sup> for cross-game compatibility
+6. How to use <a href="/glossary#data-files" class="glossary-term"><span class="glossary-term__word">data files</span></a> to store persistent information
+7. How to work with <a href="/glossary#groups" class="glossary-term"><span class="glossary-term__word"><a href="/glossary#groups" class="glossary-term">groups</a></span></a>
+8. How to use Covalence for cross-game compatibility
 
 This is just the beginning! As you become more familiar with Oxide development, you'll be able to create increasingly complex and powerful plugins to enhance your gaming experience.

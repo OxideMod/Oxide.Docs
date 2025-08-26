@@ -17,13 +17,13 @@ Before you dive in, there are a few key concepts to understand:
 
 - **Plugins**: These are self-contained bits of code which modify game server behavior. Plugins are distributed as CSharp (C#) files with a `.cs` file extension.
 
-- **Hooks**: These are functions that get called by the game or by Oxide. By using hooks<sup><a href="/glossary#hooks">[6]</a></sup> in your plugins, you can define what happens when certain game events occur.
+- **Hooks**: These are functions that get called by the game or by Oxide. By using <a href="/glossary#hooks" class="glossary-term">hooks</a> in your plugins, you can define what happens when certain game events occur.
 
-- **Configuration**: Most plugins generate a JSON<sup><a href="/glossary#json">[7]</a></sup> configuration file that server administrators can use to change how the plugin works. Understanding how to create and manage config files<sup><a href="/glossary#config-files">[8]</a></sup> is essential.
+- **Configuration**: Most plugins generate a <a href="/glossary#json" class="glossary-term">JSON</a> configuration file that server administrators can use to change how the plugin works. Understanding how to create and manage <a href="/glossary#config-files" class="glossary-term">config files</a> is essential.
 
-- **Data Files**: Plugins can create data files<sup><a href="/glossary#data-files">[9]</a></sup> in JSON<sup><a href="/glossary#json">[7]</a></sup> format to store persistent information. These files are saved in the `oxide/data` directory.
+- **Data Files**: Plugins can create <a href="/glossary#data-files" class="glossary-term">data files</a> in <a href="/glossary#json" class="glossary-term"><span class="glossary-term__word">JSON</span></a> format to store persistent information. These files are saved in the `oxide/data` directory.
 
-- **Permissions**: Many plugins have permissions<sup><a href="/glossary#permissions">[10]</a></sup> which must be assigned to users or groups<sup><a href="/glossary#groups">[11]</a></sup> in order to use certain plugin features. Implementing a proper permission system is crucial for server administration.
+- **Permissions**: Many plugins have <a href="/glossary#permissions" class="glossary-term">permissions</a> which must be assigned to users or <a href="/glossary#groups" class="glossary-term">groups</a> in order to use certain plugin features. Implementing a proper permission system is crucial for server administration.
 
 - **Commands**: Plugins can add new commands that may be used by players or server administrators. This can include both console commands and chat commands.
 

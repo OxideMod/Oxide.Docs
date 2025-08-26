@@ -5,10 +5,10 @@ after: permissions
 
 # Database
 
-The Oxide database extensions<sup><a href="/glossary#extensions">[2]</a></sup> implement a generalized database abstraction layer for both MySQL and SQLite.
+The Oxide database <a href="/glossary#extensions" class="glossary-term">extensions</a> implement a generalized database abstraction layer for both MySQL and SQLite.
 [MySQL](https://dev.mysql.com/downloads/installer/) and [MariaDB](https://mariadb.org/download/?t=mariadb&p=mariadb&r=11.7.2&os=windows&cpu=x86_64&pkg=msi&mirror=osuosl) are probably the most commonly used server, but other products also be used.
 
-Database functionality is essential for plugins that need to store large amounts of data or perform complex queries that would be inefficient with traditional data files<sup><a href="/glossary#data-files">[9]</a></sup>.
+Database functionality is essential for plugins that need to store large amounts of data or perform complex queries that would be inefficient with traditional <a href="/glossary#data-files" class="glossary-term">data files</a>.
 
 ## Open a connection
 

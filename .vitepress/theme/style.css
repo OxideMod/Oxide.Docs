@@ -328,9 +328,10 @@
 /* Glossary term reference styling (enhanced in markdown) */
 .vp-doc a[href^='/glossary#'] {
   position: relative;
-  font-weight: normal;
-  text-decoration: none;
-  color: var(--vp-c-brand);
+  font-weight: inherit;
+  text-decoration: underline dotted;
+  text-underline-offset: 2px;
+  color: inherit;
   transition: all 0.2s ease;
 }
 
@@ -339,15 +340,9 @@
 }
 
 /* Style only the superscript reference numbers */
-.vp-doc a[href^='/glossary#'] sup {
-  color: var(--vp-c-brand);
-  font-weight: 500;
-  border-bottom: 1px dashed var(--vp-c-brand-1);
-  padding: 0 2px;
-}
-
-.vp-doc a[href^='/glossary#']:hover sup {
-  border-bottom: 1px solid var(--vp-c-brand-1);
+/* No superscript markers anymore; keep legacy selector harmless */
+.vp-doc sup > a[href^='/glossary#'] {
+  text-decoration: none;
 }
 
 /* Special case for glossary page table of contents */
@@ -358,7 +353,7 @@
 
 /* Glossary Reference Styling */
 sup a {
-  text-decoration: none;
+  text-decoration: underline dotted;
   font-size: 0.7em;
   font-weight: normal;
   color: var(--vp-c-brand);
