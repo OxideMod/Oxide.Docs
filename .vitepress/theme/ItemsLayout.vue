@@ -60,11 +60,16 @@
             <span v-if="copiedId !== item.ItemId" class="item-id">{{ item.ItemId }}</span>
             <span v-else class="copied-text">Copied!</span>
           </div>
-          <span class="item-name">{{ item.ItemDisplayName }}</span>
-          <div class="item-meta">
-            <span class="item-shortname">{{ item.ItemShortName }}</span>
-            <span class="item-category">{{ item.ItemCategory }}</span>
+          <div class="item-name-wrap">
+            <span class="item-name">{{ item.ItemDisplayName }}</span>
+            <span class="item-category-badge">{{ item.ItemCategory }}</span>
           </div>
+          <button class="item-shortname-btn" @click="copyShortname(item.ItemShortName)">
+            <span v-if="copiedShortname !== item.ItemShortName" class="item-shortname">{{
+              item.ItemShortName
+            }}</span>
+            <span v-else class="copied-text">Copied!</span>
+          </button>
         </div>
       </div>
     </div>
@@ -79,6 +84,7 @@ const { filteredItems, loading, error, categories, selectedCategory, selectCateg
   useItems();
 
 const copiedId = ref(null);
+const copiedShortname = ref(null);
 
 const getCategoryImageUrl = category => {
   const categoryImageMap = {
@@ -109,6 +115,18 @@ const copyId = async id => {
     }, 2000);
   } catch (err) {
     console.error('Failed to copy ID:', err);
+  }
+};
+
+const copyShortname = async shortname => {
+  try {
+    await navigator.clipboard.writeText(shortname);
+    copiedShortname.value = shortname;
+    setTimeout(() => {
+      copiedShortname.value = null;
+    }, 2000);
+  } catch (err) {
+    console.error('Failed to copy shortname:', err);
   }
 };
 </script>
@@ -269,6 +287,23 @@ const copyId = async id => {
   font-weight: 500;
 }
 
+.item-name-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.item-category-badge {
+  font-size: 0.7rem;
+  color: var(--vp-c-text-2);
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg-soft);
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
 .item-meta {
   display: flex;
   gap: 0.5rem;
@@ -286,6 +321,30 @@ const copyId = async id => {
   font-size: 0.8rem;
   color: var(--vp-c-text-2);
   flex-shrink: 0;
+}
+
+.item-shortname-btn {
+  justify-self: end;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  color: var(--vp-c-text-2);
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.item-shortname-btn:hover {
+  color: var(--vp-c-brand);
+  background: var(--vp-c-bg-soft);
+}
+
+.item-shortname-btn:focus-visible {
+  outline: 2px solid var(--vp-c-brand);
+  outline-offset: 2px;
 }
 
 .loading-container,
@@ -363,10 +422,15 @@ const copyId = async id => {
     margin-bottom: 0.5rem;
   }
 
-  .item-meta {
+  .item-name-wrap {
+    grid-row: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .item-shortname-btn {
     grid-row: 2;
-    justify-content: flex-start;
-    margin-bottom: 0.5rem;
+    justify-self: start;
+    margin-bottom: 0.25rem;
   }
 
   .item-id-container {
@@ -374,12 +438,6 @@ const copyId = async id => {
     justify-content: flex-start;
     padding-top: 0.5rem;
     border-top: 1px solid var(--vp-c-divider);
-  }
-
-  .item-category::before {
-    content: '•';
-    margin: 0 0.25rem;
-    color: var(--vp-c-text-3);
   }
 
   .items-list {

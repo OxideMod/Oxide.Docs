@@ -1,4 +1,4 @@
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 
 export interface Item {
   ItemId: number;
@@ -13,6 +13,8 @@ export function useItems() {
   const error = ref<string | null>(null);
   const selectedCategory = ref('All');
   const searchTerm = ref('');
+  const debouncedSearchTerm = ref('');
+  let searchDebounceTimer: any = null;
 
   const categories = ref<string[]>(['All']);
 
@@ -36,6 +38,18 @@ export function useItems() {
     }
   });
 
+  watch(
+    () => searchTerm.value,
+    value => {
+      if (searchDebounceTimer) {
+        clearTimeout(searchDebounceTimer);
+      }
+      searchDebounceTimer = setTimeout(() => {
+        debouncedSearchTerm.value = value;
+      }, 200);
+    }
+  );
+
   const filteredItems = computed(() => {
     let tempItems = items.value;
 
@@ -43,8 +57,8 @@ export function useItems() {
       tempItems = tempItems.filter(item => item.ItemCategory === selectedCategory.value);
     }
 
-    if (searchTerm.value.trim() !== '') {
-      const lowerSearchTerm = searchTerm.value.toLowerCase().trim();
+    if (debouncedSearchTerm.value.trim() !== '') {
+      const lowerSearchTerm = debouncedSearchTerm.value.toLowerCase().trim();
       tempItems = tempItems.filter(
         item =>
           item.ItemDisplayName.toLowerCase().includes(lowerSearchTerm) ||
@@ -67,5 +81,6 @@ export function useItems() {
     selectedCategory,
     selectCategory,
     searchTerm,
+    debouncedSearchTerm,
   };
 }
