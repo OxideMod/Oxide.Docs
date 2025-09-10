@@ -424,8 +424,8 @@ You can use specific "layers" as parents for your UI because they are always pre
 * `Overall` the top most layer in front of all of Rust's UI
 * `Overlay` top layer in front of most of Rust's UI
 * `OverlayNonScaled`  Like Overlay, scale to resolution but not to client UI scale setting
-* `Hud` the layer where Rust stores most HUD elements like your status bar
 * `Hud.Menu` the layer where rust positions menus like your inventory
+* `Hud` the layer where Rust stores most HUD elements like your status bar
 * `Under` the lowermost layer, your UI will appear behind all of Rust's UI
 * `UnderNonScaled` like Under, scale to resolution but not to client UI scale setting
 
@@ -436,3 +436,23 @@ For the other layers, UI will only be visible in the respective view.
 * `Clans`
 * `TechTree`
 * `Map`
+
+## Layers visibility
+
+| Layer       | Normal | Inventory | Crafting | Contacts | Clans | TechTree | Map |
+| :------ | :------: | :------: | :------: | :------: | :------: | :------: | :------: |
+| Overall             | X | X | X | X  | X | X | X |
+| Overlay             | X | X | X | X  | X | X | X |
+| Overlay  Non  Scaled| X | X | X | X  | X | X | X |
+| Hud.Menu            | X | X | X | X  | X | X | X |
+| Hud                 | X | 1 | 1 | 1  | 1 | 1 | X |
+| Under               | X | 1 | 1 | 1  | 1 | 1 |   |
+| Under  Non  Scaled  | X | 1 | 1 | 1  | 1 | 1 |   |
+| Inventory           |   | X |   |    |   |   |   |
+| Crafting            |   |   | X |    |   |   |   |
+| Contacts            |   |   |   | X  |   |   |   |
+| Clans               |   |   |   |    | X |   |   |
+| TechTree            |   |   |   |    |   | X |   |
+| Map                 |   |   |   |    |   |   | X |
+
+1.  Visible but blurred, under the view background
