@@ -260,6 +260,7 @@ to create a button.
 
 | Field | Type | Description |
 | :---------- | :-------- | :-------------------------------------------------------- |
+| Button | CuiButtonComponent | Button to execute command, required |
 | Text | CuiTextComponent | Text to display on the button, required  |
 | RectTransform | CuiRectTransformComponent | Rectangle for the button, required |
 | FadeOut | float | Fade out time in seconds  |
