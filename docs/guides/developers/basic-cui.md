@@ -422,11 +422,11 @@ You can use specific "layers" as parents for your UI because they are always pre
 
 * `Overall` the top most layer in front of all of Rust's UI
 * `Overlay` top layer in front of most of Rust's UI
-* `OverlayNonScaled`  same as Overlay layer, but not scaled to resolution
+* `OverlayNonScaled`  same as Overlay layer, scale to resolution but not to client UI scale setting
 * `Hud` the layer where Rust stores most HUD elements like your status bar
 * `Hud.Menu` the layer where rust positions menus like your inventory
 * `Under` the lowermost layer, your UI will appear behind all of Rust's UI
-* `UnderNonScaled` same as Under layer, but not scaled to resolution
+* `UnderNonScaled` same as Under layer, scale to resolution but not to client UI scale setting
 
 For the other layers, UI will only be visible in the respective view.
 * `Inventory`
