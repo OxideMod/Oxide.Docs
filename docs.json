@@ -10183,6 +10183,46 @@
     },
     {
       "Type": 0,
+      "Name": "CanMannequinChangePose",
+      "HookName": "CanMannequinChangePose",
+      "HookParameters": {
+        "instance": "Mannequin",
+        "player": "BasePlayer"
+      },
+      "ReturnBehavior": 4,
+      "TargetType": "Mannequin",
+      "Category": "Entity",
+      "MethodData": {
+        "MethodName": "Server_ChangePose",
+        "ReturnType": "void",
+        "Arguments": {
+          "msg": "BaseEntity/RPCMessage"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n{\r\n\tif (msg.player == null || !msg.player.CanBuild(true, 1f))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"CanMannequinChangePose\", this, msg.player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tint num = this.PoseIndex + 1;\r\n\tif (num >= this.AvailablePoses.Length)\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "CanMannequinSwap",
+      "HookName": "CanMannequinSwap",
+      "HookParameters": {
+        "instance": "Mannequin",
+        "player": "BasePlayer"
+      },
+      "ReturnBehavior": 4,
+      "TargetType": "Mannequin",
+      "Category": "Entity",
+      "MethodData": {
+        "MethodName": "Server_RequestSwap",
+        "ReturnType": "void",
+        "Arguments": {
+          "msg": "BaseEntity/RPCMessage"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\tglobal::BasePlayer player = msg.player;\r\n\tif (!this.CanBeLooted(player) || player.IsDead())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"CanMannequinSwap\", this, player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tglobal::BaseLock @lock = base.GetLock();\r\n\tif (@lock != null && !@lock.OnTryToOpen(player))\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
       "Name": "CanElevatorLiftMove",
       "HookName": "CanElevatorLiftMove",
       "HookParameters": {
