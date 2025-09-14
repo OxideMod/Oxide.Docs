@@ -23,9 +23,9 @@ There are three ways to assign <a href="/glossary#permissions" class="glossary-t
 
 1. **User Permissions**: These are <a href="/glossary#permissions" class="glossary-term">permissions</a> given to a specific user. For instance, you might give a particular user the ability to kick other players, even if they're not part of any special group.
 
-2. **Group Permissions**: These are permissions given to a group of users. Any user who is part of this group inherits all the group's permissions. For example, you might create an "admin" group and give it permissions to kick and ban players.
+2. **Group Permissions**: These are <a href="/glossary#permissions" class="glossary-term">permissions</a> given to a group of users. Any user who is part of this group inherits all the group's permissions. For example, you might create an "admin" group and give it permissions to kick and ban players.
 
-3. **Permission Inheritance**: <a href="/glossary#groups" class="glossary-term">Groups</a> can inherit permissions from other groups through parent relationships. This is useful when you have a hierarchical structure. A group will inherit all permissions from its parent group.
+3. **Permission Inheritance**: <a href="/glossary#groups" class="glossary-term">Groups</a> can inherit permissions from other <a href="/glossary#groups" class="glossary-term">groups</a> through parent relationships. This is useful when you have a hierarchical structure. A group will inherit all permissions from its parent group.
 
 Understanding how these permission types interact is key to effectively managing your server's permissions.
 
@@ -55,8 +55,6 @@ Groups in Oxide are sets of users that share the same permissions. This makes ma
 
 :::info
 **Note on Group Inheritance:** Oxide supports parent-child relationships between groups. When you set a parent group, the child group inherits all permissions from the parent group. This is a powerful way to create hierarchical permission structures without duplicating permissions.
-
-The system includes automatic circular reference detection to prevent infinite loops (e.g., group A having group B as parent, and group B having group A as parent). If circular references are detected, they will be removed automatically and a warning will be logged.
 
 All group and permission names are handled case-insensitively, so "Admin" and "admin" are treated as the same group.
 :::
@@ -96,10 +94,6 @@ You can use the wildcard (\*) to grant multiple permissions at one time:
 
 While the base Oxide permissions system is comprehensive, managing permissions through commands may not always be the most convenient way, especially for larger servers. A plugin that can provide a graphical interface for managing permissions could prove helpful in this regard:
 
-:::tip
-**Permissions Manager**: This plugin provides a graphical interface for managing Oxide permissions. It makes it easier to add, remove, and view permissions. This can greatly simplify permissions management, especially on servers with many players and groups.
-:::
-
 ## Troubleshooting Permissions
 
 If you encounter problems while managing permissions, here are some general steps you can follow:
@@ -108,20 +102,6 @@ If you encounter problems while managing permissions, here are some general step
 - **Check the user's permissions**: Use the command `oxide.show user [username]` to view all the permissions that a user has. This can help identify if they are missing a necessary permission or have one that they should not.
 - **Verify parent group relationships**: If you're using group inheritance, make sure that the parent-child relationships are set up correctly and don't contain any circular references.
 - **Review data storage**: Oxide stores permissions data using ProtoBuf serialization in the `oxide.users` and `oxide.groups` files. If you suspect data corruption, you might need to manually edit or delete these files (after making backups).
-
-## Advanced Features
-
-### User Data Validation
-
-Oxide includes a validation system for user IDs to ensure that invalid or obsolete entries don't accumulate in the permissions database. Server administrators can customize validation rules through <a href="/glossary#extensions" class="glossary-term">extensions</a>, and the system will automatically clean up invalid entries.
-
-### Export and Import
-
-You can export your permissions to <a href="/glossary#json" class="glossary-term"><span class="glossary-term__word">JSON</span></a> format using the `oxide.export` command, which creates separate files for groups and users. This is useful for backup purposes or transferring permission settings between servers.
-
-### Command Shortcuts
-
-The same commands are also available with the "o." prefix (ex. "o.grant").
 
 ## Conclusion
 
