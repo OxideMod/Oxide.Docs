@@ -309,12 +309,18 @@ var container = new CuiElementContainer();
 var backgroundName = container.Add(myBackground, "Overlay", "MyBackgroundName");
 container.Add(myCuiComponent);
 ```
-There are multiple Add methods - one is for presets, which lets you set the parent and name. If you do not specify a name, a random GUID will be used. Name will also be returned. However, if you have a CuiElement, it works as just a `List<CuiElement>` so you have to manually specify parent and name.
+There are multiple Add methods - one is for presets, which lets you set the parent and name. If you do not specify a name, a random GUID will be used. Name will also be returned. 
+However, if you have a CuiElement, it works as just a `List<CuiElement>` so you have to manually specify parent and name.
 
-In order to send UI to the player, you should use AddUi:
+In order to send UI to the player, use the AddUi method:
 ```csharp
 CuiHelper.AddUi(basePlayer, container);
 ```
+or
+```csharp
+CuiHelper.AddUi(basePlayer, jsonString);
+```
+where jsonString is the json formatted string of the UI
 
 ## Destroying UI
 If you want to remove your beautiful UI, you should call DestroyUi and specify element ID (name) to remove like that:
@@ -325,7 +331,10 @@ CuiHelper.DestroyUi(basePlayer, backgroundName);
 ## CuiElementContainer
 CuiElementContainer is the top object to create an UI. It will contain multiple elements
 Once the container is created, we add a CuiPanel and a CuiElement with multiple component in the CuiElement
-Finally, the CuiHelper.AddUi will send the UI to a player for display but the UI will only be visible when opening workbench.
+Finally, the CuiHelper.AddUi will send the UI to a player for display.
+
+But in this case we use the "TechTree" layer so the UI will only be visible when opening workbench.
+You can have a look at [layer visibility](./basic-cui#layers-visibility) for proper layer to use.
 
 ```csharp
 private const string UI_WORKBENCHOVERLAY = "UI_WorkbenchOverlay";
@@ -372,17 +381,17 @@ There are two types of positions - Anchor and Offset. Both have Min and Max. Min
 
 Anchors are numbers that represent width and height in percents (%) from 0.0 (0%) to 1.0 (100%).
 
-Offsets are accurate values that are width and height, in pixels, relative to 1280x720. Example: You made a 100x100 box for 1280x720 and if you switch to 2560x1440, it will be 200x200 pixels.
+Offsets are accurate values that are width and height, in pixels, relative to a 1280x720 resolution. Example: You made a 100x100 box for 1280x720 and if you switch to 2560x1440, it will be 200x200 pixels.
 
 Anchors are applied before offsets. If you want offsets to be relative to the screen center, make all anchors 0.5 0.5 so that both corners are in the center. Then to make a 100x100 box you should use offsets -50 -50 for bottom left corner and 50 50 for top right one.
 ## Colors
 
 Rust UI is using normalized RGBA colors. It means that this nice red color (R255 G102 B102 A255) would be 1.0 0.4 0.4 1.0.
 
-The fourth and last number is Alpha (transparency), in the example above it is 100%.
+The fourth and last number is Alpha (transparency), in the example above it is 100% (no transparency).
 ## Fonts
 
-All available fonts are
+All available fonts are:
 * `DroidSansMono.ttf`
 * `PermanentMarker.ttf`
 * `RobotoCondensed-Bold.ttf`(Default)
@@ -419,7 +428,7 @@ All available fonts are
    
 ## Layers
 
-You can use specific "layers" as parents for your UI because they are always present:
+You can use these specific "layers" as parents for your UI, because they are always present:
 
 * `Overall` the top most layer in front of all of Rust's UI
 * `Overlay` top layer in front of most of Rust's UI
@@ -439,8 +448,8 @@ For the other layers, UI will only be visible in the respective view.
 
 ## Layers visibility
 
-| Layer       | Normal | Inventory | Crafting | Contacts | Clans | TechTree | Map |
-| :------ | :------: | :------: | :------: | :------: | :------: | :------: | :------: |
+| Layer | Normal | Inventory | Crafting | Contacts | Clans | TechTree | Map |
+| :------ | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----:|
 | Overall             | X | X | X | X  | X | X | X |
 | Overlay             | X | X | X | X  | X | X | X |
 | Overlay  Non  Scaled| X | X | X | X  | X | X | X |
@@ -455,4 +464,4 @@ For the other layers, UI will only be visible in the respective view.
 | TechTree            |   |   |   |    |   | X |   |
 | Map                 |   |   |   |    |   |   | X |
 
-1.  Visible but blurred, under the view background
+1.  Visible but blurred, under the view background.
