@@ -51,7 +51,7 @@ when using Rustplugin
 
 ```csharp
 [ConsoleCommand("test")]
-private void cmdTest((ConsoleSystem.Arg arg))
+private void cmdTest(ConsoleSystem.Arg arg)
 {
     Puts("Test successful!");
 }
