@@ -5446,7 +5446,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\tbase.ClientRPC(global::RpcTarget.NetworkGroup(\"Client_DoMonumentNotification\"));\r\n\t\tthis.nextNotificationTime = Time.time + 60f;\r\n\t}\r\n\tglobal::ExcavatorServerEffects.SetMining(true, false);\r\n\tthis.excavatorStartTime = this.GetNetworkTime();\r\n\tInterface.CallHook(\"OnExcavatorMiningToggled\", this);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t}\r\n\t\tthis.nextNotificationTime = UnityEngine.Time.time + 60f;\r\n\t}\r\n\tglobal::ExcavatorServerEffects.SetMining(true, false);\r\n\tthis.excavatorStartTime = this.GetNetworkTime();\r\n\tInterface.CallHook(\"OnExcavatorMiningToggled\", this);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
