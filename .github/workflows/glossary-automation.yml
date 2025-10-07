@@ -1,4 +1,4 @@
-name: Glossary Links Automation
+name: Glossary Build Verification
 
 on:
   push:
@@ -13,99 +13,49 @@ on:
       - 'docs/**/*.md'
       - 'scripts/glossary-linker.js'
       - 'docs/glossary.md'
-  workflow_dispatch:  # Allow manual triggering
+  workflow_dispatch:
 
 jobs:
-  update-glossary-links:
+  build-with-glossary:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-    
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Fetch full history for proper commit handling
-          token: ${{ secrets.GITHUB_TOKEN }}
-        
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.6.1'  # Using the same version as specified in package.json
-          cache: 'npm'
-          
-      - name: Install dependencies
-        run: |
-          npm ci
-          
-      - name: Run glossary linker
-        run: |
-          echo "Running glossary linker to add references to documentation..."
-          npm run glossary-links
-          
-      - name: Check for changes
-        id: verify-changed-files
-        run: |
-          if git diff --quiet; then
-            echo "No changes detected"
-            echo "changes=false" >> $GITHUB_OUTPUT
-          else
-            echo "Changes detected"
-            echo "changes=true" >> $GITHUB_OUTPUT
-            echo "Changed files:"
-            git diff --name-only
-          fi
-          
-      - name: Format files with Prettier
-        if: steps.verify-changed-files.outputs.changes == 'true'
-        run: |
-          echo "Formatting files with Prettier..."
-          npm run format
-          
-      - name: Commit and push changes
-        if: steps.verify-changed-files.outputs.changes == 'true'
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action - Glossary Automation"
-          git add .
-          if git diff --staged --quiet; then
-            echo "No staged changes to commit"
-          else
-            git commit -m "🔗 Auto-update glossary links [skip ci]"
-            git push
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    timeout-minutes: 15
 
-  validate-glossary-links:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    needs: update-glossary-links
-    if: always()  # Run even if the previous job fails
-    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20.6.1'
           cache: 'npm'
-          
+
       - name: Install dependencies
         run: npm ci
-        
+
       - name: Validate glossary file exists
         run: |
           if [ ! -f "docs/glossary.md" ]; then
-            echo "❌ Error: docs/glossary.md not found!"
+            echo "Error: docs/glossary.md not found!"
             exit 1
           else
-            echo "✅ Glossary file found"
+            echo "Glossary file found"
           fi
-          
-      - name: Check for broken glossary references
+
+      - name: Generate glossary links for build
         run: |
-          echo "Checking for any potential issues with glossary references..."
-          # This will help identify if there are any malformed links
-          grep -r "glossary#" docs/ --include="*.md" | head -10 || echo "No glossary references found or command failed" 
+          echo "Generating glossary links for this build..."
+          npm run glossary-links
+
+      - name: Build documentation with glossary links
+        run: npm run docs:build
+
+      - name: Check for glossary references in documentation source
+        run: |
+          echo "Checking for glossary references in the documentation source..."
+          grep -r "glossary#" docs/ --include="*.md" | head -10 || echo "No glossary references found or command failed"
+
+      - name: Clean generated changes
+        run: |
+          rm -rf docs/.vitepress/dist
+          git checkout -- docs
