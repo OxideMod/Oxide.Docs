@@ -10,7 +10,8 @@ from datetime import datetime
 from typing import Dict, Optional, List, Set, Tuple
 
 # Configuration
-BASE_URL = 'https://scmm.app/api'
+# Use www subdomain to avoid SSL certificate hostname mismatch
+BASE_URL = 'https://www.scmm.app/api'
 RUST_APP_ID = 252490
 COUNT = 1000  # Use 1000 items per page - API supports up to 5000
 DELAY = 1.0
