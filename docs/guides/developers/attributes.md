@@ -51,7 +51,7 @@ when using <a href="/glossary#rustplugin" class="glossary-term"><span class="glo
 
 ```csharp
 [ConsoleCommand("test")]
-private void cmdTest((ConsoleSystem.Arg arg))
+private void cmdTest(ConsoleSystem.Arg arg)
 {
     Puts("Test successful!");
 }

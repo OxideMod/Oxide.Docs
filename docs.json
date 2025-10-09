@@ -806,7 +806,7 @@
       "HookName": "OnExplosiveThrown",
       "HookParameters": {
         "player": "BasePlayer",
-        "baseEntity": "BaseEntity",
+        "V_4": "BaseEntity",
         "instance": "ThrownWeapon"
       },
       "ReturnBehavior": 0,
@@ -819,7 +819,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\ttimedExplosive.ItemOwnership = itemOwnership;\r\n\t\ttimedExplosive.SetCreator(msg.player);\r\n\t}\r\n\tthis.SetUpThrownWeapon(baseEntity);\r\n\tbase.StartAttackCooldown(this.repeatDelay);\r\n\tInterface.CallHook(\"OnExplosiveThrown\", msg.player, baseEntity, this);\r\n\tbase.UseItemAmount(1, false);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tBaseEntity obj;\r\n\tthis.DoThrowImpl(eyePos, normalized, msg.player, out obj, throwScale, default(Vector3), null);\r\n\tInterface.CallHook(\"OnExplosiveThrown\", msg.player, obj, this);\r\n\tbase.UseItemAmount(1, false);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -1973,7 +1973,7 @@
           "online": "bool"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (online == base.IsOn())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnTurretToggle\", this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tbase.SetFlag(BaseEntity.Flags.On, online, false, true);\r\n\tif (online)\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (online == base.IsOn())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnTurretToggle\", this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tbase.SetFlag(BaseEntity.Flags.On, online, false, true);\r\n\tthis.OnTurretPowerChanged(online);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -2181,7 +2181,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tbaseEntity.creatorEntity = msg.player;\r\n\tbaseEntity.skinID = this.skinID;\r\n\tbaseEntity.Spawn();\r\n\tthis.SetUpThrownWeapon(baseEntity);\r\n\tbase.StartAttackCooldown(this.repeatDelay);\r\n\tInterface.CallHook(\"OnExplosiveDropped\", msg.player, baseEntity, this);\r\n\tbase.UseItemAmount(1, true);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\tbaseEntity.creatorEntity = msg.player;\r\n\tbaseEntity.skinID = this.skinID;\r\n\tbaseEntity.Spawn();\r\n\tthis.SetUpThrownWeapon(baseEntity, base.GetOwnerItem());\r\n\tbase.StartAttackCooldown(this.repeatDelay);\r\n\tInterface.CallHook(\"OnExplosiveDropped\", msg.player, baseEntity, this);\r\n\tbase.UseItemAmount(1, true);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -3506,7 +3506,7 @@
           "playerId": "ulong"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tglobal::ItemDefinition itemDefinition = global::ItemManager.FindItemDefinition(itemid);\r\n\tif (itemDefinition == null)\r\n\t{\r\n\t\treturn false;\r\n\t}\r\n\tobject returnvar = Interface.CallHook(\"CanCraft\", this, itemDefinition, skinItemId);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\treturn (skinItemId == 0 || base.baseEntity.UnlockAllSkins || this.CheckSkinOwnership(skinItemId, playerId)) && base.baseEntity.currentCraftLevel >= (float)itemDefinition.Blueprint.GetWorkbenchLevel() && this.HasUnlocked(itemDefinition);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tglobal::ItemDefinition itemDefinition = global::ItemManager.FindItemDefinition(itemid);\r\n\tif (itemDefinition == null)\r\n\t{\r\n\t\treturn false;\r\n\t}\r\n\tobject returnvar = Interface.CallHook(\"CanCraft\", this, itemDefinition, skinItemId);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\treturn (skinItemId == 0 || (!base.baseEntity.AllSkinsLocked && (!base.baseEntity.DefaultSkinAccess || this.CheckSkinOwnership(skinItemId, playerId)))) && base.baseEntity.currentCraftLevel >= (float)itemDefinition.Blueprint.GetWorkbenchLevel() && this.HasUnlocked(itemDefinition);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -4671,7 +4671,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\tthis.nextBurstTime = Time.time + timeBetweenBursts;\r\n\t\tthis.firedCount = 0;\r\n\t\treturn;\r\n\t}\r\n\tthis.EnsureReloaded();\r\n\tif (Interface.CallHook(\"CanSamSiteShoot\", this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (!this.HasAmmo())\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tthis.firedCount = 0;\r\n\t\treturn;\r\n\t}\r\n\tthis.EnsureAmmoLoaded();\r\n\tif (Interface.CallHook(\"CanSamSiteShoot\", this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (!this.HasAmmo())\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -5446,7 +5446,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\t}\r\n\t\tthis.nextNotificationTime = Time.time + 60f;\r\n\t}\r\n\tglobal::ExcavatorServerEffects.SetMining(true, false);\r\n\tthis.excavatorStartTime = this.GetNetworkTime();\r\n\tInterface.CallHook(\"OnExcavatorMiningToggled\", this);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t}\r\n\t\tthis.nextNotificationTime = UnityEngine.Time.time + 60f;\r\n\t}\r\n\tglobal::ExcavatorServerEffects.SetMining(true, false);\r\n\tthis.excavatorStartTime = this.GetNetworkTime();\r\n\tInterface.CallHook(\"OnExcavatorMiningToggled\", this);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -6317,7 +6317,7 @@
           "duration": "float"
         }
       },
-      "CodeAfterInjection": "public override void MarkHostileFor(float duration = 60f)\r\n{\r\n\tif (Interface.CallHook(\"OnEntityMarkHostile\", this, duration) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tdouble currentTimestamp = TimeEx.currentTimestamp;\r\n\tdouble val = currentTimestamp + (double)duration;\r\n//---\r\n"
+      "CodeAfterInjection": "public override void MarkHostileFor(float duration = 60f)\r\n{\r\n\tif (Interface.CallHook(\"OnEntityMarkHostile\", this, duration) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (this.IsHostilePaused())\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -8455,13 +8455,13 @@
       "Category": "Vehicle",
       "MethodData": {
         "MethodName": "CanMoveFrom",
-        "ReturnType": "bool",
+        "ReturnType": "PlayerInventory/CanMoveFromResponse",
         "Arguments": {
           "player": "BasePlayer",
           "item": "Item"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tglobal::BaseVehicleModule moduleForItem = this.GetModuleForItem(item);\r\n\tif (!(moduleForItem != null))\r\n\t{\r\n\t\treturn true;\r\n\t}\r\n\tobject returnvar = Interface.CallHook(\"OnVehicleModuleMove\", moduleForItem, this, player);\r\n\tif (returnvar != null)\r\n\t{\r\n\t\treturn returnvar is bool && (bool)returnvar;\r\n\t}\r\n\treturn moduleForItem.CanBeMovedNow();\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tglobal::BaseVehicleModule moduleForItem = this.GetModuleForItem(item);\r\n\tif (!(moduleForItem != null))\r\n\t{\r\n\t\treturn global::PlayerInventory.CanMoveFromResponse.Success();\r\n\t}\r\n\tobject returnvar = Interface.CallHook(\"OnVehicleModuleMove\", moduleForItem, this, player);\r\n\tif (returnvar is global::PlayerInventory.CanMoveFromResponse)\r\n\t{\r\n\t\treturn (global::PlayerInventory.CanMoveFromResponse)returnvar;\r\n\t}\r\n\treturn new global::PlayerInventory.CanMoveFromResponse(moduleForItem.CanBeMovedNow(), moduleForItem.CannotBeMovedNowReason());\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -9778,7 +9778,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\tthis.<SendRespawnOptions>g__CollectExternalAndSend|525_0();\r\n\t\treturn;\r\n\t}\r\n\tList<RespawnInformation.SpawnOptions> list = Pool.Get<List<RespawnInformation.SpawnOptions>>();\r\n\tglobal::BasePlayer.GetRespawnOptionsForPlayer(list, this.userID);\r\n\tInterface.CallHook(\"OnRespawnInformationGiven\", this, list);\r\n\tthis.<SendRespawnOptions>g__SendToPlayer|525_1(list, false);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tthis.<SendRespawnOptions>g__CollectExternalAndSend|530_0();\r\n\t\treturn;\r\n\t}\r\n\tList<RespawnInformation.SpawnOptions> list = Pool.Get<List<RespawnInformation.SpawnOptions>>();\r\n\tglobal::BasePlayer.GetRespawnOptionsForPlayer(list, this.userID);\r\n\tInterface.CallHook(\"OnRespawnInformationGiven\", this, list);\r\n\tthis.<SendRespawnOptions>g__SendToPlayer|530_1(list, false);\r\n}\r\n\r\n"
     },
     {
       "Type": 1,
@@ -9812,7 +9812,7 @@
           "packet": "Network.Message"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tif (packet.connection == null || !packet.connection.connected)\r\n\t{\r\n\t\tDebug.LogWarning(\"Client without connection tried to run command: \" + text);\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnClientCommand\", packet.connection, text) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tstring text2 = ConsoleSystem.Run(ConsoleSystem.Option.Server.FromConnection(packet.connection).Quiet(), text, Array.Empty<object>());\r\n\tif (!string.IsNullOrEmpty(text2))\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tif (packet.connection == null || !packet.connection.connected)\r\n\t{\r\n\t\tDebug.LogWarning(\"Client without connection tried to run command: \" + text);\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnClientCommand\", packet.connection, text) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tConsoleSystem.CommandResult commandResult = ConsoleSystem.RunWithResult(ConsoleSystem.Option.Server.FromConnection(packet.connection).Quiet(), text, Array.Empty<object>());\r\n\tif (commandResult.Result == ConsoleSystem.CommandResultType.Success && (packet.connection.authLevel > 0u || (commandResult.Command.ServerAdmin && !commandResult.Command.ServerUser)))\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -10071,7 +10071,7 @@
       "TargetType": "MarketTerminal",
       "Category": "Vending",
       "MethodData": {
-        "MethodName": "<GetDeliveryEligibleVendingMachines>g__IsEligible|42_0",
+        "MethodName": "<GetDeliveryEligibleVendingMachines>g__IsEligible|43_0",
         "ReturnType": "bool",
         "Arguments": {
           "vendingMachine": "VendingMachine",
@@ -10079,7 +10079,7 @@
           "n": "int"
         }
       },
-      "CodeAfterInjection": "[CompilerGenerated]\r\nprivate bool <GetDeliveryEligibleVendingMachines>g__IsEligible|42_0(global::VendingMachine vendingMachine, Vector3 offset, int n)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"CanAccessVendingMachine\", this.config, vendingMachine);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\tRaycastHit raycastHit;\r\n//---\r\n"
+      "CodeAfterInjection": "[CompilerGenerated]\r\nprivate bool <GetDeliveryEligibleVendingMachines>g__IsEligible|43_0(global::VendingMachine vendingMachine, Vector3 offset, int n)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"CanAccessVendingMachine\", this.config, vendingMachine);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\tRaycastHit raycastHit;\r\n//---\r\n"
     },
     {
       "Type": 1,
@@ -10704,7 +10704,7 @@
           "failReason": "BaseMission/MissionFailReason"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tglobal::BaseMission.DoMissionEffect(this.failedEffect.resourcePath, assignee);\r\n\tFacepunch.Rust.Analytics.Azure.OnMissionComplete(assignee, this, new global::BaseMission.MissionFailReason?(failReason));\r\n\tinstance.status = global::BaseMission.MissionStatus.Failed;\r\n\tthis.MissionEnded(instance, assignee);\r\n\tInterface.CallHook(\"OnMissionFailed\", this, instance, assignee, failReason);\r\n\tif (failReason == global::BaseMission.MissionFailReason.ResetPlayerState)\r\n\t{\r\n\t\tinstance.endTime = 0f;\r\n\t\tinstance.status = global::BaseMission.MissionStatus.Default;\r\n\t\tassignee.MissionDirty(true);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tglobal::BaseMission.DoMissionEffect(this.failedEffect.resourcePath, assignee);\r\n\tFacepunch.Rust.Analytics.Azure.OnMissionComplete(assignee, this, new global::BaseMission.MissionFailReason?(failReason));\r\n\tinstance.status = global::BaseMission.MissionStatus.Failed;\r\n\tthis.MissionEnded(instance, assignee);\r\n\tInterface.CallHook(\"OnMissionFailed\", this, instance, assignee, failReason);\r\n\tif (failReason == global::BaseMission.MissionFailReason.ResetPlayerState)\r\n\t{\r\n\t\tinstance.endTimeUtcSeconds = -9223372036854775808L;\r\n\t\tinstance.status = global::BaseMission.MissionStatus.Default;\r\n\t}\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -11151,7 +11151,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n{\r\n\tif (this.playerCollider.enabled)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnPlayerColliderEnable\", this, this.playerCollider) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.RefreshColliderSize(true);\r\n\tthis.playerCollider.enabled = true;\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n{\r\n\tif (this.playerCollider.enabled)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnPlayerColliderEnable\", this, this.playerCollider) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (base.isServer & this.isInvisible)\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -12963,7 +12963,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\t\tif (this.<strChatText>5__2.Length <= 0)\r\n\t\t\t{\r\n\t\t\t\tresult = false;\r\n\t\t\t\tgoto IL_93D;\r\n\t\t\t}\r\n\t\t\tobject returnvar = Interface.CallHook(\"IOnPlayerChat\", this.userId, this.username, this.<strChatText>5__2, this.targetChannel, this.player);\r\n\t\t\tif (returnvar is bool)\r\n\t\t\t{\r\n\t\t\t\tresult = (bool)returnvar;\r\n\t\t\t}\r\n\t\t\tif (this.<strChatText>5__2.StartsWith(\"/\") || this.<strChatText>5__2.StartsWith(\"\\\\\"))\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\tif (this.<strChatText>5__2.Length <= 0)\r\n\t\t\t{\r\n\t\t\t\tresult = false;\r\n\t\t\t\tgoto IL_854;\r\n\t\t\t}\r\n\t\t\tobject returnvar = Interface.CallHook(\"IOnPlayerChat\", this.userId, this.username, this.<strChatText>5__2, this.targetChannel, this.player);\r\n\t\t\tif (returnvar is bool)\r\n\t\t\t{\r\n\t\t\t\tresult = (bool)returnvar;\r\n\t\t\t}\r\n\t\t\tif (this.<strChatText>5__2.StartsWith(\"/\") || this.<strChatText>5__2.StartsWith(\"\\\\\"))\r\n//---\r\n"
     },
     {
       "Type": 1,
@@ -13448,28 +13448,11 @@
       "TargetType": "AutoTurret",
       "Category": "Turret",
       "MethodData": {
-        "MethodName": "UpdateInterference",
-        "ReturnType": "void",
+        "MethodName": "RecalculateInterference",
+        "ReturnType": "bool",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n{\r\n\tif (!base.IsOn())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnInterferenceUpdate\", this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tfloat num = 0f;\r\n\tforeach (global::AutoTurret current in this.nearbyTurrets)\r\n//---\r\n"
-    },
-    {
-      "Type": 0,
-      "Name": "OnInterferenceOthersUpdate",
-      "HookName": "OnInterferenceOthersUpdate",
-      "HookParameters": {
-        "instance": "AutoTurret"
-      },
-      "ReturnBehavior": 1,
-      "TargetType": "AutoTurret",
-      "Category": "Turret",
-      "MethodData": {
-        "MethodName": "UpdateInterferenceOnOthers",
-        "ReturnType": "void",
-        "Arguments": {}
-      },
-      "CodeAfterInjection": "private void UpdateInterferenceOnOthers()\r\n{\r\n\tif (Interface.CallHook(\"OnInterferenceOthersUpdate\", this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tforeach (global::AutoTurret current in this.nearbyTurrets)\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "private bool RecalculateInterference()\r\n{\r\n\tobject returnvar = Interface.CallHook(\"OnInterferenceUpdate\", this);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\tbool flag = this.HasInterference();\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -13693,13 +13676,11 @@
       "TargetType": "AutoTurret",
       "Category": "Turret",
       "MethodData": {
-        "MethodName": "UpdateNearbyTurrets",
+        "MethodName": "AddNearbyTurrets",
         "ReturnType": "void",
-        "Arguments": {
-          "created": "bool"
-        }
+        "Arguments": {}
       },
-      "CodeAfterInjection": "private void UpdateNearbyTurrets(bool created)\r\n{\r\n\tList<global::AutoTurret> list = Facepunch.Pool.Get<List<global::AutoTurret>>();\r\n\tif (Interface.CallHook(\"OnNearbyTurretsScan\", this, list, created) == null)\r\n\t{\r\n\t\tglobal::Vis.Entities<global::AutoTurret>(base.transform.position, ConVar.Sentry.interferenceradius, list, 256, QueryTriggerInteraction.Ignore);\r\n\t}\r\n\tforeach (global::AutoTurret current in list)\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "private void AddNearbyTurrets()\r\n{\r\n\tthis.nearbyTurrets.Clear();\r\n\tList<global::AutoTurret> list = Facepunch.Pool.Get<List<global::AutoTurret>>();\r\n\tif (Interface.CallHook(\"OnNearbyTurretsScan\", this, list) == null)\r\n\t{\r\n\t\tglobal::Vis.Entities<global::AutoTurret>(base.transform.position, ConVar.Sentry.interferenceradius, list, 256, QueryTriggerInteraction.Ignore);\r\n\t}\r\n\tforeach (global::AutoTurret current in list)\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -15301,7 +15282,7 @@
         "reportType": "ReportType"
       },
       "ReturnBehavior": 0,
-      "TargetType": "BasePlayer/<OnFeedbackReport>d__622",
+      "TargetType": "BasePlayer/<OnFeedbackReport>d__627",
       "Category": "Player",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -15315,7 +15296,7 @@
       "Name": "OnFeedbackReported [patch]",
       "HookName": "OnFeedbackReported",
       "ReturnBehavior": 0,
-      "TargetType": "BasePlayer/<OnFeedbackReport>d__622",
+      "TargetType": "BasePlayer/<OnFeedbackReport>d__627",
       "Category": "_Patches",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -15337,7 +15318,7 @@
         "text3": "string"
       },
       "ReturnBehavior": 0,
-      "TargetType": "BasePlayer/<OnPlayerReported>d__621",
+      "TargetType": "BasePlayer/<OnPlayerReported>d__626",
       "Category": "Player",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -15444,6 +15425,81 @@
     },
     {
       "Type": 0,
+      "Name": "OnMixingTableFinished",
+      "HookName": "OnMixingTableFinished",
+      "HookParameters": {
+        "instance": "MixingTable",
+        "MixStartingPlayer": "BasePlayer",
+        "recipe": "Recipe",
+        "quantity": "int"
+      },
+      "ReturnBehavior": 0,
+      "TargetType": "MixingTable",
+      "Category": "Entity",
+      "MethodData": {
+        "MethodName": "ProduceItem",
+        "ReturnType": "void",
+        "Arguments": {
+          "recipe": "Recipe",
+          "quantity": "int"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n{\r\n\tthis.pendingItemId = recipe.ProducedItem.itemid;\r\n\tthis.StopMixing();\r\n\tthis.ConsumeInventory(recipe, quantity);\r\n\tthis.CreateRecipeItems(recipe, quantity);\r\n\tInterface.CallHook(\"OnMixingTableFinished\", this, this.MixStartingPlayer, recipe, quantity);\r\n}\r\n\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnCuiDraggableDrag",
+      "HookName": "OnCuiDraggableDrag",
+      "HookParameters": {
+        "player": "BasePlayer",
+        "name": "string",
+        "position": "Vector3",
+        "type": "DraggablePositionSendType"
+      },
+      "ReturnBehavior": 0,
+      "TargetType": "CommunityEntity",
+      "Category": "CommunityUI",
+      "MethodData": {
+        "MethodName": "Hook_DragRPC",
+        "ReturnType": "void",
+        "Arguments": {
+          "player": "BasePlayer",
+          "name": "string",
+          "position": "UnityEngine.Vector3",
+          "type": "CommunityEntity/DraggablePositionSendType"
+        }
+      },
+      "CodeAfterInjection": "private void Hook_DragRPC(global::BasePlayer player, string name, Vector3 position, global::CommunityEntity.DraggablePositionSendType type)\r\n{\r\n\tInterface.CallHook(\"OnCuiDraggableDrag\", player, name, position, type);\r\n}\r\n\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnCuiDraggableDrop",
+      "HookName": "OnCuiDraggableDrop",
+      "HookParameters": {
+        "player": "BasePlayer",
+        "draggedName": "string",
+        "draggedSlot": "string",
+        "swappedName": "string",
+        "swappedSlot": "string"
+      },
+      "ReturnBehavior": 0,
+      "TargetType": "CommunityEntity",
+      "Category": "CommunityUI",
+      "MethodData": {
+        "MethodName": "Hook_DropRPC",
+        "ReturnType": "void",
+        "Arguments": {
+          "player": "BasePlayer",
+          "draggedName": "string",
+          "draggedSlot": "string",
+          "swappedName": "string",
+          "swappedSlot": "string"
+        }
+      },
+      "CodeAfterInjection": "private void Hook_DropRPC(global::BasePlayer player, string draggedName, string draggedSlot, string swappedName, string swappedSlot)\r\n{\r\n\tInterface.CallHook(\"OnCuiDraggableDrop\", player, draggedName, draggedSlot, swappedName, swappedSlot);\r\n}\r\n\r\n"
+    },
+    {
+      "Type": 0,
       "Name": "IOnServerCommand",
       "HookName": "IOnServerCommand",
       "HookParameters": {
@@ -15462,21 +15518,6 @@
       "CodeAfterInjection": "//---\r\n{\r\n\tif (arg.Invalid)\r\n\t{\r\n\t\treturn false;\r\n\t}\r\n\tobject returnvar = Interface.CallHook(\"IOnServerCommand\", arg);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\tif (!arg.HasPermission())\r\n//---\r\n"
     },
     {
-      "Type": 1,
-      "Name": "SingleCharCmdPrefix [patch]",
-      "HookName": "SingleCharCmdPrefix [patch]",
-      "ReturnBehavior": 0,
-      "TargetType": "ConsoleSystem/Arg",
-      "Category": "_Patches",
-      "MethodData": {
-        "MethodName": "BuildCommand",
-        "ReturnType": "void",
-        "Arguments": {
-          "command": "string"
-        }
-      }
-    },
-    {
       "Type": 0,
       "Name": "IOnRunCommandLine",
       "HookName": "IOnRunCommandLine",
@@ -15490,21 +15531,6 @@
         "Arguments": {}
       },
       "CodeAfterInjection": "public static void UpdateValuesFromCommandLine()\r\n{\r\n\tif (Interface.CallHook(\"IOnRunCommandLine\") != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tforeach (KeyValuePair<string, string> current in Facepunch.CommandLine.GetSwitches())\r\n\t{\r\n//---\r\n"
-    },
-    {
-      "Type": 1,
-      "Name": "SingleCharCmdSuffix [patch]",
-      "HookName": "SingleCharCmdSuffix [patch]",
-      "ReturnBehavior": 0,
-      "TargetType": "ConsoleSystem/Arg",
-      "Category": "_Patches",
-      "MethodData": {
-        "MethodName": "BuildCommand",
-        "ReturnType": "void",
-        "Arguments": {
-          "command": "string"
-        }
-      }
     },
     {
       "Type": 0,
