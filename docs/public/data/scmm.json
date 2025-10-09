@@ -112338,25 +112338,5 @@
             "tradable": 1,
             "marketable": 1
         }
-    },
-    {
-        "name": "Generator High",
-        "sell_price": 0,
-        "sell_price_text": "$0.00",
-        "app_name": "Rust",
-        "sell_listings": 0,
-        "asset_description": {
-            "market_hash_name": "Generator High",
-            "type": "101x50;10001x50;10005x50;10006x50;10007x50;10008x50;10009x50;10010x50;10011x50;10012x50;10013x50;10015x50;10016x50;10017x50;10018x50;10019x50;10020x50;10021x50;10022x50;10023x50;10026x50;10028x50;10029x50;10030x50;10031x50;10059x50;10060x50;10061x50;10062x50;10063x50;10066x50;10068x50;10069x50;10112x50;10113x50;14072x50;14177x50;14178x50;14179x50;14180x50;14182x50;14183x50;14184x50;14185x50;14187x50;14189x50",
-            "icon_url": "",
-            "classid": "1126803408",
-            "instanceid": "0",
-            "appid": 252490,
-            "commodity": 0,
-            "currency": 0,
-            "background_color": "",
-            "tradable": 1,
-            "marketable": 1
-        }
     }
 ]

@@ -109,6 +109,13 @@ def process_item(item: Dict, existing_skins: Set[str], prices: Dict[str, Tuple[i
         logger.debug(f"Item skipped - already exists: {name}")
         return None
     
+    # Filter out malformed items with suspicious type data (e.g., "Generator High")
+    item_type = item.get('itemType', '')
+    if item_type and ('x' in item_type and ';' in item_type):
+        # Skip items where type contains patterns like "101x50;10001x50;..." (malformed data)
+        logger.debug(f"Item skipped - malformed type data: {name} (type: {item_type[:50]}...)")
+        return None
+    
     # Add debug logging to see what items we're processing
     logger.debug(f"Processing new item: {name}")
     existing_skins.add(name)
@@ -118,7 +125,7 @@ def process_item(item: Dict, existing_skins: Set[str], prices: Dict[str, Tuple[i
     
     asset_desc = {
         'market_hash_name': name,
-        'type': item.get('itemType', ''),
+        'type': item_type,
         'icon_url': item.get('iconUrl', ''),
         'classid': str(item.get('id', '')),
         'instanceid': '0',
