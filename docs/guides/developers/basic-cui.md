@@ -903,9 +903,9 @@ For the other layers, UI will only be visible in the respective view.
 This sample code use CuiGridLayoutGroupComponent, CuiVerticalLayoutGroupComponent, CuiContentSizeFitterComponent
 
 ```csharp
-public const string UIScrollName = "UI.CuiVerticalLayoutGroup"
+public const string UIScrollName = "UI.CuiVerticalLayoutGroup";
 
-CuiElementContainer createScrollUI()
+CuiElementContainer createVerticalLayout()
 {
 	CuiElementContainer elements = new CuiElementContainer();
 
@@ -915,84 +915,67 @@ CuiElementContainer createScrollUI()
 		Parent = "Hud",
 		DestroyUi = UIScrollName,
 		Components = {
-			new CuiImageComponent { Sprite = "assets/content/effects/crossbreed/fx gradient skewed.png", Color = "0.3 0.3 0.3 1.0" },
-			new CuiRectTransformComponent { AnchorMin = "0.3 0.015", AnchorMax = "0.7 0.985", Pivot = "0.5 1", Rotation = 0 },
-
+			new CuiRawImageComponent { 
+				Sprite = "assets/content/effects/crossbreed/fx gradient skewed.png", 
+				Color = "0.3 0.3 0.3 0.8", 
+			},
+			new CuiRectTransformComponent { 
+				AnchorMin = "0.3 0.5", AnchorMax = "0.7 0.92", 
+				Pivot = "0.5 1", Rotation = 0 
+			},
 			new CuiVerticalLayoutGroupComponent
 			{
 				ChildAlignment = TextAnchor.UpperCenter,
-				Spacing = 20f,
-				ChildControlHeight = true,
+				Spacing = 8f,
+				Padding = "3 12 3 12",
+				ChildControlHeight = false,
 				ChildControlWidth = true,
 			},
 			new CuiContentSizeFitterComponent()
 			{
 				VerticalFit = ContentSizeFitter.FitMode.PreferredSize,
-				HorizontalFit = ContentSizeFitter.FitMode.PreferredSize
+				HorizontalFit = ContentSizeFitter.FitMode.Unconstrained,
 			}
 		}
 	});
 
-	elements.Add(new CuiElement
-	{
-		Name = "UI.CuiVerticalLayoutGroup.P1",
-		Parent = UIScrollName,
-		Components =
-			{
-				new CuiGridLayoutGroupComponent {
-					CellSize = "32 32",
-					ChildAlignment = TextAnchor.UpperLeft,
-					Constraint = GridLayoutGroup.Constraint.FixedColumnCount,
-					ConstraintCount = 8,
-					Padding = "x",
-					Spacing = "5 5",
-					StartAxis = GridLayoutGroup.Axis.Horizontal,
-					StartCorner = GridLayoutGroup.Corner.UpperLeft
-				},               
-			}
-	});
 
-	for ( int i=0; i<32; i++) 
+	for (int i = 0; i < 6; i++)
 	{
 		elements.Add(new CuiElement
 		{
-			Name = "Button_" + i,
-			Parent = "UI.CuiVerticalLayoutGroup.P1",
-			Components =
-			{
-			new CuiImageComponent { Color = "0.4 0.4 0.4 1.0", Sprite = "assets/icons/blueprint.png", /*ImageType = Image.Type.Tiled*/ },
+			Name = "Label_" + i,
+			Parent = UIScrollName,
+			Components = {
+				new CuiImageComponent { Color = "0.2 0.2 0.8 0.6"},
+				new CuiRectTransformComponent {
+					AnchorMin = "0.02 0", AnchorMax = "0.98 0",
+					OffsetMin = "0 0", OffsetMax = "0 40"
+				},
 			}
 		});
-
+		
 		elements.Add(new CuiElement
 		{
-			Name = "ButtonText_" + i,
-			Parent = "Button_" + i,
-			Components =
-			{
-			new CuiTextComponent { Text = $"Button#{i+1}", Color = "0.95 0.95 0.95 1.0", FontSize = 10, Align = TextAnchor.MiddleCenter },
+			Name = "LabelText_" + i,
+			Parent = "Label_" + i,
+			Components = {
+				new CuiTextComponent {
+					Text = $"Text #{i+1}",
+					Color = "0.9 0.9 0.9 1.0",
+					FontSize = 14,
+					Align = TextAnchor.MiddleCenter },
 			}
 		});
-
-		elements.Add(new CuiElement
-		{
-			Name = "TheButton_" + i,
-			Parent = "ButtonText_" + i,
-			Components =
-			{
-				new CuiButtonComponent { Color = "0.2 0.6 0.2 0.8", Command = "ui.testscrollui "+ (i+1), ImageType= Image.Type.Tiled,
-				HighlightedColor = "0.2 0.7 0.3 0.8", PressedColor = "0.1 0.9 0.1 0.8"},
-			}
-		});
-
+		
 	}
 	return elements;
 }
 ```
 
-## Example CuiGridMin
+## Example CuiGrid Min
 
-This sample code use CuiGridLayoutGroupComponent
+This sample code use CuiGridLayoutGroupComponent with four simple element
 
 ```csharp
 public const string UIScrollName = "UI.CuiGridMin";
@@ -1140,6 +1123,86 @@ CuiElementContainer createGridMinUI()
 		}
 	});
 
+	return elements;
+}
+```
+
+## Example CuiGrid of button
+
+This sample code use CuiGridLayoutGroupComponent to show a grid of buttons
+
+```csharp
+public const string UIScrollName = "gridlayout.cuigrid";
+
+CuiElementContainer createScrollUI()
+{
+	CuiElementContainer elements = new CuiElementContainer();
+
+	elements.Add(new CuiElement
+	{
+		Name = UIScrollName,
+		Parent = "Overlay",
+		DestroyUi = UIScrollName,
+		Components = {
+			new CuiRawImageComponent { 
+				Sprite = "assets/content/effects/crossbreed/fx gradient skewed.png", 
+				Color = "0.1 0.1 0.1 1.0", 
+			},
+			new CuiRectTransformComponent { 
+				AnchorMin = "0.3 0.05", AnchorMax = "0.7 0.95",
+				Pivot = "0.5 1", Rotation = 0,
+			},
+			new CuiGridLayoutGroupComponent {
+				CellSize = "32 32",
+				ChildAlignment = TextAnchor.UpperLeft,
+				Constraint = GridLayoutGroup.Constraint.FixedColumnCount,
+				ConstraintCount = 8,
+				Padding = "12",
+				Spacing = "5 5",
+				StartAxis = GridLayoutGroup.Axis.Horizontal,
+				StartCorner = GridLayoutGroup.Corner.UpperLeft,
+			},
+			new CuiContentSizeFitterComponent()
+			{
+				VerticalFit = ContentSizeFitter.FitMode.PreferredSize,
+				HorizontalFit = ContentSizeFitter.FitMode.PreferredSize
+			},
+		}
+	});
+
+	for ( int i=0; i<32; i++) 
+	{
+		elements.Add(new CuiElement
+		{
+			Name = "TheButton_" + i,
+			Parent = UIScrollName, //"Button_" + i,
+			Components =
+			{
+				new CuiButtonComponent { 
+					Color = "0.2 0.2 0.7 1.0",
+					Command = "ui.testscrollui "+ (i+1), 
+					Sprite = "assets/icons/blueprint.png",
+					HighlightedColor = "0.2 0.7 0.3 0.3", 
+					PressedColor = "0.1 0.9 0.1 0.8",
+				},
+			}
+		});
+
+		elements.Add(new CuiElement
+		{
+			Name = "ButtonText_" + i,
+			Parent = "TheButton_" + i,
+			Components =
+			{
+				new CuiTextComponent {
+					Text = $"Button#{i+1}",
+					Color = "0.95 0.95 0.95 1.0",
+					FontSize = 10,
+					Align = TextAnchor.MiddleCenter
+				},
+			}
+		});
+	}
 	return elements;
 }
 ```
@@ -1531,7 +1594,6 @@ CuiElementContainer createScrollUI()
 
 ```csharp
 public const string UIScrollName = "UI.Scrolltest";
-
 CuiElementContainer createScrollUI()
 {
 	int buttonSpacing = 24;
@@ -1704,24 +1766,24 @@ CuiElementContainer createScrollUI()
 
 		elements.Add(new CuiElement
 		{
-			Name = "ButtonText_" + i,
-			Parent = "Button_" + i,
-			Components =
-			{
-			new CuiTextComponent { Text = $"Button#{i+1}", Color = "0.95 0.95 0.95 1.0", FontSize = 10, Align = TextAnchor.MiddleCenter },
-			new CuiRectTransformComponent { AnchorMin = "0.02 0.02", AnchorMax = "0.98 0.98"},
-			}
-		});
-
-		elements.Add(new CuiElement
-		{
 			Name = "TheButton_" + i,
-			Parent = "ButtonText_" + i,
+			Parent = "Button_" + i,
 			Components =
 			{
 				new CuiButtonComponent { Color = "0.8 0.2 0.2 0.8", Command = "ui.testscrollui "+ (i+1), ImageType= Image.Type.Tiled },
 				new CuiRectTransformComponent { AnchorMin = "0.02 0.02", AnchorMax = "0.98 0.98" },
 				new CuiOutlineComponent { Distance= "2 2", Color= "0 0 0 0.50" },
+			}
+		});
+
+		elements.Add(new CuiElement
+		{
+			Name = "ButtonText_" + i,
+			Parent = "TheButton_" + i,
+			Components =
+			{
+			new CuiTextComponent { Text = $"Button#{i+1}", Color = "0.95 0.95 0.95 1.0", FontSize = 10, Align = TextAnchor.MiddleCenter },
+			new CuiRectTransformComponent { AnchorMin = "0.02 0.02", AnchorMax = "0.98 0.98"},
 			}
 		});
 	}
@@ -1954,19 +2016,8 @@ CuiElementContainer createScrollUI()
 
 		elements.Add(new CuiElement
 		{
-			Name = "ButtonText_" + i,
-			Parent = "Button_" + i,
-			Components =
-			{
-			new CuiTextComponent { Text = $"Button#{i+1}", Color = "0.95 0.95 0.95 1.0", FontSize = 10, Align = TextAnchor.MiddleCenter },
-			new CuiRectTransformComponent { AnchorMin = "0.02 0.02", AnchorMax = "0.98 0.98"},
-			}
-		});
-
-		elements.Add(new CuiElement
-		{
 			Name = "TheButton_" + i,
-			Parent = "ButtonText_" + i,
+			Parent = "Button_" + i,
 			Components =
 			{
 				new CuiButtonComponent { Color = "0.8 0.2 0.2 0.8", Command = "ui.testscrollui "+ (i+1), ImageType= Image.Type.Tiled },
@@ -1975,6 +2026,16 @@ CuiElementContainer createScrollUI()
 			}
 		});
 
+		elements.Add(new CuiElement
+		{
+			Name = "ButtonText_" + i,
+			Parent = "TheButton_" + i,
+			Components =
+			{
+			new CuiTextComponent { Text = $"Button#{i+1}", Color = "0.95 0.95 0.95 1.0", FontSize = 10, Align = TextAnchor.MiddleCenter },
+			new CuiRectTransformComponent { AnchorMin = "0.02 0.02", AnchorMax = "0.98 0.98"},
+			}
+		});
 	}
 	return elements;
 }
