@@ -301,9 +301,9 @@ Scroll component with parametrization
 	},
 ```
 
-#### See example for [CuiScrollViewComponent](./basic-cui#example-scrollview)  
+#### See example for [CuiScrollViewComponent](./basic-cui#example-scrollview)
 
-#### Second example for [CuiScrollViewComponent](./basic-cui#example-scrollview-with-layoutgroup-sizefitter) with LayoutGroup, SizeFitter and update flag  
+#### Second example for [CuiScrollViewComponent](./basic-cui#example-scrollview-with-layoutgroup-sizefitter) with LayoutGroup, SizeFitter and update flag
 
 
 ### `CuiDraggableComponent`
@@ -898,7 +898,7 @@ For the other layers, UI will only be visible in the respective view.
 
 1.  Visible but blurred, under the view background.
 
-## example CuiVerticalLayoutGroup
+## Example CuiVerticalLayoutGroup
 
 This sample code use CuiGridLayoutGroupComponent, CuiVerticalLayoutGroupComponent, CuiContentSizeFitterComponent
 
@@ -990,7 +990,7 @@ CuiElementContainer createScrollUI()
 }
 ```
 
-## example CuiGridMin
+## Example CuiGridMin
 
 This sample code use CuiGridLayoutGroupComponent
 
@@ -1144,7 +1144,7 @@ CuiElementContainer createGridMinUI()
 }
 ```
 
-## example CuiDraggable
+## Example CuiDraggable
 
 This sample code use CuiDraggableComponent
 
@@ -1527,7 +1527,7 @@ CuiElementContainer createScrollUI()
 }
 ```
 
-## example ScrollView
+## Example ScrollView
 
 ```csharp
 public const string UIScrollName = "UI.Scrolltest";
@@ -1729,7 +1729,7 @@ CuiElementContainer createScrollUI()
 }
 ```
 
-## example ScrollView with LayoutGroup+SizeFitter
+## Example ScrollView with LayoutGroup+SizeFitter
 
 This sample code use CuiScrollViewComponent but with a small twist, to use with CuiVerticalLayoutGroupComponent and CuiContentSizeFitterComponent.
 Also use the `Update` flag to modify existing component created by the VerticalLayoutGroup component
