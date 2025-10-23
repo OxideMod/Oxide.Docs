@@ -112558,5 +112558,305 @@
             "tradable": 1,
             "marketable": 1
         }
+    },
+    {
+        "name": "That Thing Rock",
+        "sell_price": 199,
+        "sell_price_text": "$1.99",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "That Thing Rock",
+            "type": "Rock",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5GPHfCk4nReh8DEiv5dbP64-pbc2QPG4FmXnRRs",
+            "classid": "7626626318",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Zombie LR",
+        "sell_price": 249,
+        "sell_price_text": "$2.49",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Zombie LR",
+            "type": "LR300",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5GPGfCk4nReh8DEiv5dbO6E4qrM_RPu70sYHchY",
+            "classid": "7626626493",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Bone Cultists Garage Door",
+        "sell_price": 249,
+        "sell_price_text": "$2.49",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Bone Cultists Garage Door",
+            "type": "Garage Door",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5GPEfCk4nReh8DEiv5dbPK8-q703RPG-SAX9LXE",
+            "classid": "7626626317",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Ghost Furnace",
+        "sell_price": 199,
+        "sell_price_text": "$1.99",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Ghost Furnace",
+            "type": "Furnace",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5GLNfCk4nReh8DEiv5dYOKw-pb00Qvm6sTNTxK4",
+            "classid": "7626626311",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Lord of the Night Locker",
+        "sell_price": 249,
+        "sell_price_text": "$2.49",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Lord of the Night Locker",
+            "type": "Locker",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5GPFfCk4nReh8DEiv5dYPaE6pLAxQPu2WUwx_0A",
+            "classid": "7626626315",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Spooky Harvest Fridge",
+        "sell_price": 199,
+        "sell_price_text": "$1.99",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Spooky Harvest Fridge",
+            "type": "Fridge",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5GLMfCk4nReh8DEiv5daMag8qLMxRPG93YMjjIM",
+            "classid": "7626626313",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "The Devourer Backpack",
+        "sell_price": 199,
+        "sell_price_text": "$1.99",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "The Devourer Backpack",
+            "type": "Large Backpack",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5GLCfCk4nReh8DEiv5daO6w-r701RvCdd5-2RQ",
+            "classid": "7626626309",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Pumpkin Boots",
+        "sell_price": 99,
+        "sell_price_text": "$0.99",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Pumpkin Boots",
+            "type": "Boots",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5GLDfCk4nReh8DEiv5dRPK48pLQ1Qv-vNSXnkA",
+            "classid": "7626626308",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Tooth Monster Headwrap",
+        "sell_price": 149,
+        "sell_price_text": "$1.49",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Tooth Monster Headwrap",
+            "type": "Burlap Headwrap",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5GLBfCk4nReh8DEiv5dYMaA6pLM0SfG7MXaf-ck",
+            "classid": "7626626306",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Tooth Monster Poncho",
+        "sell_price": 199,
+        "sell_price_text": "$1.99",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Tooth Monster Poncho",
+            "type": "Hide Poncho",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5GLAfCk4nReh8DEiv5dbP6o6q7cwRP65fy0N7mE",
+            "classid": "7626626307",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Skeleton Costume Balaclava",
+        "sell_price": 149,
+        "sell_price_text": "$1.49",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Skeleton Costume Balaclava",
+            "type": "Improvised Balaclava",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5GLEfCk4nReh8DEiv5dbOq84rL01Qf-48JhcNek",
+            "classid": "7626626301",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Skeleton Costume Burlap Pants",
+        "sell_price": 149,
+        "sell_price_text": "$1.49",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Skeleton Costume Burlap Pants",
+            "type": "Burlap Trousers",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5GLGfCk4nReh8DEiv5dYP6g5qrQxRP223UtexHE",
+            "classid": "7626626305",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Skeleton Costume Burlap Shirt",
+        "sell_price": 149,
+        "sell_price_text": "$1.49",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Skeleton Costume Burlap Shirt",
+            "type": "Burlap Shirt",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5GLHfCk4nReh8DEiv5dYOqA_rLIyRPC7C77ALBA",
+            "classid": "7626626303",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Surgeon Hat",
+        "sell_price": 149,
+        "sell_price_text": "$1.49",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Surgeon Hat",
+            "type": "Miners Hat",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5GLFfCk4nReh8DEiv5dYOaw8r7wzQPu_l15pgDc",
+            "classid": "7626626300",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "RPG7",
+        "sell_price": 0,
+        "sell_price_text": "$0.00",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "RPG7",
+            "type": "Rocket Launcher",
+            "icon_url": "https://files.facepunch.com/rust/icons/inventory/rust/10337_small.png?42339974",
+            "classid": "0",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
     }
 ]
