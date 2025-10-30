@@ -112858,5 +112858,425 @@
             "tradable": 1,
             "marketable": 1
         }
+    },
+    {
+        "name": "Moonlight Raider Garage Door",
+        "sell_price": 299,
+        "sell_price_text": "$2.99",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Moonlight Raider Garage Door",
+            "type": "Garage Door",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5WPDfCk4nReh8DEiv5ddO6o5qLI1Sf639GOeUes",
+            "classid": "7659918352",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Hammer from Hell",
+        "sell_price": 199,
+        "sell_price_text": "$1.99",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Hammer from Hell",
+            "type": "Hammer",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5WPAfCk4nReh8DEiv5ddMKk2rL0xR_5bEvpfGg",
+            "classid": "7659918350",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Grim Farm Double Door",
+        "sell_price": 249,
+        "sell_price_text": "$2.49",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Grim Farm Double Door",
+            "type": "Sheet Metal Double Door",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5WPBfCk4nReh8DEiv5dYPK06q7U0Rv-58vmsFnU",
+            "classid": "7659918349",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Dracula Sheet Metal Door",
+        "sell_price": 249,
+        "sell_price_text": "$2.49",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Dracula Sheet Metal Door",
+            "type": "Sheet Metal Door",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5WPGfCk4nReh8DEiv5dbMKE3qrIwSfu305-dEKI",
+            "classid": "7659918348",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Sinister Small Box",
+        "sell_price": 199,
+        "sell_price_text": "$1.99",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Sinister Small Box",
+            "type": "Wood Storage Box",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5WPHfCk4nReh8DEiv5daOao4rbA2Qfi5x09MtXo",
+            "classid": "7659918346",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Tombstone Bed",
+        "sell_price": 199,
+        "sell_price_text": "$1.99",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Tombstone Bed",
+            "type": "Bed",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5WPEfCk4nReh8DEiv5dYOqE9pLMzRfq_i3apkLU",
+            "classid": "7659918345",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Horror Bed",
+        "sell_price": 199,
+        "sell_price_text": "$1.99",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Horror Bed",
+            "type": "Bed",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5WPFfCk4nReh8DEiv5deMaA5pLQ_Qv-DfvhblQ",
+            "classid": "7659914205",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Dr. Brainus Chestplate",
+        "sell_price": 99,
+        "sell_price_text": "$0.99",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Dr. Brainus Chestplate",
+            "type": "Metal Chest Plate",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5WLMfCk4nReh8DEiv5dbPq42r7w-Sfi7-bFaXXU",
+            "classid": "7659914204",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Dr. Brainus Facemask",
+        "sell_price": 99,
+        "sell_price_text": "$0.99",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Dr. Brainus Facemask",
+            "type": "Metal Facemask",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5WLNfCk4nReh8DEiv5daPKA5qbUxRfq_p7OUWQI",
+            "classid": "7659914203",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Witch Hide Poncho",
+        "sell_price": 149,
+        "sell_price_text": "$1.49",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Witch Hide Poncho",
+            "type": "Hide Poncho",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5WLCfCk4nReh8DEiv5dYPag8pbMwQfC9LYHK02M",
+            "classid": "7659914202",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Witch Deer Skull Mask",
+        "sell_price": 149,
+        "sell_price_text": "$1.49",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Witch Deer Skull Mask",
+            "type": "Bone Helmet",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5WLDfCk4nReh8DEiv5dYOas6rLU1Qf25C-jlRPM",
+            "classid": "7659914201",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Pumpkin Jacket",
+        "sell_price": 199,
+        "sell_price_text": "$1.99",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Pumpkin Jacket",
+            "type": "Jacket",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5WLAfCk4nReh8DEiv5daO6A4qrA1R_q_WKXQArU",
+            "classid": "7659914199",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Slime Monster Pants",
+        "sell_price": 99,
+        "sell_price_text": "$0.99",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Slime Monster Pants",
+            "type": "Pants",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5WLBfCk4nReh8DEiv5dcMa46pLI3QvnreTTJXg",
+            "classid": "7659913596",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Slime Monster Hoodie",
+        "sell_price": 99,
+        "sell_price_text": "$0.99",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Slime Monster Hoodie",
+            "type": "Hoodie",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5WLGfCk4nReh8DEiv5dYOq8_q7Y0Rfq2WUYf1G4",
+            "classid": "7659913594",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Creep Miner Hat",
+        "sell_price": 199,
+        "sell_price_text": "$1.99",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Creep Miner Hat",
+            "type": "Miners Hat",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5WLHfCk4nReh8DEiv5dbO6o2q7AzQfC4iL7sRnk",
+            "classid": "7659913593",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Frankenstein AR",
+        "sell_price": 199,
+        "sell_price_text": "$1.99",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Frankenstein AR",
+            "type": "Assault Rifle",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5WLFfCk4nReh8DEiv5dQMK84rrYwQvn01QyGnQ",
+            "classid": "7659913485",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Ghost Halloween SMG",
+        "sell_price": 199,
+        "sell_price_text": "$1.99",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Ghost Halloween SMG",
+            "type": "Custom SMG",
+            "icon_url": "https://steamcommunity-a.akamaihd.net/economy/image/6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835VY5WLEfCk4nReh8DEiv5daP64_rLU-Rfq33Y-OsaI",
+            "classid": "7659913592",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Krieg Shotgun",
+        "sell_price": 0,
+        "sell_price_text": "$0.00",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Krieg Shotgun",
+            "type": "Pump Shotgun",
+            "icon_url": "https://files.facepunch.com/rust/icons/inventory/rust/10420_small.png?3529467313",
+            "classid": "0",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Krieg chainsword",
+        "sell_price": 0,
+        "sell_price_text": "$0.00",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Krieg chainsword",
+            "type": "Chainsaw",
+            "icon_url": "https://files.facepunch.com/rust/icons/inventory/rust/10417_small.png?846030577",
+            "classid": "0",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Krieg Hazmat",
+        "sell_price": 0,
+        "sell_price_text": "$0.00",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Krieg Hazmat",
+            "type": "Hazmat Suit",
+            "icon_url": "https://files.facepunch.com/rust/icons/inventory/rust/10419_small.png?3529467313",
+            "classid": "0",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
+    },
+    {
+        "name": "Krieg Large Backpack",
+        "sell_price": 0,
+        "sell_price_text": "$0.00",
+        "app_name": "Rust",
+        "sell_listings": 0,
+        "asset_description": {
+            "market_hash_name": "Krieg Large Backpack",
+            "type": "Large Backpack",
+            "icon_url": "https://files.facepunch.com/rust/icons/inventory/rust/10416_small.png?820876389",
+            "classid": "0",
+            "instanceid": "0",
+            "appid": 252490,
+            "commodity": 0,
+            "currency": 0,
+            "background_color": "42413e",
+            "tradable": 1,
+            "marketable": 1
+        }
     }
 ]
