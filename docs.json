@@ -778,7 +778,7 @@
           "info": "HitInfo"
         }
       },
-      "CodeAfterInjection": "public override void OnAttacked(HitInfo info)\r\n{\r\n\tif (Interface.CallHook(\"IOnBasePlayerAttacked\", this, info) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tfloat health = base.health;\r\n\tif (this.InSafeZone() && !this.IsHostile() && info.Initiator != null && info.Initiator != this)\r\n//---\r\n"
+      "CodeAfterInjection": "public unsafe override void OnAttacked(HitInfo info)\r\n{\r\n\tif (Interface.CallHook(\"IOnBasePlayerAttacked\", this, info) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tfloat health = base.health;\r\n\tif (this.InSafeZone() && !this.IsHostile() && info.Initiator != null && info.Initiator != this)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -868,7 +868,8 @@
       "HookName": "OnHealingItemUse",
       "HookParameters": {
         "instance": "MedicalTool",
-        "player": "BasePlayer"
+        "fromPlayer": "BasePlayer",
+        "toTarget": "IMedicalToolTarget"
       },
       "ReturnBehavior": 1,
       "TargetType": "MedicalTool",
@@ -877,10 +878,11 @@
         "MethodName": "GiveEffectsTo",
         "ReturnType": "void",
         "Arguments": {
-          "player": "BasePlayer"
+          "fromPlayer": "BasePlayer",
+          "toTarget": "IMedicalToolTarget"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tif (!component)\r\n\t{\r\n\t\tDebug.LogWarning(\"No consumable for medicaltool :\" + base.name);\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnHealingItemUse\", this, player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tBasePlayer ownerPlayer = base.GetOwnerPlayer();\r\n\tFacepunch.Rust.Analytics.Azure.OnMedUsed(ownerItemDefinition.shortname, ownerPlayer, player);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tif (component == null)\r\n\t{\r\n\t\tDebug.LogWarning(\"No consumable for medicaltool: \" + base.name);\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnHealingItemUse\", this, fromPlayer, toTarget) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tFacepunch.Rust.Analytics.Azure.OnMedUsed(ownerItemDefinition.shortname, fromPlayer, toTarget.GetEntity());\r\n\ttoTarget.OnMedicalToolApplied(fromPlayer, ownerItemDefinition, component, this, this.canRevive);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -1304,7 +1306,7 @@
           "rpc": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (!this.CanAdministrate(rpc.player))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnCupboardDeauthorize\", this, rpc2.player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.authorizedPlayers.RemoveWhere((PlayerNameID x) => x.userid == rpc.player.userID);\r\n\tglobal::BasePlayer arg_B1_1 = rpc.player;\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (!this.CanAdministrate(rpc.player))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnCupboardDeauthorize\", this, rpc.player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.authorizedPlayers.Remove(rpc.player.userID);\r\n\tFacepunch.Rust.Analytics.Azure.OnEntityAuthChanged(this, rpc.player, this.authorizedPlayers, \"removed\", rpc.player.userID);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -1898,7 +1900,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n{\r\n\tif (!this.IsSpectating())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnPlayerSpectateEnd\", this, this.spectateFilter) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tbase.SetParent(null, false, false);\r\n\tthis.SetPlayerFlag(BasePlayer.PlayerFlags.Spectating, false);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n{\r\n\tif (!this.IsSpectating())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnPlayerSpectateEnd\", this, this.spectateFilter) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (this.spectatingTarget)\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -2011,26 +2013,6 @@
         }
       },
       "CodeAfterInjection": "//---\r\n\t\t\t\tVector3 vector = new Vector3(UnityEngine.Random.Range(-2f, 2f), 0.2f, UnityEngine.Random.Range(-2f, 2f));\r\n\t\t\t\tthis.Belt.DropActive(this.GetDropPosition(), this.GetInheritedDropVelocity() + vector.normalized * 3f);\r\n\t\t\t}\r\n\t\t\tif (!this.WoundInsteadOfDying(info))\r\n\t\t\t{\r\n\t\t\t\tif (Interface.CallHook(\"OnPlayerDeath\", this, info) != null)\r\n\t\t\t\t{\r\n\t\t\t\t\treturn;\r\n\t\t\t\t}\r\n\t\t\t\tSleepingBag.OnPlayerDeath(this);\r\n\t\t\t\tbase.Die(info);\r\n//---\r\n"
-    },
-    {
-      "Type": 0,
-      "Name": "OnPlayerRevive",
-      "HookName": "OnPlayerRevive",
-      "HookParameters": {
-        "GetOwnerPlayer()": "BasePlayer",
-        "player": "BasePlayer"
-      },
-      "ReturnBehavior": 1,
-      "TargetType": "MedicalTool",
-      "Category": "Player",
-      "MethodData": {
-        "MethodName": "GiveEffectsTo",
-        "ReturnType": "void",
-        "Arguments": {
-          "player": "BasePlayer"
-        }
-      },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tBasePlayer ownerPlayer = base.GetOwnerPlayer();\r\n\tFacepunch.Rust.Analytics.Azure.OnMedUsed(ownerItemDefinition.shortname, ownerPlayer, player);\r\n\tif (player != ownerPlayer)\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnPlayerRevive\", this.GetOwnerPlayer(), player) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tif (player.IsWounded() && this.canRevive)\r\n\t\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -2264,7 +2246,7 @@
           "itemDef": "ItemDefinition"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\tFunc<global::Item, int> arg_BD_1;\r\n\t\t\t\tif ((arg_BD_1 = global::VendingMachine.<>c.<>9__33_0) == null)\r\n\t\t\t\t{\r\n\t\t\t\t\targ_BD_1 = (global::VendingMachine.<>c.<>9__33_0 = new Func<global::Item, int>(global::VendingMachine.<>c.<>9.<RefreshSellOrderStockLevel>b__33_0));\r\n\t\t\t\t}\r\n\t\t\t\tInterface.CallHook(\"OnRefreshVendingStock\", this, itemDef);\r\n\t\t\t\targ_C5_1 = arg_BD_0.Sum(arg_BD_1) / num2;\r\n\t\t\t}\r\n\t\t\targ_C5_0.inStock = arg_C5_1;\r\n\t\t\tfloat itemCondition = 0f;\r\n\t\t\tfloat itemConditionMax = 0f;\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\tFunc<global::Item, int> arg_BD_1;\r\n\t\t\t\tif ((arg_BD_1 = global::VendingMachine.<>c.<>9__38_0) == null)\r\n\t\t\t\t{\r\n\t\t\t\t\targ_BD_1 = (global::VendingMachine.<>c.<>9__38_0 = new Func<global::Item, int>(global::VendingMachine.<>c.<>9.<RefreshSellOrderStockLevel>b__38_0));\r\n\t\t\t\t}\r\n\t\t\t\tInterface.CallHook(\"OnRefreshVendingStock\", this, itemDef);\r\n\t\t\t\targ_C5_1 = arg_BD_0.Sum(arg_BD_1) / num2;\r\n\t\t\t}\r\n\t\t\targ_C5_0.inStock = arg_C5_1;\r\n\t\t\tfloat itemCondition = 0f;\r\n\t\t\tfloat itemConditionMax = 0f;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -2649,7 +2631,7 @@
           "rpc": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tglobal::BaseEntity.RPCMessage rpc = rpc2;\r\n\tif (this.booting || this.IsOnline() || !this.IsAuthed(rpc.player))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnTurretDeauthorize\", this, rpc2.player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.authorizedPlayers.RemoveWhere((PlayerNameID x) => x.userid == rpc.player.userID);\r\n\tthis.authDirty = true;\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n{\r\n\tif (this.booting || this.IsOnline() || !this.IsAuthed(rpc.player))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnTurretDeauthorize\", this, rpc.player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.authorizedPlayers.Remove(rpc.player.userID);\r\n\tthis.authDirty = true;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -4422,19 +4404,19 @@
       "Name": "OnTeamCreate",
       "HookName": "OnTeamCreate",
       "HookParameters": {
-        "basePlayer": "BasePlayer"
+        "player": "BasePlayer"
       },
       "ReturnBehavior": 1,
       "TargetType": "RelationshipManager",
       "Category": "Team",
       "MethodData": {
-        "MethodName": "trycreateteam",
+        "MethodName": "TryCreateTeam",
         "ReturnType": "void",
         "Arguments": {
-          "arg": "ConsoleSystem/Arg"
+          "player": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tglobal::BasePlayer basePlayer = arg.Player();\r\n\tif (basePlayer.currentTeam != 0uL)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnTeamCreate\", basePlayer) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tglobal::RelationshipManager.PlayerTeam playerTeam = global::RelationshipManager.ServerInstance.CreateTeam();\r\n\tplayerTeam.teamLeader = basePlayer.userID;\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n{\r\n\tif (player.currentTeam != 0uL)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnTeamCreate\", player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tglobal::RelationshipManager.PlayerTeam playerTeam = global::RelationshipManager.ServerInstance.CreateTeam();\r\n\tplayerTeam.teamLeader = player.userID;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -4561,20 +4543,20 @@
       "Name": "OnTeamCreated",
       "HookName": "OnTeamCreated",
       "HookParameters": {
-        "basePlayer": "BasePlayer",
-        "relationshipManager": "RelationshipManager"
+        "player": "BasePlayer",
+        "playerTeam": "PlayerTeam"
       },
       "ReturnBehavior": 0,
       "TargetType": "RelationshipManager",
       "Category": "Team",
       "MethodData": {
-        "MethodName": "trycreateteam",
+        "MethodName": "TryCreateTeam",
         "ReturnType": "void",
         "Arguments": {
-          "arg": "ConsoleSystem/Arg"
+          "player": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tglobal::RelationshipManager.PlayerTeam OxideGen_2 = global::RelationshipManager.ServerInstance.CreateTeam();\r\n\tglobal::RelationshipManager.PlayerTeam playerTeam = OxideGen_2;\r\n\tplayerTeam.teamLeader = basePlayer.userID;\r\n\tplayerTeam.AddPlayer(basePlayer, false);\r\n\tFacepunch.Rust.Analytics.Azure.OnTeamChanged(\"created\", playerTeam.teamID, basePlayer.userID, basePlayer.userID, playerTeam.members);\r\n\tInterface.CallHook(\"OnTeamCreated\", basePlayer, OxideGen_2);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tglobal::RelationshipManager.PlayerTeam playerTeam = global::RelationshipManager.ServerInstance.CreateTeam();\r\n\tplayerTeam.teamLeader = player.userID;\r\n\tplayerTeam.AddPlayer(player, false);\r\n\tFacepunch.Rust.Analytics.Azure.OnTeamChanged(\"created\", playerTeam.teamID, player.userID, player.userID, playerTeam.members);\r\n\tInterface.CallHook(\"OnTeamCreated\", player, playerTeam);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -4795,10 +4777,11 @@
         "MethodName": "UpdateSpectateTarget",
         "ReturnType": "void",
         "Arguments": {
-          "strName": "string"
+          "strName": "string",
+          "invalidateIfNone": "bool"
         }
       },
-      "CodeAfterInjection": "public void UpdateSpectateTarget(string strName)\r\n{\r\n\tif (Interface.CallHook(\"CanSpectateTarget\", this, strName) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.spectateFilter = strName;\r\n\tIEnumerable<global::BaseEntity> source;\r\n//---\r\n"
+      "CodeAfterInjection": "public void UpdateSpectateTarget(string strName, bool invalidateIfNone = false)\r\n{\r\n\tif (Interface.CallHook(\"CanSpectateTarget\", this, strName) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.spectateFilter = strName;\r\n\tIEnumerable<global::BasePlayer> arg_3B_0 = global::BasePlayer.activePlayerList;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -6382,7 +6365,7 @@
           "eat": "bool"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\treturn;\r\n\t\t}\r\n\t}\r\n\tif (player != null)\r\n\t{\r\n\t\tInterface.CallHook(\"OnGrowableGathered\", this, item, player);\r\n\t\tFacepunch.Rust.Analytics.Azure.OnGatherItem(item.info.shortname, item.amount, this, player, null);\r\n\t\tplayer.GiveItem(item, global::BaseEntity.GiveItemReason.ResourceHarvested);\r\n\t\treturn;\r\n\t}\r\n\titem.Drop(base.transform.position + Vector3.up * 0.5f, Vector3.up * 1f, default(Quaternion));\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\treturn;\r\n\t\t}\r\n\t}\r\n\tif (player != null)\r\n\t{\r\n\t\tInterface.CallHook(\"OnGrowableGathered\", this, item, player);\r\n\t\tFacepunch.Rust.Analytics.Azure.OnGatherItem(item.info.shortname, item.amount, this, player, null);\r\n\t\tplayer.GiveItem(item, global::BaseEntity.GiveItemReason.ResourceHarvested, global::GiveItemOptions.BackpackOverflow);\r\n\t\treturn;\r\n\t}\r\n\titem.Drop(base.transform.position + Vector3.up * 0.5f, Vector3.up * 1f, default(Quaternion));\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -7118,7 +7101,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tthis.GiveItem(global::ItemManager.CreateByName(\"snowball\", 1, 0uL).SetItemOwnership(base.baseEntity, global::ItemOwnershipPhrases.BornPhrase), this.containerBelt);\r\n\t\tthis.GiveItem(global::ItemManager.CreateByName(\"snowball\", 1, 0uL).SetItemOwnership(base.baseEntity, global::ItemOwnershipPhrases.BornPhrase), this.containerBelt);\r\n\t\tthis.GiveItem(global::ItemManager.CreateByName(\"snowball\", 1, 0uL).SetItemOwnership(base.baseEntity, global::ItemOwnershipPhrases.BornPhrase), this.containerBelt);\r\n\t}\r\n\tInterface.CallHook(\"OnDefaultItemsReceived\", this);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tthis.GiveItem(global::ItemManager.CreateByName(\"snowball\", 1, 0uL).SetItemOwnership(base.baseEntity, global::ItemOwnershipPhrases.BornPhrase), this.containerBelt, global::GiveItemOptions.None);\r\n\t\tthis.GiveItem(global::ItemManager.CreateByName(\"snowball\", 1, 0uL).SetItemOwnership(base.baseEntity, global::ItemOwnershipPhrases.BornPhrase), this.containerBelt, global::GiveItemOptions.None);\r\n\t\tthis.GiveItem(global::ItemManager.CreateByName(\"snowball\", 1, 0uL).SetItemOwnership(base.baseEntity, global::ItemOwnershipPhrases.BornPhrase), this.containerBelt, global::GiveItemOptions.None);\r\n\t}\r\n\tInterface.CallHook(\"OnDefaultItemsReceived\", this);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -8267,13 +8250,13 @@
       "TargetType": "Elevator",
       "Category": "Elevator",
       "MethodData": {
-        "MethodName": "<CallElevator>b__26_0",
+        "MethodName": "<CallElevator>b__25_0",
         "ReturnType": "void",
         "Arguments": {
           "elevatorEnt": "Elevator"
         }
       },
-      "CodeAfterInjection": "[CompilerGenerated]\r\nprivate void <CallElevator>b__26_0(global::Elevator elevatorEnt)\r\n{\r\n\tif (elevatorEnt.IsTop)\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnElevatorCall\", this, elevatorEnt) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tfloat num;\r\n\t\televatorEnt.RequestMoveLiftTo(this.Floor, out num, this);\r\n//---\r\n"
+      "CodeAfterInjection": "[CompilerGenerated]\r\nprivate void <CallElevator>b__25_0(global::Elevator elevatorEnt)\r\n{\r\n\tif (elevatorEnt.IsTop)\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnElevatorCall\", this, elevatorEnt) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tfloat num;\r\n\t\televatorEnt.RequestMoveLiftTo(this.Floor, out num, this);\r\n//---\r\n"
     },
     {
       "Type": 1,
@@ -9012,7 +8995,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\tint itemid = global::ItemManager.FindItemDefinition(\"scrap\").itemid;\r\n\t\t\tif (player.inventory.GetAmount(itemid) >= num + num2)\r\n\t\t\t{\r\n\t\t\t\tplayer.inventory.Take(null, itemid, num + num2);\r\n\t\t\t\tplayer.blueprints.Unlock(byID.itemDef);\r\n\t\t\t\tInterface.CallHook(\"OnTechTreeNodeUnlocked\", this, byID, player);\r\n\t\t\t\tFacepunch.Rust.Analytics.Azure.OnBlueprintLearned(player, byID.itemDef, \"techtree\", num + num2, this);\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\tint itemid = global::ItemManager.FindItemDefinition(\"scrap\").itemid;\r\n\t\t\tif (player.inventory.GetAmount(itemid, false) >= num + num2)\r\n\t\t\t{\r\n\t\t\t\tplayer.inventory.Take(null, itemid, num + num2);\r\n\t\t\t\tplayer.blueprints.Unlock(byID.itemDef);\r\n\t\t\t\tInterface.CallHook(\"OnTechTreeNodeUnlocked\", this, byID, player);\r\n\t\t\t\tFacepunch.Rust.Analytics.Azure.OnBlueprintLearned(player, byID.itemDef, \"techtree\", num + num2, this);\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}\r\n"
     },
     {
       "Type": 0,
@@ -9778,7 +9761,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\tthis.<SendRespawnOptions>g__CollectExternalAndSend|530_0();\r\n\t\treturn;\r\n\t}\r\n\tList<RespawnInformation.SpawnOptions> list = Pool.Get<List<RespawnInformation.SpawnOptions>>();\r\n\tglobal::BasePlayer.GetRespawnOptionsForPlayer(list, this.userID);\r\n\tInterface.CallHook(\"OnRespawnInformationGiven\", this, list);\r\n\tthis.<SendRespawnOptions>g__SendToPlayer|530_1(list, false);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tthis.<SendRespawnOptions>g__CollectExternalAndSend|533_0();\r\n\t\treturn;\r\n\t}\r\n\tList<RespawnInformation.SpawnOptions> list = Pool.Get<List<RespawnInformation.SpawnOptions>>();\r\n\tglobal::BasePlayer.GetRespawnOptionsForPlayer(list, this.userID);\r\n\tInterface.CallHook(\"OnRespawnInformationGiven\", this, list);\r\n\tthis.<SendRespawnOptions>g__SendToPlayer|533_1(list, false);\r\n}\r\n\r\n"
     },
     {
       "Type": 1,
@@ -10474,7 +10457,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\tthis.CurrentState = global::BaseFishingRod.CatchState.Caught;\r\n\t\tif (this.currentFishTarget != null)\r\n\t\t{\r\n\t\t\tglobal::Item item = global::ItemManager.Create(this.currentFishTarget, 1, 0uL, true);\r\n\t\t\titem.SetItemOwnership(ownerPlayer, global::ItemOwnershipPhrases.Fishing);\r\n\t\t\tobject OxideGen_15 = Interface.CallHook(\"CanCatchFish\", ownerPlayer, this, item);\r\n\t\t\tif (OxideGen_15 is bool && !(bool)OxideGen_15)\r\n\t\t\t{\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\townerPlayer.GiveItem(item, global::BaseEntity.GiveItemReason.Crafted);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tthis.CurrentState = global::BaseFishingRod.CatchState.Caught;\r\n\t\tif (this.currentFishTarget != null)\r\n\t\t{\r\n\t\t\tglobal::Item item = global::ItemManager.Create(this.currentFishTarget, 1, 0uL, true);\r\n\t\t\titem.SetItemOwnership(ownerPlayer, global::ItemOwnershipPhrases.Fishing);\r\n\t\t\tobject OxideGen_15 = Interface.CallHook(\"CanCatchFish\", ownerPlayer, this, item);\r\n\t\t\tif (OxideGen_15 is bool && !(bool)OxideGen_15)\r\n\t\t\t{\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\townerPlayer.GiveItem(item, global::BaseEntity.GiveItemReason.Crafted, global::GiveItemOptions.None);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -10515,7 +10498,7 @@
           "player": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (this.AtMaxAuthCapacity())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnTurretAuthorize\", this, player2) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.authorizedPlayers.RemoveWhere((PlayerNameID x) => x.userid == player.userID);\r\n\tPlayerNameID playerNameID = new PlayerNameID();\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (this.AtMaxAuthCapacity())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnTurretAuthorize\", this, player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.authorizedPlayers.Add(player.userID);\r\n\tFacepunch.Rust.Analytics.Azure.OnEntityAuthChanged(this, player, this.authorizedPlayers, \"added\", player.userID);\r\n//---\r\n"
     },
     {
       "Type": 1,
@@ -10659,7 +10642,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tulong num = msg.read.UInt64();\r\n\tif (num == 0uL || this.IsAuthed(num))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnTurretAssign\", this, num, msg.player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tstring username = global::BasePlayer.SanitizePlayerNameString(msg.read.String(256, false), num);\r\n\tPlayerNameID playerNameID = new PlayerNameID();\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tulong num = msg.read.UInt64();\r\n\tif (num == 0uL || this.IsAuthed(num))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnTurretAssign\", this, num, msg.player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tFacepunch.Rust.Analytics.Azure.OnEntityAuthChanged(this, msg.player, this.authorizedPlayers, \"added\", num);\r\n\tthis.authorizedPlayers.Add(num);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -10680,7 +10663,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tFacepunch.Rust.Analytics.Azure.OnEntityAuthChanged(this, arg_CC_1, arg_C1_0.Select(arg_C1_1), \"added\", num);\r\n\tthis.authorizedPlayers.Add(playerNameID);\r\n\tthis.UpdateMaxAuthCapacity();\r\n\tbase.SendNetworkUpdate(global::BasePlayer.NetworkQueue.Update);\r\n\tInterface.CallHook(\"OnTurretAssigned\", this, num, msg.player);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tFacepunch.Rust.Analytics.Azure.OnEntityAuthChanged(this, msg.player, this.authorizedPlayers, \"added\", num);\r\n\tthis.authorizedPlayers.Add(num);\r\n\tthis.UpdateMaxAuthCapacity();\r\n\tbase.SendNetworkUpdate(global::BasePlayer.NetworkQueue.Update);\r\n\tInterface.CallHook(\"OnTurretAssigned\", this, num, msg.player);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -11775,7 +11758,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t{\r\n\t\titem2.Remove(0f);\r\n\t\tDebug.LogError(\"Sub-entity is not a photo\");\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnPhotoCapture\", photoEntity, item, player, array) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tphotoEntity.SetImageData(player.userID, array);\r\n\tif (!player.inventory.GiveItem(item2, null))\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\titem2.Remove(0f);\r\n\t\tDebug.LogError(\"Sub-entity is not a photo\");\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnPhotoCapture\", photoEntity, item, player, array) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tphotoEntity.SetImageData(player.userID, array);\r\n\tif (!player.inventory.GiveItem(item2, null, global::GiveItemOptions.None))\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -11979,7 +11962,7 @@
           "player": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\tif (itemAmount.itemDef.IsAllowed(EraRestriction.Loot))\r\n\t\t{\r\n\t\t\tplayer.GiveItem(global::ItemManager.CreateByItemID(itemAmount.itemid, Mathf.CeilToInt(itemAmount.amount), 0uL).SetItemOwnership(player, global::ItemOwnershipPhrases.AdventCalendar), global::BaseEntity.GiveItemReason.PickedUp);\r\n\t\t}\r\n\t}\r\n\tInterface.CallHook(\"OnAdventGiftAwarded\", this, player);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tif (itemAmount.itemDef.IsAllowed(EraRestriction.Loot))\r\n\t\t{\r\n\t\t\tplayer.GiveItem(global::ItemManager.CreateByItemID(itemAmount.itemid, Mathf.CeilToInt(itemAmount.amount), 0uL).SetItemOwnership(player, global::ItemOwnershipPhrases.AdventCalendar), global::BaseEntity.GiveItemReason.PickedUp, global::GiveItemOptions.None);\r\n\t\t}\r\n\t}\r\n\tInterface.CallHook(\"OnAdventGiftAwarded\", this, player);\r\n}\r\n\r\n"
     },
     {
       "Type": 1,
@@ -12158,7 +12141,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "public void DelayedModsChanged()\r\n{\r\n\tif (Interface.CallHook(\"OnWeaponModChange\", this, this.GetOwnerPlayer()) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tFunc<global::ProjectileWeaponMod, global::ProjectileWeaponMod.Modifier> arg_5A_1;\r\n\tif ((arg_5A_1 = global::BaseProjectile.<>c.<>9__97_0) == null)\r\n//---\r\n"
+      "CodeAfterInjection": "public void DelayedModsChanged()\r\n{\r\n\tif (Interface.CallHook(\"OnWeaponModChange\", this, this.GetOwnerPlayer()) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tFunc<global::ProjectileWeaponMod, global::ProjectileWeaponMod.Modifier> arg_5A_1;\r\n\tif ((arg_5A_1 = global::BaseProjectile.<>c.<>9__99_0) == null)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -12219,7 +12202,8 @@
       "HookName": "OnInventoryItemsCount",
       "HookParameters": {
         "instance": "PlayerInventory",
-        "itemid": "int"
+        "itemid": "int",
+        "includeBackpack": "bool"
       },
       "ReturnBehavior": 1,
       "TargetType": "PlayerInventory",
@@ -12228,10 +12212,11 @@
         "MethodName": "GetAmount",
         "ReturnType": "int",
         "Arguments": {
-          "itemid": "int"
+          "itemid": "int",
+          "includeBackpack": "bool"
         }
       },
-      "CodeAfterInjection": "//---\r\n{\r\n\tif (itemid == 0)\r\n\t{\r\n\t\treturn 0;\r\n\t}\r\n\tobject returnvar = Interface.CallHook(\"OnInventoryItemsCount\", this, itemid);\r\n\tif (returnvar is int)\r\n\t{\r\n\t\treturn (int)returnvar;\r\n\t}\r\n\tint num = 0;\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n{\r\n\tif (itemid == 0)\r\n\t{\r\n\t\treturn 0;\r\n\t}\r\n\tobject returnvar = Interface.CallHook(\"OnInventoryItemsCount\", this, itemid, includeBackpack);\r\n\tif (returnvar is int)\r\n\t{\r\n\t\treturn (int)returnvar;\r\n\t}\r\n\tint num = 0;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -12591,7 +12576,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tif (player == null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tstring text = msg.read.String(256, false);\r\n\tif (Interface.CallHook(\"OnVehicleLockRequest\", this, player, text) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tglobal::ItemAmount itemAmount = this.lockResourceCost;\r\n\tif ((float)player.inventory.GetAmount(itemAmount.itemDef.itemid) >= itemAmount.amount && this.carOccupant.CarLock.TryAddALock(text, player.userID))\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tif (player == null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tstring text = msg.read.String(256, false);\r\n\tif (Interface.CallHook(\"OnVehicleLockRequest\", this, player, text) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tglobal::ItemAmount itemAmount = this.lockResourceCost;\r\n\tif ((float)player.inventory.GetAmount(itemAmount.itemDef.itemid, false) >= itemAmount.amount && this.carOccupant.CarLock.TryAddALock(text, player.userID))\r\n//---\r\n"
     },
     {
       "Type": 1,
@@ -12902,7 +12887,7 @@
           "rpc": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (!this.IsDriver(rpc.player))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnCupboardDeauthorize\", this, rpc2.player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.authorizedPlayers.RemoveAll((PlayerNameID x) => x.userid == rpc.player.userID);\r\n\tglobal::BasePlayer arg_B1_1 = rpc.player;\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (!this.IsDriver(rpc.player))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnCupboardDeauthorize\", this, rpc.player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.authorizedPlayers.Remove(rpc.player.userID);\r\n\tFacepunch.Rust.Analytics.Azure.OnEntityAuthChanged(this, rpc.player, this.authorizedPlayers, \"removed\", rpc.player.userID);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -12963,7 +12948,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\t\tif (this.<strChatText>5__2.Length <= 0)\r\n\t\t\t{\r\n\t\t\t\tresult = false;\r\n\t\t\t\tgoto IL_854;\r\n\t\t\t}\r\n\t\t\tobject returnvar = Interface.CallHook(\"IOnPlayerChat\", this.userId, this.username, this.<strChatText>5__2, this.targetChannel, this.player);\r\n\t\t\tif (returnvar is bool)\r\n\t\t\t{\r\n\t\t\t\tresult = (bool)returnvar;\r\n\t\t\t}\r\n\t\t\tif (this.<strChatText>5__2.StartsWith(\"/\") || this.<strChatText>5__2.StartsWith(\"\\\\\"))\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\tif (this.<strChatText>5__2.Length <= 0)\r\n\t\t\t{\r\n\t\t\t\tresult = false;\r\n\t\t\t\tgoto IL_859;\r\n\t\t\t}\r\n\t\t\tobject returnvar = Interface.CallHook(\"IOnPlayerChat\", this.userId, this.username, this.<strChatText>5__2, this.targetChannel, this.player);\r\n\t\t\tif (returnvar is bool)\r\n\t\t\t{\r\n\t\t\t\tresult = (bool)returnvar;\r\n\t\t\t}\r\n\t\t\tif (this.<strChatText>5__2.StartsWith(\"/\") || this.<strChatText>5__2.StartsWith(\"\\\\\"))\r\n//---\r\n"
     },
     {
       "Type": 1,
@@ -13405,30 +13390,13 @@
     },
     {
       "Type": 0,
-      "Name": "CanBeHomingTargeted [AttackHeliPilotFlare]",
+      "Name": "CanBeHomingTargeted [HeliPilotFlare]",
       "HookName": "CanBeHomingTargeted",
       "HookParameters": {
-        "instance": "AttackHeliPilotFlare"
+        "instance": "HeliPilotFlare"
       },
       "ReturnBehavior": 1,
-      "TargetType": "AttackHeliPilotFlare",
-      "Category": "Weapon",
-      "MethodData": {
-        "MethodName": "IsValidHomingTarget",
-        "ReturnType": "bool",
-        "Arguments": {}
-      },
-      "CodeAfterInjection": "public bool IsValidHomingTarget()\r\n{\r\n\tobject returnvar = Interface.CallHook(\"CanBeHomingTargeted\", this);\r\n\treturn !(returnvar is bool) || (bool)returnvar;\r\n}\r\n\r\n"
-    },
-    {
-      "Type": 0,
-      "Name": "CanBeHomingTargeted [RoadFlare]",
-      "HookName": "CanBeHomingTargeted",
-      "HookParameters": {
-        "instance": "RoadFlare"
-      },
-      "ReturnBehavior": 1,
-      "TargetType": "RoadFlare",
+      "TargetType": "HeliPilotFlare",
       "Category": "Weapon",
       "MethodData": {
         "MethodName": "IsValidHomingTarget",
@@ -13858,7 +13826,7 @@
           "attackWeapon": "AttackEntity"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tthis.ApplyItemOwnership(entity, item);\r\n\t\tthis.OverrideOwnership(item, attackWeapon);\r\n\t\tFacepunch.Rust.Analytics.Azure.OnGatherItem(item.info.shortname, item.amount, base.baseEntity, entity, attackWeapon);\r\n\t\tInterface.CallHook(\"OnDispenserGathered\", this, entity, item);\r\n\t\twhile (item.amount > item.MaxStackable())\r\n\t\t{\r\n\t\t\tglobal::Item item2 = item.SplitItem(item.MaxStackable());\r\n\t\t\tentity.GiveItem(item2, global::BaseEntity.GiveItemReason.ResourceHarvested);\r\n\t\t}\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tthis.ApplyItemOwnership(entity, item);\r\n\t\tthis.OverrideOwnership(item, attackWeapon);\r\n\t\tFacepunch.Rust.Analytics.Azure.OnGatherItem(item.info.shortname, item.amount, base.baseEntity, entity, attackWeapon);\r\n\t\tInterface.CallHook(\"OnDispenserGathered\", this, entity, item);\r\n\t\twhile (item.amount > item.MaxStackable())\r\n\t\t{\r\n\t\t\tglobal::Item item2 = item.SplitItem(item.MaxStackable());\r\n\t\t\tentity.GiveItem(item2, global::BaseEntity.GiveItemReason.ResourceHarvested, global::GiveItemOptions.BackpackOverflow);\r\n\t\t}\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -13880,7 +13848,7 @@
           "eat": "bool"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\t\t\t\tif (reciever)\r\n\t\t\t\t{\r\n\t\t\t\t\tFacepunch.Rust.Analytics.Azure.OnGatherItem(item.info.shortname, item.amount, this, reciever, null);\r\n\t\t\t\t\tInterface.CallHook(\"OnCollectiblePickedup\", this, reciever, item);\r\n\t\t\t\t\treciever.GiveItem(item, global::BaseEntity.GiveItemReason.ResourceHarvested);\r\n\t\t\t\t}\r\n\t\t\t\telse\r\n\t\t\t\t{\r\n\t\t\t\t\titem.Drop(base.transform.position + Vector3.up * 0.5f, Vector3.up, default(Quaternion));\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\t\t\t\tif (reciever)\r\n\t\t\t\t{\r\n\t\t\t\t\tFacepunch.Rust.Analytics.Azure.OnGatherItem(item.info.shortname, item.amount, this, reciever, null);\r\n\t\t\t\t\tInterface.CallHook(\"OnCollectiblePickedup\", this, reciever, item);\r\n\t\t\t\t\treciever.GiveItem(item, global::BaseEntity.GiveItemReason.ResourceHarvested, global::GiveItemOptions.BackpackOverflow);\r\n\t\t\t\t}\r\n\t\t\t\telse\r\n\t\t\t\t{\r\n\t\t\t\t\titem.Drop(base.transform.position + Vector3.up * 0.5f, Vector3.up, default(Quaternion));\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -13903,7 +13871,7 @@
           "weapon": "AttackEntity"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\t{\r\n\t\t\t\t\titem = (global::Item)returnvar;\r\n\t\t\t\t}\r\n\t\t\t\tthis.ApplyItemOwnership(player, item);\r\n\t\t\t\tFacepunch.Rust.Analytics.Azure.OnGatherItem(item.info.shortname, item.amount, base.baseEntity, player, weapon);\r\n\t\t\t\tInterface.CallHook(\"OnDispenserBonusReceived\", this, player, item);\r\n\t\t\t\twhile (item.amount > item.MaxStackable())\r\n\t\t\t\t{\r\n\t\t\t\t\tglobal::Item item2 = item.SplitItem(item.MaxStackable());\r\n\t\t\t\t\tplayer.GiveItem(item2, global::BaseEntity.GiveItemReason.ResourceHarvested);\r\n\t\t\t\t}\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\t{\r\n\t\t\t\t\titem = (global::Item)returnvar;\r\n\t\t\t\t}\r\n\t\t\t\tthis.ApplyItemOwnership(player, item);\r\n\t\t\t\tFacepunch.Rust.Analytics.Azure.OnGatherItem(item.info.shortname, item.amount, base.baseEntity, player, weapon);\r\n\t\t\t\tInterface.CallHook(\"OnDispenserBonusReceived\", this, player, item);\r\n\t\t\t\twhile (item.amount > item.MaxStackable())\r\n\t\t\t\t{\r\n\t\t\t\t\tglobal::Item item2 = item.SplitItem(item.MaxStackable());\r\n\t\t\t\t\tplayer.GiveItem(item2, global::BaseEntity.GiveItemReason.ResourceHarvested, global::GiveItemOptions.BackpackOverflow);\r\n\t\t\t\t}\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -14601,27 +14569,6 @@
     },
     {
       "Type": 0,
-      "Name": "OnTurretIdentifierSet",
-      "HookName": "OnTurretIdentifierSet",
-      "HookParameters": {
-        "instance": "AutoTurret",
-        "player": "BasePlayer",
-        "text2": "string"
-      },
-      "ReturnBehavior": 1,
-      "TargetType": "AutoTurret",
-      "Category": "Turret",
-      "MethodData": {
-        "MethodName": "Server_SetID",
-        "ReturnType": "void",
-        "Arguments": {
-          "msg": "BaseEntity/RPCMessage"
-        }
-      },
-      "CodeAfterInjection": "//---\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (text == this.GetIdentifier())\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnTurretIdentifierSet\", this, msg.player, text2) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tDebug.Log(\"SetID success!\");\r\n\t\tthis.UpdateIdentifier(text2, false);\r\n//---\r\n"
-    },
-    {
-      "Type": 0,
       "Name": "OnVendingShopOpen [TravellingVendor]",
       "HookName": "OnVendingShopOpen",
       "HookParameters": {
@@ -14846,7 +14793,7 @@
       "HookParameters": {
         "basePlayer": "BasePlayer"
       },
-      "ReturnBehavior": 0,
+      "ReturnBehavior": 4,
       "TargetType": "ConVar.Debugging",
       "Category": "Player",
       "MethodData": {
@@ -14856,12 +14803,12 @@
           "arg": "ConsoleSystem/Arg"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\texpr_64.SetHeld(false);\r\n\t\t}\r\n\t\tbasePlayer.DisablePlayerCollider();\r\n\t\tRust.Ai.SimpleAIMemory.AddIgnorePlayer(basePlayer);\r\n\t\tglobal::BaseEntity.Query.Server.RemovePlayer(basePlayer);\r\n\t\tInterface.CallHook(\"OnPlayerVanish\", basePlayer);\r\n\t\tif (!Global.Runner.IsInvoking(new Action(Debugging.TickInvis)))\r\n\t\t{\r\n\t\t\tGlobal.Runner.InvokeRepeating(new Action(Debugging.TickInvis), 0f, 0f);\r\n\t\t}\r\n\t}\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\treturn;\r\n\t}\r\n\tbool @bool = arg.GetBool(0, !basePlayer.isInvisible);\r\n\tif (@bool && !basePlayer.isInvisible)\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnPlayerVanish\", basePlayer) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tforeach (Connection current in basePlayer.net.group.subscribers)\r\n\t\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
-      "Name": "OnPlayerUnvanish",
-      "HookName": "OnPlayerUnvanish",
+      "Name": "OnPlayerVanished",
+      "HookName": "OnPlayerVanished",
       "HookParameters": {
         "basePlayer": "BasePlayer"
       },
@@ -14875,7 +14822,7 @@
           "arg": "ConsoleSystem/Arg"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\tbasePlayer.syncPosition = true;\r\n\t\tbasePlayer.EnablePlayerCollider();\r\n\t\tRust.Ai.SimpleAIMemory.RemoveIgnorePlayer(basePlayer);\r\n\t\tglobal::BaseEntity.Query.Server.RemovePlayer(basePlayer);\r\n\t\tglobal::BaseEntity.Query.Server.AddPlayer(basePlayer);\r\n\t\tInterface.CallHook(\"OnPlayerUnvanish\", basePlayer);\r\n\t\tif (Debugging.invisiblePlayers.Count == 0)\r\n\t\t{\r\n\t\t\tGlobal.Runner.CancelInvoke(new Action(Debugging.TickInvis));\r\n\t\t}\r\n\t}\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tbasePlayer.isInvisible = true;\r\n\t\tglobal::BasePlayer.invisPlayers.Add(basePlayer);\r\n\t\tbasePlayer.DisablePlayerCollider();\r\n\t\tRust.Ai.SimpleAIMemory.AddIgnorePlayer(basePlayer);\r\n\t\tglobal::BaseEntity.Query.Server.RemovePlayer(basePlayer);\r\n\t\tInterface.CallHook(\"OnPlayerVanished\", basePlayer);\r\n\t}\r\n\telse if (!@bool && basePlayer.isInvisible)\r\n\t{\r\n\t\tbasePlayer.isInvisible = false;\r\n\t\tglobal::BasePlayer.invisPlayers.Remove(basePlayer);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -15282,7 +15229,7 @@
         "reportType": "ReportType"
       },
       "ReturnBehavior": 0,
-      "TargetType": "BasePlayer/<OnFeedbackReport>d__627",
+      "TargetType": "BasePlayer/<OnFeedbackReport>d__634",
       "Category": "Player",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -15296,7 +15243,7 @@
       "Name": "OnFeedbackReported [patch]",
       "HookName": "OnFeedbackReported",
       "ReturnBehavior": 0,
-      "TargetType": "BasePlayer/<OnFeedbackReport>d__627",
+      "TargetType": "BasePlayer/<OnFeedbackReport>d__634",
       "Category": "_Patches",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -15318,7 +15265,7 @@
         "text3": "string"
       },
       "ReturnBehavior": 0,
-      "TargetType": "BasePlayer/<OnPlayerReported>d__626",
+      "TargetType": "BasePlayer/<OnPlayerReported>d__633",
       "Category": "Player",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -15500,6 +15447,114 @@
     },
     {
       "Type": 0,
+      "Name": "OnTurretIdentifierSet",
+      "HookName": "OnTurretIdentifierSet",
+      "HookParameters": {
+        "instance": "AutoTurret",
+        "player": "BasePlayer",
+        "newID": "string"
+      },
+      "ReturnBehavior": 4,
+      "TargetType": "AutoTurret",
+      "Category": "Turret",
+      "MethodData": {
+        "MethodName": "SetID",
+        "ReturnType": "void",
+        "Arguments": {
+          "player": "BasePlayer",
+          "oldID": "string",
+          "newID": "string",
+          "bypassChecks": "bool"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (oldID == this.GetIdentifier())\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnTurretIdentifierSet\", this, player, newID) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tDebug.Log(\"SetID success!\");\r\n\t\tthis.UpdateIdentifier(newID, false);\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnPlayerRevive",
+      "HookName": "OnPlayerRevive",
+      "HookParameters": {
+        "fromPlayer": "BasePlayer",
+        "instance": "BasePlayer"
+      },
+      "ReturnBehavior": 1,
+      "TargetType": "BasePlayer",
+      "Category": "Player",
+      "MethodData": {
+        "MethodName": "OnMedicalToolApplied",
+        "ReturnType": "void",
+        "Arguments": {
+          "fromPlayer": "BasePlayer",
+          "itemDef": "ItemDefinition",
+          "consumable": "ItemModConsumable",
+          "medicalToolEntity": "MedicalTool",
+          "canRevive": "bool"
+        }
+      },
+      "CodeAfterInjection": "public virtual void OnMedicalToolApplied(global::BasePlayer fromPlayer, global::ItemDefinition itemDef, global::ItemModConsumable consumable, global::MedicalTool medicalToolEntity, bool canRevive)\r\n{\r\n\tif ((fromPlayer != this && this.IsWounded()) & canRevive)\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnPlayerRevive\", fromPlayer, this) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tthis.StopWounded(fromPlayer);\r\n\t}\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnPlayerUnvanish",
+      "HookName": "OnPlayerUnvanish",
+      "HookParameters": {
+        "basePlayer": "BasePlayer"
+      },
+      "ReturnBehavior": 4,
+      "TargetType": "ConVar.Debugging",
+      "Category": "Player",
+      "MethodData": {
+        "MethodName": "invis",
+        "ReturnType": "void",
+        "Arguments": {
+          "arg": "ConsoleSystem/Arg"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t\tglobal::BaseEntity.Query.Server.RemovePlayer(basePlayer);\r\n\t\tInterface.CallHook(\"OnPlayerVanished\", basePlayer);\r\n\t}\r\n\telse if (!@bool && basePlayer.isInvisible)\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnPlayerUnvanish\", basePlayer) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tbasePlayer.isInvisible = false;\r\n\t\tglobal::BasePlayer.invisPlayers.Remove(basePlayer);\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnPlayerUnvanished",
+      "HookName": "OnPlayerUnvanished",
+      "HookParameters": {
+        "basePlayer": "BasePlayer"
+      },
+      "ReturnBehavior": 0,
+      "TargetType": "ConVar.Debugging",
+      "Category": "Player",
+      "MethodData": {
+        "MethodName": "invis",
+        "ReturnType": "void",
+        "Arguments": {
+          "arg": "ConsoleSystem/Arg"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t\t}\r\n\t\tRust.Ai.SimpleAIMemory.RemoveIgnorePlayer(basePlayer);\r\n\t\tglobal::BaseEntity.Query.Server.RemovePlayer(basePlayer);\r\n\t\tglobal::BaseEntity.Query.Server.AddPlayer(basePlayer);\r\n\t}\r\n\tInterface.CallHook(\"OnPlayerUnvanished\", basePlayer);\r\n\targ.ReplyWith(\"Invis: \" + basePlayer.isInvisible.ToString());\r\n\tbasePlayer.Command(\"debug.setinvis_ui\", new object[]\r\n\t{\r\n\t\tbasePlayer.isInvisible\r\n\t});\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnEntitySnapshot [BaseNetworkable NetWrite]",
+      "HookName": "OnEntitySnapshot",
+      "HookParameters": {
+        "instance": "BaseNetworkable",
+        "connection": "Connection"
+      },
+      "ReturnBehavior": 4,
+      "TargetType": "BaseNetworkable",
+      "Category": "Entity",
+      "MethodData": {
+        "MethodName": "SendAsSnapshot",
+        "ReturnType": "void",
+        "Arguments": {
+          "connection": "Network.Connection",
+          "write": "Network.NetWrite",
+          "ordered": "bool"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t\tuint num = connection.validate.entityUpdates + 1u;\r\n\t\tconnection.validate.entityUpdates = num;\r\n\t\targ_19_0 = num;\r\n\t}\r\n\tuint val = arg_19_0;\r\n\tif (Interface.CallHook(\"OnEntitySnapshot\", this, connection) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tglobal::BaseNetworkable.SaveInfo saveInfo = new global::BaseNetworkable.SaveInfo\r\n\t{\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
       "Name": "IOnServerCommand",
       "HookName": "IOnServerCommand",
       "HookParameters": {
@@ -15622,7 +15677,7 @@
           "addLimit": "int"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\tList<Group> list2 = Pool.Get<List<Group>>();\r\n\t\tListHashSet<Group> listHashSet = Pool.Get<ListHashSet<Group>>();\r\n\t\tthis.sv.visibility.GetVisibleFromFar(this.group, listHashSet);\r\n\t\tthis.AddVisibleFromNear(this.secondaryGroup, listHashSet);\r\n\t\tListHashSet<Group>.Compare(this.subscriber.subscribed, listHashSet, list, list2, null);\r\n\t\tif (Interface.CallHook(\"OnNetworkSubscriptionsUpdate\", this, list, list2) == null)\r\n\t\t{\r\n\t\t\tfor (int i = 0; i < list2.Count; i++)\r\n\t\t\t{\r\n\t\t\t\tGroup group = list2[i];\r\n\t\t\t\tif (removeLimit > 0)\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tList<Group> list = Pool.Get<List<Group>>();\r\n\t\tList<Group> list2 = Pool.Get<List<Group>>();\r\n\t\tListHashSet<Group> listHashSet = Pool.Get<ListHashSet<Group>>();\r\n\t\tthis.SubStrategy.GatherSubscriptions(this, listHashSet);\r\n\t\tListHashSet<Group>.Compare(this.subscriber.subscribed, listHashSet, list, list2, null);\r\n\t\tif (Interface.CallHook(\"OnNetworkSubscriptionsUpdate\", this, list, list2) != null)\r\n\t\t{\r\n\t\t\tgoto IL_140;\r\n\t\t}\r\n\t\tfor (int i = 0; i < list2.Count; i++)\r\n\t\t{\r\n//---\r\n"
     },
     {
       "Type": 1,
@@ -15636,7 +15691,7 @@
         "ReturnType": "bool",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\tList<Group> list = Pool.Get<List<Group>>();\r\n\t\tListHashSet<Group> listHashSet = Pool.Get<ListHashSet<Group>>();\r\n\t\tthis.sv.visibility.GetVisibleFromNear(this.group, listHashSet);\r\n\t\tthis.AddVisibleFromNear(this.secondaryGroup, listHashSet);\r\n\t\tListHashSet<Group>.Compare(this.subscriber.subscribed, listHashSet, list, null, null);\r\n\t\tif (Interface.CallHook(\"OnNetworkSubscriptionsUpdate\", this, list, null) == null)\r\n\t\t{\r\n\t\t\tfor (int i = 0; i < list.Count; i++)\r\n\t\t\t{\r\n\t\t\t\tGroup group = list[i];\r\n\t\t\t\tthis.subscriber.Subscribe(group);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tList<Group> list = Pool.Get<List<Group>>();\r\n\t\tListHashSet<Group> listHashSet = Pool.Get<ListHashSet<Group>>();\r\n\t\tthis.SubStrategy.GatherHighPrioSubscriptions(this, listHashSet);\r\n\t\tListHashSet<Group>.Compare(this.subscriber.subscribed, listHashSet, list, null, null);\r\n\t\tif (Interface.CallHook(\"OnNetworkSubscriptionsUpdate\", this, list, null) != null)\r\n\t\t{\r\n\t\t\tgoto IL_A2;\r\n\t\t}\r\n\t\tfor (int i = 0; i < list.Count; i++)\r\n\t\t{\r\n//---\r\n"
     },
     {
       "Type": 1,
