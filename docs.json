@@ -15677,7 +15677,7 @@
           "addLimit": "int"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\tList<Group> list = Pool.Get<List<Group>>();\r\n\t\tList<Group> list2 = Pool.Get<List<Group>>();\r\n\t\tListHashSet<Group> listHashSet = Pool.Get<ListHashSet<Group>>();\r\n\t\tthis.SubStrategy.GatherSubscriptions(this, listHashSet);\r\n\t\tListHashSet<Group>.Compare(this.subscriber.subscribed, listHashSet, list, list2, null);\r\n\t\tif (Interface.CallHook(\"OnNetworkSubscriptionsUpdate\", this, list, list2) != null)\r\n\t\t{\r\n\t\t\tgoto IL_140;\r\n\t\t}\r\n\t\tfor (int i = 0; i < list2.Count; i++)\r\n\t\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tList<Group> list = Pool.Get<List<Group>>();\r\n\t\tList<Group> list2 = Pool.Get<List<Group>>();\r\n\t\tListHashSet<Group> listHashSet = Pool.Get<ListHashSet<Group>>();\r\n\t\tthis.SubStrategy.GatherSubscriptions(this, listHashSet);\r\n\t\tListHashSet<Group>.Compare(this.subscriber.subscribed, listHashSet, list, list2, null);\r\n\t\tif (Interface.CallHook(\"OnNetworkSubscriptionsUpdate\", this, list, list2) == null)\r\n\t\t{\r\n\t\t\tfor (int i = 0; i < list2.Count; i++)\r\n\t\t\t{\r\n\t\t\t\tGroup group = list2[i];\r\n\t\t\t\tif (removeLimit > 0)\r\n//---\r\n"
     },
     {
       "Type": 1,
@@ -15691,7 +15691,7 @@
         "ReturnType": "bool",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tList<Group> list = Pool.Get<List<Group>>();\r\n\t\tListHashSet<Group> listHashSet = Pool.Get<ListHashSet<Group>>();\r\n\t\tthis.SubStrategy.GatherHighPrioSubscriptions(this, listHashSet);\r\n\t\tListHashSet<Group>.Compare(this.subscriber.subscribed, listHashSet, list, null, null);\r\n\t\tif (Interface.CallHook(\"OnNetworkSubscriptionsUpdate\", this, list, null) != null)\r\n\t\t{\r\n\t\t\tgoto IL_A2;\r\n\t\t}\r\n\t\tfor (int i = 0; i < list.Count; i++)\r\n\t\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tList<Group> list = Pool.Get<List<Group>>();\r\n\t\tListHashSet<Group> listHashSet = Pool.Get<ListHashSet<Group>>();\r\n\t\tthis.SubStrategy.GatherHighPrioSubscriptions(this, listHashSet);\r\n\t\tListHashSet<Group>.Compare(this.subscriber.subscribed, listHashSet, list, null, null);\r\n\t\tif (Interface.CallHook(\"OnNetworkSubscriptionsUpdate\", this, list, null) == null)\r\n\t\t{\r\n\t\t\tfor (int i = 0; i < list.Count; i++)\r\n\t\t\t{\r\n\t\t\t\tGroup group = list[i];\r\n\t\t\t\tthis.subscriber.Subscribe(group);\r\n//---\r\n"
     },
     {
       "Type": 1,
