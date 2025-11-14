@@ -9,7 +9,7 @@ Commands are a fundamental aspect of managing a Rust server. They allow you to m
 
 ## Prerequisites
 
-Before proceeding with this guide, ensure that you have Moderator or administrator permissions on your Rust server. If you are not already an admin or moderator on your server, you can grant yourself these permissions. Here are the steps to do this:
+Before proceeding with this guide, ensure that you have Moderator or administrator <a href="/glossary#permissions" class="glossary-term">permissions</a> on your Rust server. If you are not already an admin or moderator on your server, you can grant yourself these <a href="/glossary#permissions" class="glossary-term"><span class="glossary-term__word">permissions</span></a>. Here are the steps to do this:
 
 1. First, you need your Steam64ID. You can get this by going to a site like [SteamID.io](https://steamid.io/), entering your steam profile URL, and copying the steamID64.
 2. Navigate to the `users.cfg` file. This will be in the same location as your server's `server.cfg` file, which is in the `/server/my_server_identity/cfg/` directory (replace `my_server_identity` with your server's identity).
@@ -32,7 +32,7 @@ Note: Depending on your server setup, you might be accessing the server console 
 
 ## Command Types and Handling
 
-Oxide uses a sophisticated command handling system called Covalence, which provides cross-game compatibility. There are two primary types of commands:
+Oxide uses a sophisticated command handling system called <a href="/glossary#covalence" class="glossary-term">Covalence</a>, which provides cross-game compatibility. There are two primary types of commands:
 
 1. **Chat Commands**: These are entered in the game chat and typically start with a prefix like `/` or `!`. The specific prefixes that trigger chat commands are configurable in the Oxide configuration.
 
@@ -107,7 +107,7 @@ For security purposes, Oxide also supports command filtering, which can prevent 
 
 ## Cross-Game Command Support
 
-One of the powerful features of Oxide's Covalence command system is that it allows plugins to be compatible across different games. Developers can create plugins that register commands using the Covalence API, and these commands will work the same way regardless of whether the server is running Rust, Hurtworld, or any other supported game.
+One of the powerful features of Oxide's <a href="/glossary#covalence" class="glossary-term"><span class="glossary-term__word"><a href="/glossary#covalence" class="glossary-term">Covalence</a></span></a> command system is that it allows plugins to be compatible across different games. Developers can create plugins that register commands using the <a href="/glossary#covalence" class="glossary-term">Covalence</a> API, and these commands will work the same way regardless of whether the server is running Rust, Hurtworld, or any other supported game.
 
 This cross-game functionality is particularly useful for:
 

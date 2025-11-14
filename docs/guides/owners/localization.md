@@ -19,7 +19,7 @@ Moreover, localization can increase the engagement level of your players. Player
 
 ## What are Language Files?
 
-Language files are the backbone of the localization process in Oxide. They are text files that contain translations of various plugin texts and messages into different languages. Each plugin that supports localization will have its own set of language files, and each language supported by the plugin will have its own file. These files are usually in JSON format and can be easily edited to customize or add new translations.
+Language files are the backbone of the localization process in Oxide. They are text files that contain translations of various plugin texts and messages into different languages. Each plugin that supports localization will have its own set of language files, and each language supported by the plugin will have its own file. These files are usually in <a href="/glossary#json" class="glossary-term">JSON</a> format and can be easily edited to customize or add new translations.
 
 ## Where are Language Files Located in the Oxide Plugin System?
 
@@ -44,7 +44,7 @@ In this example, the `en` folder (for English language) contains the language fi
 
 ## How Can I Modify a Language File?
 
-Modifying a language file is straightforward and involves editing the respective JSON file using a text editor or an Integrated Development Environment (IDE) of your choice.
+Modifying a language file is straightforward and involves editing the respective <a href="/glossary#json" class="glossary-term"><span class="glossary-term__word">JSON</span></a> file using a text editor or an Integrated Development Environment (IDE) of your choice.
 
 When you open the JSON file, you'll see a structure similar to the following:
 
