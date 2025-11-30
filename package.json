@@ -3,6 +3,7 @@
   "devDependencies": {
     "@types/markdown-it": "^12.2.3",
     "@types/node": "^20.6.1",
+    "glob": "^10.4.5",
     "gray-matter": "^4.0.3",
     "husky": "^8.0.0",
     "lint-staged": "^15.0.2",
@@ -19,13 +20,22 @@
     "prepare": "husky install",
     "format": "prettier --write .",
     "lint": "prettier --check .",
-    "check": "prettier --check ."
+    "check": "prettier --check .",
+    "glossary-links": "node scripts/glossary-linker.js",
+    "format-with-glossary": "npm run glossary-links && prettier --write .",
+    "merge-skins": "echo 'merge-skins removed'",
+    "fetch-skins": "python scripts/fetch_skins.py --fresh",
+    "fix-glossary": "node scripts/glossary-linker.js remove"
   },
   "volta": {
     "node": "20.6.1"
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx,vue,css,md}": [
+    "*.{js,ts,jsx,tsx,vue,css}": [
+      "prettier --write"
+    ],
+    "*.md": [
+      "node scripts/glossary-linker.js",
       "prettier --write"
     ]
   }

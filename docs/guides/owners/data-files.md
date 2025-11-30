@@ -5,11 +5,11 @@ after: configure-plugins
 
 # Data Files
 
-Data files are JSON files that plugins may use to store arbitrary data. They help plugins persist information between server restarts or plugin reloads. Understanding how data files work is important for server administrators who need to manage or troubleshoot their servers.
+<a href="/glossary#data-files" class="glossary-term">Data files</a> are <a href="/glossary#json" class="glossary-term">JSON</a> files that plugins may use to store arbitrary data. They help plugins persist information between server restarts or plugin reloads. Understanding how <a href="/glossary#data-files" class="glossary-term">data files</a> work is important for server administrators who need to manage or troubleshoot their servers.
 
 ## Data Directory
 
-Data files may be found in the `data` folder which is located by default in `oxide/data` (unless the server host has moved it).
+<a href="/glossary#data-files" class="glossary-term">Data files</a> may be found in the `data` folder which is located by default in `oxide/data` (unless the server host has moved it).
 
 ## File Names
 
@@ -19,7 +19,7 @@ It is recommended for plugin authors, when creating a large number of data files
 
 ## File Structure
 
-All plugin data files are saved as JSON (JavaScript Object Notation). The structure of each data file depends entirely on what the plugin needs to store. Common types of data stored include:
+All plugin data files are saved as <a href="/glossary#json" class="glossary-term">JSON</a> (JavaScript Object Notation). The structure of each data file depends entirely on what the plugin needs to store. Common types of data stored include:
 
 - Player information and statistics
 - Game world state
@@ -29,7 +29,7 @@ All plugin data files are saved as JSON (JavaScript Object Notation). The struct
 
 ## Valid JSON
 
-Like configuration files, data files must be valid JSON. If you need to edit a data file manually (which is generally not recommended unless you know exactly what you're doing), use a validator such as [jsonlint.com](https://jsonlint.com) to ensure the data file remains valid JSON.
+Like configuration files, data files must be valid <a href="/glossary#json" class="glossary-term">JSON</a>. If you need to edit a data file manually (which is generally not recommended unless you know exactly what you're doing), use a validator such as [jsonlint.com](https://jsonlint.com) to ensure the data file remains valid JSON.
 
 ## Differences Between Data Files and Configuration Files
 
