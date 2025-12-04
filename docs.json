@@ -344,7 +344,7 @@
           "info": "HitInfo"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\tinfo.damageTypes.Scale(DamageType.Bleeding, ConVar.Server.bleedingdamage);\r\n\t\tif (!(this is BasePlayer))\r\n\t\t{\r\n\t\t\tinfo.damageTypes.Scale(DamageType.Fun_Water, 0f);\r\n\t\t}\r\n\t\tif (Interface.CallHook(\"IOnBaseCombatEntityHurt\", this, info) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tthis.DebugHurt(info);\r\n\t\tfloat num = info.damageTypes.Total();\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tinfo.damageTypes.Scale(DamageType.Bullet, ConVar.Server.bulletdamage);\r\n\t\tinfo.damageTypes.Scale(DamageType.Slash, ConVar.Server.meleedamage);\r\n\t\tinfo.damageTypes.Scale(DamageType.Blunt, ConVar.Server.meleedamage);\r\n\t\tinfo.damageTypes.Scale(DamageType.Stab, ConVar.Server.meleedamage);\r\n\t\tinfo.damageTypes.Scale(DamageType.Bleeding, ConVar.Server.bleedingdamage);\r\n\t\tif (Interface.CallHook(\"IOnBaseCombatEntityHurt\", this, info) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tif (base.Components != null)\r\n\t\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -6179,7 +6179,7 @@
           "info": "HitInfo"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\treturn;\r\n\t}\r\n\tbase.LogEntry(global::RustLog.EntryType.Combat, 2, \"died\");\r\n\tthis.health = 0f;\r\n\tthis.lifestate = global::BaseCombatEntity.LifeState.Dead;\r\n\tInterface.CallHook(\"OnEntityDeath\", this, info);\r\n\tif (info != null && info.InitiatorPlayer)\r\n\t{\r\n\t\tglobal::BasePlayer initiatorPlayer = info.InitiatorPlayer;\r\n\t\tif (initiatorPlayer != null && initiatorPlayer.GetActiveMission() != -1 && !initiatorPlayer.IsNpc)\r\n\t\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\treturn;\r\n\t}\r\n\tbase.LogEntry(global::RustLog.EntryType.Combat, 2, \"died\");\r\n\tthis.health = 0f;\r\n\tthis.lifestate = global::BaseCombatEntity.LifeState.Dead;\r\n\tInterface.CallHook(\"OnEntityDeath\", this, info);\r\n\tif (info != null && info.InitiatorPlayer != null && !info.InitiatorPlayer.IsNpc && info.InitiatorPlayer != this)\r\n\t{\r\n\t\tglobal::BaseMission.MissionEventPayload payload = new global::BaseMission.MissionEventPayload\r\n\t\t{\r\n\t\t\tNetworkIdentifier = info.InitiatorPlayer.net.ID,\r\n//---\r\n"
     },
     {
       "Type": 0,
