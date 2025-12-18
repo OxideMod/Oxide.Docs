@@ -5944,41 +5944,6 @@
       "CodeAfterInjection": "public global::BuildingPrivlidge GetBuildingPrivilege(OBB obb, bool cached, float cacheDuration = 1f, global::BuildingPrivlidge exclude = null)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"OnBuildingPrivilege\", this, obb, cached, cacheDuration, exclude);\r\n\tif (returnvar is global::BuildingPrivlidge)\r\n\t{\r\n\t\treturn (global::BuildingPrivlidge)returnvar;\r\n\t}\r\n\tif (cached && this.cachedBuildingPrivilegeTime != 0f && Time.time - this.cachedBuildingPrivilegeTime < cacheDuration)\r\n//---\r\n"
     },
     {
-      "Type": 1,
-      "Name": "OnSignalBroadcast",
-      "HookName": "OnSignalBroadcast",
-      "ReturnBehavior": 0,
-      "TargetType": "BaseEntity",
-      "Category": "Network",
-      "MethodData": {
-        "MethodName": "SignalBroadcast",
-        "ReturnType": "void",
-        "Arguments": {
-          "signal": "BaseEntity/Signal",
-          "sourceConnection": "Network.Connection"
-        }
-      },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (this.net.group == null || base.limitNetworking)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnSignalBroadcast\", this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.ClientRPC(global::RpcTarget.NetworkGroup(\"SignalFromServer\", this, SendMethod.Unreliable, Priority.Immediate), (int)signal, (sourceConnection != null) ? sourceConnection.userid : 0uL);\r\n}\r\n"
-    },
-    {
-      "Type": 1,
-      "Name": "OnSignalBroadcast",
-      "HookName": "OnSignalBroadcast",
-      "ReturnBehavior": 0,
-      "TargetType": "BaseEntity",
-      "Category": "Player",
-      "MethodData": {
-        "MethodName": "SignalBroadcast",
-        "ReturnType": "void",
-        "Arguments": {
-          "signal": "BaseEntity/Signal",
-          "arg": "string",
-          "sourceConnection": "Network.Connection"
-        }
-      },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (this.net.group == null || base.limitNetworking)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnSignalBroadcast\", this, sourceConnection) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.ClientRPC(global::RpcTarget.NetworkGroup(\"SignalFromServerEx\", this, SendMethod.Unreliable, Priority.Immediate), (int)signal, arg, (sourceConnection != null) ? sourceConnection.userid : 0uL);\r\n}\r\n"
-    },
-    {
       "Type": 0,
       "Name": "OnHelicopterRetire",
       "HookName": "OnHelicopterRetire",
@@ -15553,6 +15518,47 @@
         }
       },
       "CodeAfterInjection": "//---\r\n\t\tuint num = connection.validate.entityUpdates + 1u;\r\n\t\tconnection.validate.entityUpdates = num;\r\n\t\targ_19_0 = num;\r\n\t}\r\n\tuint val = arg_19_0;\r\n\tif (Interface.CallHook(\"OnEntitySnapshot\", this, connection) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tglobal::BaseNetworkable.SaveInfo saveInfo = new global::BaseNetworkable.SaveInfo\r\n\t{\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnSignalBroadcast",
+      "HookName": "OnSignalBroadcast",
+      "HookParameters": {
+        "instance": "BaseEntity",
+        "sourceConnection": "Connection",
+        "signal": "Signal",
+        "arg": "string"
+      },
+      "ReturnBehavior": 4,
+      "TargetType": "BaseEntity",
+      "Category": "Player",
+      "MethodData": {
+        "MethodName": "SignalBroadcast",
+        "ReturnType": "void",
+        "Arguments": {
+          "signal": "BaseEntity/Signal",
+          "arg": "string",
+          "sourceConnection": "Network.Connection"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (this.net.group == null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnSignalBroadcast\", this, sourceConnection, signal, arg) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.ClientRPC(global::RpcTarget.NetworkGroup(\"SignalFromServerEx\", this, SendMethod.Unreliable, Priority.Immediate), (int)signal, arg, (sourceConnection != null) ? sourceConnection.userid : 0uL);\r\n}\r\n"
+    },
+    {
+      "Type": 1,
+      "Name": "LimitNetworkingSignalBroadcast [Patch]",
+      "HookName": "LimitNetworkingSignalBroadcast [Patch]",
+      "ReturnBehavior": 0,
+      "TargetType": "BaseEntity",
+      "Category": "_Patches",
+      "MethodData": {
+        "MethodName": "SignalBroadcast",
+        "ReturnType": "void",
+        "Arguments": {
+          "signal": "BaseEntity/Signal",
+          "arg": "string",
+          "sourceConnection": "Network.Connection"
+        }
+      }
     },
     {
       "Type": 0,
