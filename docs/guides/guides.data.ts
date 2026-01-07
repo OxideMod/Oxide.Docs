@@ -5,6 +5,7 @@ export default {
     return {
       owner: getSidebarByPath('docs/guides/owners/'),
       developer: getSidebarByPath('docs/guides/developers/'),
+      community: getSidebarByPath('docs/guides/community/'),
     };
   },
 };

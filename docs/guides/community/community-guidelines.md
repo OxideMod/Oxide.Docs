@@ -1,6 +1,6 @@
 ---
 title: Community Guidelines
-after: data-files
+after: 0
 ---
 
 # Community Guidelines
