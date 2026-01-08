@@ -1,5 +1,5 @@
 ---
-title: CUI Elements
+title: CUI Class
 after: index
 ---
 # Structure
