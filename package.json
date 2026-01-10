@@ -1,16 +1,16 @@
 {
   "type": "module",
   "devDependencies": {
-    "@types/markdown-it": "^12.2.3",
-    "@types/node": "^20.6.1",
+    "@types/markdown-it": "^14.1.2",
+    "@types/node": "^25.0.4",
     "gray-matter": "^4.0.3",
-    "husky": "^8.0.0",
-    "lint-staged": "^15.0.2",
-    "markdown-it": "^13.0.2",
-    "markdown-it-footnote": "^3.0.3",
-    "prettier": "^3.0.3",
-    "vitepress": "^1.0.0-rc.24",
-    "vue": "^3.3.4"
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "markdown-it": "^14.1.0",
+    "markdown-it-footnote": "^4.0.0",
+    "prettier": "^3.7.4",
+    "vitepress": "^1.6.4",
+    "vue": "^3.5.26"
   },
   "scripts": {
     "docs:dev": "vitepress dev",
@@ -22,7 +22,7 @@
     "check": "prettier --check ."
   },
   "volta": {
-    "node": "20.6.1"
+    "node": "22.16.0"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx,vue,css,md}": [
