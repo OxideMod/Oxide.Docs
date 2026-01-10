@@ -16,7 +16,7 @@ Before you start, ensure you have the following:
 
 ## Understanding Plugins and Extensions
 
-In the Oxide modding framework, plugins and extensions serve different roles:
+In the Oxide modding framework, plugins and <a href="/glossary#extensions" class="glossary-term">extensions</a> serve different roles:
 
 - **Plugins** are .cs files that are compiled at runtime by the Oxide framework. These are typically game-specific and provide unique gameplay features or modifications.
 
@@ -55,7 +55,7 @@ using UnityEngine;
 - `Oxide.Core` contains fundamental functionalities of the Oxide modding framework.
 - `UnityEngine` is a library provided by Unity, the game engine Rust is built on.
 
-Next, we'll define our namespace and create a class MyFirstPlugin that inherits from RustPlugin. Every Oxide plugin should have metadata defined. This metadata includes the `plugin name`, `author`, and `version`. This is done using attributes at the start of your plugin class.
+Next, we'll define our namespace and create a class MyFirstPlugin that inherits from <a href="/glossary#rustplugin" class="glossary-term">RustPlugin</a>. Every Oxide plugin should have metadata defined. This metadata includes the `plugin name`, `author`, and `version`. This is done using attributes at the start of your plugin class.
 
 ```csharp
 namespace Oxide.Plugins;
@@ -99,7 +99,7 @@ Join your server and use the `/hello` command in chat. If everything is working 
 
 ### Step 4: Implementing Permissions
 
-Let's enhance our plugin by implementing permissions. We'll require players to have a specific permission (`myfirstplugin.hello`) to use the `/hello` chat command.
+Let's enhance our plugin by implementing <a href="/glossary#permissions" class="glossary-term">permissions</a>. We'll require players to have a specific permission (`myfirstplugin.hello`) to use the `/hello` chat command.
 
 ```csharp
 namespace Oxide.Plugins;
@@ -128,11 +128,11 @@ public class MyFirstPlugin : RustPlugin
 
 Here we have added a condition that checks if the user has the `myfirstplugin.hello` permission. If the calling player does not have the required permission they will receive a different message from our greeting.
 
-After making these changes, save and reupload your plugin to your server. You should now be able to grant permissions using the command `grant <user or group> <permission>`. Try using the `/hello` command in chat as a user with and without the `myfirstplugin.hello` permission. You'll see the different responses!
+After making these changes, save and reupload your plugin to your server. You should now be able to grant <a href="/glossary#permissions" class="glossary-term"><span class="glossary-term__word">permissions</span></a> using the command `grant <user or group> <permission>`. Try using the `/hello` command in chat as a user with and without the `myfirstplugin.hello` permission. You'll see the different responses!
 
 ### Step 5: Using Hooks
 
-Oxide provides a system of hooks that your plugins can use to interact with the game. Hooks are methods that get called when specific events happen in the game, such as a player connecting, a player being hurt, an entity being spawned, etc.
+Oxide provides a system of <a href="/glossary#hooks" class="glossary-term">hooks</a> that your plugins can use to interact with the game. <a href="/glossary#hooks" class="glossary-term"><span class="glossary-term__word"><a href="/glossary#hooks" class="glossary-term">Hooks</a></span></a> are methods that get called when specific events happen in the game, such as a player connecting, a player being hurt, an entity being spawned, etc.
 
 In this section, we'll use the OnPlayerConnected hook to print a message to the server console when a player connects.
 
@@ -201,7 +201,7 @@ After defining your configuration class and the reference pointing to the config
   - _For avoiding duplicate code, and calls the **GetDefaultConfig** method_
 
 - `SaveConfig`
-  - _Writes the plugin configuration to a Json File in **oxide/config** directory_
+  - _Writes the plugin configuration to a <a href="/glossary#json" class="glossary-term">JSON</a> File in **oxide/config** directory_
 
 ```csharp
     // Existing Code...
@@ -253,17 +253,232 @@ Finally, modify your `HelloCommand` method to access the `ReplyMessage` field in
             PrintToChat(player, "You don't have permission to use this command!");
             return;
         }
-        PrintToChat(player, helloMessage);
+        PrintToChat(player, _configuration.ReplyMessage);
     }
-//Existing code..
 ```
 
-Now, when your plugin is loaded, it will check for a configuration file. If it doesn't exist, a new one will be created using `LoadDefaultConfig` which creates a new instance of Configuration with the field `ReplyMessage` having it's value as "**hello**". If it does exist, the `ReplyMessage` value will be loaded from the file. You can change the `ReplyMessage` value in the configuration file to change the message of the `/hello` chat command without modifying the code.
+This configuration will be saved in the `oxide/config` directory as a config file with the name of your plugin (e.g., `MyFirstPlugin.json`). Server administrators can edit this file to change the reply message without having to modify your plugin code.
 
-After making these changes, save and reupload your plugin to your server. Try changing the `ReplyMessage` value in the configuration file and use the `/hello` command in chat. You'll see the updated message!
+### Step 7: Using Data Files
 
-### Summary
+In Oxide, <a href="/glossary#data-files" class="glossary-term">data files</a> are used to store information that persists between server restarts. Let's add functionality to store the last time a player used the `/hello` command.
 
-Congratulations, you've created your first Oxide plugin for Rust! You've learned how to create a chat command, implement permissions, use hooks, and implement plugin configuration. This is just the beginning - the Oxide modding framework offers many more functionalities to explore.
+```csharp
+// Existing code...
 
-To continue improving your plugin, consider adding more commands, implementing more hooks, and making more use of the configuration file. Always test your changes by deploying the updated plugin to your server and verifying its behavior.
+private Dictionary<string, DateTime> _lastCommandUsage = new Dictionary<string, DateTime>();
+private const string DataFileName = "MyFirstPlugin_LastUsage";
+
+void Init()
+{
+    permission.RegisterPermission("myfirstplugin.hello", this);
+    LoadData();
+}
+
+void OnServerSave() => SaveData();
+void Unload() => SaveData();
+
+private void LoadData()
+{
+    _lastCommandUsage = Interface.Oxide.DataFileSystem.ReadObject<Dictionary<string, DateTime>>(DataFileName)
+                        ?? new Dictionary<string, DateTime>();
+}
+
+private void SaveData()
+{
+    if (_lastCommandUsage != null)
+        Interface.Oxide.DataFileSystem.WriteObject(DataFileName, _lastCommandUsage);
+}
+
+[ChatCommand("hello")]
+private void HelloCommand(BasePlayer player, string command, string[] args)
+{
+    if(!permission.UserHasPermission(player.UserIDString, "myfirstplugin.hello"))
+    {
+        PrintToChat(player, "You don't have permission to use this command!");
+        return;
+    }
+
+    string userId = player.UserIDString;
+    string message = _configuration.ReplyMessage;
+
+    if (_lastCommandUsage.ContainsKey(userId))
+    {
+        TimeSpan timeSinceLastUse = DateTime.Now - _lastCommandUsage[userId];
+        message += $" You last used this command {timeSinceLastUse.TotalMinutes:0.0} minutes ago.";
+    }
+
+    _lastCommandUsage[userId] = DateTime.Now;
+    SaveData();
+
+    PrintToChat(player, message);
+}
+```
+
+This code:
+
+1. Creates a dictionary to store the last time each player used the command
+2. Loads this data from a data file when the plugin initializes
+3. Saves the data when the server saves or when the plugin unloads
+4. Updates the dictionary and tells the player when they last used the command
+
+The data file will be saved as a <a href="/glossary#json" class="glossary-term"><span class="glossary-term__word">JSON</span></a> file in the `oxide/data` directory.
+
+### Step 8: Working with Groups
+
+Oxide has a built-in <a href="/glossary#groups" class="glossary-term">groups</a> system that works with permissions. Let's enhance our plugin to give a different message based on the player's group.
+
+```csharp
+[ChatCommand("hello")]
+private void HelloCommand(BasePlayer player, string command, string[] args)
+{
+    if(!permission.UserHasPermission(player.UserIDString, "myfirstplugin.hello"))
+    {
+        PrintToChat(player, "You don't have permission to use this command!");
+        return;
+    }
+
+    string userId = player.UserIDString;
+    string message = _configuration.ReplyMessage;
+
+    // Check if player is in the admin group
+    if (permission.UserHasGroup(userId, "admin"))
+    {
+        message = "Greetings, admin! " + message;
+    }
+
+    if (_lastCommandUsage.ContainsKey(userId))
+    {
+        TimeSpan timeSinceLastUse = DateTime.Now - _lastCommandUsage[userId];
+        message += $" You last used this command {timeSinceLastUse.TotalMinutes:0.0} minutes ago.";
+    }
+
+    _lastCommandUsage[userId] = DateTime.Now;
+    SaveData();
+
+    PrintToChat(player, message);
+}
+```
+
+This checks if the player is in the "admin" group and gives them a special greeting if they are.
+
+### Step 9: Using Covalence for Cross-Game Compatibility
+
+If you want your plugin to work across multiple games, you can use the <a href="/glossary#covalence" class="glossary-term">Covalence</a> system. Let's convert our plugin to use <a href="/glossary#covalence" class="glossary-term"><span class="glossary-term__word"><a href="/glossary#covalence" class="glossary-term">Covalence</a></span></a>:
+
+```csharp
+using Oxide.Core;
+using Oxide.Core.Plugins;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+
+namespace Oxide.Plugins
+{
+    [Info("MyFirstPlugin", "Author Name", "1.0.0")]
+    public class MyFirstPlugin : CovalencePlugin
+    {
+        private Configuration _configuration;
+        private Dictionary<string, DateTime> _lastCommandUsage = new Dictionary<string, DateTime>();
+        private const string DataFileName = "MyFirstPlugin_LastUsage";
+
+        private class Configuration
+        {
+            public string ReplyMessage = "Hello";
+        }
+
+        protected override void LoadConfig()
+        {
+            base.LoadConfig();
+            try
+            {
+                _configuration = Config.ReadObject<Configuration>();
+                if (_configuration == null) LoadDefaultConfig();
+            }
+            catch
+            {
+                PrintError("Configuration file is corrupt! Check your config file at https://jsonlint.com/");
+                LoadDefaultConfig();
+            }
+            SaveConfig();
+        }
+
+        protected override void LoadDefaultConfig() => _configuration = new Configuration();
+        protected override void SaveConfig() => Config.WriteObject(_configuration);
+
+        private void LoadData()
+        {
+            _lastCommandUsage = Interface.Oxide.DataFileSystem.ReadObject<Dictionary<string, DateTime>>(DataFileName)
+                            ?? new Dictionary<string, DateTime>();
+        }
+
+        private void SaveData()
+        {
+            if (_lastCommandUsage != null)
+                Interface.Oxide.DataFileSystem.WriteObject(DataFileName, _lastCommandUsage);
+        }
+
+        void Init()
+        {
+            permission.RegisterPermission("myfirstplugin.hello", this);
+            LoadData();
+        }
+
+        void OnServerSave() => SaveData();
+        void Unload() => SaveData();
+
+        [Command("hello")]
+        private void HelloCommand(IPlayer player, string command, string[] args)
+        {
+            if (!player.HasPermission("myfirstplugin.hello"))
+            {
+                player.Reply("You don't have permission to use this command!");
+                return;
+            }
+
+            string userId = player.Id;
+            string message = _configuration.ReplyMessage;
+
+            // Check if player is in the admin group
+            if (player.IsAdmin)
+            {
+                message = "Greetings, admin! " + message;
+            }
+
+            if (_lastCommandUsage.ContainsKey(userId))
+            {
+                TimeSpan timeSinceLastUse = DateTime.Now - _lastCommandUsage[userId];
+                message += $" You last used this command {timeSinceLastUse.TotalMinutes:0.0} minutes ago.";
+            }
+
+            _lastCommandUsage[userId] = DateTime.Now;
+            SaveData();
+
+            player.Reply(message);
+        }
+    }
+}
+```
+
+By using the <a href="/glossary#covalence" class="glossary-term">Covalence</a> API, this plugin can now work across different games supported by Oxide, not just Rust. Notice the changes:
+
+1. Inheriting from `CovalencePlugin` instead of `RustPlugin`
+2. Using `[Command]` instead of `[ChatCommand]`
+3. Using `IPlayer` instead of `BasePlayer`
+4. Using `player.Reply()` instead of `PrintToChat()`
+5. Using `player.HasPermission()` instead of `permission.UserHasPermission()`
+
+## Conclusion
+
+Congratulations! You've created your first Oxide plugin. In this guide, you've learned:
+
+1. How to set up a basic plugin structure
+2. How to implement chat commands
+3. How to work with <a href="/glossary#permissions" class="glossary-term">permissions</a>
+4. How to use <a href="/glossary#hooks" class="glossary-term">hooks</a> to respond to game events
+5. How to implement configuration files for your plugin
+6. How to use <a href="/glossary#data-files" class="glossary-term"><span class="glossary-term__word">data files</span></a> to store persistent information
+7. How to work with <a href="/glossary#groups" class="glossary-term"><span class="glossary-term__word"><a href="/glossary#groups" class="glossary-term">groups</a></span></a>
+8. How to use Covalence for cross-game compatibility
+
+This is just the beginning! As you become more familiar with Oxide development, you'll be able to create increasingly complex and powerful plugins to enhance your gaming experience.

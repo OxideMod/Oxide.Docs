@@ -284,7 +284,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #15f715;
+  background: #757575;
   border-radius: 4px;
   transition: background 0.3s ease;
 }
@@ -301,5 +301,156 @@
 
 /* Dark mode adjustments */
 .dark ::-webkit-scrollbar-track {
-  background: #1a1a1c;
+  background: transparent;
+}
+
+/**
+* Component: Glossary
+* -------------------------------------------------------------------------- */
+
+/* Glossary page specific styles */
+.vp-doc h3[id] {
+  margin-top: 1.5em;
+  position: relative;
+}
+
+.vp-doc h3[id]::before {
+  content: '';
+  display: block;
+  height: 1px;
+  width: 100%;
+  background: var(--vp-c-divider);
+  position: absolute;
+  top: -0.75em;
+  left: 0;
+}
+
+/* Glossary term reference styling (enhanced in markdown) */
+.vp-doc a[href^='/glossary#'] {
+  position: relative;
+  font-weight: inherit;
+  text-decoration: underline dotted;
+  text-underline-offset: 2px;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+.vp-doc a[href^='/glossary#']:hover {
+  background-color: rgba(var(--vp-c-brand-1), 0.05);
+}
+
+/* Style only the superscript reference numbers */
+/* No superscript markers anymore; keep legacy selector harmless */
+.vp-doc sup > a[href^='/glossary#'] {
+  text-decoration: none;
+}
+
+/* Special case for glossary page table of contents */
+.vp-doc [id^='toc-'] a,
+.vp-doc .header-anchor {
+  border-bottom: none !important;
+}
+
+/* Glossary Reference Styling */
+sup a {
+  text-decoration: underline dotted;
+  font-size: 0.7em;
+  font-weight: normal;
+  color: var(--vp-c-brand);
+  margin-left: 0.1em;
+  position: relative;
+  top: -0.2em;
+  transition: all 0.2s ease;
+}
+
+sup a:hover {
+  color: var(--vp-c-brand-dark);
+  background-color: rgba(var(--vp-c-brand-rgb), 0.1);
+  border-radius: 3px;
+}
+
+/* Make sure references maintain their superscript position */
+sup {
+  vertical-align: super;
+  line-height: 0;
+}
+
+/**
+* Component: Skins Page
+* -------------------------------------------------------------------------- */
+
+/* VitePress adds the oxide-skins-page class to body when on skins page */
+.oxide-skins-page .VPNav {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure the footer is still visible on the skins page */
+.oxide-skins-page .VPFooter {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Fix potential layout issues on the skins page */
+.oxide-skins-page .VPContent {
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+}
+
+/* Override any max-width constraint on the layout container */
+.oxide-skins-page .VPLayout {
+  max-width: 100%;
+  padding: 0;
+}
+
+/**
+* Component: Navigation Dropdown
+* -------------------------------------------------------------------------- */
+
+/* Style the dropdown menu to match the theme */
+.VPNavBar .VPFlyout {
+  --vp-c-bg-elv: var(--vp-c-bg-alt);
+}
+
+.VPNavBar .VPMenu {
+  background-color: var(--vp-c-bg-alt) !important;
+  border: 1px solid var(--vp-c-divider) !important;
+  border-radius: 8px !important;
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.1),
+    0 2px 6px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Dark mode dropdown styling */
+.dark .VPNavBar .VPMenu {
+  background-color: var(--vp-c-bg-alt) !important;
+  border: 1px solid #232225 !important;
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.4),
+    0 2px 6px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Style dropdown menu items */
+.VPNavBar .VPMenu .VPMenuLink {
+  color: var(--vp-c-text-1) !important;
+  transition: all 0.25s ease !important;
+  border-radius: 4px !important;
+  margin: 2px 4px !important;
+}
+
+.VPNavBar .VPMenu .VPMenuLink:hover {
+  background-color: var(--vp-c-brand-soft) !important;
+  color: var(--vp-c-brand-1) !important;
+}
+
+/* Style the dropdown text/button */
+.VPNavBar .VPNavBarMenuGroup .VPNavBarMenuGroupTitle {
+  color: var(--vp-c-text-1) !important;
+}
+
+.VPNavBar .VPNavBarMenuGroup .VPNavBarMenuGroupTitle:hover {
+  color: var(--vp-c-brand-1) !important;
 }

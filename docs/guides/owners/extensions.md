@@ -7,7 +7,7 @@ after: configure-plugins
 
 ## Introduction
 
-Extensions are class libraries (.dll files) that extend the functionality of Oxide, allowing your Rust server to integrate with other software or offer additional features. Extensions are more powerful than plugins as they have deeper integration with the game and can provide fundamental services that plugins rely on. Common extensions used in Rust servers include [RustEdit](https://www.rustedit.io/) for custom map making and [Discord](https://discord.com/) for enabling chat synchronization between a Rust server and a Discord channel.
+<a href="/glossary#extensions" class="glossary-term">Extensions</a> are class libraries (.dll files) that extend the functionality of Oxide, allowing your Rust server to integrate with other software or offer additional features. <a href="/glossary#extensions" class="glossary-term"><span class="glossary-term__word">Extensions</span></a> are more powerful than plugins as they have deeper integration with the game and can provide fundamental services that plugins rely on. Common extensions used in Rust servers include [RustEdit](https://www.rustedit.io/) for custom map making and [Discord](https://discord.com/) for enabling chat synchronization between a Rust server and a Discord channel.
 
 ## Extension Types
 
@@ -77,7 +77,7 @@ If you encounter issues with an extension:
 1. **Check server logs**: Extension loading errors will be logged in the server console.
 2. **Version compatibility**: Ensure the extension is compatible with your version of Oxide and the game.
 3. **Dependencies**: Some extensions depend on other extensions or libraries, make sure all required components are installed.
-4. **Permissions**: Verify the extension file has appropriate read/execute permissions.
+4. **Permissions**: Verify the extension file has appropriate read/execute <a href="/glossary#permissions" class="glossary-term">permissions</a>.
 5. **Conflicts**: Extensions may conflict with each other. Try disabling other extensions to isolate the issue.
 
 ## Common Extension Commands
@@ -85,8 +85,8 @@ If you encounter issues with an extension:
 While most extensions don't provide direct commands, some include helpful utilities:
 
 - `oxide.ext` - Lists all loaded extensions with version information
-- `oxide.reload.extension <name>` - Reloads an extension that supports hot-reloading
-- `oxide.unload.extension <name>` - Unloads an extension (if it supports unloading)
+- `oxide.reload.extension <n>` - Reloads an extension that supports hot-reloading
+- `oxide.unload.extension <n>` - Unloads an extension (if it supports unloading)
 
 ## Conclusion
 

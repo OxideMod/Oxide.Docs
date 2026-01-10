@@ -5,11 +5,11 @@ after: unique
 
 # Uses permission system (if applicable)
 
-1. Features should generally be gated by one or more permissions.
+1. Features should generally be gated by one or more <a href="/glossary#permissions" class="glossary-term">permissions</a>.
 
 ## Explanation
 
-This guideline requires that developers implement sufficient permissions that users can use to grant certain users access to the plugin features.
+This guideline requires that developers implement sufficient <a href="/glossary#permissions" class="glossary-term"><span class="glossary-term__word">permissions</span></a> that users can use to grant certain users access to the plugin features.
 
 An example of this would be `Vanish` or `Admin Radar` and their individual permissions for various features.
 

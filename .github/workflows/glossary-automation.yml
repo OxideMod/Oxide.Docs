@@ -1,0 +1,61 @@
+name: Glossary Build Verification
+
+on:
+  push:
+    branches: [ main, master, skins-implementation ]
+    paths:
+      - 'docs/**/*.md'
+      - 'scripts/glossary-linker.js'
+      - 'docs/glossary.md'
+  pull_request:
+    branches: [ main, master, skins-implementation ]
+    paths:
+      - 'docs/**/*.md'
+      - 'scripts/glossary-linker.js'
+      - 'docs/glossary.md'
+  workflow_dispatch:
+
+jobs:
+  build-with-glossary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.6.1'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate glossary file exists
+        run: |
+          if [ ! -f "docs/glossary.md" ]; then
+            echo "Error: docs/glossary.md not found!"
+            exit 1
+          else
+            echo "Glossary file found"
+          fi
+
+      - name: Generate glossary links for build
+        run: |
+          echo "Generating glossary links for this build..."
+          npm run glossary-links
+
+      - name: Build documentation with glossary links
+        run: npm run docs:build
+
+      - name: Check for glossary references in documentation source
+        run: |
+          echo "Checking for glossary references in the documentation source..."
+          grep -r "glossary#" docs/ --include="*.md" | head -10 || echo "No glossary references found or command failed"
+
+      - name: Clean generated changes
+        run: |
+          rm -rf docs/.vitepress/dist
+          git checkout -- docs

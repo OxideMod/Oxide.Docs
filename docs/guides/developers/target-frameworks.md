@@ -4,17 +4,19 @@ after: basic-cui
 ---
 
 # Target frameworks
+
 The frameworks that are used across the projects
 
-- Core/extensions/libraries
+- Core/<a href="/glossary#extensions" class="glossary-term">extensions</a>/libraries
 - Standalone tools
 - Supported games
 
 ## Core/extensions/libraries
 
-All core projects, extensions, and libraries support `net35`, `net40`, `net45`, `net46`, `netstandard2.0`, `netstandard2.1`, `net5.0`, and `net6.0` for wide compatibility with other projects. The only exclusion being the `Unity 5.0` extension, which only supports `net35`.
+All core projects, <a href="/glossary#extensions" class="glossary-term"><span class="glossary-term__word">extensions</span></a>, and libraries support `net35`, `net40`, `net45`, `net46`, `netstandard2.0`, `netstandard2.1`, `net5.0`, and `net6.0` for wide compatibility with other projects. The only exclusion being the `Unity 5.0` extension, which only supports `net35`.
 
 ## Standalone tools
+
 ### net6.0
 
 - Compiler
@@ -23,6 +25,7 @@ All core projects, extensions, and libraries support `net35`, `net40`, `net45`, 
 - WebClient
 
 ### Supported games
+
 ### net48
 
 - 7 Days to Die
@@ -58,5 +61,3 @@ All core projects, extensions, and libraries support `net35`, `net40`, `net45`, 
 ### il2cpp
 
 - Nomad
-	
-	

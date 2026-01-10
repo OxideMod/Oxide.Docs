@@ -5,11 +5,11 @@ after: commands
 
 # Introduction to Permissions
 
-In Oxide, permissions play a crucial role in server management, allowing server administrators to fine-tune who can do what on their server. Permissions allows server owners to give players unique abilities and benefits on their servers.
+In Oxide, <a href="/glossary#permissions" class="glossary-term">permissions</a> play a crucial role in server management, allowing server administrators to fine-tune who can do what on their server. <a href="/glossary#permissions" class="glossary-term"><span class="glossary-term__word">Permissions</span></a> allows server owners to give players unique abilities and benefits on their servers.
 
 Administering permissions is easy; simply enter the desired command and you're done! If your server does not have a console, you can use any compatible RCON tool or remote console to send the commands to the server. Most Oxide-supported games also support the permission commands in the chat.
 
-Permissions in Oxide are managed on a per-user and per-group basis. This means you can assign permissions to a specific user or a group of users. Groups are beneficial when you want to assign the same set of permissions to many users, such as admins, mods, or VIPs.
+Permissions in Oxide are managed on a per-user and per-group basis. This means you can assign permissions to a specific user or a group of users. <a href="/glossary#groups" class="glossary-term">Groups</a> are beneficial when you want to assign the same set of permissions to many users, such as admins, mods, or VIPs.
 
 ## Understanding Permissions
 
@@ -17,15 +17,15 @@ Each permission in Oxide is represented by a string, often in a format like "plu
 
 When a command is executed, Oxide checks if the user has the corresponding permission. If they do, the command is executed; if they don't, the command is rejected, and usually, a message like "You don't have permission to use this command" is shown.
 
-By default, the groups that are created by Oxide are: admin and default. These can be changed by editing those under the oxide.config.json file. The admin group will automatically be assigned to players that are recognized as admin (via ownerid) by the server. The "default" group will automatically be assigned to ALL players that connect to the server.
+By default, the <a href="/glossary#groups" class="glossary-term"><span class="glossary-term__word"><a href="/glossary#groups" class="glossary-term">groups</a></span></a> that are created by Oxide are: admin and default. These can be changed by editing those under the oxide.config.<a href="/glossary#json" class="glossary-term">json</a> file. The admin group will automatically be assigned to players that are recognized as admin (via ownerid) by the server. The "default" group will automatically be assigned to ALL players that connect to the server.
 
-There are three ways to assign permissions in Oxide:
+There are three ways to assign <a href="/glossary#permissions" class="glossary-term">permissions</a> in Oxide:
 
-1. **User Permissions**: These are permissions given to a specific user. For instance, you might give a particular user the ability to kick other players, even if they're not part of any special group.
+1. **User Permissions**: These are <a href="/glossary#permissions" class="glossary-term">permissions</a> given to a specific user. For instance, you might give a particular user the ability to kick other players, even if they're not part of any special group.
 
-2. **Group Permissions**: These are permissions given to a group of users. Any user who is part of this group inherits all the group's permissions. For example, you might create an "admin" group and give it permissions to kick and ban players.
+2. **Group Permissions**: These are <a href="/glossary#permissions" class="glossary-term">permissions</a> given to a group of users. Any user who is part of this group inherits all the group's permissions. For example, you might create an "admin" group and give it permissions to kick and ban players.
 
-3. **Permission Inheritance**: Groups can inherit permissions from other groups through parent relationships. This is useful when you have a hierarchical structure. A group will inherit all permissions from its parent group.
+3. **Permission Inheritance**: <a href="/glossary#groups" class="glossary-term">Groups</a> can inherit permissions from other <a href="/glossary#groups" class="glossary-term">groups</a> through parent relationships. This is useful when you have a hierarchical structure. A group will inherit all permissions from its parent group.
 
 Understanding how these permission types interact is key to effectively managing your server's permissions.
 
@@ -55,8 +55,6 @@ Groups in Oxide are sets of users that share the same permissions. This makes ma
 
 :::info
 **Note on Group Inheritance:** Oxide supports parent-child relationships between groups. When you set a parent group, the child group inherits all permissions from the parent group. This is a powerful way to create hierarchical permission structures without duplicating permissions.
-
-The system includes automatic circular reference detection to prevent infinite loops (e.g., group A having group B as parent, and group B having group A as parent). If circular references are detected, they will be removed automatically and a warning will be logged.
 
 All group and permission names are handled case-insensitively, so "Admin" and "admin" are treated as the same group.
 :::
@@ -96,10 +94,6 @@ You can use the wildcard (\*) to grant multiple permissions at one time:
 
 While the base Oxide permissions system is comprehensive, managing permissions through commands may not always be the most convenient way, especially for larger servers. A plugin that can provide a graphical interface for managing permissions could prove helpful in this regard:
 
-:::tip
-**Permissions Manager**: This plugin provides a graphical interface for managing Oxide permissions. It makes it easier to add, remove, and view permissions. This can greatly simplify permissions management, especially on servers with many players and groups.
-:::
-
 ## Troubleshooting Permissions
 
 If you encounter problems while managing permissions, here are some general steps you can follow:
@@ -108,20 +102,6 @@ If you encounter problems while managing permissions, here are some general step
 - **Check the user's permissions**: Use the command `oxide.show user [username]` to view all the permissions that a user has. This can help identify if they are missing a necessary permission or have one that they should not.
 - **Verify parent group relationships**: If you're using group inheritance, make sure that the parent-child relationships are set up correctly and don't contain any circular references.
 - **Review data storage**: Oxide stores permissions data using ProtoBuf serialization in the `oxide.users` and `oxide.groups` files. If you suspect data corruption, you might need to manually edit or delete these files (after making backups).
-
-## Advanced Features
-
-### User Data Validation
-
-Oxide includes a validation system for user IDs to ensure that invalid or obsolete entries don't accumulate in the permissions database. Server administrators can customize validation rules through extensions, and the system will automatically clean up invalid entries.
-
-### Export and Import
-
-You can export your permissions to JSON format using the `oxide.export` command, which creates separate files for groups and users. This is useful for backup purposes or transferring permission settings between servers.
-
-### Command Shortcuts
-
-The same commands are also available with the "o." prefix (ex. "o.grant").
 
 ## Conclusion
 

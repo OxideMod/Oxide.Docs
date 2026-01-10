@@ -15,7 +15,7 @@ Aside from individual game distributions, our core platform is comprised of the 
 - **Compiler**: Plugin compilation system
 - **References**: API reference documentation
 - **Patcher**: Game patching systems
-- **Unity**: Unity game-specific hooks and extensions
+- **Unity**: Unity game-specific <a href="/glossary#hooks" class="glossary-term">hooks</a> and <a href="/glossary#extensions" class="glossary-term">extensions</a>
 - **SQLite**: Database integration for SQLite
 - **MySql**: Database integration for MySQL
 
@@ -45,7 +45,7 @@ For our expert developers with substantial C# experience and familiarity with Ox
 
 - Adding major new features
 - Implementing advanced functionality
-- Creating new extensions
+- Creating new <a href="/glossary#extensions" class="glossary-term"><span class="glossary-term__word">extensions</span></a>
 - Optimizing code performance
 
 ## How to Contribute

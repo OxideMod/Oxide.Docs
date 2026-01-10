@@ -13,7 +13,7 @@ Custom commands are easily implemented with minimal boilerplate for both in-game
 
 Chat commands are in-game commands entered via the game client's chat, prefixed by a forward slash (/).
 
-when using covalence
+when using <a href="/glossary#covalence" class="glossary-term">covalence</a>
 
 ```csharp
 [Command("test")]
@@ -23,7 +23,7 @@ private void TestCommand(IPlayer player, string command, string[] args)
 }
 ```
 
-when using Rustplugin
+when using <a href="/glossary#rustplugin" class="glossary-term">Rustplugin</a>
 
 ```csharp
 [ChatCommand("test")]
@@ -37,7 +37,7 @@ void cmdTest (BasePlayer player, string command, string [] args)
 
 Console commands may be executed from the server console and in-game interfaces F1 (where applicable).
 
-when using covalence
+when using <a href="/glossary#covalence" class="glossary-term"><span class="glossary-term__word">covalence</span></a>
 
 ```csharp
 [Command("test")]
@@ -47,7 +47,7 @@ private void TestCommand(IPlayer player, string command, string[] args)
 }
 ```
 
-when using Rustplugin
+when using <a href="/glossary#rustplugin" class="glossary-term"><span class="glossary-term__word"><a href="/glossary#rustplugin" class="glossary-term">Rustplugin</a></span></a>
 
 ```csharp
 [ConsoleCommand("test")]

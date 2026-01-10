@@ -41,7 +41,7 @@ private void MyCommand(BasePlayer player, string command, string[] args)
 
 ### 1.3 Permissions
 
-Permissions should follow a specific format: `pluginname.permission`. The plugin name should be in lowercase and the permission should clearly represent its function.
+<a href="/glossary#permissions" class="glossary-term">Permissions</a> should follow a specific format: `pluginname.permission`. The plugin name should be in lowercase and the permission should clearly represent its function.
 
 For example:
 
@@ -325,7 +325,7 @@ private void HelloCommand(IPlayer player, string command, string[] args)
 
 In this example, the `Init` method and the `HelloCommand` method are close together because they are related - the command is registered in the `Init` method and handled in the `HelloCommand` method.
 
-Regions can be very useful to group related code together, especially in large code files. In Rust plugins, it's common to use regions to separate different sections of your code, such as command handlers, hooks, and helper methods.
+Regions can be very useful to group related code together, especially in large code files. In Rust plugins, it's common to use regions to separate different sections of your code, such as command handlers, <a href="/glossary#hooks" class="glossary-term">hooks</a>, and helper methods.
 
 ```csharp
 #region Command Handlers
@@ -362,7 +362,7 @@ private void BroadcastServerRestart(BasePlayer player)
 #endregion
 ```
 
-In this example, the code is organized into three regions: Command Handlers, Hooks, and Helper Methods. This organization makes it easier to navigate through the code.
+In this example, the code is organized into three regions: Command Handlers, <a href="/glossary#hooks" class="glossary-term"><span class="glossary-term__word">Hooks</span></a>, and Helper Methods. This organization makes it easier to navigate through the code.
 
 ## 6. Versioning
 

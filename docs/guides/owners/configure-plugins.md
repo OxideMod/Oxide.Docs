@@ -5,15 +5,15 @@ after: install-plugins
 
 # Configuring Plugins
 
-Most plugins will generate a JSON configuration file once loaded. With these files, you can adjust how plugins behave to customize your server experience. This guide will help you understand how to locate, edit, and apply configuration changes.
+Most plugins will generate a <a href="/glossary#json" class="glossary-term">JSON</a> configuration file once loaded. With these files, you can adjust how plugins behave to customize your server experience. This guide will help you understand how to locate, edit, and apply configuration changes.
 
 :::warning ⚠️Important Note
-Always make backups of your configuration files before making changes. It's easy to make mistakes when editing JSON files, and having a backup allows you to restore the original settings if something goes wrong.
+Always make backups of your configuration files before making changes. It's easy to make mistakes when editing <a href="/glossary#json" class="glossary-term">JSON</a> files, and having a backup allows you to restore the original settings if something goes wrong.
 :::
 
 ## 1. Understanding Configuration Files
 
-Configuration files are saved as JSON (JavaScript Object Notation), a lightweight data-interchange format that is both human-readable and machine-parsable. Here's an example of what a simple configuration file might look like:
+Configuration files are saved as <a href="/glossary#json" class="glossary-term">JSON</a> (JavaScript Object Notation), a lightweight data-interchange format that is both human-readable and machine-parsable. Here's an example of what a simple configuration file might look like:
 
 ```json
 {
@@ -114,7 +114,7 @@ Some plugins save their current configuration to disk when they are unloaded. If
 
 ### Plugin Data Files
 
-In addition to configuration files, plugins may create data files in the `oxide/data` directory. These store information the plugin needs to persist across server restarts. Generally, you shouldn't modify these files unless you know exactly what you're doing.
+In addition to configuration files, plugins may create <a href="/glossary#data-files" class="glossary-term">data files</a> in the `oxide/data` directory. These store information the plugin needs to persist across server restarts. Generally, you shouldn't modify these files unless you know exactly what you're doing.
 
 ## Conclusion
 

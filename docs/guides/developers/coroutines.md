@@ -37,7 +37,7 @@ It's also possible to force stop coroutines by using `StopCoroutine` and `StopAl
 
 ## Example
 
-An example of coroutine sending http message to Discord. Messages are stored in a queue to be processed later by the ProcessQueue coroutine.
+An example of coroutine sending http message to Discord. Messages are stored in a queue to be processed later by the ProcessQueue coroutine. This approach is useful when developing plugins that need to perform asynchronous operations.
 
 ```csharp
 private class DiscordComponent : MonoBehaviour

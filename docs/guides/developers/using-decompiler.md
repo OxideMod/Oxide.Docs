@@ -7,7 +7,7 @@ after: publicizer
 
 ## Why use a Decompiler
 
-The Oxide hooks are a part of the information needed to program plugins. You also need to have some knowledge of the Rust game API, and there is no documentation for that. Also there are some changes every wipe. The next best thing is to inspect a decompiled version of the game DLL files. The main Rust class can be found in the Assembly-CSharp.dll file.
+The Oxide <a href="/glossary#hooks" class="glossary-term">hooks</a> are a part of the information needed to program plugins. You also need to have some knowledge of the Rust game API, and there is no documentation for that. Also there are some changes every wipe. The next best thing is to inspect a decompiled version of the game DLL files. The main Rust class can be found in the Assembly-CSharp.dll file.
 
 ## Decompiler software
 
@@ -45,7 +45,7 @@ In DnSpy, Open the files Assembly-CSharp.dll, from the managed folder. You can a
 
 The search and browsing are probably the most usefull function of the decompiler.
 When searching for a hook name, the `search for` field needs to be `Number/String`, to do a literal search in the files.
-If you can't find a hook name that you know exist, double check that the Oxide .dll files are loaded, they contain some of the hooks.
+If you can't find a hook name that you know exist, double check that the Oxide .dll files are loaded, they contain some of the <a href="/glossary#hooks" class="glossary-term"><span class="glossary-term__word">hooks</span></a>.
 
 When searching for function, variable, class, etc. select `All of the above` in the search field, or one of the more restrictive searches.
 
