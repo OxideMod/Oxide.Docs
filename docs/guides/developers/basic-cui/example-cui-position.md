@@ -6,7 +6,7 @@ after: example-countdown
 # Example CUI position vs resolution {#CuiPosition-code}
 
 This small example is to show the effect of screen resolution vs. the usage of anchormin/max and offsetmin/max positioning.
-The rectangles are all positioned centered on the screen using a 1280x768 resolution. 
+The rectangles are all positioned centered on the screen using a 1280x720 resolution. 
 note: offsetmin and offsetmax are calculated relative to a 1280x768 resolution.
 
 ```csharp
