@@ -98,6 +98,7 @@ function formatNavbar(sortedFiles: any[]) {
     if (file.children) {
       navbar.push({
         text: file.title,
+        collapsed: true,
         link: file.link,
         items: formatNavbar(file.children),
       });

@@ -71,6 +71,7 @@ export default defineConfig({
     nav: [
       { text: '← Back to OxideMod', link: 'https://oxidemod.com/' },
       { text: 'Guides', link: '/guides/' },
+      //{ text: 'Reviewers', link: '/guides/reviewers/' },
       { text: 'Core', link: '/core/' },
       { text: 'Hooks', link: '/hooks/' },
       { text: 'Glossary', link: '/glossary' },
@@ -99,11 +100,7 @@ export default defineConfig({
         {
           text: 'Community',
           collapsed: false,
-          items: [
-            { text: 'Community Guidelines', link: '/guides/owners/community-guidelines' },
-            { text: 'Contributing', link: '/guides/owners/contributing' },
-            { text: 'Reporting Issues', link: '/guides/owners/reporting-issues' },
-          ],
+          items: getSidebarByPath('docs/guides/community/'),
         },
       ],
       '/guides/reviewers/': [
@@ -150,6 +147,6 @@ export default defineConfig({
     },
   },
   sitemap: {
-    hostname: 'https://docs.oxidemod.com'
-  }
+    hostname: 'https://docs.oxidemod.com',
+  },
 });
