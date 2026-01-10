@@ -89,33 +89,33 @@ The images below are all using the positions from the code above and show four r
 In this example, the blue layer stay over the player hotbar with different resolution, using AnchorMin = "0.5 0", AnchorMax = "0.5 0". 
 <br>
 <figure style="text-align: center;">
-  <img src="./CUI_1280x768.png" alt="CUI_1280x768.png">
+  <img src="./cui_1280x768.png" alt="cui_1280x768.png">
   <figcaption>CUI positioning at 1280x768 resolution.</figcaption>
 </figure>
 <br>
 
 <figure style="text-align: center;">
-  <img src="./CUI_800x600.png" alt="CUI_800x600.png">
+  <img src="./cui_800x600.png" alt="cui_800x600.png">
   <figcaption>CUI positioning at 800x600 resolution.</figcaption>
 </figure>
 <br>
 <figure style="text-align: center;">
-  <img src="./CUI_1440x1080.png" alt="CUI_1440x1080.png">
+  <img src="./cui_1440x1080.png" alt="cui_1440x1080.png">
   <figcaption>CUI positioning at 1440x1080 resolution.</figcaption>
 </figure>
 <br>
 <figure style="text-align: center;">
-  <img src="./CUI_1920x1080.png" alt="CUI_1920x1080.png">
+  <img src="./cui_1920x1080.png" alt="cui_1920x1080.png">
   <figcaption>CUI positioning at 1920x1080 resolution.</figcaption>
 </figure>
 <br>
 <figure style="text-align: center;">
-  <img src="./CUI_2160x1200.png" alt="CUI_2160x1200.png">
+  <img src="./cui_2160x1200.png" alt="cui_2160x1200.png">
   <figcaption>CUI positioning at 2160x1200 resolution.</figcaption>
 </figure>
 <br>
 <figure style="text-align: center;">
-  <img src="./CUI_2560x1440.png" alt="CUI_2560x1440.png">
+  <img src="./cui_2560x1440.png" alt="cui_2560x1440.png">
   <figcaption>CUI positioning at 2560x1440 resolution.</figcaption>
 </figure>
 <br>
