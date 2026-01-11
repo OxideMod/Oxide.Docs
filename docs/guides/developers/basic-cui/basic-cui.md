@@ -111,7 +111,10 @@ new CuiRawImageComponent
 ```
 
 ## `CuiButtonComponent` 
-Button with command to execute, and other atttributes.  
+Button with command to execute, and other attributes.  
+Field NormalColor should be used with HighlightedColor, PressedColor, DisabledColor, SelectedColor.
+When the field Color is used on the button, it will affect the color of the other fields.
+Ex. if Color is blue and NormalColor is red, the button will show purple.
 
 | Field | Type | Description |
 | :---------- | :-------- | :-------------------------------------------------------- |
@@ -123,13 +126,13 @@ Button with command to execute, and other atttributes.
 | Enabled | bool? | Select if component is visible or not, default: true |
 | FadeDuration | float | fade duration in sec, default 0.1 |
 | FadeIn | float | Fadein time in seconds  |
-| HighlightedColor | string | Color when button highlighted |
+| HighlightedColor | string | Color when button highlighted (ex. mouse cursor over button) |
 | ImageType | Image.Type | see [image-type](./basic-cui#image-type)  |
 | Material | string | Material of background, see [Material](./basic-cui#material)  |
-| NormalColor | string | Normal color of the button,see [colors](./basic-cui#colors) |
+| NormalColor | string | Normal color of the button, see [colors](./basic-cui#colors) |
 | PlaceholderParentId | string | Parent Id  |
 | PressedColor | string | Color when button is pressed, see [colors](./basic-cui#colors) |
-| SelectedColor | string | Color when button is selected, see [colors](./basic-cui#colors) |
+| SelectedColor | string | Color when button is selected, last button clicked is marked selected, see [colors](./basic-cui#colors) |
 | Sprite | string | see [Image/Icon](https://github.com/OrangeWulf/Rust-Docs/blob/master/Extended/UI.md#imagesicons) |
 
 ```csharp
