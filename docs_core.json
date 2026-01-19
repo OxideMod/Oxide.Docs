@@ -1464,8 +1464,8 @@
 			"HookParameters": {
 				"connection": "Connection"
 			},
-			"ReturnType": "void",
-			"ReturnBehavior": 0,
+			"ReturnType": "object",
+			"ReturnBehavior": 3,
 			"TargetType": "RustCore",
 			"Category": "Server",
 			"HookDescription": "Called when a user is approved for connection",
@@ -1487,8 +1487,8 @@
 				"userid": "string",
 				"ipaddr": "string"
 			},
-			"ReturnType": "void",
-			"ReturnBehavior": 0,
+			"ReturnType": "object",
+			"ReturnBehavior": 3,
 			"TargetType": "RustCore",
 			"Category": "Server",
 			"HookDescription": "Called when a user is approved for connection",
