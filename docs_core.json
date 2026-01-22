@@ -592,7 +592,7 @@
 			"ReturnType": "bool",
 			"ReturnBehavior": 3,
 			"TargetType": "RustCore",
-			"Category": "Entity",
+			"Category": "Player",
 			"HookDescription": "Called when a player attempts to pickup a deployed entity (AutoTurret, BaseMountable, BearTrap, DecorDeployable, Door, DoorCloser, ReactiveTarget, SamSite, SleepingBag, SpinnerWheel, StorageContainer, etc.)",
 			"MethodData": {
 				"MethodName": "ICanPickupEntity",
@@ -664,7 +664,7 @@
 			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
-			"Category": "Server",
+			"Category": "Player",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "OnServerUserSet",
@@ -809,7 +809,7 @@
 			"ReturnType": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
-			"Category": "Server",
+			"Category": "Player",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "IOnPlayerBanned",
@@ -1281,7 +1281,7 @@
 			"ReturnType": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
-			"Category": "Entity",
+			"Category": "Structure",
 			"HookDescription": "",
 			"MethodData": {
 				"MethodName": "IOnCupboardAuthorize",
@@ -1318,6 +1318,188 @@
 				}
 			},
 			"CodeAfterInjection": "private object IOnCupboardAuthorize(ulong userID, BasePlayer player, BuildingPrivlidge privlidge)\r\n{\r\n\tif (userID == player.userID)\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnCupboardAuthorize\", privlidge, player) != null)\r\n\t\t{\r\n\t\t\treturn true;\r\n\t\t}\r\n\t}\r\n\telse if (Interface.CallHook(\"OnCupboardAssign\", privlidge, userID, player) != null)\r\n\t{\r\n\t\treturn true;\r\n\t}\r\n\r\n\treturn null;\r\n}"
-		}
+		},
+		{
+			"Type": 0,
+			"Name": "OnGroupPermissionRevoked",
+			"HookName": "OnGroupPermissionRevoked",
+			"HookParameters": {
+				"groupName": "string",
+				"permission": "string"
+			},
+			"ReturnType": "void",
+			"ReturnBehavior": 0,
+			"TargetType": "Permission",
+			"Category": "Permission",
+			"HookDescription": "Called when a group permission is revoked",
+			"MethodData": {
+				"MethodName": "RevokeGroupPermission",
+				"ReturnType": "void",
+				"Arguments": {
+				"groupName": "string",
+				"permission": "string"
+				}
+			},
+			"CodeAfterInjection": "\t\t\telse\r\n\t\t\t{\r\n\t\t\t\tbool flag7 = !groupData.Perms.Remove(permission);\r\n\t\t\t\tif (!flag7)\r\n\t\t\t\t{\r\n\t\t\t\t\tInterface.Call(\"OnGroupPermissionRevoked\", new object[] { groupName, permission });\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+		},
+		{
+			"Type": 0,
+			"Name": "OnUserPermissionRevoked",
+			"HookName": "OnUserPermissionRevoked",
+			"HookParameters": {
+				"groupName": "string",
+				"permission": "string"
+			},
+			"ReturnType": "void",
+			"ReturnBehavior": 0,
+			"TargetType": "Permission",
+			"Category": "Permission",
+			"HookDescription": "Called when a user permission is revoked",
+			"MethodData": {
+				"MethodName": "RevokeGroupPermission",
+				"ReturnType": "void",
+				"Arguments": {
+				"groupName": "string",
+				"permission": "string"
+				}
+			},
+			"CodeAfterInjection": "\t\t\telse\r\n\t\t\t{\r\n\t\t\t\tbool flag7 = !groupData.Perms.Remove(permission);\r\n\t\t\t\tif (!flag7)\r\n\t\t\t\t{\r\n\t\t\t\t\tInterface.Call(\"OnGroupPermissionRevoked\", new object[] { groupName, permission });\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+		},
+		{
+			"Type": 0,
+			"Name": "OnGroupPermissionGranted",
+			"HookName": "OnGroupPermissionGranted",
+			"HookParameters": {
+				"groupName": "string",
+				"permission": "string"
+			},
+			"ReturnType": "void",
+			"ReturnBehavior": 0,
+			"TargetType": "Permission",
+			"Category": "Permission",
+			"HookDescription": "Called when a group permission is granted",
+			"MethodData": {
+				"MethodName": "GrantGroupPermission",
+				"ReturnType": "void",
+				"Arguments": {
+				"groupName": "string",
+				"permission": "string"
+				}
+			},
+			"CodeAfterInjection": "\t\t\telse\r\n\t\t\t{\r\n\t\t\t\tbool flag9 = !groupData.Perms.Add(permission);\r\n\t\t\t\tif (!flag9)\r\n\t\t\t\t{\r\n\t\t\t\t\tInterface.Call(\"OnGroupPermissionGranted\", new object[] { groupName, permission });\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+		},
+		{
+			"Type": 0,
+			"Name": "OnUserPermissionGranted",
+			"HookName": "OnUserPermissionGranted",
+			"HookParameters": {
+				"groupName": "string",
+				"permission": "string"
+			},
+			"ReturnType": "void",
+			"ReturnBehavior": 0,
+			"TargetType": "Permission",
+			"Category": "Permission",
+			"HookDescription": "Called when a user permission is granted",
+			"MethodData": {
+				"MethodName": "GrantUserPermission",
+				"ReturnType": "void",
+				"Arguments": {
+				"groupName": "string",
+				"permission": "string"
+				}
+			},
+			"CodeAfterInjection": "\t\telse\r\n\t\t{\r\n\t\t\tbool flag8 = !userData.Perms.Add(permission);\r\n\t\t\tif (!flag8)\r\n\t\t\t{\r\n\t\t\t\tInterface.Call(\"OnUserPermissionGranted\", new object[] { playerId, permission });\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+		},
+		{
+			"Type": 0,
+			"Name": "OnUserGroupAdded",
+			"HookName": "OnUserGroupAdded",
+			"HookParameters": {
+				"playerId": "string",
+				"groupName": "string"
+			},
+			"ReturnType": "void",
+			"ReturnBehavior": 0,
+			"TargetType": "Permission",
+			"Category": "Permission",
+			"HookDescription": "Called when a user group is added",
+			"MethodData": {
+				"MethodName": "AddUserGroup",
+				"ReturnType": "void",
+				"Arguments": {
+				"playerId": "string",
+				"groupName": "string"
+				}
+			},
+			"CodeAfterInjection": "\tif (!flag)\r\n\t{\r\n\t\tUserData userData = this.GetUserData(playerId);\r\n\t\tbool flag2 = !userData.Groups.Add(groupName);\r\n\t\tif (!flag2)\r\n\t\t{\r\n\t\t\tInterface.Call(\"OnUserGroupAdded\", new object[] { playerId, groupName });\r\n\t\t}\r\n\t}\r\n}"
+		},
+		{
+			"Type": 0,
+			"Name": "OnUserGroupRemoved",
+			"HookName": "OnUserGroupRemoved",
+			"HookParameters": {
+				"playerId": "string",
+				"groupName": "string"
+			},
+			"ReturnType": "void",
+			"ReturnBehavior": 0,
+			"TargetType": "Permission",
+			"Category": "Permission",
+			"HookDescription": "Called when a user group is removed",
+			"MethodData": {
+				"MethodName": "RemoveUserGroup",
+				"ReturnType": "void",
+				"Arguments": {
+				"playerId": "string",
+				"groupName": "string"
+				}
+			},
+			"CodeAfterInjection": "\t\telse\r\n\t\t{\r\n\t\t\tbool flag4 = !userData.Groups.Remove(groupName);\r\n\t\t\tif (!flag4)\r\n\t\t\t{\r\n\t\t\t\tInterface.Call(\"OnUserGroupRemoved\", new object[] { playerId, groupName });\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+		},
+		{
+			"Type": 0,
+			"Name": "OnUserApprove",
+			"HookName": "OnUserApprove",
+			"HookParameters": {
+				"connection": "Connection"
+			},
+			"ReturnType": "object",
+			"ReturnBehavior": 3,
+			"TargetType": "RustCore",
+			"Category": "Server",
+			"HookDescription": "Called when a user is approved for connection",
+			"MethodData": {
+				"MethodName": "IOnUserApprove",
+				"ReturnType": "object",
+				"Arguments": {
+				"connection": "Connection"
+				}
+			},
+			"CodeAfterInjection": "\tobject obj3 = ((obj == null) ? obj2 : obj);\r\n\tif (obj3 is string || (obj3 is bool && !(bool)obj3))\r\n\t{\r\n\t\tConnectionAuth.Reject(connection, (obj3 is string) ? obj3.ToString() : this.lang.GetMessage(\"ConnectionRejected\", this, text), null);\r\n\t\treturn true;\r\n\t}\r\n\tobject obj4 = Interface.CallHook(\"OnUserApprove\", connection);\r\n\tobject obj5 = Interface.CallHook(\"OnUserApproved\", username, text, text2);\r\n\tif (obj4 != null)\r\n\t{\r\n\t\treturn obj4;\r\n\t}\r\n\treturn obj5;\r\n}"
+		},
+		{
+			"Type": 0,
+			"Name": "OnUserApproved",
+			"HookName": "OnUserApproved",
+			"HookParameters": {
+				"username": "string",
+				"userid": "string",
+				"ipaddr": "string"
+			},
+			"ReturnType": "object",
+			"ReturnBehavior": 3,
+			"TargetType": "RustCore",
+			"Category": "Server",
+			"HookDescription": "Called when a user is approved for connection",
+			"MethodData": {
+				"MethodName": "IOnUserApprove",
+				"ReturnType": "object",
+				"Arguments": {
+				"connection": "Connection"
+				}
+			},
+			"CodeAfterInjection": "\tobject obj3 = ((obj == null) ? obj2 : obj);\r\n\tif (obj3 is string || (obj3 is bool && !(bool)obj3))\r\n\t{\r\n\t\tConnectionAuth.Reject(connection, (obj3 is string) ? obj3.ToString() : this.lang.GetMessage(\"ConnectionRejected\", this, text), null);\r\n\t\treturn true;\r\n\t}\r\n\tobject obj4 = Interface.CallHook(\"OnUserApprove\", connection);\r\n\tobject obj5 = Interface.CallHook(\"OnUserApproved\", username, text, text2);\r\n\tif (obj4 != null)\r\n\t{\r\n\t\treturn obj4;\r\n\t}\r\n\treturn obj5;\r\n}"
+		}		
 	]
 }
