@@ -3016,7 +3016,7 @@
         "basePlayer": "BasePlayer",
         "instance": "GunTrap"
       },
-      "ReturnBehavior": 1,
+      "ReturnBehavior": 3,
       "TargetType": "GunTrap",
       "Category": "Player",
       "MethodData": {
@@ -3024,7 +3024,7 @@
         "ReturnType": "bool",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\twhile (enumerator.MoveNext())\r\n\t\t\t\t{\r\n\t\t\t\t\tglobal::BasePlayer basePlayer = enumerator.Current as global::BasePlayer;\r\n\t\t\t\t\tif (!(basePlayer == null) && !basePlayer.IsSleeping() && basePlayer.IsAlive())\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\tobject returnvar = Interface.CallHook(\"CanBeTargeted\", basePlayer, this);\r\n\t\t\t\t\t\tif (returnvar is bool)\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\treturn (bool)returnvar;\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\tif (!flag2)\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\twhile (enumerator.MoveNext())\r\n\t\t\t\t{\r\n\t\t\t\t\tglobal::BasePlayer basePlayer = enumerator.Current as global::BasePlayer;\r\n\t\t\t\t\tif (!(basePlayer == null) && !basePlayer.IsSleeping() && basePlayer.IsAlive())\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\tobject returnvar = Interface.CallHook(\"CanBeTargeted\", basePlayer, this);\r\n\t\t\t\t\t\tif (returnvar is bool)\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\tflag = (bool)returnvar;\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\tif (!flag2)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -3705,8 +3705,8 @@
     },
     {
       "Type": 1,
-      "Name": "CanBeTargeted [GunTrap] [cleanup]",
-      "HookName": "CanBeTargeted [patch]",
+      "Name": "CanBeTargeted [GunTrap] [patch]",
+      "HookName": "CanBeTargeted",
       "ReturnBehavior": 0,
       "TargetType": "GunTrap",
       "Category": "Player",
@@ -3714,7 +3714,8 @@
         "MethodName": "CheckTrigger",
         "ReturnType": "bool",
         "Arguments": {}
-      }
+      },
+      "CodeAfterInjection": "//---\r\n\t\t\t\twhile (enumerator.MoveNext())\r\n\t\t\t\t{\r\n\t\t\t\t\tglobal::BasePlayer basePlayer = enumerator.Current as global::BasePlayer;\r\n\t\t\t\t\tif (!(basePlayer == null) && !basePlayer.IsSleeping() && basePlayer.IsAlive())\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\tobject returnvar = Interface.CallHook(\"CanBeTargeted\", basePlayer, this);\r\n\t\t\t\t\t\tif (returnvar is bool)\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\tflag = (bool)returnvar;\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\tbreak;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -15927,6 +15928,20 @@
         "Arguments": {}
       },
       "CodeAfterInjection": "//---\r\n\t\tthis.<i>5__2 = num2 + 1;\r\n\t}\r\n\telse\r\n\t{\r\n\t\tthis.<>1__state = -1;\r\n\t\tInterface.CallHook(\"OnDeepSeaClose\", deepSeaManager);\r\n\t\tglobal::DeepSeaManager.Log(\"Closing...\");\r\n\t\tdeepSeaManager.SetFlag(global::BaseEntity.Flags.Open, false, false, true);\r\n\t\tdeepSeaManager.SetFlag(global::BaseEntity.Flags.Reserved1, false, false, true);\r\n\t\tdeepSeaManager.SetFlag(global::BaseEntity.Flags.Busy, true, false, false);\r\n\t\tdeepSeaManager.TimeToWipe = 0f;\r\n//---\r\n"
+    },
+    {
+      "Type": 1,
+      "Name": "CanBeTargeted [GunTrap] [patch2]",
+      "HookName": "CanBeTargeted",
+      "ReturnBehavior": 0,
+      "TargetType": "GunTrap",
+      "Category": "Player",
+      "MethodData": {
+        "MethodName": "CheckTrigger",
+        "ReturnType": "bool",
+        "Arguments": {}
+      },
+      "CodeAfterInjection": "//---\r\n\t\t\t\twhile (enumerator.MoveNext())\r\n\t\t\t\t{\r\n\t\t\t\t\tglobal::BasePlayer basePlayer = enumerator.Current as global::BasePlayer;\r\n\t\t\t\t\tif (!(basePlayer == null) && !basePlayer.IsSleeping() && basePlayer.IsAlive())\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\tobject returnvar = Interface.CallHook(\"CanBeTargeted\", basePlayer, this);\r\n\t\t\t\t\t\tif (returnvar is bool)\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\tflag = (bool)returnvar;\r\n\t\t\t\t\t\t\tbreak;\r\n\t\t\t\t\t\t}\r\n//---\r\n"
     },
     {
       "Type": 0,
