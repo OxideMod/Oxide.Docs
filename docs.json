@@ -1691,7 +1691,8 @@
         "MethodName": "Kill",
         "ReturnType": "void",
         "Arguments": {
-          "mode": "BaseNetworkable/DestroyMode"
+          "mode": "BaseNetworkable/DestroyMode",
+          "callOnKilled": "bool"
         }
       },
       "CodeAfterInjection": "//---\r\n\tif (this.IsDestroyed)\r\n\t{\r\n\t\tDebug.LogWarning(\"Calling kill - but already IsDestroyed!? \" + ((this != null) ? this.ToString() : null));\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnEntityKill\", this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tEntityProfiler.killed++;\r\n\tif (EntityProfiler.mode >= 2)\r\n//---\r\n"
@@ -5297,7 +5298,7 @@
           "info": "HitInfo"
         }
       },
-      "CodeAfterInjection": "public virtual void OnDied(global::HitInfo info)\r\n{\r\n\tthis.isKilled = true;\r\n\tInterface.CallHook(\"OnEntityDeath\", this, info);\r\n\tbase.Kill(global::BaseNetworkable.DestroyMode.None);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "public virtual void OnDied(global::HitInfo info)\r\n{\r\n\tthis.isKilled = true;\r\n\tInterface.CallHook(\"OnEntityDeath\", this, info);\r\n\tbase.Kill(global::BaseNetworkable.DestroyMode.None, true);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -7430,7 +7431,7 @@
           "forceServerSide": "bool"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\tif (this.lifeStory != null)\r\n\t\t\t{\r\n\t\t\t\tnum += Mathf.Clamp(Mathf.FloorToInt(this.lifeStory.secondsAlive / 180f), 0, 20);\r\n\t\t\t}\r\n\t\t\targ_207_0.containedItems.Add(new global::ItemAmount(global::ItemManager.FindItemDefinition(\"fat.animal\"), (float)num));\r\n\t\t\tInterface.CallHook(\"OnPlayerCorpseSpawned\", this, playerCorpse);\r\n\t\t\treturn playerCorpse;\r\n\t\t}\r\n\t}\r\n\treturn null;\r\n}\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\tif (this.lifeStory != null)\r\n\t\t\t{\r\n\t\t\t\tnum += Mathf.Clamp(Mathf.FloorToInt(this.lifeStory.secondsAlive / 180f), 0, 20);\r\n\t\t\t}\r\n\t\t\targ_1FB_0.containedItems.Add(new global::ItemAmount(global::ItemManager.FindItemDefinition(\"fat.animal\"), (float)num));\r\n\t\t\tInterface.CallHook(\"OnPlayerCorpseSpawned\", this, playerCorpse);\r\n\t\t\treturn playerCorpse;\r\n\t\t}\r\n\t}\r\n\treturn null;\r\n}\r\n"
     },
     {
       "Type": 0,
@@ -8046,7 +8047,7 @@
           "player": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "public void PlayerStoppedLooting(global::BasePlayer player)\r\n{\r\n\tInterface.CallHook(\"OnLootEntityEnd\", player, this);\r\n\tif (this.inventory == null || this.inventory.itemList == null || this.inventory.itemList.Count == 0)\r\n\t{\r\n\t\tbase.Kill(global::BaseNetworkable.DestroyMode.None);\r\n\t}\r\n\telse\r\n//---\r\n"
+      "CodeAfterInjection": "public void PlayerStoppedLooting(global::BasePlayer player)\r\n{\r\n\tInterface.CallHook(\"OnLootEntityEnd\", player, this);\r\n\tif (this.inventory == null || this.inventory.itemList == null || this.inventory.itemList.Count == 0)\r\n\t{\r\n\t\tbase.Kill(global::BaseNetworkable.DestroyMode.None, true);\r\n\t}\r\n\telse\r\n//---\r\n"
     },
     {
       "Type": 1,
@@ -9662,7 +9663,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\t{\r\n\t\t\tbaseEntity.globalBroadcast = true;\r\n\t\t\tbaseEntity.Spawn();\r\n\t\t}\r\n\t}\r\n\tInterface.CallHook(\"OnSupplyDropDropped\", baseEntity, this);\r\n\tbase.transform.position = Vector3.Lerp(this.startPos, this.endPos, num);\r\n\tbase.transform.hasChanged = true;\r\n\tif (num >= 1f)\r\n\t{\r\n\t\tbase.Kill(global::BaseNetworkable.DestroyMode.None);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t{\r\n\t\t\tbaseEntity.globalBroadcast = true;\r\n\t\t\tbaseEntity.Spawn();\r\n\t\t}\r\n\t}\r\n\tInterface.CallHook(\"OnSupplyDropDropped\", baseEntity, this);\r\n\tbase.transform.position = Vector3.Lerp(this.startPos, this.endPos, num);\r\n\tbase.transform.hasChanged = true;\r\n\tif (num >= 1f)\r\n\t{\r\n\t\tbase.Kill(global::BaseNetworkable.DestroyMode.None, true);\r\n//---\r\n"
     },
     {
       "Type": 1,
@@ -9975,7 +9976,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\tthis.<SendRespawnOptions>g__CollectExternalAndSend|572_0();\r\n\t\treturn;\r\n\t}\r\n\tList<RespawnInformation.SpawnOptions> list = Pool.Get<List<RespawnInformation.SpawnOptions>>();\r\n\tglobal::BasePlayer.GetRespawnOptionsForPlayer(list, this.userID);\r\n\tInterface.CallHook(\"OnRespawnInformationGiven\", this, list);\r\n\tthis.<SendRespawnOptions>g__SendToPlayer|572_1(list, false);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tthis.<SendRespawnOptions>g__CollectExternalAndSend|573_0();\r\n\t\treturn;\r\n\t}\r\n\tList<RespawnInformation.SpawnOptions> list = Pool.Get<List<RespawnInformation.SpawnOptions>>();\r\n\tglobal::BasePlayer.GetRespawnOptionsForPlayer(list, this.userID);\r\n\tInterface.CallHook(\"OnRespawnInformationGiven\", this, list);\r\n\tthis.<SendRespawnOptions>g__SendToPlayer|573_1(list, false);\r\n}\r\n\r\n"
     },
     {
       "Type": 1,
@@ -10745,7 +10746,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\townerPlayer.SignalBroadcast(global::BaseEntity.Signal.Alt_Attack, null);\r\n\t\tbase.Invoke(new Action(this.ResetLine), 6f);\r\n\t\tfishingBobber.Kill(global::BaseNetworkable.DestroyMode.None);\r\n\t\tthis.currentBobber.Set(null);\r\n\t\tbase.CancelInvoke(new Action(this.CatchProcess));\r\n\t\tInterface.CallHook(\"OnFishCaught\", this.currentFishTarget, this, ownerPlayer);\r\n\t\treturn;\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\townerPlayer.SignalBroadcast(global::BaseEntity.Signal.Alt_Attack, null);\r\n\t\tbase.Invoke(new Action(this.ResetLine), 6f);\r\n\t\tfishingBobber.Kill(global::BaseNetworkable.DestroyMode.None, true);\r\n\t\tthis.currentBobber.Set(null);\r\n\t\tbase.CancelInvoke(new Action(this.CatchProcess));\r\n\t\tInterface.CallHook(\"OnFishCaught\", this.currentFishTarget, this, ownerPlayer);\r\n\t\treturn;\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -12356,7 +12357,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "public void DelayedModsChanged()\r\n{\r\n\tif (Interface.CallHook(\"OnWeaponModChange\", this, this.GetOwnerPlayer()) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tFunc<global::ProjectileWeaponMod, global::ProjectileWeaponMod.Modifier> arg_5A_1;\r\n\tif ((arg_5A_1 = global::BaseProjectile.<>c.<>9__100_0) == null)\r\n//---\r\n"
+      "CodeAfterInjection": "public void DelayedModsChanged()\r\n{\r\n\tif (Interface.CallHook(\"OnWeaponModChange\", this, this.GetOwnerPlayer()) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tFunc<global::ProjectileWeaponMod, global::ProjectileWeaponMod.Modifier> arg_5A_1;\r\n\tif ((arg_5A_1 = global::BaseProjectile.<>c.<>9__101_0) == null)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -12376,7 +12377,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (!this.Menu_WaterClear_ShowIf(player))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnSprayRemove\", this, player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tbase.Kill(global::BaseNetworkable.DestroyMode.None);\r\n}\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (!this.Menu_WaterClear_ShowIf(player))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnSprayRemove\", this, player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tbase.Kill(global::BaseNetworkable.DestroyMode.None, true);\r\n}\r\n"
     },
     {
       "Type": 1,
@@ -12536,7 +12537,7 @@
           "di": "DroppedItem"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (num2 == 0)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tInterface.CallHook(\"OnDroppedItemCombined\", this);\r\n\tif (di.DropReason == global::DroppedItem.DropReasonEnum.Player)\r\n\t{\r\n\t\tthis.DropReason = global::DroppedItem.DropReasonEnum.Player;\r\n\t}\r\n\tdi.item.MigrateItemOwnership(this.item, di.item.amount);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tif (global::Item.BlockStackFoodItem(this.item, di.item))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tint num2 = di.item.amount + this.item.amount;\r\n\tInterface.CallHook(\"OnDroppedItemCombined\", this);\r\n\tif (num2 > this.item.MaxStackable())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (num2 == 0)\r\n//---\r\n"
     },
     {
       "Type": 1,
@@ -13062,7 +13063,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "public void DoOccludedCheck()\r\n{\r\n\tif (Physics.SphereCast(new Ray(base.transform.position + Vector3.up * 5f, Vector3.down), 0.25f, 5f, 2097152))\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnStashOcclude\", this) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tthis.DropItems(null);\r\n\t\tbase.Kill(global::BaseNetworkable.DestroyMode.None);\r\n//---\r\n"
+      "CodeAfterInjection": "public void DoOccludedCheck()\r\n{\r\n\tif (Physics.SphereCast(new Ray(base.transform.position + Vector3.up * 5f, Vector3.down), 0.25f, 5f, 2097152))\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnStashOcclude\", this) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tthis.DropItems(null);\r\n\t\tbase.Kill(global::BaseNetworkable.DestroyMode.None, true);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -15424,7 +15425,7 @@
         "reportType": "ReportType"
       },
       "ReturnBehavior": 0,
-      "TargetType": "BasePlayer/<OnFeedbackReport>d__671",
+      "TargetType": "BasePlayer/<OnFeedbackReport>d__672",
       "Category": "Player",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -15438,7 +15439,7 @@
       "Name": "OnFeedbackReported [patch]",
       "HookName": "OnFeedbackReported",
       "ReturnBehavior": 0,
-      "TargetType": "BasePlayer/<OnFeedbackReport>d__671",
+      "TargetType": "BasePlayer/<OnFeedbackReport>d__672",
       "Category": "_Patches",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -15460,7 +15461,7 @@
         "text3": "string"
       },
       "ReturnBehavior": 0,
-      "TargetType": "BasePlayer/<OnPlayerReported>d__670",
+      "TargetType": "BasePlayer/<OnPlayerReported>d__671",
       "Category": "Player",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -15872,7 +15873,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\t{\r\n\t\t\tPhysics.SyncTransforms();\r\n\t\t}\r\n\t\tPhysics.autoSyncTransforms = autoSyncTransforms;\r\n\t}\r\n\tInterface.CallHook(\"OnPlayerBoatEditStarted\", playerBoat, this);\r\n\tplayerBoat.Kill(global::BaseNetworkable.DestroyMode.None);\r\n\tPool.FreeUnmanaged<global::PlayerBoat>(ref playerBoats);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t{\r\n\t\t\tPhysics.SyncTransforms();\r\n\t\t}\r\n\t\tPhysics.autoSyncTransforms = autoSyncTransforms;\r\n\t}\r\n\tInterface.CallHook(\"OnPlayerBoatEditStarted\", playerBoat, this);\r\n\tplayerBoat.Kill(global::BaseNetworkable.DestroyMode.None, true);\r\n\tPool.FreeUnmanaged<global::PlayerBoat>(ref playerBoats);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -15942,6 +15943,38 @@
         "Arguments": {}
       },
       "CodeAfterInjection": "//---\r\n\t\t\t\twhile (enumerator.MoveNext())\r\n\t\t\t\t{\r\n\t\t\t\t\tglobal::BasePlayer basePlayer = enumerator.Current as global::BasePlayer;\r\n\t\t\t\t\tif (!(basePlayer == null) && !basePlayer.IsSleeping() && basePlayer.IsAlive())\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\tobject returnvar = Interface.CallHook(\"CanBeTargeted\", basePlayer, this);\r\n\t\t\t\t\t\tif (returnvar is bool)\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\tflag = (bool)returnvar;\r\n\t\t\t\t\t\t\tbreak;\r\n\t\t\t\t\t\t}\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnCorpsePopulate [Rust.Ai.Gen2.State_Dead]",
+      "HookName": "OnCorpsePopulate",
+      "HookParameters": {
+        "Owner": "BaseEntity",
+        "lootableCorpse": "LootableCorpse"
+      },
+      "ReturnBehavior": 4,
+      "TargetType": "Rust.Ai.Gen2.State_Dead",
+      "Category": "NPC",
+      "MethodData": {
+        "MethodName": "StartRagdoll",
+        "ReturnType": "void",
+        "Arguments": {}
+      },
+      "CodeAfterInjection": "//---\r\n\t\t{\r\n\t\t\tlootableCorpse.playerName = this.Owner.GetType().Name;\r\n\t\t}\r\n\t\tlootableCorpse.Spawn();\r\n\t\tbaseCorpse.TakeChildren(this.Owner);\r\n\t\tif (Interface.CallHook(\"OnCorpsePopulate\", this.Owner, lootableCorpse) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tif (this.LootSpawnSlots.Length != 0)\r\n\t\t{\r\n//---\r\n"
+    },
+    {
+      "Type": 1,
+      "Name": "OnCorpsePopulate [Rust.Ai.Gen2.State_Dead] [Patch]",
+      "HookName": "OnCorpsePopulate",
+      "ReturnBehavior": 0,
+      "TargetType": "Rust.Ai.Gen2.State_Dead",
+      "Category": "NPC",
+      "MethodData": {
+        "MethodName": "StartRagdoll",
+        "ReturnType": "void",
+        "Arguments": {}
+      },
+      "CodeAfterInjection": "//---\r\n\t\t{\r\n\t\t\tlootableCorpse.playerName = this.Owner.GetType().Name;\r\n\t\t}\r\n\t\tlootableCorpse.Spawn();\r\n\t\tbaseCorpse.TakeChildren(this.Owner);\r\n\t\tif (Interface.CallHook(\"OnCorpsePopulate\", this.Owner, lootableCorpse) == null && this.LootSpawnSlots.Length != 0)\r\n\t\t{\r\n\t\t\tglobal::LootContainer.LootSpawnSlot[] lootSpawnSlots = this.LootSpawnSlots;\r\n\t\t\tfor (int i = 0; i < lootSpawnSlots.Length; i++)\r\n\t\t\t{\r\n\t\t\t\tglobal::LootContainer.LootSpawnSlot lootSpawnSlot = lootSpawnSlots[i];\r\n//---\r\n"
     },
     {
       "Type": 0,
