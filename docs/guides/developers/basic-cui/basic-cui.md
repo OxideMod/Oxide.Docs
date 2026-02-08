@@ -807,9 +807,9 @@ All available fonts are:
 * `Image.Type.Filled`
  
 ### `InputField.LineType`
-* `TextAnchor.SingleLine`
-* `TextAnchor.MultiLineSubmit`
-* `TextAnchor.MultiLineNewline`
+* `LineType.SingleLine`
+* `LineType.MultiLineSubmit`
+* `LineType.MultiLineNewline`
 
 ### `VerticalWrapMode`
 * `VerticalWrapMode.Truncate`
