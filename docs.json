@@ -736,7 +736,7 @@
           "rpc": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tthis.SetNavMeshLinkEnabled(false);\r\n\t}\r\n\tFacepunch.Rust.Analytics.Azure.OnBaseInteract(rpc.player, this);\r\n\tthis.StartCheckingForBlockages(false);\r\n\tInterface.CallHook(\"OnDoorClosed\", this, rpc.player);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tthis.SetNavMeshLinkEnabled(false);\r\n\t}\r\n\tFacepunch.Rust.Analytics.Azure.OnBaseInteract(rpc.player, this);\r\n\tthis.StartCheckingForBlockages(false);\r\n\tthis.OnPlayerClosedDoor(rpc.player);\r\n\tInterface.CallHook(\"OnDoorClosed\", this, rpc.player);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -15975,6 +15975,88 @@
         "Arguments": {}
       },
       "CodeAfterInjection": "//---\r\n\t\t{\r\n\t\t\tlootableCorpse.playerName = this.Owner.GetType().Name;\r\n\t\t}\r\n\t\tlootableCorpse.Spawn();\r\n\t\tbaseCorpse.TakeChildren(this.Owner);\r\n\t\tif (Interface.CallHook(\"OnCorpsePopulate\", this.Owner, lootableCorpse) == null && this.LootSpawnSlots.Length != 0)\r\n\t\t{\r\n\t\t\tglobal::LootContainer.LootSpawnSlot[] lootSpawnSlots = this.LootSpawnSlots;\r\n\t\t\tfor (int i = 0; i < lootSpawnSlots.Length; i++)\r\n\t\t\t{\r\n\t\t\t\tglobal::LootContainer.LootSpawnSlot lootSpawnSlot = lootSpawnSlots[i];\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnLootSpawn [LootFill]",
+      "HookName": "OnLootSpawn",
+      "HookParameters": {
+        "instance": "LootFill"
+      },
+      "ReturnBehavior": 1,
+      "TargetType": "LootFill",
+      "Category": "Resource",
+      "MethodData": {
+        "MethodName": "DelayFill",
+        "ReturnType": "void",
+        "Arguments": {}
+      },
+      "CodeAfterInjection": "//---\r\n{\r\n\tif (this.StorageContainer == null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnLootSpawn\", this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (this.LootSpawnSlots.Length != 0)\r\n\t{\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnFogOfWarStale",
+      "HookName": "OnFogOfWarStale",
+      "HookDescription": "",
+      "HookParameters": {
+        "instance": "BasePlayer"
+      },
+      "ReturnBehavior": 0,
+      "TargetType": "BasePlayer",
+      "Category": "Player",
+      "MethodData": {
+        "MethodName": "OnFogOfWarStale",
+        "ReturnType": "void",
+        "Arguments": {}
+      },
+      "CodeAfterInjection": "private void OnFogOfWarStale()\r\n{\r\n\tglobal::BasePlayer.<OnFogOfWarStale>g__ClearFogList|128_0(this.GetFogImageList(global::BasePlayer.FogMode.Mainland));\r\n\tglobal::BasePlayer.<OnFogOfWarStale>g__ClearFogList|128_0(this.GetFogImageList(global::BasePlayer.FogMode.DeepSea));\r\n\tInterface.CallHook(\"OnFogOfWarStale\", this);\r\n}\r\n\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnFogOfWarCleared",
+      "HookName": "OnFogOfWarCleared",
+      "HookParameters": {
+        "instance": "BasePlayer",
+        "mainland": "bool",
+        "deepSea": "bool"
+      },
+      "ReturnBehavior": 0,
+      "TargetType": "BasePlayer",
+      "Category": "Player",
+      "MethodData": {
+        "MethodName": "ServerClearFog",
+        "ReturnType": "void",
+        "Arguments": {
+          "mainland": "bool",
+          "deepSea": "bool"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (deepSea)\r\n\t{\r\n\t\tthis.<ServerClearFog>g__ClearFogList|126_0(ref this.State.fogImagesDeepSea);\r\n\t}\r\n\tInterface.CallHook(\"OnFogOfWarCleared\", this, mainland, deepSea);\r\n\tthis.DirtyPlayerState();\r\n\tthis.SendFogImagesToClient();\r\n}\r\n\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnFogOfWarImageUpdate",
+      "HookName": "OnFogOfWarImageUpdate",
+      "HookDescription": "",
+      "HookParameters": {
+        "instance": "BasePlayer",
+        "b": "byte",
+        "b2": "byte",
+        "num": "uint",
+        "num2": "uint",
+        "i": "Byte[]"
+      },
+      "ReturnBehavior": 4,
+      "TargetType": "BasePlayer",
+      "Category": "Player",
+      "MethodData": {
+        "MethodName": "FogImageUpdate",
+        "ReturnType": "void",
+        "Arguments": {
+          "msg": "BaseEntity/RPCMessage"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\tbyte[] array = msg.read.BytesWithSize(10485760u, false);\r\n\tif (array == null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnFogOfWarImageUpdate\", this, b, b2, num, num2, array) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tglobal::FileStorage.server.RemoveEntityNum(this.net.ID, num2);\r\n\tuint value = global::FileStorage.server.Store(array, global::FileStorage.Type.png, this.net.ID, num2);\r\n//---\r\n"
     },
     {
       "Type": 0,
