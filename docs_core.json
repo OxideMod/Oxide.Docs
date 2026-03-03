@@ -7,7 +7,6 @@
 			"HookParameters": {
 				"args": "object[]"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "CSharpExtension",
 			"Category": "Server",
@@ -26,7 +25,6 @@
 			"Name": "Loaded",
 			"HookName": "Loaded",
 			"HookParameters": {},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "CSharpPlugin",
 			"Category": "Server",
@@ -43,7 +41,6 @@
 			"Name": "Unload",
 			"HookName": "Unload",
 			"HookParameters": {},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "CSharpPlugin",
 			"Category": "Server",
@@ -65,7 +62,6 @@
 				"name": "string",
 				"owner": "Plugin"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "Permission",
 			"Category": "Permission",
@@ -89,7 +85,6 @@
 				"oldName": "string",
 				"newName": "string"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "Permission",
 			"Category": "Permission",
@@ -111,7 +106,6 @@
 			"HookParameters": {
 				"name": "string"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "Permission",
 			"Category": "Permission",
@@ -134,7 +128,6 @@
 			"HookParameters": {
 				"name": "string"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "Permission",
 			"Category": "Permission",
@@ -156,7 +149,6 @@
 				"name": "string",
 				"title": "string"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "Permission",
 			"Category": "Permission",
@@ -179,7 +171,6 @@
 				"name": "string",
 				"title": "string"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "Permission",
 			"Category": "Permission",
@@ -202,7 +193,6 @@
 				"name": "string",
 				"parent": "string"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "Permission",
 			"Category": "Permission",
@@ -224,7 +214,6 @@
 			"HookParameters": {
 				"plugin": "Plugin"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "OxideMod",
 			"Category": "Server",
@@ -245,7 +234,6 @@
 			"HookParameters": {
 				"plugin": "Plugin"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "OxideMod",
 			"Category": "Server",
@@ -264,7 +252,6 @@
 			"Name": "Init",
 			"HookName": "Init",
 			"HookParameters": {},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "CSPlugin",
 			"Category": "Server",
@@ -283,7 +270,6 @@
 			"Name": "LoadDefaultConfig",
 			"HookName": "LoadDefaultConfig",
 			"HookParameters": {},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "Plugin",
 			"Category": "Server",
@@ -300,7 +286,6 @@
 			"Name": "LoadDefaultMessages",
 			"HookName": "LoadDefaultMessages",
 			"HookParameters": {},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "Plugin",
 			"Category": "Server",
@@ -321,7 +306,6 @@
 				"command": "string",
 				"args": "string[]"
 			},
-			"ReturnTypeOverwrite": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RemoteConsole",
 			"Category": "Server",
@@ -345,7 +329,6 @@
 				"player": "BasePlayer",
 				"userId": "ulong"
 			},
-			"ReturnTypeOverwrite": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "Player",
 			"Category": "Server",
@@ -370,7 +353,6 @@
 			"HookParameters": {
 				"serverInitialized": "bool"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
 			"Category": "Server",
@@ -391,7 +373,6 @@
 			"HookParameters": {
 				"serverInitialized": "bool"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
 			"Category": "Server",
@@ -408,7 +389,6 @@
 			"Name": "OnServerShutdown",
 			"HookName": "OnServerShutdown",
 			"HookParameters": {},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
 			"Category": "Server",
@@ -428,7 +408,6 @@
 				"player": "BasePlayer",
 				"json": "string"
 			},
-			"ReturnTypeOverwrite": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "CUIHelper",
 			"Category": "Server",
@@ -451,7 +430,6 @@
 				"player": "BasePlayer",
 				"elem": "string"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "CUIHelper",
 			"Category": "Server",
@@ -474,7 +452,6 @@
 				"entity": "BaseCombatEntity",
 				"hitInfo": "HitInfo"
 			},
-			"ReturnTypeOverwrite": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
 			"Category": "Entity",
@@ -497,7 +474,6 @@
 				"npc": "BaseNpc",
 				"target": "BaseEntity"
 			},
-			"ReturnTypeOverwrite": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
 			"Category": "NPC",
@@ -520,7 +496,6 @@
 				"npc": "BaseEntity",
 				"target": "BaseEntity"
 			},
-			"ReturnTypeOverwrite": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
 			"Category": "NPC",
@@ -543,7 +518,6 @@
 				"baseNetworkable": "BaseNetworkable",
 				"saveInfo": "BaseNetworkable.SaveInfo"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
 			"Category": "Entity",
@@ -566,7 +540,6 @@
 				"item": "Item",
 				"amount": "ref float"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
 			"Category": "Item",
@@ -612,7 +585,6 @@
 				"basePlayer": "BasePlayer",
 				"hitInfo": "HitInfo"
 			},
-			"ReturnTypeOverwrite": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
 			"Category": "Entity",
@@ -635,7 +607,6 @@
 				"basePlayer": "BasePlayer",
 				"hitInfo": "HitInfo"
 			},
-			"ReturnTypeOverwrite": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
 			"Category": "Entity",
@@ -661,7 +632,6 @@
 				"reason": "string",
 				"expiry": "long"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
 			"Category": "Player",
@@ -690,7 +660,6 @@
 				"reason": "string",
 				"expiry": "long"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
 			"Category": "Server",
@@ -717,7 +686,6 @@
 				"steamId": "ulong",
 				"address": "string"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
 			"Category": "Server",
@@ -740,7 +708,6 @@
 				"steamId": "string",
 				"address": "string"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
 			"Category": "Server",
@@ -765,7 +732,7 @@
 			"ReturnBehavior": 3,
 			"TargetType": "RustCore",
 			"Category": "Server",
-			"HookDescription": "Called when a player attempt to login the server",
+			"HookDescription": "Called when a player attempt to login the server. return bool to reject connection, or string for reason of rejection",
 			"MethodData": {
 				"MethodName": "IOnUserApprove",
 				"ReturnType": "object",
@@ -788,7 +755,7 @@
 			"ReturnBehavior": 3,
 			"TargetType": "RustCore",
 			"Category": "Server",
-			"HookDescription": "Called when a player attempt to login the server",
+			"HookDescription": "Called when a player attempt to login the server. return bool to reject connection, or string for reason of rejection",
 			"MethodData": {
 				"MethodName": "IOnUserApprove",
 				"ReturnType": "object",
@@ -806,7 +773,6 @@
 				"connection": "Connection",
 				"status": "string"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
 			"Category": "Player",
@@ -831,7 +797,6 @@
 				"message": "string",
 				"channel": "Chat.ChatChannel"
 			},
-			"ReturnTypeOverwrite": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
 			"Category": "Player",
@@ -858,7 +823,6 @@
 				"message": "string",
 				"channel": "Chat.ChatChannel"
 			},
-			"ReturnTypeOverwrite": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
 			"Category": "Player",
@@ -884,7 +848,6 @@
 				"iplayer": "IPlayer",
 				"message": "string"
 			},
-			"ReturnTypeOverwrite": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
 			"Category": "Player",
@@ -911,7 +874,6 @@
 				"cmd": "string",
 				"args": "string[]"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
 			"Category": "Server",
@@ -936,7 +898,6 @@
 				"cmd": "string",
 				"args": "string[]"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
 			"Category": "Server",
@@ -961,7 +922,6 @@
 				"cmd": "string",
 				"args": "string[]"
 			},
-			"ReturnTypeOverwrite": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
 			"Category": "Player",
@@ -986,7 +946,6 @@
 				"cmd": "string",
 				"args": "string[]"
 			},
-			"ReturnTypeOverwrite": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
 			"Category": "Player",
@@ -1009,7 +968,6 @@
 			"HookParameters": {
 				"iplayer": "IPlayer"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
 			"Category": "Player",
@@ -1030,7 +988,6 @@
 			"HookParameters": {
 				"player": "BasePlayer"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
 			"Category": "Player",
@@ -1052,7 +1009,6 @@
 				"iplayer": "IPlayer",
 				"reason": "string"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
 			"Category": "Player",
@@ -1075,7 +1031,6 @@
 				"player": "BasePlayer",
 				"val": "string"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
 			"Category": "Player",
@@ -1099,7 +1054,6 @@
 				"iplayer": "IPlayer",
 				"val": "string"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
 			"Category": "Player",
@@ -1123,7 +1077,6 @@
 				"iplayer": "IPlayer",
 				"reason": "string"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
 			"Category": "Server",
@@ -1145,7 +1098,6 @@
 			"HookParameters": {
 				"iplayer": "IPlayer"
 			},
-			"ReturnTypeOverwrite": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
 			"Category": "Player",
@@ -1166,7 +1118,6 @@
 			"HookParameters": {
 				"iplayer": "IPlayer"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "RustCore",
 			"Category": "Player",
@@ -1188,7 +1139,6 @@
 				"ipAddress": "IPAddress",
 				"message": "RemoteMessage"
 			},
-			"ReturnTypeOverwrite": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
 			"Category": "Server",
@@ -1212,7 +1162,6 @@
 				"message": "string",
 				"arg": "string[]"
 			},
-			"ReturnTypeOverwrite": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
 			"Category": "Server",
@@ -1234,7 +1183,6 @@
 			"HookParameters": {
 				"arg": "ConsoleSystem.Arg"
 			},
-			"ReturnTypeOverwrite": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
 			"Category": "Server",
@@ -1256,7 +1204,6 @@
 				"cmd": "string",
 				"arg": "string[]"
 			},
-			"ReturnTypeOverwrite": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
 			"Category": "Server",
@@ -1278,7 +1225,6 @@
 				"privlidge": "BuildingPrivlidge",
 				"player": "BasePlayer"
 			},
-			"ReturnTypeOverwrite": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
 			"Category": "Structure",
@@ -1303,7 +1249,6 @@
 				"userID": "ulong",
 				"player": "BasePlayer"
 			},
-			"ReturnTypeOverwrite": "object",
 			"ReturnBehavior": 1,
 			"TargetType": "RustCore",
 			"Category": "Entity",
@@ -1327,7 +1272,6 @@
 				"groupName": "string",
 				"permission": "string"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "Permission",
 			"Category": "Permission",
@@ -1350,7 +1294,6 @@
 				"groupName": "string",
 				"permission": "string"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "Permission",
 			"Category": "Permission",
@@ -1373,7 +1316,6 @@
 				"groupName": "string",
 				"permission": "string"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "Permission",
 			"Category": "Permission",
@@ -1396,7 +1338,6 @@
 				"groupName": "string",
 				"permission": "string"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "Permission",
 			"Category": "Permission",
@@ -1419,7 +1360,6 @@
 				"playerId": "string",
 				"groupName": "string"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "Permission",
 			"Category": "Permission",
@@ -1442,7 +1382,6 @@
 				"playerId": "string",
 				"groupName": "string"
 			},
-			"ReturnTypeOverwrite": "void",
 			"ReturnBehavior": 0,
 			"TargetType": "Permission",
 			"Category": "Permission",
@@ -1464,7 +1403,6 @@
 			"HookParameters": {
 				"connection": "Connection"
 			},
-			"ReturnTypeOverwrite": "object",
 			"ReturnBehavior": 3,
 			"TargetType": "RustCore",
 			"Category": "Server",
@@ -1487,7 +1425,6 @@
 				"userid": "string",
 				"ipaddr": "string"
 			},
-			"ReturnTypeOverwrite": "object",
 			"ReturnBehavior": 3,
 			"TargetType": "RustCore",
 			"Category": "Server",
