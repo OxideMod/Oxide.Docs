@@ -158,8 +158,7 @@ function getExamplesMarkdown(hooks: IHook[]) {
   }, [] as IHook[]);
 
   for (const hook of hooks) {
-    let returnType =
-      hook.ReturnTypeOverwrite != null && hook.ReturnTypeOverwrite != 'void' ? 'object' : 'void';
+    let returnType = getHookReturnType(hook);
     output += `\`\`\`csharp`;
     //TODO: Use proper return type instead of void
     output += `\nprivate ${returnType} ${hook.HookName}( ${getArgumentString(hook.HookParameters)} )`;
@@ -171,6 +170,14 @@ function getExamplesMarkdown(hooks: IHook[]) {
   }
 
   return output;
+}
+
+function getHookReturnType(hook: IHook) {
+  if (hook.ReturnBehavior === ReturnBehaviour.Continue) {
+    return 'void';
+  }
+
+  return hook.ReturnTypeOverwrite ? hook.ReturnTypeOverwrite.replace(/\//g, '.') + '?' : 'object';
 }
 
 // Generate the location of the hook in the games source code
