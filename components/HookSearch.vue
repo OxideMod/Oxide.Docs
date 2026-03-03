@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useRoute, useRouter } from 'vitepress';
 import { useSidebar } from 'vitepress/theme';
-import { ComputedRef, computed, ref } from 'vue';
+import { ComputedRef, computed, ref, watch } from 'vue';
 
 withDefaults(
   defineProps<{
@@ -18,28 +18,39 @@ const showSearch = computed(() => /^\/(hooks)\//.test(route.path));
 const search = ref('');
 const { sidebarGroups } = useSidebar();
 
-const searchResults: ComputedRef<any[]> = computed(() => {
+const visibleCount = ref(5);
+
+const allResults: ComputedRef<any[]> = computed(() => {
   if (!search.value) return [];
 
   let result = [];
+  const searchTerm = search.value.trim().toLowerCase();
 
   sidebarGroups.value.forEach(group => {
     group.items.forEach(item => {
       if (item.items) {
         item.items.forEach(subItem => {
-          if (subItem.text.toLowerCase().includes(search.value.toLowerCase())) {
+          if (subItem.text.toLowerCase().includes(searchTerm)) {
             result.push(subItem);
           }
         });
       } else {
-        if (item.text.toLowerCase().includes(search.value.toLowerCase())) {
+        if (item.text.toLowerCase().includes(searchTerm)) {
           result.push(item);
         }
       }
     });
   });
 
-  return result.slice(0, 5);
+  return result;
+});
+
+const searchResults = computed(() => {
+  return allResults.value.slice(0, visibleCount.value);
+});
+
+watch(search, () => {
+  visibleCount.value = 5;
 });
 </script>
 
@@ -63,6 +74,9 @@ const searchResults: ComputedRef<any[]> = computed(() => {
           <a v-if="result.link" :href="result.link">{{ result.text }}</a>
           <span v-else>{{ result.text }}</span>
         </div>
+        <a v-if="allResults.length > visibleCount" class="view-more" @click="visibleCount += 5">
+          Show more ({{ allResults.length - visibleCount }} remaining)
+        </a>
       </div>
     </div>
 
@@ -119,8 +133,9 @@ const searchResults: ComputedRef<any[]> = computed(() => {
 }
 
 .sidebar-link {
+  position: relative;
   font-size: 14px;
-  padding: 4px 0 4px 12px;
+  padding: 4px 0 4px 22px;
 }
 
 .sidebar-link a {
@@ -130,7 +145,34 @@ const searchResults: ComputedRef<any[]> = computed(() => {
   transition: color 0.25s;
 }
 
+.sidebar-link a::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-bottom: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  transform: translateY(-50%) rotate(-45deg);
+  opacity: 0.5;
+}
+
 .sidebar-link a:hover {
   color: var(--vp-c-brand);
+}
+
+.view-more {
+  display: block;
+  padding: 4px 12px;
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--vp-c-brand);
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.view-more:hover {
+  opacity: 0.85;
 }
 </style>
