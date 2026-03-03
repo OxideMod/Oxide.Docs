@@ -101,6 +101,7 @@
         "player": "BasePlayer",
         "instance": "CodeLock"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "CodeLock",
       "Category": "Player",
@@ -121,6 +122,7 @@
         "player": "BasePlayer",
         "instance": "CodeLock"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "CodeLock",
       "Category": "Player",
@@ -141,6 +143,7 @@
         "player": "BasePlayer",
         "instance": "KeyLock"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "KeyLock",
       "Category": "Player",
@@ -161,6 +164,7 @@
         "player": "BasePlayer",
         "instance": "KeyLock"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "KeyLock",
       "Category": "Player",
@@ -182,6 +186,7 @@
         "owner": "BasePlayer",
         "fromTempBlueprint": "Item"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "ItemCrafter",
       "Category": "Item",
@@ -591,6 +596,7 @@
         "player": "BasePlayer",
         "instance": "Signage"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "Signage",
       "Category": "Player",
@@ -933,6 +939,7 @@
         "instance": "ResearchTable",
         "num": "int"
       },
+      "ReturnTypeOverwrite": "int",
       "ReturnBehavior": 3,
       "TargetType": "ResearchTable",
       "Category": "Item",
@@ -951,6 +958,7 @@
         "instance": "BasePlayer",
         "player": "BasePlayer"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "BasePlayer",
       "Category": "Player",
@@ -971,6 +979,7 @@
         "instance": "BasePlayer",
         "info": "HitInfo"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "BasePlayer",
       "Category": "Player",
@@ -1033,6 +1042,7 @@
         "instance": "Item",
         "amountToConsume": "int"
       },
+      "ReturnTypeOverwrite": "int",
       "ReturnBehavior": 3,
       "TargetType": "Item",
       "Category": "Item",
@@ -1316,6 +1326,7 @@
         "instance": "BaseNetworkable",
         "player": "BasePlayer"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "BaseNetworkable",
       "Category": "Network",
@@ -1356,6 +1367,7 @@
         "obj": "BaseCombatEntity",
         "instance": "AutoTurret"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "AutoTurret",
       "Category": "Player",
@@ -1396,6 +1408,7 @@
         "potentialtarget": "BaseCombatEntity",
         "instance": "HelicopterTurret"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "HelicopterTurret",
       "Category": "Player",
@@ -1438,6 +1451,7 @@
         "item": "Item",
         "targetSlot": "int"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "PlayerInventory",
       "Category": "Item",
@@ -1460,6 +1474,7 @@
         "item": "Item",
         "targetSlot": "int"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "PlayerInventory",
       "Category": "Item",
@@ -1482,6 +1497,7 @@
         "item": "Item",
         "targetPos": "int"
       },
+      "ReturnTypeOverwrite": "ItemContainer/CanAcceptResult",
       "ReturnBehavior": 1,
       "TargetType": "ItemContainer",
       "Category": "Item",
@@ -1520,6 +1536,7 @@
         "instance": "Item",
         "split_Amount": "int"
       },
+      "ReturnTypeOverwrite": "Item",
       "ReturnBehavior": 1,
       "TargetType": "Item",
       "Category": "Item",
@@ -1665,6 +1682,7 @@
       "HookParameters": {
         "connection": "Connection"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "ConnectionQueue",
       "Category": "Player",
@@ -1854,6 +1872,7 @@
       "HookParameters": {
         "list": "Dictionary`2"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "SaveRestore",
       "Category": "Server",
@@ -2098,6 +2117,7 @@
         "basePlayer": "BasePlayer",
         "instance": "FlameTurret"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "FlameTurret",
       "Category": "Player",
@@ -2115,6 +2135,7 @@
       "HookParameters": {
         "instance": "BaseOven"
       },
+      "ReturnTypeOverwrite": "Item",
       "ReturnBehavior": 1,
       "TargetType": "BaseOven",
       "Category": "Item",
@@ -2133,6 +2154,7 @@
         "instance": "Item",
         "item": "Item"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "Item",
       "Category": "Item",
@@ -2196,6 +2218,7 @@
         "player": "BasePlayer",
         "instance": "VendingMachine"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "VendingMachine",
       "Category": "Vending",
@@ -2217,6 +2240,7 @@
         "player": "BasePlayer",
         "instance": "VendingMachine"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "VendingMachine",
       "Category": "Vending",
@@ -2357,6 +2381,7 @@
         "player": "BasePlayer",
         "instance": "BaseCombatEntity"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "BaseCombatEntity",
       "Category": "Player",
@@ -2586,6 +2611,7 @@
         "instance": "Recycler",
         "slot": "Item"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "Recycler",
       "Category": "Crafting",
@@ -2664,6 +2690,7 @@
         "amount": "int",
         "free": "bool"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "ItemCrafter",
       "Category": "Crafting",
@@ -2686,6 +2713,7 @@
         "instance": "PatrolHelicopterAI",
         "ply": "BasePlayer"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "PatrolHelicopterAI",
       "Category": "Vehicle",
@@ -2826,6 +2854,7 @@
         "instance": "BaseNpc",
         "best": "BaseEntity"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "BaseNpc",
       "Category": "NPC",
@@ -2911,6 +2940,7 @@
         "iGrade": "Enum",
         "iSkin": "ulong"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "BuildingBlock",
       "Category": "Structure",
@@ -2935,6 +2965,7 @@
         "iGrade": "Enum",
         "iSkin": "ulong"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "BuildingBlock",
       "Category": "Structure",
@@ -2957,6 +2988,7 @@
         "player": "BasePlayer",
         "instance": "DecayEntity"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "DecayEntity",
       "Category": "Structure",
@@ -2977,6 +3009,7 @@
         "player": "BasePlayer",
         "instance": "Mailbox"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "Mailbox",
       "Category": "Player",
@@ -3017,6 +3050,7 @@
         "basePlayer": "BasePlayer",
         "instance": "GunTrap"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 3,
       "TargetType": "GunTrap",
       "Category": "Player",
@@ -3049,6 +3083,7 @@
       "HookParameters": {
         "instance": "Item"
       },
+      "ReturnTypeOverwrite": "int",
       "ReturnBehavior": 1,
       "TargetType": "Item",
       "Category": "Item",
@@ -3087,6 +3122,7 @@
         "instance": "BasePlayer",
         "spawnPoint": "SpawnPoint"
       },
+      "ReturnTypeOverwrite": "SpawnPoint",
       "ReturnBehavior": 3,
       "TargetType": "BasePlayer",
       "Category": "Player",
@@ -3126,6 +3162,7 @@
         "player": "BasePlayer",
         "item": "Item"
       },
+      "ReturnTypeOverwrite": "Item",
       "ReturnBehavior": 3,
       "TargetType": "ResourceDispenser",
       "Category": "Resource",
@@ -3149,6 +3186,7 @@
         "item": "Item",
         "targetSlot": "int"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "VendingMachine",
       "Category": "Vending",
@@ -3231,6 +3269,7 @@
         "instance": "BradleyAPC",
         "ent": "BaseEntity"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "BradleyAPC",
       "Category": "Vehicle",
@@ -3318,6 +3357,7 @@
       "HookParameters": {
         "instance": "PatrolHelicopterAI"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "PatrolHelicopterAI",
       "Category": "Vehicle",
@@ -3335,6 +3375,7 @@
       "HookParameters": {
         "instance": "PatrolHelicopterAI"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "PatrolHelicopterAI",
       "Category": "Vehicle",
@@ -3353,6 +3394,7 @@
         "instance": "PatrolHelicopterAI",
         "ply": "BasePlayer"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "PatrolHelicopterAI",
       "Category": "Vehicle",
@@ -3477,6 +3519,7 @@
         "itemDefinition": "ItemDefinition",
         "skinItemId": "int"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "PlayerBlueprints",
       "Category": "Crafting",
@@ -3498,6 +3541,7 @@
       "HookParameters": {
         "item": "Item"
       },
+      "ReturnTypeOverwrite": "int",
       "ReturnBehavior": 1,
       "TargetType": "ResearchTable",
       "Category": "Item",
@@ -3534,6 +3578,7 @@
       "HookParameters": {
         "instance": "BasePlayer"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "BasePlayer",
       "Category": "Player",
@@ -3914,6 +3959,7 @@
         "instance": "BaseNpc",
         "target": "BaseEntity"
       },
+      "ReturnTypeOverwrite": "float",
       "ReturnBehavior": 1,
       "TargetType": "BaseNpc",
       "Category": "NPC",
@@ -4041,6 +4087,7 @@
       "HookParameters": {
         "instance": "CH47HelicopterAIController"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "CH47HelicopterAIController",
       "Category": "Vehicle",
@@ -4114,6 +4161,7 @@
       "HookParameters": {
         "instance": "CH47HelicopterAIController"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "CH47HelicopterAIController",
       "Category": "Vehicle",
@@ -4335,6 +4383,7 @@
       "HookParameters": {
         "instance": "BaseCombatEntity"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "BaseCombatEntity",
       "Category": "Entity",
@@ -4352,6 +4401,7 @@
       "HookParameters": {
         "instance": "BasePlayer"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "BasePlayer",
       "Category": "Entity",
@@ -4688,6 +4738,7 @@
       "HookParameters": {
         "instance": "BaseBoat"
       },
+      "ReturnTypeOverwrite": "System.Collections.Generic.List`1<UnityEngine.Vector3>",
       "ReturnBehavior": 1,
       "TargetType": "BaseBoat",
       "Category": "Vehicle",
@@ -4752,6 +4803,7 @@
         "instance": "Planner",
         "component": "Construction"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "Planner",
       "Category": "Structure",
@@ -4853,6 +4905,7 @@
         "player": "BasePlayer",
         "instance": "NPCVendingMachine"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "NPCVendingMachine",
       "Category": "Vending",
@@ -5116,6 +5169,28 @@
     },
     {
       "Type": 0,
+      "Name": "OnHelicopterStrafeEnter",
+      "HookName": "OnHelicopterStrafeEnter",
+      "HookParameters": {
+        "instance": "PatrolHelicopterAI",
+        "position": "Vector3",
+        "strafeTarget": "BasePlayer"
+      },
+      "ReturnBehavior": 1,
+      "TargetType": "PatrolHelicopterAI",
+      "Category": "Vehicle",
+      "MethodData": {
+        "MethodName": "StartStrafe",
+        "ReturnType": "void",
+        "Arguments": {
+          "strafeTarget": "BasePlayer",
+          "shouldUseNapalm": "bool"
+        }
+      },
+      "CodeAfterInjection": "private void StartStrafe(global::BasePlayer strafeTarget, bool shouldUseNapalm = false)\r\n{\r\n\tif (Interface.CallHook(\"OnHelicopterStrafeEnter\", this, strafeTarget.transform.position, strafeTarget) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tthis.strafe_target = strafeTarget;\r\n\tthis.get_out_of_strafe_distance = UnityEngine.Random.Range(13f, 17f);\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
       "Name": "OnPlayerSetInfo [server]",
       "HookName": "OnPlayerSetInfo",
       "HookParameters": {
@@ -5350,6 +5425,7 @@
         "instance": "TimedExplosive",
         "fuseLength": "float"
       },
+      "ReturnTypeOverwrite": "float",
       "ReturnBehavior": 3,
       "TargetType": "TimedExplosive",
       "Category": "Weapon",
@@ -5752,6 +5828,7 @@
         "instance": "BasePlayer",
         "player": "BasePlayer"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "BasePlayer",
       "Category": "Player",
@@ -5843,6 +5920,7 @@
         "cached": "bool",
         "cacheDuration": "float"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "WireTool",
       "Category": "Player",
@@ -5885,6 +5963,7 @@
         "player": "BasePlayer",
         "sleepingBag2": "SleepingBag"
       },
+      "ReturnTypeOverwrite": "SleepingBag",
       "ReturnBehavior": 3,
       "TargetType": "SleepingBag",
       "Category": "Player",
@@ -5930,6 +6009,7 @@
         "cacheDuration": "float",
         "exclude": "BuildingPrivlidge"
       },
+      "ReturnTypeOverwrite": "BuildingPrivlidge",
       "ReturnBehavior": 1,
       "TargetType": "BaseEntity",
       "Category": "Entity",
@@ -6342,6 +6422,7 @@
         "instance": "MiningQuarry",
         "item": "Item"
       },
+      "ReturnTypeOverwrite": "Item",
       "ReturnBehavior": 3,
       "TargetType": "MiningQuarry",
       "Category": "Resource",
@@ -6362,6 +6443,7 @@
         "id": "uint",
         "debugName": "string"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "BaseEntity/RPC_Server/IsActiveItem",
       "Category": "Entity",
@@ -6388,6 +6470,7 @@
         "debugName": "string",
         "includeMounted": "bool"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "BaseEntity/RPC_Server/FromOwner",
       "Category": "Entity",
@@ -6467,6 +6550,7 @@
         "debugName": "string",
         "maximumDistance": "float"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "BaseEntity/RPC_Server/IsVisible",
       "Category": "Entity",
@@ -6495,6 +6579,7 @@
         "maximumDistance": "float",
         "checkParent": "bool"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "BaseEntity/RPC_Server/MaxDistance",
       "Category": "Entity",
@@ -6664,6 +6749,7 @@
         "hitchable": "IHitchable",
         "spot": "HitchSpot"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "HitchTrough",
       "Category": "Animal",
@@ -6798,6 +6884,7 @@
         "instance": "Sail",
         "player": "BasePlayer"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "Sail",
       "Category": "Naval",
@@ -6818,6 +6905,7 @@
         "instance": "Sail",
         "player": "BasePlayer"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "Sail",
       "Category": "Naval",
@@ -6838,6 +6926,7 @@
         "instance": "Sail",
         "player": "BasePlayer"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "Sail",
       "Category": "Naval",
@@ -6905,6 +6994,7 @@
         "instance": "BallistaGun",
         "player": "BasePlayer"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "BallistaGun",
       "Category": "Primitive",
@@ -6924,6 +7014,7 @@
       "HookParameters": {
         "instance": "Cannon"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "Cannon",
       "Category": "Naval",
@@ -7037,6 +7128,7 @@
         "instance": "BaseRagdoll",
         "player": "BasePlayer"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "BaseRagdoll",
       "Category": "Player",
@@ -7059,6 +7151,7 @@
         "shooter": "BasePlayer",
         "num2": "float"
       },
+      "ReturnTypeOverwrite": "float",
       "ReturnBehavior": 3,
       "TargetType": "Catapult",
       "Category": "Primitive",
@@ -7100,6 +7193,7 @@
         "player": "BasePlayer",
         "instance": "PhotoFrame"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "PhotoFrame",
       "Category": "Player",
@@ -7957,6 +8051,7 @@
         "instance": "AutoTurret",
         "playerID": "ulong"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "AutoTurret",
       "Category": "Electronic",
@@ -7977,6 +8072,7 @@
         "instance": "PoweredRemoteControlEntity",
         "playerID": "ulong"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "PoweredRemoteControlEntity",
       "Category": "Electronic",
@@ -7997,6 +8093,7 @@
         "instance": "RemoteControlEntity",
         "playerID": "ulong"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "RemoteControlEntity",
       "Category": "Electronic",
@@ -8439,6 +8536,7 @@
       "HookParameters": {
         "instance": "ModularCarCodeLock"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 4,
       "TargetType": "ModularCarCodeLock",
       "Category": "Vehicle",
@@ -8644,6 +8742,7 @@
         "instance": "BaseModularVehicle",
         "player": "BasePlayer"
       },
+      "ReturnTypeOverwrite": "PlayerInventory/CanMoveFromResponse",
       "ReturnBehavior": 4,
       "TargetType": "BaseModularVehicle",
       "Category": "Vehicle",
@@ -8665,6 +8764,7 @@
         "player": "BasePlayer",
         "instance": "BaseMountable"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "BaseMountable",
       "Category": "Player",
@@ -8685,6 +8785,7 @@
         "player": "BasePlayer",
         "instance": "ModularCarSeat"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "ModularCarSeat",
       "Category": "Player",
@@ -9004,6 +9105,7 @@
         "instance": "EntityFuelSystem",
         "fuelItem": "Item"
       },
+      "ReturnTypeOverwrite": "int",
       "ReturnBehavior": 1,
       "TargetType": "EntityFuelSystem",
       "Category": "Fuel",
@@ -9022,6 +9124,7 @@
         "instance": "EntityFuelSystem",
         "fuelContainer": "StorageContainer"
       },
+      "ReturnTypeOverwrite": "Item",
       "ReturnBehavior": 1,
       "TargetType": "EntityFuelSystem",
       "Category": "Fuel",
@@ -9039,6 +9142,7 @@
       "HookParameters": {
         "instance": "EntityFuelSystem"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "EntityFuelSystem",
       "Category": "Fuel",
@@ -9060,6 +9164,7 @@
         "fuelContainer": "StorageContainer",
         "player": "BasePlayer"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "EntityFuelSystem",
       "Category": "Fuel",
@@ -9082,6 +9187,7 @@
         "seconds": "float",
         "fuelUsedPerSecond": "float"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 4,
       "TargetType": "EntityFuelSystem",
       "Category": "Fuel",
@@ -9104,6 +9210,7 @@
         "node": "NodeInstance",
         "instance": "TechTreeData"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "TechTreeData",
       "Category": "TechTree",
@@ -9126,6 +9233,7 @@
         "node": "NodeInstance",
         "instance": "TechTreeData"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "TechTreeData",
       "Category": "TechTree",
@@ -9277,6 +9385,7 @@
       "HookParameters": {
         "instance": "PhoneController"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "PhoneController",
       "Category": "Phone",
@@ -9440,6 +9549,7 @@
       "HookParameters": {
         "info": "ItemDefinition"
       },
+      "ReturnTypeOverwrite": "int",
       "ReturnBehavior": 1,
       "TargetType": "ResearchTable",
       "Category": "Item",
@@ -9497,6 +9607,7 @@
         "numberOfTransactions": "int",
         "targetContainer": "ItemContainer"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "VendingMachine",
       "Category": "Vending",
@@ -9523,6 +9634,7 @@
         "forPlayer": "BasePlayer",
         "teamId": "ulong"
       },
+      "ReturnTypeOverwrite": "BasePlayer/SpawnPoint",
       "ReturnBehavior": 1,
       "TargetType": "ServerMgr",
       "Category": "Player",
@@ -9899,6 +10011,7 @@
         "player": "BasePlayer",
         "instance": "GestureConfig"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "GestureConfig",
       "Category": "Player",
@@ -10021,6 +10134,7 @@
         "playerID": "ulong",
         "ignoreTimers": "bool"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "SleepingBag",
       "Category": "Entity",
@@ -10265,6 +10379,7 @@
         "config": "DeliveryDroneConfig",
         "vendingMachine": "VendingMachine"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "MarketTerminal",
       "Category": "Vending",
@@ -10426,6 +10541,7 @@
       "HookParameters": {
         "instance": "ElevatorLift"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "ElevatorLift",
       "Category": "Elevator",
@@ -10466,6 +10582,7 @@
         "item": "Item",
         "instance": "Recycler"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "Recycler",
       "Category": "Crafting",
@@ -10779,6 +10896,7 @@
         "instance": "VendingMachine",
         "targetContainer": "ItemContainer"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 4,
       "TargetType": "VendingMachine",
       "Category": "Vending",
@@ -10958,6 +11076,7 @@
         "mission": "BaseMission",
         "provider": "IMissionProvider"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "BaseMission",
       "Category": "Mission",
@@ -11025,6 +11144,7 @@
         "player": "BasePlayer",
         "instance": "CarvablePumpkin"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "CarvablePumpkin",
       "Category": "Player",
@@ -11085,6 +11205,7 @@
         "eyePos": "Vector3",
         "checkLineOfSight": "bool"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "AttackEntity",
       "Category": "Player",
@@ -11447,6 +11568,7 @@
         "player": "BasePlayer",
         "instance": "PatternFirework"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "PatternFirework",
       "Category": "Firework",
@@ -11881,6 +12003,7 @@
         "amount": "int",
         "funWater": "bool"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "WaterBall",
       "Category": "Entity",
@@ -11905,6 +12028,7 @@
         "player": "BasePlayer",
         "instance": "LiquidWeapon"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "LiquidWeapon",
       "Category": "Weapon",
@@ -12039,7 +12163,7 @@
           "brainSenses": "AIBrainSenses"
         }
       },
-      "CodeAfterInjection": "public void SetKnown(global::BaseEntity ent, global::BaseEntity owner, global::AIBrainSenses brainSenses)\r\n{\r\n\tif (Interface.CallHook(\"OnNpcTargetSense\", owner, ent, brainSenses) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tglobal::IAISenses iAISenses = owner as global::IAISenses;\r\n\tglobal::BasePlayer basePlayer = ent as global::BasePlayer;\r\n//---\r\n"
+      "CodeAfterInjection": "public void SetKnown(global::BaseEntity ent, global::BaseEntity owner, global::AIBrainSenses brainSenses)\r\n{\r\n\tif (Interface.CallHook(\"OnNpcTargetSense\", owner, ent, brainSenses) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tIAISenses iAISenses = owner as IAISenses;\r\n\tglobal::BasePlayer basePlayer = ent as global::BasePlayer;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -12049,6 +12173,7 @@
         "instance": "TreeEntity",
         "info": "HitInfo"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "TreeEntity",
       "Category": "Entity",
@@ -12227,6 +12352,7 @@
         "num2": "int",
         "instance": "Recycler"
       },
+      "ReturnTypeOverwrite": "int",
       "ReturnBehavior": 3,
       "TargetType": "Recycler",
       "Category": "Item",
@@ -12265,6 +12391,7 @@
         "owner": "TrainCar",
         "owner2": "TrainCar"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "TrainCoupling",
       "Category": "Vehicle",
@@ -12421,6 +12548,7 @@
         "itemid": "int",
         "includeBackpack": "bool"
       },
+      "ReturnTypeOverwrite": "int",
       "ReturnBehavior": 1,
       "TargetType": "PlayerInventory",
       "Category": "Item",
@@ -12444,6 +12572,7 @@
         "itemid": "int",
         "amount": "int"
       },
+      "ReturnTypeOverwrite": "int",
       "ReturnBehavior": 1,
       "TargetType": "PlayerInventory",
       "Category": "Item",
@@ -12660,6 +12789,7 @@
         "instance": "BaseOven",
         "slot": "int"
       },
+      "ReturnTypeOverwrite": "float",
       "ReturnBehavior": 1,
       "TargetType": "BaseOven",
       "Category": "Entity",
@@ -12760,6 +12890,7 @@
         "instance": "ModularCarCodeLock",
         "codeEntered": "string"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "ModularCarCodeLock",
       "Category": "Player",
@@ -12920,6 +13051,7 @@
         "instance": "TimedExplosive",
         "entity": "BaseEntity"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "TimedExplosive",
       "Category": "Entity",
@@ -12940,6 +13072,7 @@
         "inventory": "PlayerInventory",
         "fuelType": "ItemDefinition"
       },
+      "ReturnTypeOverwrite": "Item",
       "ReturnBehavior": 1,
       "TargetType": "Chainsaw",
       "Category": "Item",
@@ -12958,6 +13091,7 @@
         "inventory": "PlayerInventory",
         "fuelType": "ItemDefinition"
       },
+      "ReturnTypeOverwrite": "Item",
       "ReturnBehavior": 1,
       "TargetType": "FlameThrower",
       "Category": "Item",
@@ -13156,6 +13290,7 @@
         "targetChannel": "ChatChannel",
         "player": "BasePlayer"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 3,
       "TargetType": "ConVar.Chat/<sayAs>d__19",
       "Category": "Player",
@@ -13223,6 +13358,7 @@
         "ammoSource": "IAmmoContainer",
         "GetOwnerPlayer()": "BasePlayer"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "BaseProjectile",
       "Category": "Weapon",
@@ -13245,6 +13381,7 @@
         "player": "BasePlayer",
         "instance": "WeaponRack"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 4,
       "TargetType": "WeaponRack",
       "Category": "Item",
@@ -13524,6 +13661,7 @@
         "itemCraftTask": "ItemCraftTask",
         "taskID": "int"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "ItemCrafter",
       "Category": "Item",
@@ -13543,6 +13681,7 @@
       "HookParameters": {
         "instance": "BaseHelicopter"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "BaseHelicopter",
       "Category": "Weapon",
@@ -13560,6 +13699,7 @@
       "HookParameters": {
         "instance": "CH47Helicopter"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "CH47Helicopter",
       "Category": "Weapon",
@@ -13577,6 +13717,7 @@
       "HookParameters": {
         "instance": "PlayerHelicopter"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "PlayerHelicopter",
       "Category": "Weapon",
@@ -13594,6 +13735,7 @@
       "HookParameters": {
         "instance": "PatrolHelicopter"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "PatrolHelicopter",
       "Category": "Weapon",
@@ -13611,6 +13753,7 @@
       "HookParameters": {
         "instance": "HeliPilotFlare"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "HeliPilotFlare",
       "Category": "Weapon",
@@ -13721,6 +13864,7 @@
         "item": "Item",
         "targetSlot": "int"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "Locker",
       "Category": "Item",
@@ -14098,6 +14242,7 @@
         "instance": "StorageContainer",
         "targetSlot": "int"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "StorageContainer",
       "Category": "Item",
@@ -14174,6 +14319,7 @@
       "HookParameters": {
         "url": "string"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "BoomBox",
       "Category": "Radio",
@@ -14259,6 +14405,7 @@
         "CurrentState": "BasicAIState",
         "newState": "BasicAIState"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 4,
       "TargetType": "BaseAIBrain",
       "Category": "NPC",
@@ -14453,6 +14600,7 @@
         "player": "BasePlayer",
         "instance": "HBHFSensor"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "HBHFSensor",
       "Category": "Player",
@@ -14596,6 +14744,7 @@
         "scientistPrefabs": "List`1",
         "spawnPositions": "List`1"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "BradleyAPC",
       "Category": "NPC",
@@ -14705,6 +14854,7 @@
         "instance": "ModularCar",
         "viaModule": "BaseVehicleModule"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "ModularCar",
       "Category": "Vehicle",
@@ -14727,6 +14877,7 @@
         "owner": "ModularCar",
         "instance": "ModularCarCodeLock"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "ModularCarCodeLock",
       "Category": "Vehicle",
@@ -14852,6 +15003,7 @@
         "instance": "NPCPlayer",
         "nPCPlayerCorpse": "NPCPlayerCorpse"
       },
+      "ReturnTypeOverwrite": "BaseCorpse",
       "ReturnBehavior": 1,
       "TargetType": "NPCPlayer",
       "Category": "NPC",
@@ -14876,6 +15028,7 @@
         "instance": "PlayerInventory",
         "id": "int"
       },
+      "ReturnTypeOverwrite": "Item",
       "ReturnBehavior": 1,
       "TargetType": "PlayerInventory",
       "Category": "Item",
@@ -14896,6 +15049,7 @@
         "instance": "PlayerInventory",
         "ammoType": "AmmoTypes"
       },
+      "ReturnTypeOverwrite": "Item",
       "ReturnBehavior": 1,
       "TargetType": "PlayerInventory",
       "Category": "Item",
@@ -14990,6 +15144,7 @@
         "instance": "SenseComponent",
         "entity": "BaseEntity"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "Rust.Ai.Gen2.SenseComponent",
       "Category": "NPC",
@@ -15799,6 +15954,7 @@
         "entity": "BaseEntity",
         "Portal": "DeepSeaPortal"
       },
+      "ReturnTypeOverwrite": "System.ValueTuple`2<System.Boolean,Translate/Phrase>",
       "ReturnBehavior": 1,
       "TargetType": "TriggerDeepSeaPortal",
       "Category": "Naval",
@@ -15883,6 +16039,7 @@
         "instance": "PlayerBoat",
         "player": "BasePlayer"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "PlayerBoat",
       "Category": "Naval",
@@ -16065,6 +16222,7 @@
       "HookParameters": {
         "arg": "Arg"
       },
+      "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
       "TargetType": "ConsoleSystem",
       "Category": "Server",

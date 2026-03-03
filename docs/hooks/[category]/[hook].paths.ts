@@ -37,7 +37,7 @@ export default {
 };
 
 function buildMarkdownFile(hooks: IHook[]) {
-  let overwrite = null;
+  let overwrite = '';
 
   // Check if the hook has an overwrite
   const hookOverwrite = `docs/hooks/overwrites/${hooks[0].Category}/${hooks[0].Name}.md`;
@@ -85,11 +85,11 @@ function getSection(fileContent: string, sectionName: string) {
 
 // Loop through all hooks and get all unique descriptions
 function getHookDescription(hooks: IHook[]) {
-  const output = [];
+  const output: string[] = [];
 
   for (const hook of hooks) {
     if (hook.HookDescription && !output.includes(hook.HookDescription)) {
-      output.push(hook.HookDescription.replace(/\r/g, "  "));
+      output.push(hook.HookDescription.replace(/\r/g, '  '));
     }
   }
 
@@ -113,8 +113,8 @@ This is an internal hook and will not be called in plugins. See [Internal Hooks]
 // Get the return behavior of the hook by return behavior type
 function getUsageReturn(hookData: IHook) {
   let returnType = 'non-null';
-  if (hookData.ReturnType != null && hookData.ReturnType != 'object')
-    returnType = hookData.ReturnType.replace(/`1</g, '&lt;')
+  if (hookData.ReturnTypeOverwrite != null && hookData.ReturnTypeOverwrite != 'object')
+    returnType = hookData.ReturnTypeOverwrite.replace(/`1</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/\//g, '.');
 
@@ -122,11 +122,10 @@ function getUsageReturn(hookData: IHook) {
     return `* No return behavior`;
   }
 
-  if (hookData.ReturnBehavior === ReturnBehaviour.ExitWhenValidType) {
-    return `* Return a ${returnType} value to override default behavior`;
-  }
-
-  if (hookData.ReturnBehavior === ReturnBehaviour.ExitWhenNonNull) {
+  if (
+    hookData.ReturnBehavior === ReturnBehaviour.ExitWhenValidType ||
+    hookData.ReturnBehavior === ReturnBehaviour.ExitWhenNonNull
+  ) {
     return `* Return a ${returnType} value to override default behavior`;
   }
 
@@ -147,7 +146,7 @@ function getExamplesMarkdown(hooks: IHook[]) {
       !acc.some(h => {
         if (h.HookParameters && hook.HookParameters) {
           return Object.keys(h.HookParameters).every(
-            key => h.HookParameters[key] === hook.HookParameters[key]
+            key => h.HookParameters?.[key] === hook.HookParameters?.[key]
           );
         }
         return false;
@@ -159,7 +158,8 @@ function getExamplesMarkdown(hooks: IHook[]) {
   }, [] as IHook[]);
 
   for (const hook of hooks) {
-    let returnType = hook.ReturnType != null && hook.ReturnType != 'void' ? 'object' : 'void';
+    let returnType =
+      hook.ReturnTypeOverwrite != null && hook.ReturnTypeOverwrite != 'void' ? 'object' : 'void';
     output += `\`\`\`csharp`;
     //TODO: Use proper return type instead of void
     output += `\nprivate ${returnType} ${hook.HookName}( ${getArgumentString(hook.HookParameters)} )`;
@@ -222,7 +222,7 @@ function getHookLineIndex(hookData: IHook) {
 }
 
 // Get the argument string from key value pairs
-function getArgumentString(args: { [key: string]: string }) {
+function getArgumentString(args?: { [key: string]: string }) {
   if (!args) {
     return '';
   }
