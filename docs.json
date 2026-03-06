@@ -13311,7 +13311,7 @@
           "rpc": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\tthis.guestCode = text;\r\n\t\tthis.hasGuestCode = (this.guestCode.Length > 0);\r\n\t\tthis.guestPlayers.Clear();\r\n\t\tthis.guestPlayers.Add(rpc.player.userID);\r\n\t}\r\n\tInterface.CallHook(\"OnCodeChanged\", rpc.player, this, text, flag);\r\n\tthis.DoEffect(this.effectCodeChanged.resourcePath);\r\n\tbase.SendNetworkUpdate(global::BasePlayer.NetworkQueue.Update);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tthis.guestCode = text;\r\n\t\tthis.hasGuestCode = (this.guestCode.Length > 0);\r\n\t\tthis.guestPlayers.Clear();\r\n\t\tthis.guestPlayers.Add(rpc.player.userID);\r\n\t}\r\n\tInterface.CallHook(\"OnCodeChanged\", rpc.player, this, text, flag);\r\n\tthis.DoEffect(this.effectCodeChanged.resourcePath);\r\n\tbase.SendNetworkUpdate(global::BasePlayer.NetworkQueue.Update);\r\n\tthis.UpdateParentBox();\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
