@@ -9265,11 +9265,11 @@
     },
     {
       "Type": 0,
-      "Name": "OnTechTreeNodeUnlocked",
+      "Name": "OnTechTreeNodeUnlocked [Group]",
       "HookName": "OnTechTreeNodeUnlocked",
       "HookParameters": {
         "instance": "Workbench",
-        "byID2": "NodeInstance",
+        "itemDef": "ItemDefinition",
         "player": "BasePlayer"
       },
       "ReturnBehavior": 0,
@@ -9282,7 +9282,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\tglobal::TechTreeData.NodeInstance byID2 = techTreeForLevel.GetByID(current3);\r\n\t\t\t\t\t\t\tif (byID2 != null && byID2.itemDef != null)\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\tplayer.blueprints.Unlock(byID2.itemDef);\r\n\t\t\t\t\t\t\t\tInterface.CallHook(\"OnTechTreeNodeUnlocked\", this, byID2, player);\r\n\t\t\t\t\t\t\t\tFacepunch.Rust.Analytics.Azure.OnBlueprintLearned(player, byID2.itemDef, \"techtree\", 0, this);\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\tDebug.Log(\"Player unlocked group :\" + current2.groupName);\r\n\t\t\t\t\t}\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\tglobal::TechTreeData.NodeInstance byID2 = techTreeForLevel.GetByID(current3);\r\n\t\t\t\t\t\t\tif (byID2 != null && byID2.itemDef != null)\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\tplayer.blueprints.Unlock(byID2.itemDef);\r\n\t\t\t\t\t\t\t\tInterface.CallHook(\"OnTechTreeNodeUnlocked\", this, byID2.itemDef, player);\r\n\t\t\t\t\t\t\t\tFacepunch.Rust.Analytics.Azure.OnBlueprintLearned(player, byID2.itemDef, \"techtree\", 0, this);\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\tDebug.Log(\"Player unlocked group :\" + current2.groupName);\r\n\t\t\t\t\t}\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -16192,6 +16192,27 @@
         "Arguments": {}
       },
       "CodeAfterInjection": "//---\r\n\tbool flag = false;\r\n\tint num = 0;\r\n\tforeach (global::BaseEntity current in this.myTrigger.entityContents)\r\n\t{\r\n\t\tglobal::BasePlayer basePlayer = current as global::BasePlayer;\r\n\t\tif (basePlayer != null && Interface.CallHook(\"OnSensorDetect\", this, basePlayer) == null && !(basePlayer == null) && !basePlayer.IsDead() && !basePlayer.IsSleeping() && basePlayer.isServer)\r\n\t\t{\r\n\t\t\tif (!flag)\r\n\t\t\t{\r\n\t\t\t\tprivilege = this.GetPrivilege(true);\r\n\t\t\t\tflag = true;\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnTechTreeNodeUnlocked [Non Group]",
+      "HookName": "OnTechTreeNodeUnlocked",
+      "HookParameters": {
+        "instance": "Workbench",
+        "current4": "ItemDefinition",
+        "player": "BasePlayer"
+      },
+      "ReturnBehavior": 0,
+      "TargetType": "Workbench",
+      "Category": "TechTree",
+      "MethodData": {
+        "MethodName": "RPC_TechTreeUnlock",
+        "ReturnType": "void",
+        "Arguments": {
+          "msg": "BaseEntity/RPCMessage"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\tglobal::TechTreeData.NodeInstance byID2 = techTreeForLevel.GetByID(current3);\r\n\t\t\t\t\t\t\tif (byID2 != null && byID2.itemDef != null)\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\tplayer.blueprints.Unlock(byID2.itemDef);\r\n\t\t\t\t\t\t\t\tInterface.CallHook(\"OnTechTreeNodeUnlocked\", this, byID2.itemDef, player);\r\n\t\t\t\t\t\t\t\tFacepunch.Rust.Analytics.Azure.OnBlueprintLearned(player, byID2.itemDef, \"techtree\", 0, this);\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\tDebug.Log(\"Player unlocked group :\" + current2.groupName);\r\n\t\t\t\t\t}\r\n//---\r\n"
     },
     {
       "Type": 0,
