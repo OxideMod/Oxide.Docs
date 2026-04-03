@@ -9166,52 +9166,6 @@
       "CodeAfterInjection": "public int TryUseFuel(float seconds, float fuelUsedPerSecond)\r\n{\r\n\tglobal::StorageContainer fuelContainer = this.GetFuelContainer();\r\n\tobject returnvar = Interface.CallHook(\"CanUseFuel\", this, fuelContainer, seconds, fuelUsedPerSecond);\r\n\tif (returnvar is int)\r\n\t{\r\n\t\treturn (int)returnvar;\r\n\t}\r\n\tif (fuelContainer.IsRealNull())\r\n//---\r\n"
     },
     {
-      "Type": 0,
-      "Name": "CanUnlockTechTreeNode",
-      "HookName": "CanUnlockTechTreeNode",
-      "HookParameters": {
-        "player": "BasePlayer",
-        "node": "NodeInstance",
-        "instance": "TechTreeData"
-      },
-      "ReturnTypeOverwrite": "bool",
-      "ReturnBehavior": 1,
-      "TargetType": "TechTreeData",
-      "Category": "TechTree",
-      "MethodData": {
-        "MethodName": "PlayerCanUnlock",
-        "ReturnType": "bool",
-        "Arguments": {
-          "player": "BasePlayer",
-          "node": "TechTreeData/NodeInstance"
-        }
-      },
-      "CodeAfterInjection": "public bool PlayerCanUnlock(global::BasePlayer player, global::TechTreeData.NodeInstance node)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"CanUnlockTechTreeNode\", player, node, this);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\treturn !this.HasPlayerUnlocked(player, node);\r\n//---\r\n"
-    },
-    {
-      "Type": 0,
-      "Name": "CanUnlockTechTreeNodePath",
-      "HookName": "CanUnlockTechTreeNodePath",
-      "HookParameters": {
-        "player": "BasePlayer",
-        "node": "NodeInstance",
-        "instance": "TechTreeData"
-      },
-      "ReturnTypeOverwrite": "bool",
-      "ReturnBehavior": 1,
-      "TargetType": "TechTreeData",
-      "Category": "TechTree",
-      "MethodData": {
-        "MethodName": "PlayerHasPathForUnlock",
-        "ReturnType": "bool",
-        "Arguments": {
-          "player": "BasePlayer",
-          "node": "TechTreeData/NodeInstance"
-        }
-      },
-      "CodeAfterInjection": "public bool PlayerHasPathForUnlock(global::BasePlayer player, global::TechTreeData.NodeInstance node)\r\n{\r\n\tobject returnvar = Interface.CallHook(\"CanUnlockTechTreeNodePath\", player, node, this);\r\n\tif (returnvar is bool)\r\n\t{\r\n\t\treturn (bool)returnvar;\r\n\t}\r\n\tglobal::TechTreeData.NodeInstance entryNode = this.GetEntryNode();\r\n//---\r\n"
-    },
-    {
       "Type": 1,
       "Name": "OnIORefCleared [patch]",
       "HookName": "OnIORefCleared [patch]",
