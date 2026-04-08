@@ -9202,7 +9202,7 @@
       "HookName": "OnTechTreeNodeUnlock",
       "HookParameters": {
         "instance": "Workbench",
-        "current": "NodeInstance",
+        "byID": "NodeInstance",
         "player": "BasePlayer"
       },
       "ReturnBehavior": 1,
@@ -9215,7 +9215,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\tint amount = player.inventory.GetAmount(itemid, false);\r\n\t\t\tforeach (global::TechTreeData.NodeInstance current in pooledList)\r\n\t\t\t{\r\n\t\t\t\tif (current != null && !(current.itemDef == null))\r\n\t\t\t\t{\r\n\t\t\t\t\tif (Interface.CallHook(\"OnTechTreeNodeUnlock\", this, current, player) != null)\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\treturn;\r\n\t\t\t\t\t}\r\n\t\t\t\t\tint num2;\r\n\t\t\t\t\tnum += global::Workbench.ScrapForResearch(current.itemDef, techTreeForLevel.techTreeLevel, out num2);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tif (byID == null)\r\n\t{\r\n\t\tDebug.Log(\"Node for unlock not found :\" + id.ToString());\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnTechTreeNodeUnlock\", this, byID, player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tusing (PooledList<global::TechTreeData.NodeInstance> pooledList = Pool.Get<PooledList<global::TechTreeData.NodeInstance>>())\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -9223,8 +9223,9 @@
       "HookName": "OnTechTreeNodeUnlocked",
       "HookParameters": {
         "instance": "Workbench",
-        "itemDef": "ItemDefinition",
-        "player": "BasePlayer"
+        "byID": "NodeInstance",
+        "player": "BasePlayer",
+        "i": "PooledList`1"
       },
       "ReturnBehavior": 0,
       "TargetType": "Workbench",
@@ -9236,7 +9237,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\tglobal::TechTreeData.NodeInstance byID2 = techTreeForLevel.GetByID(current3);\r\n\t\t\t\t\t\t\tif (byID2 != null && byID2.itemDef != null)\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\tplayer.blueprints.Unlock(byID2.itemDef);\r\n\t\t\t\t\t\t\t\tInterface.CallHook(\"OnTechTreeNodeUnlocked\", this, byID2.itemDef, player);\r\n\t\t\t\t\t\t\t\tFacepunch.Rust.Analytics.Azure.OnBlueprintLearned(player, byID2.itemDef, \"techtree\", 0, this);\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\tDebug.Log(\"Player unlocked group :\" + current2.groupName);\r\n\t\t\t\t\t}\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\t\t\tDebug.Log(\"Player unlocked group :\" + current2.groupName);\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\t\t\t\tplayer.inventory.Take(null, itemid, num);\r\n\t\t\t\tplayer.blueprints.UnlockList(pooledList2);\r\n\t\t\t\tInterface.CallHook(\"OnTechTreeNodeUnlocked\", this, byID, player, pooledList2);\r\n\t\t\t\tforeach (global::ItemDefinition current4 in pooledList2)\r\n\t\t\t\t{\r\n\t\t\t\t\tint num4;\r\n\t\t\t\t\tint num3 = global::Workbench.ScrapForResearch(current4, techTreeForLevel.techTreeLevel, out num4);\r\n\t\t\t\t\tFacepunch.Rust.Analytics.Azure.OnBlueprintLearned(player, current4, \"techtree\", num3 + num4, this);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -16166,7 +16167,7 @@
           "msg": "BaseEntity/RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\tglobal::TechTreeData.NodeInstance byID2 = techTreeForLevel.GetByID(current3);\r\n\t\t\t\t\t\t\tif (byID2 != null && byID2.itemDef != null)\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\tplayer.blueprints.Unlock(byID2.itemDef);\r\n\t\t\t\t\t\t\t\tInterface.CallHook(\"OnTechTreeNodeUnlocked\", this, byID2.itemDef, player);\r\n\t\t\t\t\t\t\t\tFacepunch.Rust.Analytics.Azure.OnBlueprintLearned(player, byID2.itemDef, \"techtree\", 0, this);\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\tDebug.Log(\"Player unlocked group :\" + current2.groupName);\r\n\t\t\t\t\t}\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\t\t\tDebug.Log(\"Player unlocked group :\" + current2.groupName);\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\t\t\t\tplayer.inventory.Take(null, itemid, num);\r\n\t\t\t\tplayer.blueprints.UnlockList(pooledList2);\r\n\t\t\t\tInterface.CallHook(\"OnTechTreeNodeUnlocked\", this, byID, player, pooledList2);\r\n\t\t\t\tforeach (global::ItemDefinition current4 in pooledList2)\r\n\t\t\t\t{\r\n\t\t\t\t\tint num4;\r\n\t\t\t\t\tint num3 = global::Workbench.ScrapForResearch(current4, techTreeForLevel.techTreeLevel, out num4);\r\n\t\t\t\t\tInterface.CallHook(\"OnTechTreeNodeUnlocked\", this, current4, player);\r\n//---\r\n"
     },
     {
       "Type": 0,
