@@ -71,10 +71,10 @@ private void TestCommand(IPlayer player, string command, string[] args)
 
 ## Info
 
-Information about the plugin. plugin name (with spaces between words), Developper or maintainer name, and a 3 digit version number.
+Information about the plugin. plugin name (with spaces between words), Developer or maintainer name, and a 3 digit version number.
 
 ```csharp
-[Info("Plugin name", "Developper/Maintainer", "1.0.0")]
+[Info("Plugin name", "Developer/Maintainer", "1.0.0")]
 ```
 
 ## Description
@@ -151,7 +151,7 @@ Note: see harmony documentation for info about harmony patches
 
 ## Reference
 
-Add the ablility to reference additionnal DLL files to be used by the plugin
+Add the ability to reference additional DLL files to be used by the plugin
 
 ```csharp
 //Reference: System.Drawing

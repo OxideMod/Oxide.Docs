@@ -33,7 +33,7 @@ The `In` method will run the `callback` once after the `interval` has passed in 
 
 ## `Every`
 
-The `Every` method will continuously run the `callback` every `interval` milliseconds
+The `Every` method will continuously run the `callback` every `interval` seconds
 
 ::: details Github Location
 [`Every`](https://github.com/OxideMod/Oxide.CSharp/blob/develop/src/PluginTimers.cs#L94)
@@ -41,7 +41,7 @@ The `Every` method will continuously run the `callback` every `interval` millise
 
 ## `Repeat`
 
-The `Repeat` method will run the `callback` every `interval` milliseconds for a set number of `repeats`
+The `Repeat` method will run the `callback` every `interval` seconds for a set number of `repeats`
 
 ::: details Github Location
 [`Repeat`](https://github.com/OxideMod/Oxide.CSharp/blob/develop/src/PluginTimers.cs#L105)

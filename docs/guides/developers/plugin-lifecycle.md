@@ -20,7 +20,7 @@ The first state a plugin is in during set up is Resolving, after which...
 Assuming all of the above operations complete successfully, then a plugin is considered Resolved and initialization begins.
 ## Initialization
 
-Init is the earliest hook in the plugin lifecycle, occuring immediately after a plugin has resolved. Init occurs before dependencies are available. Any exceptions caused by initialization hooks will prevent further initialization, rollback compiliation, and emit an error.
+Init is the earliest hook in the plugin lifecycle, occuring immediately after a plugin has resolved. Init occurs before dependencies are available. Any exceptions caused by initialization hooks will prevent further initialization, rollback compilation, and emit an error.
 ```csharp
 void Init()
 {

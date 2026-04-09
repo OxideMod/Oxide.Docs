@@ -77,27 +77,29 @@ webrequest.Enqueue("http://www.google.com/search?q=umod", "param1=value1", (code
 
 The HTTP PUT is generally used to update existing resources. The request body of a PUT request generally contains an updated representation of the original resource. HTTP status code 200 (OK) OR HTTP status code 204 (No Content) are expected in response to a successful PUT request.
 
+```csharp
 webrequest.Enqueue("http://www.google.com/search?q=umod", null, (code, response) =>
 {
-if (code != 200 || response == null)
-{
-Puts($"Couldn't get an answer from Google!");
+    if (code != 200 || response == null)
+    {
+        Puts($"Couldn't get an answer from Google!");
         return;
     }
     Puts($"Google answered: {response}");
 }, this, RequestMethod.PUT);
+```
 
 ## POST and PUT body
 
 Typically an updated resource is represented in a POST/PUT request body as a query string.
 
 ```csharp
-Dictionary<string,string> parameters = new Dictionary<string,string>();
+Dictionary<string, string> parameters = new Dictionary<string, string>();
 
 parameters.Add("param1", "value1");
 parameters.Add("param2", "value2");
 
-string[] body = string.Join("&", parameters.Cast<string>().Select(key => string.Format("{0}={1}", key, source[key]));
+string body = string.Join("&", parameters.Select(p => $"{p.Key}={p.Value}"));
 webrequest.Enqueue("http://www.google.com/search?q=umod", body, (code, response) =>
 {
     if (code != 200 || response == null)
@@ -117,7 +119,7 @@ The following example demonstrates how to refactor delegate behavior by encapsul
 [Command("get")]
 private void GetRequest(IPlayer player, string command, string[] args)
 {
-    webrequest.EnqueueGet("http://www.google.com/search?q=umod", (code, response) => GetCallback(code, response, player), this);
+    webrequest.Enqueue("http://www.google.com/search?q=umod", null, (code, response) => GetCallback(code, response, player), this, RequestMethod.GET);
 }
 
 private void GetCallback(int code, string response, IPlayer player)

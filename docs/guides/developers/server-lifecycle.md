@@ -9,7 +9,7 @@ The lifecycle of a game server application
 ## Server application
 ### Initialization
 
-The first initialization state generally occurs very early during the start-up process of a game server. uMod does the following...
+The first initialization state generally occurs very early during the start-up process of a game server. Oxide does the following...
 
 1. Create a temporary in-memory PipeLogger to store any log messages made during initialization.
 1. Loads Oxide configuration files.
@@ -65,9 +65,9 @@ The many mysteries of any given game's networking stack are generally hidden fro
 
 Quite often game developers implement multiplayer functionality and distribute a separate dedicated server application to the community. Server administrators then self-host or hire GSPs (game service providers) to host dedicated servers on their behalf. This is typically beneficial to game developers because a dedicated server can prevent cheating and increase the longevity of their game by allowing server-side customizations.
 
-Dedicated servers typically announce to players that a server is available using an official server list. Game developers can choose to what extent servers with any given modifications are allowed. uMod does not support servers that do not appear on the official server list.
+Dedicated servers typically announce to players that a server is available using an official server list. Game developers can choose to what extent servers with any given modifications are allowed. Oxide does not support servers that do not appear on the official server list.
 
-uMod does not support player client modification, except when the game networking stack requires using a game client as a server (e.g. P2P).
+Oxide does not support player client modification, except when the game networking stack requires using a game client as a server (e.g. P2P).
 ### Handshake
 
 The following hooks allow plugins to intercept or listen to connection events.
@@ -102,7 +102,7 @@ void OnPlayerConnected(IPlayer player)
 
 ### Disconnect monitoring
 ```csharp
-bool OnPlayerDisconnected(IPlayer player);
+void OnPlayerDisconnected(IPlayer player);
 void OnPlayerKicked(IPlayer player, string reason);
 ```
 

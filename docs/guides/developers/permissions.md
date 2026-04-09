@@ -100,8 +100,14 @@ string GroupParent = permission.GetGroupParent("GroupName");
 
 Get permissions for a group
 
+The second parameter `parents` controls whether to include permissions inherited from parent groups.
+
 ```csharp
+// Get only direct permissions for the group
 string[] permissions = permission.GetGroupPermissions("GroupName", false);
+
+// Include inherited permissions from parent groups
+string[] allPermissions = permission.GetGroupPermissions("GroupName", true);
 ```
 
 Migrate group

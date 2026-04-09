@@ -153,7 +153,7 @@ public class MyFirstPlugin : RustPlugin
 }
 ```
 
-After saving and reuploading your plugin to your server, every time a player sends a chat message, a message will be printed to the server console indicating who sent the message and what the message was.
+After saving and reuploading your plugin to your server, every time a player connects, a message will be printed to the server console indicating who connected.
 
 ### Step 6: Implementing Configuration
 
@@ -253,7 +253,7 @@ Finally, modify your `HelloCommand` method to access the `ReplyMessage` field in
             PrintToChat(player, "You don't have permission to use this command!");
             return;
         }
-        PrintToChat(player, helloMessage);
+        PrintToChat(player, _configuration.ReplyMessage);
     }
 //Existing code..
 ```

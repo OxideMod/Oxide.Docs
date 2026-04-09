@@ -119,7 +119,7 @@ By definition a non-query is a query which modifies data and does not retrieve d
 
 ```csharp
 int exampleId = 2;
-string sqlQuery = "UPDATE example_table SET `field1` = @0, `field2` = @1  WHERE `id` = @3;";
+string sqlQuery = "UPDATE example_table SET `field1` = @0, `field2` = @1  WHERE `id` = @2;";
 Sql sqlCommand = Oxide.Core.Database.Sql.Builder.Append(sqlQuery, "field1 value", "field2 value", exampleId);
 
 sqlLibrary.ExecuteNonQuery(sqlCommand, sqlConnection);

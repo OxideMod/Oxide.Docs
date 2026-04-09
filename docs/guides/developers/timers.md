@@ -9,10 +9,19 @@ Timers generally execute functions after a set interval. Optionally continuous, 
 
 ## Single timer
 
-Executes a function once after the specified delay interval.
+Executes a function once after the specified delay in seconds. `timer.In` is an alias for `timer.Once`.
 
 ```csharp
 Timer myTimer = timer.Once(1f, () =>
+{
+    Puts("Hello world!");
+});
+```
+
+or equivalently:
+
+```csharp
+Timer myTimer = timer.In(1f, () =>
 {
     Puts("Hello world!");
 });

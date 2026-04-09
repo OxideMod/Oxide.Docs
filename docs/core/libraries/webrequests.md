@@ -20,5 +20,5 @@ after: timers
 The `Enqueue` method is used for sending `POST`, `PUT` and `GET` requests, the method also supports `Headers` which can be supplied via the arguments.
 
 ::: details Github Location
-[`Enqeue`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/WebRequests.cs#L492)
+[`Enqueue`](https://github.com/OxideMod/Oxide.Core/blob/develop/src/Libraries/WebRequests.cs#L492)
 :::

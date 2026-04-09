@@ -40,8 +40,8 @@ Modern Oxide extensions include several advanced features:
 
 Before you can install extensions, make sure you have:
 
-- **A working Rust server set up and running**. If you need help with this, please check out our [Server Setup](todo_server_setup_linky) Guide.
-- **Oxide installed on your server**. If you need help with this, please check out our [Install Oxide](todo_install_oxide_linky) Guide.
+- **A working Rust server set up and running**. If you need help with this, please check out our [Server Setup](setup-server) Guide.
+- **Oxide installed on your server**. If you need help with this, please check out our [Install Oxide](install-oxide) Guide.
 
 ## Installing Extensions
 

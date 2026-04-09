@@ -123,7 +123,7 @@ private class UnityVector3Converter : JsonConverter
 }
 ```
 
-With this sample code, the serialized data will be compact and look like this for Vertor3d data.
+With this sample code, the serialized data will be compact and look like this for Vector3 data.
 
 ```json
 "position": "-2310 11.10 574",
