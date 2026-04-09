@@ -1284,14 +1284,14 @@
 				"permission": "string"
 				}
 			},
-			"CodeAfterInjection": "\t\t\telse\r\n\t\t\t{\r\n\t\t\t\tbool flag7 = !groupData.Perms.Remove(permission);\r\n\t\t\t\tif (!flag7)\r\n\t\t\t\t{\r\n\t\t\t\t\tInterface.Call(\"OnGroupPermissionRevoked\", new object[] { groupName, permission });\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+			"CodeAfterInjection": "\telse\r\n\t{\r\n\t\tif (!groupData.Perms.Remove(permission))\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tInterface.Call(\"OnGroupPermissionRevoked\", new object[] { groupName, permission });\r\n\t\treturn;\r\n\t}\r\n}"
 		},
 		{
 			"Type": 0,
 			"Name": "OnUserPermissionRevoked",
 			"HookName": "OnUserPermissionRevoked",
 			"HookParameters": {
-				"groupName": "string",
+				"playerId": "string",
 				"permission": "string"
 			},
 			"ReturnBehavior": 0,
@@ -1299,14 +1299,14 @@
 			"Category": "Permission",
 			"HookDescription": "Called when a user permission is revoked",
 			"MethodData": {
-				"MethodName": "RevokeGroupPermission",
+				"MethodName": "RevokeUserPermission",
 				"ReturnType": "void",
 				"Arguments": {
-				"groupName": "string",
-				"permission": "string"
+				"playerId": "string",
+				"permission": "string"				
 				}
 			},
-			"CodeAfterInjection": "\t\t\telse\r\n\t\t\t{\r\n\t\t\t\tbool flag7 = !groupData.Perms.Remove(permission);\r\n\t\t\t\tif (!flag7)\r\n\t\t\t\t{\r\n\t\t\t\t\tInterface.Call(\"OnGroupPermissionRevoked\", new object[] { groupName, permission });\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+			"CodeAfterInjection": "\telse\r\n\t{\r\n\t\tif (!userData.Perms.Remove(permission))\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tInterface.Call(\"OnUserPermissionRevoked\", new object[] { playerId, permission });\r\n\t\treturn;\r\n\t}\r\n}"
 		},
 		{
 			"Type": 0,
@@ -1325,17 +1325,18 @@
 				"ReturnType": "void",
 				"Arguments": {
 				"groupName": "string",
-				"permission": "string"
+				"permission": "string",
+				"owner":"Plugin"
 				}
 			},
-			"CodeAfterInjection": "\t\t\telse\r\n\t\t\t{\r\n\t\t\t\tbool flag9 = !groupData.Perms.Add(permission);\r\n\t\t\t\tif (!flag9)\r\n\t\t\t\t{\r\n\t\t\t\t\tInterface.Call(\"OnGroupPermissionGranted\", new object[] { groupName, permission });\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+			"CodeAfterInjection": "\telse\r\n\t{\r\n\t\tif (!groupData.Perms.Add(permission))\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tInterface.Call(\"OnGroupPermissionGranted\", new object[] { groupName, permission });\r\n\t\treturn;\r\n\t}\r\n}"
 		},
 		{
 			"Type": 0,
 			"Name": "OnUserPermissionGranted",
 			"HookName": "OnUserPermissionGranted",
 			"HookParameters": {
-				"groupName": "string",
+				"playerId": "string",
 				"permission": "string"
 			},
 			"ReturnBehavior": 0,
@@ -1346,11 +1347,12 @@
 				"MethodName": "GrantUserPermission",
 				"ReturnType": "void",
 				"Arguments": {
-				"groupName": "string",
-				"permission": "string"
+				"playerId": "string",
+				"permission": "string",
+				"owner" :"Plugin"
 				}
 			},
-			"CodeAfterInjection": "\t\telse\r\n\t\t{\r\n\t\t\tbool flag8 = !userData.Perms.Add(permission);\r\n\t\t\tif (!flag8)\r\n\t\t\t{\r\n\t\t\t\tInterface.Call(\"OnUserPermissionGranted\", new object[] { playerId, permission });\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+			"CodeAfterInjection": "\telse\r\n\t{\r\n\t\tif (!userData.Perms.Add(permission))\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tInterface.Call(\"OnUserPermissionGranted\", new object[] { playerId, permission });\r\n\t\treturn;\r\n\t}\r\n}"
 		},
 		{
 			"Type": 0,
@@ -1372,7 +1374,7 @@
 				"groupName": "string"
 				}
 			},
-			"CodeAfterInjection": "\tif (!flag)\r\n\t{\r\n\t\tUserData userData = this.GetUserData(playerId);\r\n\t\tbool flag2 = !userData.Groups.Add(groupName);\r\n\t\tif (!flag2)\r\n\t\t{\r\n\t\t\tInterface.Call(\"OnUserGroupAdded\", new object[] { playerId, groupName });\r\n\t\t}\r\n\t}\r\n}"
+			"CodeAfterInjection": "public void AddUserGroup(string playerId, string groupName)\r\n{\r\n\tif (!this.GroupExists(groupName))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (!this.GetUserData(playerId).Groups.Add(groupName))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tInterface.Call(\"OnUserGroupAdded\", new object[] { playerId, groupName });\r\n}"
 		},
 		{
 			"Type": 0,
@@ -1394,7 +1396,7 @@
 				"groupName": "string"
 				}
 			},
-			"CodeAfterInjection": "\t\telse\r\n\t\t{\r\n\t\t\tbool flag4 = !userData.Groups.Remove(groupName);\r\n\t\t\tif (!flag4)\r\n\t\t\t{\r\n\t\t\t\tInterface.Call(\"OnUserGroupRemoved\", new object[] { playerId, groupName });\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+			"CodeAfterInjection": "\telse\r\n\t{\r\n\t\tif (!userData.Groups.Remove(groupName))\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tInterface.Call(\"OnUserGroupRemoved\", new object[] { playerId, groupName });\r\n\t\treturn;\r\n\t}\r\n}"
 		},
 		{
 			"Type": 0,
