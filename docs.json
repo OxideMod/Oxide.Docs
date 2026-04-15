@@ -9241,7 +9241,7 @@
     },
     {
       "Type": 0,
-      "Name": "OnTechTreeNodeUnlocked",
+      "Name": "OnTechTreeNodeUnlocked [Group]",
       "HookName": "OnTechTreeNodeUnlocked",
       "HookParameters": {
         "instance": "Workbench",
@@ -16169,6 +16169,27 @@
         "Arguments": {}
       },
       "CodeAfterInjection": "//---\r\n\tbool flag = false;\r\n\tint num = 0;\r\n\tforeach (global::BaseEntity current in this.myTrigger.entityContents)\r\n\t{\r\n\t\tglobal::BasePlayer basePlayer = current as global::BasePlayer;\r\n\t\tif (basePlayer != null && Interface.CallHook(\"OnSensorDetect\", this, basePlayer) == null && !(basePlayer == null) && !basePlayer.IsDead() && !basePlayer.IsSleeping() && basePlayer.isServer)\r\n\t\t{\r\n\t\t\tif (!flag)\r\n\t\t\t{\r\n\t\t\t\tprivilege = this.GetPrivilege(true);\r\n\t\t\t\tflag = true;\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnTechTreeNodeUnlocked [Non Group]",
+      "HookName": "OnTechTreeNodeUnlocked",
+      "HookParameters": {
+        "instance": "Workbench",
+        "current4": "ItemDefinition",
+        "player": "BasePlayer"
+      },
+      "ReturnBehavior": 0,
+      "TargetType": "Workbench",
+      "Category": "TechTree",
+      "MethodData": {
+        "MethodName": "RPC_TechTreeUnlock",
+        "ReturnType": "void",
+        "Arguments": {
+          "msg": "BaseEntity.RPCMessage"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t\t\t\t\t\tDebug.Log(\"Player unlocked group :\" + current2.groupName);\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\t\t\t\tplayer.inventory.Take(null, itemid, num);\r\n\t\t\t\tplayer.blueprints.UnlockList(pooledList2);\r\n\t\t\t\tInterface.CallHook(\"OnTechTreeNodeUnlocked\", this, byID, player, pooledList2);\r\n\t\t\t\tforeach (global::ItemDefinition current4 in pooledList2)\r\n\t\t\t\t{\r\n\t\t\t\t\tint num4;\r\n\t\t\t\t\tint num3 = global::Workbench.ScrapForResearch(current4, techTreeForLevel.techTreeLevel, out num4);\r\n\t\t\t\t\tInterface.CallHook(\"OnTechTreeNodeUnlocked\", this, current4, player);\r\n//---\r\n"
     },
     {
       "Type": 0,
