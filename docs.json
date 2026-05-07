@@ -1440,7 +1440,7 @@
           "msg": "ProtoBuf.CreateBuilding"
         }
       },
-      "CodeAfterInjection": "//---\r\n\ttarget.normal = msg.normal;\r\n\ttarget.rotation = msg.rotation;\r\n\ttarget.player = ownerPlayer;\r\n\ttarget.isHoldingShift = msg.isHoldingShift;\r\n\ttarget.valid = true;\r\n\tif (Interface.CallHook(\"CanBuild\", this, construction, target) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (ShouldParent(target.entity, deployable))\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\ttarget.isHoldingShift = msg.isHoldingShift;\r\n\ttarget.isSnapped = msg.isSnapped;\r\n\ttarget.snappedPosition = msg.snappedPosition;\r\n\ttarget.snappedRotation = msg.snappedRotation;\r\n\ttarget.valid = true;\r\n\tif (Interface.CallHook(\"CanBuild\", this, construction, target) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (ShouldParent(target.entity, deployable))\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -1673,7 +1673,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "[RPC_Server]\r\n[RPC_Server.IsVisible(3f)]\r\npublic void Pickup(RPCMessage msg)\r\n{\r\n\tif (msg.player.CanInteract() && this.item != null && allowPickup && Interface.CallHook(\"OnItemPickup\", this.item, msg.player, this) == null && CanOpenInSafeZone(msg.player))\r\n\t{\r\n\t\tItemModContainer component = this.item.info.GetComponent<ItemModContainer>();\r\n\t\tif (!(component != null) || !component.canLootInWorld || !(component.pickupInWorldDelay > 0f) || !(Mathf.Abs(pickupStartTime + component.pickupInWorldDelay - UnityEngine.Time.realtimeSinceStartup) > ConVar.AntiHack.rpc_timer_forgiveness))\r\n\t\t{\r\n\t\t\tClientRPC(RpcTarget.NetworkGroup(\"PickupSound\"));\r\n//---\r\n"
+      "CodeAfterInjection": "[RPC_Server.IsVisible(3f)]\r\n[RPC_Server]\r\npublic void Pickup(RPCMessage msg)\r\n{\r\n\tif (msg.player.CanInteract() && this.item != null && allowPickup && Interface.CallHook(\"OnItemPickup\", this.item, msg.player, this) == null && CanOpenInSafeZone(msg.player))\r\n\t{\r\n\t\tItemModContainer component = this.item.info.GetComponent<ItemModContainer>();\r\n\t\tif (!(component != null) || !component.canLootInWorld || !(component.pickupInWorldDelay > 0f) || !(Mathf.Abs(pickupStartTime + component.pickupInWorldDelay - UnityEngine.Time.realtimeSinceStartup) > ConVar.AntiHack.rpc_timer_forgiveness))\r\n\t\t{\r\n\t\t\tClientRPC(RpcTarget.NetworkGroup(\"PickupSound\"));\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -2351,7 +2351,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "[RPC_Server.IsVisible(3f)]\r\n[RPC_Server]\r\npublic void RPC_OpenShop(RPCMessage msg)\r\n{\r\n\tif (OccupiedCheck(msg.player) && Interface.CallHook(\"OnVendingShopOpen\", this, msg.player) == null)\r\n\t{\r\n\t\tOpenShop(msg.player);\r\n\t\tInterface.CallHook(\"OnVendingShopOpened\", this, msg.player);\r\n\t}\r\n}\r\n"
+      "CodeAfterInjection": "[RPC_Server]\r\n[RPC_Server.IsVisible(3f)]\r\npublic void RPC_OpenShop(RPCMessage msg)\r\n{\r\n\tif (OccupiedCheck(msg.player) && Interface.CallHook(\"OnVendingShopOpen\", this, msg.player) == null)\r\n\t{\r\n\t\tOpenShop(msg.player);\r\n\t\tInterface.CallHook(\"OnVendingShopOpened\", this, msg.player);\r\n\t}\r\n}\r\n"
     },
     {
       "Type": 0,
@@ -2371,7 +2371,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "[RPC_Server.IsVisible(3f)]\r\n[RPC_Server]\r\npublic void RPC_RotateVM(RPCMessage msg)\r\n{\r\n\tif (Interface.CallHook(\"OnRotateVendingMachine\", this, msg.player) == null && CanRotate())\r\n\t{\r\n\t\tUpdateEmptyFlag();\r\n\t\tif (msg.player.CanBuild() && IsInventoryEmpty())\r\n\t\t{\r\n\t\t\tbase.transform.rotation = Quaternion.LookRotation(-base.transform.forward, base.transform.up);\r\n//---\r\n"
+      "CodeAfterInjection": "[RPC_Server]\r\n[RPC_Server.IsVisible(3f)]\r\npublic void RPC_RotateVM(RPCMessage msg)\r\n{\r\n\tif (Interface.CallHook(\"OnRotateVendingMachine\", this, msg.player) == null && CanRotate())\r\n\t{\r\n\t\tUpdateEmptyFlag();\r\n\t\tif (msg.player.CanBuild() && IsInventoryEmpty())\r\n\t\t{\r\n\t\t\tbase.transform.rotation = Quaternion.LookRotation(-base.transform.forward, base.transform.up);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -3040,7 +3040,7 @@
           "rpc": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "[RPC_Server.MaxDistance(3f)]\r\n[RPC_Server]\r\nprivate void RPC_Spin(RPCMessage rpc)\r\n{\r\n\tif (rpc.player.CanInteract() && AllowPlayerSpins() && (AnyoneSpin() || rpc.player.CanBuild()) && Interface.CallHook(\"OnSpinWheel\", rpc.player, this) == null && !(velocity > 15f))\r\n\t{\r\n\t\tvelocity += UnityEngine.Random.Range(4f, 7f);\r\n\t\tToggleChildEntityColliders(state: false);\r\n\t}\r\n}\r\n"
+      "CodeAfterInjection": "[RPC_Server]\r\n[RPC_Server.MaxDistance(3f)]\r\nprivate void RPC_Spin(RPCMessage rpc)\r\n{\r\n\tif (rpc.player.CanInteract() && AllowPlayerSpins() && (AnyoneSpin() || rpc.player.CanBuild()) && Interface.CallHook(\"OnSpinWheel\", rpc.player, this) == null && !(velocity > 15f))\r\n\t{\r\n\t\tvelocity += UnityEngine.Random.Range(4f, 7f);\r\n\t\tToggleChildEntityColliders(state: false);\r\n\t}\r\n}\r\n"
     },
     {
       "Type": 0,
@@ -7009,7 +7009,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "[RPC_Server.IsVisible(3f)]\r\n[RPC_Server]\r\n[RPC_Server.CallsPerSecond(5uL)]\r\npublic void TurnOn(RPCMessage msg)\r\n{\r\n\tif (Interface.CallHook(\"OnEngineStart\", this, msg.player) == null && fuelSystem.HasFuel() && PlayerBoat.IsPlayerAuthedOnChildEntity(this, msg.player, authedIfNoPrivOrLock: true))\r\n\t{\r\n\t\tTurnOn();\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "[RPC_Server.CallsPerSecond(5uL)]\r\n[RPC_Server.IsVisible(3f)]\r\n[RPC_Server]\r\npublic void TurnOn(RPCMessage msg)\r\n{\r\n\tif (Interface.CallHook(\"OnEngineStart\", this, msg.player) == null && fuelSystem.HasFuel() && PlayerBoat.IsPlayerAuthedOnChildEntity(this, msg.player, authedIfNoPrivOrLock: true))\r\n\t{\r\n\t\tTurnOn();\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -7029,7 +7029,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "[RPC_Server]\r\n[RPC_Server.IsVisible(3f)]\r\n[RPC_Server.CallsPerSecond(5uL)]\r\npublic void TurnOff(RPCMessage msg)\r\n{\r\n\tif (Interface.CallHook(\"OnEngineStop\", this, msg.player) == null && PlayerBoat.IsPlayerAuthedOnChildEntity(this, msg.player, authedIfNoPrivOrLock: true))\r\n\t{\r\n\t\tTurnOff();\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "[RPC_Server.CallsPerSecond(5uL)]\r\n[RPC_Server.IsVisible(3f)]\r\n[RPC_Server]\r\npublic void TurnOff(RPCMessage msg)\r\n{\r\n\tif (Interface.CallHook(\"OnEngineStop\", this, msg.player) == null && PlayerBoat.IsPlayerAuthedOnChildEntity(this, msg.player, authedIfNoPrivOrLock: true))\r\n\t{\r\n\t\tTurnOff();\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -7230,7 +7230,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "[RPC_Server.MaxDistance(3f)]\r\n[RPC_Server]\r\nprivate void SVSwitch(RPCMessage msg)\r\n{\r\n\tif (Interface.CallHook(\"OnMixingTableToggle\", this, msg.player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tbool flag = msg.read.Bit();\r\n\tif (flag != IsOn() && !(msg.player == null))\r\n//---\r\n"
+      "CodeAfterInjection": "[RPC_Server]\r\n[RPC_Server.MaxDistance(3f)]\r\nprivate void SVSwitch(RPCMessage msg)\r\n{\r\n\tif (Interface.CallHook(\"OnMixingTableToggle\", this, msg.player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tbool flag = msg.read.Bit();\r\n\tif (flag != IsOn() && !(msg.player == null))\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -14743,7 +14743,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "[RPC_Server.MaxDistance(3f)]\r\n[RPC_Server.IsVisible(3f)]\r\n[RPC_Server]\r\npublic void RPC_RequestRemoveLock(RPCMessage msg)\r\n{\r\n\tif (HasOccupant && carOccupant.CarLock.HasALock && Interface.CallHook(\"OnLockRemove\", carOccupant, msg.player) == null)\r\n\t{\r\n\t\tcarOccupant.CarLock.RemoveLock();\r\n\t\tEffect.server.Run(addRemoveLockEffect.resourcePath, this, 0u, Vector3.zero, Vector3.zero);\r\n\t}\r\n}\r\n"
+      "CodeAfterInjection": "[RPC_Server]\r\n[RPC_Server.MaxDistance(3f)]\r\n[RPC_Server.IsVisible(3f)]\r\npublic void RPC_RequestRemoveLock(RPCMessage msg)\r\n{\r\n\tif (HasOccupant && carOccupant.CarLock.HasALock && Interface.CallHook(\"OnLockRemove\", carOccupant, msg.player) == null)\r\n\t{\r\n\t\tcarOccupant.CarLock.RemoveLock();\r\n\t\tEffect.server.Run(addRemoveLockEffect.resourcePath, this, 0u, Vector3.zero, Vector3.zero);\r\n\t}\r\n}\r\n"
     },
     {
       "Type": 0,
