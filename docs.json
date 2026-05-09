@@ -2052,7 +2052,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "[RPC_Server]\r\n[RPC_Server.MaxDistance(3f)]\r\nprotected virtual void SVSwitch(RPCMessage msg)\r\n{\r\n\tbool flag = msg.read.Bit();\r\n\tif (Interface.CallHook(\"OnOvenToggle\", this, msg.player) != null || flag == IsOn() || (needsBuildingPrivilegeToUse && !msg.player.CanBuild()))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (flag)\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "[RPC_Server.MaxDistance(3f)]\r\n[RPC_Server]\r\nprotected virtual void SVSwitch(RPCMessage msg)\r\n{\r\n\tbool flag = msg.read.Bit();\r\n\tif (Interface.CallHook(\"OnOvenToggle\", this, msg.player) != null || flag == IsOn() || (needsBuildingPrivilegeToUse && !msg.player.CanBuild()))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (flag)\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -2539,7 +2539,7 @@
           "rpc": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "[RPC_Server.MaxDistance(3f, CheckParent = true)]\r\n[RPC_Server]\r\nprivate void TryLock(RPCMessage rpc)\r\n{\r\n\tif (rpc.player.CanInteract() && !IsLocked() && code.Length == 4 && Interface.CallHook(\"CanLock\", rpc.player, this) == null && whitelistPlayers.Contains(rpc.player.userID))\r\n\t{\r\n\t\tDoEffect(effectLocked.resourcePath);\r\n\t\tSetFlag(Flags.Locked, b: true);\r\n\t\tSendNetworkUpdate();\r\n\t}\r\n//---\r\n"
+      "CodeAfterInjection": "[RPC_Server]\r\n[RPC_Server.MaxDistance(3f, CheckParent = true)]\r\nprivate void TryLock(RPCMessage rpc)\r\n{\r\n\tif (rpc.player.CanInteract() && !IsLocked() && code.Length == 4 && Interface.CallHook(\"CanLock\", rpc.player, this) == null && whitelistPlayers.Contains(rpc.player.userID))\r\n\t{\r\n\t\tDoEffect(effectLocked.resourcePath);\r\n\t\tSetFlag(Flags.Locked, b: true);\r\n\t\tSendNetworkUpdate();\r\n\t}\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -3040,7 +3040,7 @@
           "rpc": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "[RPC_Server]\r\n[RPC_Server.MaxDistance(3f)]\r\nprivate void RPC_Spin(RPCMessage rpc)\r\n{\r\n\tif (rpc.player.CanInteract() && AllowPlayerSpins() && (AnyoneSpin() || rpc.player.CanBuild()) && Interface.CallHook(\"OnSpinWheel\", rpc.player, this) == null && !(velocity > 15f))\r\n\t{\r\n\t\tvelocity += UnityEngine.Random.Range(4f, 7f);\r\n\t\tToggleChildEntityColliders(state: false);\r\n\t}\r\n}\r\n"
+      "CodeAfterInjection": "[RPC_Server.MaxDistance(3f)]\r\n[RPC_Server]\r\nprivate void RPC_Spin(RPCMessage rpc)\r\n{\r\n\tif (rpc.player.CanInteract() && AllowPlayerSpins() && (AnyoneSpin() || rpc.player.CanBuild()) && Interface.CallHook(\"OnSpinWheel\", rpc.player, this) == null && !(velocity > 15f))\r\n\t{\r\n\t\tvelocity += UnityEngine.Random.Range(4f, 7f);\r\n\t\tToggleChildEntityColliders(state: false);\r\n\t}\r\n}\r\n"
     },
     {
       "Type": 0,
@@ -3801,7 +3801,7 @@
           "rpc": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "[RPC_Server.IsVisible(3f)]\r\n[RPC_Server]\r\nprivate void RPC_LootCorpse(RPCMessage rpc)\r\n{\r\n\tBasePlayer player = rpc.player;\r\n\tif (!player || !player.CanInteract() || !CanLoot() || containers == null || Interface.CallHook(\"CanLootEntity\", player, this) != null || !player.inventory.loot.StartLootingEntity(this))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tSetFlag(Flags.Open, b: true);\r\n\tfor (int i = 0; i < containers.Length; i++)\r\n//---\r\n"
+      "CodeAfterInjection": "[RPC_Server]\r\n[RPC_Server.IsVisible(3f)]\r\nprivate void RPC_LootCorpse(RPCMessage rpc)\r\n{\r\n\tBasePlayer player = rpc.player;\r\n\tif (!player || !player.CanInteract() || !CanLoot() || containers == null || Interface.CallHook(\"CanLootEntity\", player, this) != null || !player.inventory.loot.StartLootingEntity(this))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tSetFlag(Flags.Open, b: true);\r\n\tfor (int i = 0; i < containers.Length; i++)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -5452,7 +5452,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "[RPC_Server]\r\n[RPC_Server.IsVisible(3f)]\r\npublic void RPC_Assist(RPCMessage msg)\r\n{\r\n\tif (msg.player.CanInteract() && !(msg.player == this) && IsWounded() && Interface.CallHook(\"OnPlayerAssist\", this, msg.player) == null)\r\n\t{\r\n\t\tStopWounded(msg.player);\r\n\t\tmsg.player.stats.Add(\"wounded_assisted\", 1, (Stats)5);\r\n\t\tstats.Add(\"wounded_healed\", 1);\r\n\t}\r\n//---\r\n"
+      "CodeAfterInjection": "[RPC_Server.IsVisible(3f)]\r\n[RPC_Server]\r\npublic void RPC_Assist(RPCMessage msg)\r\n{\r\n\tif (msg.player.CanInteract() && !(msg.player == this) && IsWounded() && Interface.CallHook(\"OnPlayerAssist\", this, msg.player) == null)\r\n\t{\r\n\t\tStopWounded(msg.player);\r\n\t\tmsg.player.stats.Add(\"wounded_assisted\", 1, (Stats)5);\r\n\t\tstats.Add(\"wounded_healed\", 1);\r\n\t}\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -5781,7 +5781,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "[RPC_Server.FromOwner]\r\n[RPC_Server.CallsPerSecond(1uL)]\r\n[RPC_Server]\r\npublic void Server_ClearMapMarkers(RPCMessage msg)\r\n{\r\n\tif (Interface.CallHook(\"OnMapMarkersClear\", this, State.pointsOfInterest) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tServerCurrentDeathNote?.Dispose();\r\n\tServerCurrentDeathNote = null;\r\n//---\r\n"
+      "CodeAfterInjection": "[RPC_Server]\r\n[RPC_Server.FromOwner]\r\n[RPC_Server.CallsPerSecond(1uL)]\r\npublic void Server_ClearMapMarkers(RPCMessage msg)\r\n{\r\n\tif (Interface.CallHook(\"OnMapMarkersClear\", this, State.pointsOfInterest) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tServerCurrentDeathNote?.Dispose();\r\n\tServerCurrentDeathNote = null;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -6370,7 +6370,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n[RPC_Server.CallsPerSecond(10uL)]\r\n[RPC_Server]\r\npublic void Server_RemovePointOfInterest(RPCMessage msg)\r\n{\r\n\tint num = msg.read.Int32();\r\n\tif (State.pointsOfInterest != null && State.pointsOfInterest.Count > num && num >= 0 && Interface.CallHook(\"OnMapMarkerRemove\", this, State.pointsOfInterest, num) == null)\r\n\t{\r\n\t\tState.pointsOfInterest[num].Dispose();\r\n\t\tState.pointsOfInterest.RemoveAt(num);\r\n\t\tDirtyPlayerState();\r\n\t\tSendMarkersToClient();\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n[RPC_Server.CallsPerSecond(10uL)]\r\n[RPC_Server.FromOwner]\r\npublic void Server_RemovePointOfInterest(RPCMessage msg)\r\n{\r\n\tint num = msg.read.Int32();\r\n\tif (State.pointsOfInterest != null && State.pointsOfInterest.Count > num && num >= 0 && Interface.CallHook(\"OnMapMarkerRemove\", this, State.pointsOfInterest, num) == null)\r\n\t{\r\n\t\tState.pointsOfInterest[num].Dispose();\r\n\t\tState.pointsOfInterest.RemoveAt(num);\r\n\t\tDirtyPlayerState();\r\n\t\tSendMarkersToClient();\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -6662,7 +6662,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n[RPC_Server.InputValidation(new Type[] { typeof(MapNote) })]\r\n[RPC_Server]\r\npublic void Server_AddMarker(RPCMessage msg)\r\n{\r\n\tMapNote mapNote = msg.read.Proto<MapNote>();\r\n\tif (Interface.CallHook(\"OnMapMarkerAdd\", this, mapNote) != null || !CanUseMapMarkers)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (State.pointsOfInterest == null)\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n[RPC_Server.FromOwner]\r\n[RPC_Server]\r\npublic void Server_AddMarker(RPCMessage msg)\r\n{\r\n\tMapNote mapNote = msg.read.Proto<MapNote>();\r\n\tif (Interface.CallHook(\"OnMapMarkerAdd\", this, mapNote) != null || !CanUseMapMarkers)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (State.pointsOfInterest == null)\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 1,
@@ -6820,7 +6820,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "[RPC_Server]\r\n[RPC_Server.MaxDistance(5f)]\r\npublic void RPC_WantsPush(RPCMessage msg)\r\n{\r\n\tBasePlayer player = msg.player;\r\n\tif (!player.isMounted && !RecentlyPushed && CanPushNow(player) && !(rigidBody == null) && (!OnlyOwnerAccessible() || !(player != creatorEntity)) && Interface.CallHook(\"OnVehiclePush\", this, msg.player) == null)\r\n\t{\r\n\t\tplayer.metabolism.calories.Subtract(3f);\r\n\t\tplayer.metabolism.SendChanges();\r\n\t\tif (rigidBody.IsSleeping())\r\n\t\t{\r\n//---\r\n"
+      "CodeAfterInjection": "[RPC_Server.MaxDistance(5f)]\r\n[RPC_Server]\r\npublic void RPC_WantsPush(RPCMessage msg)\r\n{\r\n\tBasePlayer player = msg.player;\r\n\tif (!player.isMounted && !RecentlyPushed && CanPushNow(player) && !(rigidBody == null) && (!OnlyOwnerAccessible() || !(player != creatorEntity)) && Interface.CallHook(\"OnVehiclePush\", this, msg.player) == null)\r\n\t{\r\n\t\tplayer.metabolism.calories.Subtract(3f);\r\n\t\tplayer.metabolism.SendChanges();\r\n\t\tif (rigidBody.IsSleeping())\r\n\t\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -6840,7 +6840,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "[RPC_Server]\r\n[RPC_Server.CallsPerSecond(5uL)]\r\n[RPC_Server.IsVisible(3f)]\r\npublic void SV_ToggleReverse(RPCMessage msg)\r\n{\r\n\tif (Interface.CallHook(\"OnEngineReverse\", this, msg.player) == null && PlayerBoat.IsPlayerAuthedOnChildEntity(this, msg.player, authedIfNoPrivOrLock: true) && PlayerBoat.IsChildOfInteractablePlayerBoat(this))\r\n\t{\r\n\t\tSetFlag(Flags.Reserved3, !InReverse);\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "[RPC_Server.IsVisible(3f)]\r\n[RPC_Server.CallsPerSecond(5uL)]\r\n[RPC_Server]\r\npublic void SV_ToggleReverse(RPCMessage msg)\r\n{\r\n\tif (Interface.CallHook(\"OnEngineReverse\", this, msg.player) == null && PlayerBoat.IsPlayerAuthedOnChildEntity(this, msg.player, authedIfNoPrivOrLock: true) && PlayerBoat.IsChildOfInteractablePlayerBoat(this))\r\n\t{\r\n\t\tSetFlag(Flags.Reserved3, !InReverse);\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -7009,7 +7009,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "[RPC_Server]\r\n[RPC_Server.CallsPerSecond(5uL)]\r\n[RPC_Server.IsVisible(3f)]\r\npublic void TurnOn(RPCMessage msg)\r\n{\r\n\tif (Interface.CallHook(\"OnEngineStart\", this, msg.player) == null && fuelSystem.HasFuel() && PlayerBoat.IsPlayerAuthedOnChildEntity(this, msg.player, authedIfNoPrivOrLock: true))\r\n\t{\r\n\t\tTurnOn();\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "[RPC_Server.IsVisible(3f)]\r\n[RPC_Server]\r\n[RPC_Server.CallsPerSecond(5uL)]\r\npublic void TurnOn(RPCMessage msg)\r\n{\r\n\tif (Interface.CallHook(\"OnEngineStart\", this, msg.player) == null && fuelSystem.HasFuel() && PlayerBoat.IsPlayerAuthedOnChildEntity(this, msg.player, authedIfNoPrivOrLock: true))\r\n\t{\r\n\t\tTurnOn();\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -7029,7 +7029,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "[RPC_Server]\r\n[RPC_Server.CallsPerSecond(5uL)]\r\n[RPC_Server.IsVisible(3f)]\r\npublic void TurnOff(RPCMessage msg)\r\n{\r\n\tif (Interface.CallHook(\"OnEngineStop\", this, msg.player) == null && PlayerBoat.IsPlayerAuthedOnChildEntity(this, msg.player, authedIfNoPrivOrLock: true))\r\n\t{\r\n\t\tTurnOff();\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "[RPC_Server.CallsPerSecond(5uL)]\r\n[RPC_Server.IsVisible(3f)]\r\n[RPC_Server]\r\npublic void TurnOff(RPCMessage msg)\r\n{\r\n\tif (Interface.CallHook(\"OnEngineStop\", this, msg.player) == null && PlayerBoat.IsPlayerAuthedOnChildEntity(this, msg.player, authedIfNoPrivOrLock: true))\r\n\t{\r\n\t\tTurnOff();\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -13138,7 +13138,7 @@
           "rpc": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "[RPC_Server]\r\n[RPC_Server.MaxDistance(3f)]\r\nprivate void AddSelfAuthorize(RPCMessage rpc)\r\n{\r\n\tif (rpc.player.CanInteract() && CanModifyAuth(rpc.player) && Interface.CallHook(\"OnCupboardAuthorize\", this, rpc.player) == null)\r\n\t{\r\n\t\tAddPlayer(rpc.player);\r\n\t\tSendNetworkUpdate();\r\n\t}\r\n}\r\n"
+      "CodeAfterInjection": "[RPC_Server.MaxDistance(3f)]\r\n[RPC_Server]\r\nprivate void AddSelfAuthorize(RPCMessage rpc)\r\n{\r\n\tif (rpc.player.CanInteract() && CanModifyAuth(rpc.player) && Interface.CallHook(\"OnCupboardAuthorize\", this, rpc.player) == null)\r\n\t{\r\n\t\tAddPlayer(rpc.player);\r\n\t\tSendNetworkUpdate();\r\n\t}\r\n}\r\n"
     },
     {
       "Type": 0,
@@ -13158,7 +13158,7 @@
           "rpc": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "[RPC_Server]\r\n[RPC_Server.MaxDistance(3f)]\r\nprivate void RemoveSelfAuthorize(RPCMessage rpc)\r\n{\r\n\tif (rpc.player.CanInteract() && CanModifyAuth(rpc.player) && Interface.CallHook(\"OnCupboardDeauthorize\", this, rpc.player) == null)\r\n\t{\r\n\t\tauthorizedPlayers.Remove(rpc.player.userID);\r\n\t\tFacepunch.Rust.Analytics.Azure.OnEntityAuthChanged(this, rpc.player, authorizedPlayers, \"removed\", rpc.player.userID);\r\n\t\tUpdateMaxAuthCapacity();\r\n\t\tUpdatePrivilegeReceivers();\r\n//---\r\n"
+      "CodeAfterInjection": "[RPC_Server.MaxDistance(3f)]\r\n[RPC_Server]\r\nprivate void RemoveSelfAuthorize(RPCMessage rpc)\r\n{\r\n\tif (rpc.player.CanInteract() && CanModifyAuth(rpc.player) && Interface.CallHook(\"OnCupboardDeauthorize\", this, rpc.player) == null)\r\n\t{\r\n\t\tauthorizedPlayers.Remove(rpc.player.userID);\r\n\t\tFacepunch.Rust.Analytics.Azure.OnEntityAuthChanged(this, rpc.player, authorizedPlayers, \"removed\", rpc.player.userID);\r\n\t\tUpdateMaxAuthCapacity();\r\n\t\tUpdatePrivilegeReceivers();\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -14743,7 +14743,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "[RPC_Server]\r\n[RPC_Server.IsVisible(3f)]\r\n[RPC_Server.MaxDistance(3f)]\r\npublic void RPC_RequestRemoveLock(RPCMessage msg)\r\n{\r\n\tif (HasOccupant && carOccupant.CarLock.HasALock && Interface.CallHook(\"OnLockRemove\", carOccupant, msg.player) == null)\r\n\t{\r\n\t\tcarOccupant.CarLock.RemoveLock();\r\n\t\tEffect.server.Run(addRemoveLockEffect.resourcePath, this, 0u, Vector3.zero, Vector3.zero);\r\n\t}\r\n}\r\n"
+      "CodeAfterInjection": "[RPC_Server.MaxDistance(3f)]\r\n[RPC_Server]\r\n[RPC_Server.IsVisible(3f)]\r\npublic void RPC_RequestRemoveLock(RPCMessage msg)\r\n{\r\n\tif (HasOccupant && carOccupant.CarLock.HasALock && Interface.CallHook(\"OnLockRemove\", carOccupant, msg.player) == null)\r\n\t{\r\n\t\tcarOccupant.CarLock.RemoveLock();\r\n\t\tEffect.server.Run(addRemoveLockEffect.resourcePath, this, 0u, Vector3.zero, Vector3.zero);\r\n\t}\r\n}\r\n"
     },
     {
       "Type": 0,
@@ -15256,7 +15256,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "[RPC_Server]\r\n[RPC_Server.MaxDistance(3f)]\r\npublic void SERVER_WantsFire(RPCMessage msg)\r\n{\r\n\tBasePlayer player = msg.player;\r\n\tif (CanFire() && Interface.CallHook(\"OnSiegeWeaponFire\", this, player) == null)\r\n\t{\r\n\t\tfloat force = reloadProgress;\r\n\t\tFire(player, force);\r\n\t\treloadProgress = 0f;\r\n\t\ttimeSinceLastFire = 0f;\r\n//---\r\n"
+      "CodeAfterInjection": "[RPC_Server.MaxDistance(3f)]\r\n[RPC_Server]\r\npublic void SERVER_WantsFire(RPCMessage msg)\r\n{\r\n\tBasePlayer player = msg.player;\r\n\tif (CanFire() && Interface.CallHook(\"OnSiegeWeaponFire\", this, player) == null)\r\n\t{\r\n\t\tfloat force = reloadProgress;\r\n\t\tFire(player, force);\r\n\t\treloadProgress = 0f;\r\n\t\ttimeSinceLastFire = 0f;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -15276,7 +15276,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n[RPC_Server.MaxDistance(3f)]\r\npublic void SERVER_WantsAttack(RPCMessage msg)\r\n{\r\n\tBasePlayer player = msg.player;\r\n\tBasePlayer driver = GetDriver();\r\n\tif (!(driver == null) && !(player == null) && !(driver != player) && CanAttack() && !driver.InSafeZone() && Interface.CallHook(\"OnSiegeWeaponFire\", this, player) == null)\r\n\t{\r\n\t\tClientRPC(RpcTarget.NetworkGroup(\"CLIENT_Attack\"));\r\n\t\tInvoke(delegate\r\n\t\t{\r\n\t\t\tScanEntities(driver);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n[RPC_Server]\r\npublic void SERVER_WantsAttack(RPCMessage msg)\r\n{\r\n\tBasePlayer player = msg.player;\r\n\tBasePlayer driver = GetDriver();\r\n\tif (!(driver == null) && !(player == null) && !(driver != player) && CanAttack() && !driver.InSafeZone() && Interface.CallHook(\"OnSiegeWeaponFire\", this, player) == null)\r\n\t{\r\n\t\tClientRPC(RpcTarget.NetworkGroup(\"CLIENT_Attack\"));\r\n\t\tInvoke(delegate\r\n\t\t{\r\n\t\t\tScanEntities(driver);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -15365,7 +15365,7 @@
           "rpc": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "[RPC_Server]\r\n[RPC_Server.MaxDistance(3f)]\r\n[RPC_Server.CallsPerSecond(2uL)]\r\nprotected void RPC_OpenDoor(RPCMessage rpc)\r\n{\r\n\tif (rpc.player.CanInteract(usableWhileCrawling: true) && CanOpenDoor() && Interface.CallHook(\"OnSiegeWeaponDoorOpen\", this, rpc.player) == null)\r\n\t{\r\n\t\tOpenDoor();\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "[RPC_Server.CallsPerSecond(2uL)]\r\n[RPC_Server.MaxDistance(3f)]\r\n[RPC_Server]\r\nprotected void RPC_OpenDoor(RPCMessage rpc)\r\n{\r\n\tif (rpc.player.CanInteract(usableWhileCrawling: true) && CanOpenDoor() && Interface.CallHook(\"OnSiegeWeaponDoorOpen\", this, rpc.player) == null)\r\n\t{\r\n\t\tOpenDoor();\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -15385,7 +15385,7 @@
           "rpc": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "[RPC_Server.MaxDistance(3f)]\r\n[RPC_Server]\r\n[RPC_Server.CallsPerSecond(2uL)]\r\nprotected void RPC_CloseDoor(RPCMessage rpc)\r\n{\r\n\tif (rpc.player.CanInteract(usableWhileCrawling: true) && CanCloseDoor() && Interface.CallHook(\"OnSiegeWeaponDoorClose\", this, rpc.player) == null)\r\n\t{\r\n\t\tCloseDoor();\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "[RPC_Server.MaxDistance(3f)]\r\n[RPC_Server.CallsPerSecond(2uL)]\r\n[RPC_Server]\r\nprotected void RPC_CloseDoor(RPCMessage rpc)\r\n{\r\n\tif (rpc.player.CanInteract(usableWhileCrawling: true) && CanCloseDoor() && Interface.CallHook(\"OnSiegeWeaponDoorClose\", this, rpc.player) == null)\r\n\t{\r\n\t\tCloseDoor();\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
