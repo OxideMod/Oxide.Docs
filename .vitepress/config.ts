@@ -2,6 +2,8 @@ import MarkdownItFootnote from 'markdown-it-footnote';
 import { defineConfig, HeadConfig } from 'vitepress';
 import { getHooksSidebar } from '../util/hooks';
 import { getSidebarByPath } from '../util/nav';
+import { glossaryTerms } from '../util/terms';
+import { glossaryLinkPlugin } from '../util/glossary-md-plugin.js';
 
 var hooks = getHooksSidebar();
 
@@ -144,6 +146,7 @@ export default defineConfig({
   markdown: {
     config(md) {
       md.use(MarkdownItFootnote);
+      md.use(glossaryLinkPlugin, { terms: glossaryTerms });
     },
   },
   sitemap: {

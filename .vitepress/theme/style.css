@@ -303,3 +303,17 @@
 .dark ::-webkit-scrollbar-track {
   background: #1a1a1c;
 }
+
+/* Glossary term links (see util/glossary-md-plugin.js) */
+.vp-doc a.glossary-term,
+.vp-doc a.glossary-term:visited {
+  color: inherit;
+  font-weight: inherit;
+  text-decoration: underline dotted;
+  text-decoration-color: var(--vp-c-text-2);
+  text-underline-offset: 3px;
+}
+.vp-doc a.glossary-term:hover {
+  color: inherit;
+  text-decoration-color: var(--vp-c-text-1);
+}
