@@ -2436,7 +2436,7 @@
           "AndWait": "bool"
         }
       },
-      "CodeAfterInjection": "private IEnumerator DoAutomatedSave(bool AndWait = false)\r\n{\r\n\tInterface.CallHook(\"OnServerSave\");\r\n\treturn new <DoAutomatedSave>d__20(0)\r\n\t{\r\n\t\t<>4__this = this,\r\n\t\tAndWait = AndWait\r\n\t};\r\n//---\r\n"
+      "CodeAfterInjection": "private IEnumerator DoAutomatedSave(bool AndWait = false)\r\n{\r\n\tInterface.CallHook(\"OnServerSave\");\r\n\treturn new <DoAutomatedSave>d__30(0)\r\n\t{\r\n\t\t<>4__this = this,\r\n\t\tAndWait = AndWait\r\n\t};\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -7060,7 +7060,7 @@
         "deepSeaManager": "DeepSeaManager"
       },
       "ReturnBehavior": 0,
-      "TargetType": "DeepSeaManager/<CloseDeepSeaAsync>d__119",
+      "TargetType": "DeepSeaManager/<CloseDeepSeaAsync>d__75",
       "Category": "Naval",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -7077,7 +7077,7 @@
         "deepSeaManager": "DeepSeaManager"
       },
       "ReturnBehavior": 0,
-      "TargetType": "DeepSeaManager/<OpenDeepSeaAsync>d__117",
+      "TargetType": "DeepSeaManager/<OpenDeepSeaAsync>d__73",
       "Category": "Naval",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -10305,7 +10305,7 @@
       "TargetType": "MarketTerminal",
       "Category": "Vending",
       "MethodData": {
-        "MethodName": "<GetDeliveryEligibleVendingMachines>g__IsEligible|43_0",
+        "MethodName": "<GetDeliveryEligibleVendingMachines>g__IsEligible|25_0",
         "ReturnType": "bool",
         "Arguments": {
           "vendingMachine": "VendingMachine",
@@ -10313,7 +10313,7 @@
           "n": "int"
         }
       },
-      "CodeAfterInjection": "private bool <GetDeliveryEligibleVendingMachines>g__IsEligible|43_0(VendingMachine vendingMachine, Vector3 offset, int n)\r\n{\r\n\tobject obj = Interface.CallHook(\"CanAccessVendingMachine\", config, vendingMachine);\r\n\tif (obj is bool)\r\n\t{\r\n\t\treturn (bool)obj;\r\n\t}\r\n\tif (vendingMachine.IsInDeepSeaCached)\r\n//---\r\n"
+      "CodeAfterInjection": "private bool <GetDeliveryEligibleVendingMachines>g__IsEligible|25_0(VendingMachine vendingMachine, Vector3 offset, int n)\r\n{\r\n\tobject obj = Interface.CallHook(\"CanAccessVendingMachine\", config, vendingMachine);\r\n\tif (obj is bool)\r\n\t{\r\n\t\treturn (bool)obj;\r\n\t}\r\n\tif (vendingMachine.IsInDeepSeaCached)\r\n//---\r\n"
     },
     {
       "Type": 1,
@@ -15502,7 +15502,7 @@
         "reportType": "Facepunch.Models.ReportType"
       },
       "ReturnBehavior": 0,
-      "TargetType": "BasePlayer/<OnFeedbackReport>d__708",
+      "TargetType": "BasePlayer/<OnFeedbackReport>d__752",
       "Category": "Player",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -15516,7 +15516,7 @@
       "Name": "OnFeedbackReported [patch]",
       "HookName": "OnFeedbackReported",
       "ReturnBehavior": 0,
-      "TargetType": "BasePlayer/<OnFeedbackReport>d__708",
+      "TargetType": "BasePlayer/<OnFeedbackReport>d__752",
       "Category": "_Patches",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -15538,7 +15538,7 @@
         "message": "string"
       },
       "ReturnBehavior": 0,
-      "TargetType": "BasePlayer/<OnPlayerReported>d__707",
+      "TargetType": "BasePlayer/<OnPlayerReported>d__751",
       "Category": "Player",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -15999,7 +15999,7 @@
         "deepSeaManager": "DeepSeaManager"
       },
       "ReturnBehavior": 0,
-      "TargetType": "DeepSeaManager/<OpenDeepSeaAsync>d__117",
+      "TargetType": "DeepSeaManager/<OpenDeepSeaAsync>d__73",
       "Category": "Naval",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -16016,7 +16016,7 @@
         "deepSeaManager": "DeepSeaManager"
       },
       "ReturnBehavior": 0,
-      "TargetType": "DeepSeaManager/<CloseDeepSeaAsync>d__119",
+      "TargetType": "DeepSeaManager/<CloseDeepSeaAsync>d__75",
       "Category": "Naval",
       "MethodData": {
         "MethodName": "MoveNext",
