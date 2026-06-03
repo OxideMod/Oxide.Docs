@@ -1,4 +1,4 @@
-import { readdirSync, statSync } from 'fs';
+import { readdirSync } from 'fs';
 import { extname, join } from 'path';
 import matter from 'gray-matter';
 
@@ -15,18 +15,19 @@ export function getSidebarByPath(dirPath: string): any[] {
 
 function getNavbarDataFromFolder(path: string) {
   // Get all files in the directory
-  const files = readdirSync(path);
+  const entries = readdirSync(path, { withFileTypes: true });
 
   const unsortedFiles: any[] = [];
 
   // Loop through all files
-  for (const file of files) {
+  for (const entry of entries) {
+    const file = entry.name;
+
     // Get file path
     const filePath = join(path, file);
-    const stat = statSync(filePath);
 
     // Check if it's a directory
-    if (stat.isDirectory()) {
+    if (entry.isDirectory()) {
       // Get all files in the directory
       const files = getNavbarDataFromFolder(filePath);
 
