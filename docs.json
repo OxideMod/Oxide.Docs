@@ -13,7 +13,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "private void DoTick()\r\n{\r\n\tInterface.CallHook(\"OnTick\");\r\n\tRCon.Update();\r\n\tCompanionServer.Server.Update();\r\n\tNexusServer.Update();\r\n\tfor (int i = 0; i < Network.Net.sv.connections.Count; i++)\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "private void DoTick()\r\n{\r\n\tInterface.CallHook(\"OnTick\");\r\n\tRustRelayFakePlayer.Tick();\r\n\tRCon.Update();\r\n\tCompanionServer.Server.Update();\r\n\tNexusServer.Update();\r\n\tfor (int i = 0; i < Network.Net.sv.connections.Count; i++)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -244,7 +244,7 @@
           "item": "Item"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\tPositionChecks = true;\r\n\t\tcontainers.Add(item.contents);\r\n\t\titem.contents.onDirty += MarkDirty;\r\n\t\titemSource = item;\r\n\t\tentitySource = item.GetWorldEntity();\r\n\t\tInterface.CallHook(\"OnLootItem\", GetComponent<BasePlayer>(), item);\r\n\t\tMarkDirty();\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t_markDirtyCallback = MarkDirty;\r\n\t\t}\r\n\t\titem.contents.onDirty += _markDirtyCallback;\r\n\t\titemSource = item;\r\n\t\tentitySource = item.GetWorldEntity();\r\n\t\tInterface.CallHook(\"OnLootItem\", GetComponent<BasePlayer>(), item);\r\n\t\tMarkDirty();\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -414,7 +414,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (flag6)\r\n\t{\r\n\t\tstats.Add(value.itemMod.category + \"_hit_\" + hitEntity.Categorize(), 1);\r\n\t}\r\n\tif (Interface.CallHook(\"OnPlayerAttack\", this, hitInfo) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (value.integrity <= 0f)\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (flag5)\r\n\t{\r\n\t\tstats.Add(value.itemMod.category + \"_hit_\" + hitEntity.Categorize(), 1);\r\n\t}\r\n\tif (Interface.CallHook(\"OnPlayerAttack\", this, hitInfo) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (value.integrity <= 0f)\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -1440,7 +1440,7 @@
           "msg": "ProtoBuf.CreateBuilding"
         }
       },
-      "CodeAfterInjection": "//---\r\n\ttarget.isHoldingShift = msg.isHoldingShift;\r\n\ttarget.isSnapped = msg.isSnapped;\r\n\ttarget.snappedPosition = msg.snappedPosition;\r\n\ttarget.snappedRotation = msg.snappedRotation;\r\n\ttarget.valid = true;\r\n\tif (Interface.CallHook(\"CanBuild\", this, construction, target) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (ShouldParent(target.entity, deployable))\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\ttarget.isHoldingShift = msg.isHoldingShift;\r\n\ttarget.isSnapped = msg.isSnapped;\r\n\ttarget.snappedPosition = msg.snappedPosition;\r\n\ttarget.snappedRotation = msg.snappedRotation;\r\n\ttarget.valid = true;\r\n\tif (Interface.CallHook(\"CanBuild\", this, construction, target) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\ttarget.shouldParent = ShouldParent(target.entity, deployable);\r\n\tif (target.shouldParent)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -6093,7 +6093,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tif (base.IsDestroyed || base.transform == null)\r\n\t\t{\r\n\t\t\tCancelInvoke(PlayRadioChatter);\r\n\t\t}\r\n\t\telse if (Interface.CallHook(\"OnNpcRadioChatter\", this) == null)\r\n\t\t{\r\n\t\t\tEffect.server.Run(RadioChatterEffects[UnityEngine.Random.Range(0, RadioChatterEffects.Length)].resourcePath, this, StringPool.Get(\"head\"), Vector3.zero, Vector3.zero);\r\n\t\t\tQueueRadioChatter();\r\n\t\t}\r\n\t}\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tif ((base.IsDestroyed || base.transform == null) && _playRadioChatter != null)\r\n\t\t{\r\n\t\t\tCancelInvoke(_playRadioChatter);\r\n\t\t}\r\n\t\telse if (Interface.CallHook(\"OnNpcRadioChatter\", this) == null)\r\n\t\t{\r\n\t\t\tEffect.server.Run(RadioChatterEffects[UnityEngine.Random.Range(0, RadioChatterEffects.Length)].resourcePath, this, StringPool.Get(\"head\"), Vector3.zero, Vector3.zero);\r\n\t\t\tQueueRadioChatter();\r\n\t\t}\r\n\t}\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -6337,7 +6337,7 @@
       "HookName": "OnBuildingSplit",
       "HookParameters": {
         "oldBuilding": "BuildingManager.Building",
-        "newID": "uint"
+        "num": "uint"
       },
       "ReturnBehavior": 0,
       "TargetType": "ServerBuildingManager",
@@ -6349,7 +6349,7 @@
           "oldBuilding": "BuildingManager.Building"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tBuilding largestSplit = null;\r\n\twhile (oldBuilding.HasBuildingBlocks())\r\n\t{\r\n\t\tBuildingBlock buildingBlock = oldBuilding.buildingBlocks[0];\r\n\t\tuint newID = BuildingManager.server.NewBuildingID();\r\n\t\tInterface.CallHook(\"OnBuildingSplit\", oldBuilding, newID);\r\n\t\tbuildingBlock.EntityLinkBroadcast(delegate(BuildingBlock b)\r\n\t\t{\r\n\t\t\tb.AttachToBuilding(newID);\r\n\t\t});\r\n\t\tBuilding building = BuildingManager.server.GetBuilding(newID);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tBuilding largestSplit = null;\r\n\twhile (oldBuilding.HasBuildingBlocks())\r\n\t{\r\n\t\tBuildingBlock buildingBlock = oldBuilding.buildingBlocks[0];\r\n\t\tuint num = BuildingManager.server.NewBuildingID();\r\n\t\tInterface.CallHook(\"OnBuildingSplit\", oldBuilding, num);\r\n\t\tbuildingBlock.EntityLinkBroadcast(_AttachToBuildingCallback, num);\r\n\t\tBuilding building = BuildingManager.server.GetBuilding(num);\r\n\t\tif (building != null)\r\n\t\t{\r\n\t\t\tobj.Add(building);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -11755,8 +11755,8 @@
       "Name": "OnEntityReskin",
       "HookName": "OnEntityReskin",
       "HookParameters": {
-        "baseEntity": "BaseEntity",
-        "skin": "ItemSkinDirectory.Skin",
+        "itemDefinition": "ItemDefinition",
+        "uInt64": "ulong",
         "player": "BasePlayer"
       },
       "ReturnBehavior": 1,
@@ -11769,15 +11769,15 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\tItemDefinition itemDefinition = null;\r\n\t\t\tulong num = ItemDefinition.FindSkin((def.isRedirectOf != null) ? def.isRedirectOf.itemid : def.itemid, targetSkin);\r\n\t\t\tItemSkinDirectory.Skin skin = ((def.isRedirectOf != null) ? def.isRedirectOf : def).skins.FirstOrDefault((ItemSkinDirectory.Skin x) => x.id == targetSkin);\r\n\t\t\tif (Interface.CallHook(\"OnEntityReskin\", baseEntity, skin, msg.player) != null)\r\n\t\t\t{\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\tif (skin.invItem != null && skin.invItem is ItemSkin itemSkin)\r\n\t\t\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tSprayFailResponse(ReskinFailReason.InvalidItem, player);\r\n\t\treturn;\r\n\t}\r\n\tulong num2 = ItemDefinition.FindSkin((def.isRedirectOf != null) ? def.isRedirectOf.itemid : def.itemid, num);\r\n\tif (Interface.CallHook(\"OnEntityReskin\", def, num2, msg.player) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (!TryFindTargetRedirect(def, num, out var targetRedirect))\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
       "Name": "OnEntityReskinned",
       "HookName": "OnEntityReskinned",
       "HookParameters": {
-        "baseEntity": "BaseEntity",
-        "skin": "ItemSkinDirectory.Skin",
+        "itemDefinition": "ItemDefinition",
+        "uInt64": "ulong",
         "player": "BasePlayer"
       },
       "ReturnBehavior": 0,
@@ -11790,7 +11790,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\tif (baseEntity is DecayEntity decayEntity3 && !flag)\r\n\t\t\t\t{\r\n\t\t\t\t\tdecayEntity3.StopBeingDemolishable();\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t\tInterface.CallHook(\"OnEntityReskinned\", baseEntity, skin, msg.player);\r\n\t\t\tClientRPC(RpcTarget.NetworkGroup(\"Client_ReskinResult\"), 1, baseEntity.net.ID);\r\n\t\t}\r\n\t}\r\n\tif (!base.UsingInfiniteAmmoCheat)\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tif (baseEntity is IReskinCallback reskinCallback)\r\n\t{\r\n\t\treskinCallback.OnReskinned(player);\r\n\t}\r\n\tbaseEntity.SendNetworkUpdate();\r\n\tInterface.CallHook(\"OnEntityReskinned\", def, num2, msg.player);\r\n\tClientRPC(RpcTarget.NetworkGroup(\"Client_ReskinResult\"), 1, baseEntity.net.ID);\r\n\tif (!base.UsingInfiniteAmmoCheat)\r\n\t{\r\n\t\tLoseCondition(ConditionLossPerReskin);\r\n\t}\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -12660,7 +12660,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\tUpdateAttachmentTemperature();\r\n\t\tcookQueue.Add(this);\r\n\t\tlastCookUpdate = 0f;\r\n\t\tlastCookVisualsUpdate = 0f;\r\n\t\tSetFlag(Flags.On, b: true);\r\n\t\tInterface.CallHook(\"OnOvenStarted\", this);\r\n\t\tif (hasOpenFlame)\r\n\t\t{\r\n\t\t\tSingletonComponent<NpcFireManager>.Instance.Add(this);\r\n\t\t}\r\n\t}\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tUpdateAttachmentTemperature();\r\n\t\tcookQueue.Add(this);\r\n\t\tlastCookUpdate = 0f;\r\n\t\tlastCookVisualsUpdate = 0f;\r\n\t\tSetFlag(Flags.On, b: true);\r\n\t\tInterface.CallHook(\"OnOvenStarted\", this);\r\n\t\tif (hasOpenFlame)\r\n\t\t{\r\n\t\t\tSingletonComponent<NpcFireManager>.Instance.Add(this);\r\n\t\t}\r\n\t\tUpdateIsCooking();\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -15135,7 +15135,7 @@
           "velocity": "UnityEngine.Vector3"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\tdroppedItem.DroppedTime = DateTime.UtcNow;\r\n\t\t\tFacepunch.Rust.Analytics.Azure.OnItemDropped(player, droppedItem, DroppedItem.DropReasonEnum.Death);\r\n\t\t}\r\n\t}\r\n\tItem activeItem = player.GetActiveItem();\r\n\tif (activeItem == null || Interface.CallHook(\"OnPlayerDropActiveItem\", player, activeItem) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tusing (TimeWarning.New(\"PlayerBelt.DropActive\"))\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\tdroppedItem.DroppedTime = DateTime.UtcNow;\r\n\t\t\tFacepunch.Rust.Analytics.Azure.OnItemDropped(player, droppedItem, DroppedItem.DropReasonEnum.Death);\r\n\t\t}\r\n\t}\r\n\tItem activeItem = player.GetActiveItem();\r\n\tif (activeItem == null || Interface.CallHook(\"OnPlayerDropActiveItem\", player, activeItem) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (activeItem.GetHeldEntity() is Boomerang { HasThrown: not false })\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -15502,7 +15502,7 @@
         "reportType": "Facepunch.Models.ReportType"
       },
       "ReturnBehavior": 0,
-      "TargetType": "BasePlayer/<OnFeedbackReport>d__752",
+      "TargetType": "BasePlayer/<OnFeedbackReport>d__756",
       "Category": "Player",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -15516,7 +15516,7 @@
       "Name": "OnFeedbackReported [patch]",
       "HookName": "OnFeedbackReported",
       "ReturnBehavior": 0,
-      "TargetType": "BasePlayer/<OnFeedbackReport>d__752",
+      "TargetType": "BasePlayer/<OnFeedbackReport>d__756",
       "Category": "_Patches",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -15538,7 +15538,7 @@
         "message": "string"
       },
       "ReturnBehavior": 0,
-      "TargetType": "BasePlayer/<OnPlayerReported>d__751",
+      "TargetType": "BasePlayer/<OnPlayerReported>d__755",
       "Category": "Player",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -16166,6 +16166,22 @@
         "Arguments": {}
       },
       "CodeAfterInjection": "//---\r\n\t{\r\n\t\tDebugDrawSensor(vector);\r\n\t}\r\n\tforeach (BaseEntity entityContent in myTrigger.entityContents)\r\n\t{\r\n\t\tif (!(entityContent is BasePlayer basePlayer) || Interface.CallHook(\"OnSensorDetect\", this, basePlayer) != null || basePlayer == null || basePlayer.IsDead() || basePlayer.IsSleeping() || !basePlayer.isServer)\r\n\t\t{\r\n\t\t\tcontinue;\r\n\t\t}\r\n\t\tif (!flag)\r\n\t\t{\r\n//---\r\n"
+    },
+    {
+      "Type": 1,
+      "Name": "OnPlayerAttack [Projectile] [Patch]",
+      "HookName": "OnPlayerAttack",
+      "ReturnBehavior": 0,
+      "TargetType": "BasePlayer",
+      "Category": "_Patches",
+      "MethodData": {
+        "MethodName": "OnProjectileAttack",
+        "ReturnType": "void",
+        "Arguments": {
+          "msg": "BaseEntity.RPCMessage"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (flag5)\r\n\t{\r\n\t\tstats.Add(value.itemMod.category + \"_hit_\" + hitEntity.Categorize(), 1);\r\n\t}\r\n\tif (Interface.CallHook(\"OnPlayerAttack\", this, hitInfo) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (value.integrity <= 0f)\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
