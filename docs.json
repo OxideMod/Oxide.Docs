@@ -414,7 +414,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (flag5)\r\n\t{\r\n\t\tstats.Add(value.itemMod.category + \"_hit_\" + hitEntity.Categorize(), 1);\r\n\t}\r\n\tif (Interface.CallHook(\"OnPlayerAttack\", this, hitInfo) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (value.integrity <= 0f)\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t}\r\n\t\tif (flag6)\r\n\t\t{\r\n\t\t\tstats.Add(firedProjectile.itemMod.category + \"_hit_\" + hitEntity.Categorize(), 1);\r\n\t\t}\r\n\t\tif (Interface.CallHook(\"OnPlayerAttack\", this, hitInfo) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tif (firedProjectile.integrity <= 0f)\r\n\t\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -16181,7 +16181,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (flag5)\r\n\t{\r\n\t\tstats.Add(value.itemMod.category + \"_hit_\" + hitEntity.Categorize(), 1);\r\n\t}\r\n\tif (Interface.CallHook(\"OnPlayerAttack\", this, hitInfo) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (value.integrity <= 0f)\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t}\r\n\t\tif (flag6)\r\n\t\t{\r\n\t\t\tstats.Add(firedProjectile.itemMod.category + \"_hit_\" + hitEntity.Categorize(), 1);\r\n\t\t}\r\n\t\tif (Interface.CallHook(\"OnPlayerAttack\", this, hitInfo) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tif (firedProjectile.integrity <= 0f)\r\n\t\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
