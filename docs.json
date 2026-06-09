@@ -16151,7 +16151,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t}\r\n\t}\r\n\tif (b != 0 || fogImageList[b2] != num)\r\n\t{\r\n\t\tbyte[] array = msg.read.BytesWithSize();\r\n\t\tif (array != null && Interface.CallHook(\"OnFogOfWarImageUpdate\", this, b, b2, num, num2, array) == null)\r\n\t\t{\r\n\t\t\tFileStorage.server.RemoveEntityNum(net.ID, num2);\r\n\t\t\tuint value = FileStorage.server.Store(array, FileStorage.Type.png, net.ID, num2);\r\n\t\t\tfogImageList[b2] = value;\r\n\t\t\tDirtyPlayerState();\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t}\r\n\t}\r\n\tif (b != 0 || fogImageList[b2] != num)\r\n\t{\r\n\t\tbyte[] array = msg.read.BytesWithSize(5000u);\r\n\t\tif (array != null && Interface.CallHook(\"OnFogOfWarImageUpdate\", this, b, b2, num, num2, array) == null)\r\n\t\t{\r\n\t\t\tFileStorage.server.RemoveEntityNum(net.ID, num2);\r\n\t\t\tuint value = FileStorage.server.Store(array, FileStorage.Type.png, net.ID, num2);\r\n\t\t\tfogImageList[b2] = value;\r\n\t\t\tDirtyPlayerState();\r\n//---\r\n"
     },
     {
       "Type": 1,
