@@ -1,4 +1,4 @@
----
+number---
 title: Configuring Plugins
 after: install-plugins
 ---
