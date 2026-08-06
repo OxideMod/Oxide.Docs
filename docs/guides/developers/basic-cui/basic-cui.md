@@ -64,6 +64,7 @@ Image with a sprite, material, color and cache.
 
 | Field | Type | Description |
 | :---------- | :-------- | :-------------------------------------------------------- |
+| BlocksRaycast | bool? | Does the component affect raycasting |
 | Color | string | Color Field in RGBA format, see [colors](./basic-cui#colors)  |
 | Enabled | bool? | Select if component is visible or not, default: true |
 | FadeIn | float | Fadein time in seconds  |
@@ -71,6 +72,7 @@ Image with a sprite, material, color and cache.
 | ImageType | Image.Type | see [Image.Type](./basic-cui#image-type)  |
 | ItemId | int | Item ID, see [RustHelp Item list](https://rusthelp.com/tools/admin/item-list) |
 | Material | string | Material of background [Material](./basic-cui#material)  |
+| PixelsPerUnitMultiplier | float | pixels per unit multiplier |  
 | PlaceholderParentId | string | Parent Id  |
 | Png | string | Png image  |
 | SkinId | ulong | Skin ID  |
@@ -91,6 +93,7 @@ new CuiImageComponent
 
 | Field | Type | Description |
 | :---------- | :-------- | :-------------------------------------------------------- |
+| BlocksRaycast | bool? | Does the component affect raycasting |
 | Color | string | Color Field in RGBA format see [colors](./basic-cui#colors)  |
 | Enabled | bool? | Select if component is visible or not, default: true |
 | FadeIn | float | Fadein time in seconds  |
@@ -118,16 +121,18 @@ Ex. if Color is blue and NormalColor is red, the button will show purple.
 
 | Field | Type | Description |
 | :---------- | :-------- | :-------------------------------------------------------- |
+| BlocksRaycast | bool? | Does the component affect raycasting |
 | Close | string | UI name to close  |
 | Color | string | Color Field in RGBA format see [colors](./basic-cui#colors)  |
 | ColorMultiplier | float | color multiplier |
 | Command | string | Command to execute when button is pressed  |
 | DisabledColor | string | Color when button disabled |
 | Enabled | bool? | Select if component is visible or not, default: true |
-| FadeDuration | float | fade duration in sec, default 0.1 |
+| FadeDuration | float? | fade duration in sec, default 0.1 |
 | FadeIn | float | Fadein time in seconds  |
 | HighlightedColor | string | Color when button highlighted (ex. mouse cursor over button) |
 | ImageType | Image.Type | see [image-type](./basic-cui#image-type)  |
+| Interactable | bool? | does this component accept input |
 | Material | string | Material of background, see [Material](./basic-cui#material)  |
 | NormalColor | string | Normal color of the button, see [colors](./basic-cui#colors) |
 | PlaceholderParentId | string | Parent Id  |
@@ -152,6 +157,7 @@ Input field with default text attributes and command to run
 | :---------- | :-------- | :-------------------------------------------------------- |
 | Align | TextAnchor | see [Align](./basic-cui#align)  |
 | Autofocus | bool | set input focus mode  |
+| BlocksRaycast | bool? | Does the component affect raycasting |
 | CharsLimit | int | maximum number of char, 0 = infinite  |
 | Color | string | Color Field in RGBA format see [colors](./basic-cui#colors)  |
 | Command | string | Command to execute when button is pressed  |
@@ -160,6 +166,7 @@ Input field with default text attributes and command to run
 | Font | string | see [fonts](./basic-cui#fonts)  |
 | FontSize | int | Size of font  |
 | HudMenuInput | bool | blocks keyboard input like NeedsKeyboard but is used for UI in the inventory/crafting  |
+| Interactable | bool? | does this component accept input |
 | IsPassword | bool | password mode, hide input |
 | LineType | InputField.LineType | see [InputField.LineType](./basic-cui#inputfield-linetype)  |
 | NeedsKeyboard | bool | blocks or allow keyboard input |
@@ -187,13 +194,16 @@ Text with value, font size, font, text align and color.
 | Field | Type | Description |
 | :---------- | :-------- | :-------------------------------------------------------- |
 | Align | TextAnchor | see [Align](./basic-cui#align), default: TextAnchor.UpperLef  |
+| BlocksRaycast | bool? | Does the component affect raycasting |
 | Color | string | Color Field in RGBA string format, see [colors](./basic-cui#colors)  |
 | Enabled | bool? | Select if component is visible or not, default: true |
 | FadeIn | float | Fadein time in seconds  |
 | Font | string |  see [fonts](./basic-cui#fonts), default: RobotoCondensed-Bold.ttf |
 | FontSize | int | Size of font , defalut: 14 |
+| PlaceholderParentId | string | Id to identify parent of this component |
 | Text | string | Text to display  |
 | VerticalOverflow | VerticalWrapMode | see [VerticalWrapMode](./basic-cui#verticalwrapmode) |
+
 
 ```csharp
 new CuiTextComponent 
@@ -448,6 +458,79 @@ new CuiGridLayoutGroupComponent
 
 #### See example for [CuiGridLayoutGroup](./example-gridmin)
 
+## `CuiCanvasGroupComponent`
+
+| Field | Type | Description |
+| :---------- | :-------- | :-------------------------------------------------------- |
+| Alpha | float? | Opacity of the UI elements in this group |
+| BlocksRaycasts | bool? | Does the component affect raycasting |
+| Fade | string | fade info string representing two float values "toalpha duration".  start value is alpha, end value toalpha, duration is the amout of time to transition  |
+| Interactable | bool? | does this component accept input |
+
+```csharp
+new CuiCanvasGroupComponent 
+{ 
+	Alpha = 1.0f,
+	BlocksRaycasts = true,
+	Interactable = true,
+	Fade = "0.0 1.0"
+},
+```
+
+## `CuiMaskComponent`
+
+| Field | Type | Description |
+| :---------- | :-------- | :-------------------------------------------------------- |
+| Enabled | bool? | Select if component is visible or not, default: true |
+| ShowMaskGraphic  | bool? |  |
+
+```csharp
+new CuiMaskComponent 
+{ 
+	ShowMaskGraphic = true
+},
+```
+
+## `CuiTooltipComponent `
+
+| Field | Type | Description |
+| :---------- | :-------- | :-------------------------------------------------------- |
+| Delay | Tooltip.DelayType | see [Tooltip.DelayType](./basic-cui#tooltip-delaytype) |
+| Enabled | bool? |  Select if component is visible or not, default: true |
+| Offset | string | offset from element to show the tooltip |
+| Position | TooltipContainer.PositionMode | see [TooltipContainer.PositionMode](./basic-cui#tooltipcontainer-positionmode) |
+| Text | string | tooltip text to display |
+| TooltipType | CommunityEntity.TooltipType | see [CommunityEntity.TooltipType](./basic-cui#communityentity-tooltiptype) |
+| UseCentre | bool? |  |
+
+
+```csharp
+new CuiTooltipComponent 
+{ 
+	Text = "tooltip help test",
+	Offset = "0.5 0.5",
+	UseCentre = true,
+	TooltipType = TooltipType.AlwaysOnTop
+},
+```
+
+### `Tooltip.DelayType`
+* `Tooltip.DelayType.Short`
+* `Tooltip.DelayType.Long`
+
+### `TooltipContainer.PositionMode`
+* `TooltipContainer.PositionMode.Auto`
+* `TooltipContainer.PositionMode.Top`
+* `TooltipContainer.PositionMode.Bottom`
+* `TooltipContainer.PositionMode.Left`
+* `TooltipContainer.PositionMode.Right`
+* `TooltipContainer.PositionMode.TopLeft`
+
+### `CommunityEntity.TooltipType`
+* `TooltipType.Default`
+* `TooltipType.AlwaysOnTop`
+* `TooltipType.AlwaysOnTopEmoji`
+
 
 ## `CuiContentSizeFitterComponent`
 
@@ -611,6 +694,7 @@ To draw a scrollbar
 | :---------- | :-------- | :-------------------------------------------------------- |  
 | AutoHide | bool | Auto hides the scroller  |  
 | Enabled | bool? | Select if component is visible or not, default: true |
+| FadeDuration | float? | number of seconds for the fade effect |
 | HandleColor | string | Color of handle see [colors](./basic-cui#colors) |  
 | HandleSprite | string | Sprite of handle  |  
 | HighlightColor | string | Color when highlighted handle, see [colors](./basic-cui#colors) |
@@ -656,10 +740,14 @@ CuiHelper.AddUi(basePlayer, jsonString);
 where jsonString is the Json formatted string of the UI, generated by the Json conversion of the CuiElementContainer.
 
 ### Destroying UI
-If you want to remove your UI, you should call DestroyUi and specify element ID (name) to remove like that :
+If you want to remove one or multiple UI, you should call DestroyUi and specify element ID (name) to remove. for multiples elements, create a list or array of the names to destroy :
 
 ```csharp
 CuiHelper.DestroyUi(basePlayer, NameOfElement);
+
+CuiHelper.DestroyUi(basePlayer, List<string> NameOfElements);
+
+CuiHelper.DestroyUi(basePlayer, string[] NameOfElements);
 ```
 
 ### GetColor
@@ -788,7 +876,7 @@ All available fonts are:
 * `assets/icons/iconmaterial.mat`  (Default)
 
 ### UI data types
-### Align
+### `Align`
 * `TextAnchor.UpperLeft`
 * `TextAnchor.UpperCenter`
 * `TextAnchor.UpperRight`
@@ -799,7 +887,7 @@ All available fonts are:
 * `TextAnchor.LowerCenter`
 * `TextAnchor.LowerRight`
 
-### Image.Type
+### `Image.Type`
 
 * `Image.Type.Simple`
 * `Image.Type.Sliced`
@@ -847,7 +935,7 @@ All available fonts are:
 * `Elastic`
 * `Clamped`
 
-### PositionSendType
+### `PositionSendType`
 * `CommunityEntity.DraggablePositionSendType.NormalizedScreen` \
 &emsp; the Position normalized to the Screen resolution
 * `CommunityEntity.DraggablePositionSendType.NormalizedParent` \
@@ -901,3 +989,33 @@ For the other layers, UI will only be visible in the respective view.
 
 1.  Visible but blurred, under the view background.
 
+
+## Pie menu
+
+The CommunityEntity class implement methods for the creation of pie menu and a pietest method to show how to use the piemenu
+
+```csharp
+public static void AddPieMenu(CustomPie pie, string name, string description, string command, string sprite, bool disabled, bool selected, string next, string prev)
+```
+
+```csharp
+public void SendPie(BasePlayer player, CustomPie pie)
+```
+
+Code sample for pie menu, from the CommunityEntity class
+```csharp
+public static void pietest(ConsoleSystem.Arg arg)
+{
+	using (CustomPie customPie = Facepunch.Pool.Get<CustomPie>())
+	{
+		customPie.menus = Facepunch.Pool.Get<List<CustomPieMenu>>();
+		CommunityEntity.AddPieMenu(customPie, "Switch Night", "Switch to night mode", "env.time 0", "assets/icons/device_add.png", false, false, "", "");
+		CommunityEntity.AddPieMenu(customPie, "Switch Day", "Switch to day mode", "env.time 12", "assets/icons/device_add.png", false, false, "", "");
+		CommunityEntity.AddPieMenu(customPie, "Rain", "Make it rain on the server", "sv weather.load storm", "assets/icons/embrella.png", false, false, "", "");
+		CommunityEntity.AddPieMenu(customPie, "Be Malicious", "This attempts to open your player inventory.", "inventory.toggle", "assets/icons/explosion_sprite.png", false, false, "", "");
+		CommunityEntity.AddPieMenu(customPie, "Left/Right Test", "Pick one or the other", "pietest_prev", "assets/icons/facepunch.png", false, false, "pietest_prev", "pietest_next");
+		CommunityEntity.AddPieMenu(customPie, "Exit", "Close this context menu", "", "assets/icons/close.png", false, false, "", "");
+		CommunityEntity.ServerInstance.SendPie(arg.Player(), customPie);
+	}
+}
+```
