@@ -909,7 +909,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tBasePlayer player = msg.player;\r\n\tItem targetItem = GetTargetItem();\r\n\tif (targetItem != null && Interface.CallHook(\"CanResearchItem\", player, targetItem) == null && targetItem.amount <= 1 && IsItemResearchable(targetItem))\r\n\t{\r\n\t\tInterface.CallHook(\"OnItemResearch\", this, targetItem, player);\r\n\t\ttargetItem.CollectedForCrafting(player);\r\n\t\tresearchFinishedTime = Time.realtimeSinceStartup + researchDuration;\r\n\t\tInvoke(ResearchAttemptFinished, researchDuration);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tBasePlayer player = msg.player;\r\n\tItem targetItem = GetTargetItem();\r\n\tif (targetItem == null || Interface.CallHook(\"CanResearchItem\", player, targetItem) != null || targetItem.amount > 1 || !IsItemResearchable(targetItem))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tInterface.CallHook(\"OnItemResearch\", this, targetItem, player);\r\n\tif (!onlyOneUser || !(msg.player.inventory.loot.entitySource != this))\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -930,7 +930,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tBasePlayer player = msg.player;\r\n\tItem targetItem = GetTargetItem();\r\n\tif (targetItem != null && Interface.CallHook(\"CanResearchItem\", player, targetItem) == null && targetItem.amount <= 1 && IsItemResearchable(targetItem))\r\n\t{\r\n\t\tInterface.CallHook(\"OnItemResearch\", this, targetItem, player);\r\n\t\ttargetItem.CollectedForCrafting(player);\r\n\t\tresearchFinishedTime = Time.realtimeSinceStartup + researchDuration;\r\n\t\tInvoke(ResearchAttemptFinished, researchDuration);\r\n\t\tbase.inventory.SetLocked(isLocked: true);\r\n\t\tint scrapCost = ScrapForResearch(targetItem);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tItem targetItem = GetTargetItem();\r\n\tif (targetItem == null || Interface.CallHook(\"CanResearchItem\", player, targetItem) != null || targetItem.amount > 1 || !IsItemResearchable(targetItem))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tInterface.CallHook(\"OnItemResearch\", this, targetItem, player);\r\n\tif (!onlyOneUser || !(msg.player.inventory.loot.entitySource != this))\r\n\t{\r\n\t\ttargetItem.CollectedForCrafting(player);\r\n\t\tresearchFinishedTime = Time.realtimeSinceStartup + researchDuration;\r\n\t\tInvoke(ResearchAttemptFinished, researchDuration);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -2623,7 +2623,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "private void SVSwitch(RPCMessage msg)\r\n{\r\n\tbool flag = msg.read.Bit();\r\n\tif (flag == IsOn() || msg.player == null || Interface.CallHook(\"OnRecyclerToggle\", this, msg.player) != null || (!flag && onlyOneUser && msg.player.inventory.loot.entitySource != this) || (flag && !HasRecyclable()))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (flag)\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "private void SVSwitch(RPCMessage msg)\r\n{\r\n\tbool flag = msg.read.Bit();\r\n\tif (flag == IsOn() || msg.player == null || Interface.CallHook(\"OnRecyclerToggle\", this, msg.player) != null || (onlyOneUser && msg.player.inventory.loot.entitySource != this) || (flag && GetRecyclerState() == RecyclerState.Unpowered) || (flag && !HasRecyclable()))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (flag)\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -2792,7 +2792,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\tmsg.player.ShowToast(GameTip.Styles.Error, PlayerInventoryErrors.InvalidItem, false);\r\n\t\tConstructionErrors.Log(msg.player, id.ToString());\r\n\t}\r\n\telse\r\n\t{\r\n\t\tif (Interface.CallHook(\"CanMoveItem\", item, this, itemContainerId, num, num2, itemMoveModifier) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tBaseEntity entityOwner = item.GetEntityOwner();\r\n\t\tif (entityOwner != null && entityOwner == msg.player && msg.player.IsRestrainedOrSurrendering)\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tmsg.player.ShowToast(GameTip.Styles.Error, PlayerInventoryErrors.InvalidItem, false);\r\n\t\tConstructionErrors.Log(msg.player, id.ToString());\r\n\t}\r\n\telse\r\n\t{\r\n\t\tif (Interface.CallHook(\"CanMoveItem\", item, this, itemContainerId, num, num2, itemMoveModifier) != null || item.IsLocked() || (item.parent != null && item.parent.IsLocked()))\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tBaseEntity entityOwner = item.GetEntityOwner();\r\n\t\tif (entityOwner != null && entityOwner == msg.player && msg.player.IsRestrainedOrSurrendering)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -2950,7 +2950,7 @@
           "gameObject": "UnityEngine.GameObject"
         }
       },
-      "CodeAfterInjection": "public static void AddViolation(BasePlayer ply, AntiHackType type, float amount, GameObject gameObject = null)\r\n{\r\n\tif (Interface.CallHook(\"OnPlayerViolation\", ply, type, amount, gameObject) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tusing (TimeWarning.New(\"AntiHack.AddViolation\"))\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "public static void AddViolation(BasePlayer ply, AntiHackType type, float amount, GameObject gameObject = null)\r\n{\r\n\tif (Interface.CallHook(\"OnPlayerViolation\", ply, type, amount, gameObject) != null || ply.ActivePlayerInd == -1)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tusing (TimeWarning.New(\"AntiHack.AddViolation\"))\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -3114,7 +3114,7 @@
         "ReturnType": "int",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\tint num = info.stackable;\r\n\tif (parent != null && parent.maxStackSize > 0)\r\n\t{\r\n\t\tnum = Mathf.Min(parent.maxStackSize, num);\r\n\t}\r\n\tobject obj = Interface.CallHook(\"OnMaxStackable\", this);\r\n\tif (obj is int)\r\n\t{\r\n\t\treturn (int)obj;\r\n\t}\r\n\treturn num;\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tint num = info.stackable;\r\n\tif (parent != null && parent.maxStackSize > 0)\r\n\t{\r\n\t\tnum = ((!parent.allowItemsToIncreaseToMaxStackSize) ? Mathf.Min(parent.maxStackSize, num) : Mathf.Max(parent.maxStackSize, num));\r\n\t}\r\n\tobject obj = Interface.CallHook(\"OnMaxStackable\", this);\r\n\tif (obj is int)\r\n\t{\r\n\t\treturn (int)obj;\r\n\t}\r\n\treturn num;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -3591,7 +3591,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\tDebug.Log(\"CONTACT DEVELOPERS! LootContainer::PopulateLoot has null inventory!!!\");\r\n\t\treturn;\r\n\t}\r\n\tbase.inventory.Clear();\r\n\tItemManager.DoRemoves();\r\n\tif (Interface.CallHook(\"OnLootSpawn\", this) == null)\r\n\t{\r\n\t\tPopulateLoot();\r\n\t\tif (shouldRefreshContents)\r\n\t\t{\r\n\t\t\tInvoke(SpawnLoot, UnityEngine.Random.Range(minSecondsBetweenRefresh, maxSecondsBetweenRefresh));\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tDebug.Log(\"CONTACT DEVELOPERS! LootContainer::PopulateLoot has null inventory!!!\");\r\n\t\treturn;\r\n\t}\r\n\tbase.inventory.Clear();\r\n\tItemManager.DoRemoves();\r\n\tif (Interface.CallHook(\"OnLootSpawn\", this) == null)\r\n\t{\r\n\t\tPopulateLoot();\r\n\t\tCancelLootRefreshCountdown();\r\n\t\tif (shouldRefreshContents)\r\n\t\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -3837,13 +3837,13 @@
       "TargetType": "DroppedItemContainer",
       "Category": "Player",
       "MethodData": {
-        "MethodName": "RPC_OpenLoot",
+        "MethodName": "PlayerOpenLoot",
         "ReturnType": "void",
         "Arguments": {
-          "rpc": "BaseEntity.RPCMessage"
+          "player": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "//---\r\nprivate void RPC_OpenLoot(RPCMessage rpc)\r\n{\r\n\tif (inventory != null)\r\n\t{\r\n\t\tBasePlayer player = rpc.player;\r\n\t\tif ((bool)player && player.CanInteract() && Interface.CallHook(\"CanLootEntity\", player, this) == null && player.inventory.loot.StartLootingEntity(this))\r\n\t\t{\r\n\t\t\tSetFlagLocal(Flags.Open, b: true);\r\n\t\t\tplayer.inventory.loot.AddContainer(inventory);\r\n\t\t\tplayer.inventory.loot.SendImmediate();\r\n\t\t\tplayer.ClientRPC(RpcTarget.Player(\"RPC_OpenLootPanel\", player), lootPanelName);\r\n//---\r\n"
+      "CodeAfterInjection": "public void PlayerOpenLoot(BasePlayer player)\r\n{\r\n\tif ((bool)player && player.CanInteract() && Interface.CallHook(\"CanLootEntity\", player, this) == null && player.inventory.loot.StartLootingEntity(this))\r\n\t{\r\n\t\tSetFlagLocal(Flags.Open, b: true);\r\n\t\tplayer.inventory.loot.AddContainer(inventory);\r\n\t\tplayer.inventory.loot.SendImmediate();\r\n\t\tplayer.ClientRPC(RpcTarget.Player(\"RPC_OpenLootPanel\", player), lootPanelName);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -4295,7 +4295,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\tEffect.server.Run(\"assets/bundled/prefabs/fx/impacts/additive/fire.prefab\", item, 0u, new Vector3(0f, 1f, 0f), Vector3.up);\r\n\t\t\t}\r\n\t\t\thitInfo.PointEnd = item.transform.position;\r\n\t\t\thitInfo.HitPositionWorld = item.transform.position;\r\n\t\t\thitInfo.damageTypes.Set(DamageType.Heat, damagePerSecond * tickRate);\r\n\t\t\tInterface.CallHook(\"OnFireBallDamage\", this, item, hitInfo);\r\n\t\t\titem.OnAttacked(hitInfo);\r\n\t\t}\r\n\t}\r\n\tPool.FreeUnmanaged(ref obj);\r\n}\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\tnum *= siegeWeaponDamageScale;\r\n\t\t\t}\r\n\t\t\thitInfo.PointEnd = item.transform.position;\r\n\t\t\thitInfo.HitPositionWorld = item.transform.position;\r\n\t\t\thitInfo.damageTypes.Set(DamageType.Heat, num);\r\n\t\t\tInterface.CallHook(\"OnFireBallDamage\", this, item, hitInfo);\r\n\t\t\titem.OnAttacked(hitInfo);\r\n\t\t}\r\n\t}\r\n\tPool.FreeUnmanaged(ref obj);\r\n}\r\n"
     },
     {
       "Type": 0,
@@ -4329,13 +4329,13 @@
       "Category": "Player",
       "MethodData": {
         "MethodName": "ServerUpdate",
-        "ReturnType": "void",
+        "ReturnType": "bool",
         "Arguments": {
           "ownerEntity": "BaseCombatEntity",
           "delta": "float"
         }
       },
-      "CodeAfterInjection": "public override void ServerUpdate(BaseCombatEntity ownerEntity, float delta)\r\n{\r\n\tbase.ServerUpdate(ownerEntity, delta);\r\n\tInterface.CallHook(\"OnPlayerMetabolize\", this, ownerEntity, delta);\r\n\tusing (TimeWarning.New(\"PlayerMetabolism.ServerUpdate\"))\r\n\t{\r\n\t\tif (owner.IsConnected)\r\n\t\t{\r\n\t\t\tSendChanges();\r\n//---\r\n"
+      "CodeAfterInjection": "public override bool ServerUpdate(BaseCombatEntity ownerEntity, float delta)\r\n{\r\n\tbool num = base.ServerUpdate(ownerEntity, delta);\r\n\tInterface.CallHook(\"OnPlayerMetabolize\", this, ownerEntity, delta);\r\n\tbool flag = num;\r\n\tif ((flag || isDirty || _needsFullSnapshot) && owner.IsConnected)\r\n\t{\r\n\t\tusing (TimeWarning.New(\"PlayerMetabolism.ServerUpdate\"))\r\n\t\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -5902,7 +5902,8 @@
       "HookParameters": {
         "player": "BasePlayer",
         "cached": "bool",
-        "cacheDuration": "float"
+        "cacheDuration": "float",
+        "targetIoEnt": "IOEntity"
       },
       "ReturnTypeOverwrite": "bool",
       "ReturnBehavior": 1,
@@ -5914,10 +5915,11 @@
         "Arguments": {
           "player": "BasePlayer",
           "cached": "bool",
-          "cacheDuration": "float"
+          "cacheDuration": "float",
+          "targetIoEnt": "IOEntity"
         }
       },
-      "CodeAfterInjection": "public static bool CanPlayerUseWires(BasePlayer player, bool cached = false, float cacheDuration = 1f)\r\n{\r\n\tobject obj = Interface.CallHook(\"CanUseWires\", player, cached, cacheDuration);\r\n\tif (obj is bool)\r\n\t{\r\n\t\treturn (bool)obj;\r\n\t}\r\n\tif (player != null && player.IsInCreativeMode && Creative.unlimitedIo)\r\n//---\r\n"
+      "CodeAfterInjection": "public static bool CanPlayerUseWires(BasePlayer player, bool cached = false, float cacheDuration = 1f, IOEntity targetIoEnt = null)\r\n{\r\n\tobject obj = Interface.CallHook(\"CanUseWires\", player, cached, cacheDuration, targetIoEnt);\r\n\tif (obj is bool)\r\n\t{\r\n\t\treturn (bool)obj;\r\n\t}\r\n\tif (player != null && player.IsInCreativeMode && Creative.unlimitedIo)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -6044,7 +6046,7 @@
           "force": "bool"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\tnum2 = 0f;\r\n\t\t\t}\r\n\t\t}\r\n\t\tPool.FreeUnmanaged(ref obj);\r\n\t\tcachedProtectedMinutes = num2;\r\n\t\tInterface.CallHook(\"OnCupboardProtectionCalculated\", this, cachedProtectedMinutes);\r\n\t\treturn cachedProtectedMinutes;\r\n\t}\r\n\treturn 0f;\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t{\r\n\t\t\treturn cachedProtectedMinutes;\r\n\t\t}\r\n\t\tnextProtectedCalcTime = Time.realtimeSinceStartup + 60f;\r\n\t\tcachedProtectedMinutes = CalculateProtectedMinutes();\r\n\t\tInterface.CallHook(\"OnCupboardProtectionCalculated\", this, cachedProtectedMinutes);\r\n\t\treturn cachedProtectedMinutes;\r\n\t}\r\n\treturn 0f;\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -6721,7 +6723,7 @@
           "bAdded": "bool"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\tbase.baseEntity.GetHeldEntity().UpdateShieldState(bHeld: true);\r\n\t\t}\r\n\t\titem?.contents?.onItemAddedRemoved?.Invoke(item, bAdded);\r\n\t}\r\n\tbase.baseEntity.ProcessMissionEvent(BaseMission.MissionEventType.CLOTHINGCHANGED, 0, 0f);\r\n\tInterface.CallHook(\"OnClothingItemChanged\", this, item, bAdded);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t}\r\n\t\tInvoke(_updatedVisibleHolsteredItemsCallback, 0.1f);\r\n\t\titem?.contents?.onItemAddedRemoved?.Invoke(item, bAdded);\r\n\t}\r\n\tbase.baseEntity.ProcessMissionEvent(BaseMission.MissionEventType.CLOTHINGCHANGED, 0, 0f);\r\n\tInterface.CallHook(\"OnClothingItemChanged\", this, item, bAdded);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -7063,7 +7065,7 @@
         "deepSeaManager": "DeepSeaManager"
       },
       "ReturnBehavior": 0,
-      "TargetType": "DeepSeaManager/<CloseDeepSeaAsync>d__77",
+      "TargetType": "DeepSeaManager/<CloseDeepSeaAsync>d__75",
       "Category": "Naval",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -7080,7 +7082,7 @@
         "deepSeaManager": "DeepSeaManager"
       },
       "ReturnBehavior": 0,
-      "TargetType": "DeepSeaManager/<OpenDeepSeaAsync>d__75",
+      "TargetType": "DeepSeaManager/<OpenDeepSeaAsync>d__73",
       "Category": "Naval",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -7428,7 +7430,7 @@
           "connection": "Network.Connection"
         }
       },
-      "CodeAfterInjection": "public BasePlayer SpawnNewPlayer(Connection connection)\r\n{\r\n\tRelationshipManager.PlayerTeam playerTeam = RelationshipManager.ServerInstance.FindPlayersTeam(connection.userid);\r\n\tBasePlayer.SpawnPoint spawnPoint = FindSpawnPoint(null, playerTeam?.teamID ?? 0);\r\n\tBasePlayer basePlayer = GameManager.server.CreateEntity(\"assets/prefabs/player/player.prefab\", spawnPoint.pos, spawnPoint.rot).ToPlayer();\r\n\tif (Interface.CallHook(\"OnPlayerSpawn\", basePlayer, connection) != null)\r\n\t{\r\n\t\treturn (BasePlayer)(object)spawnPoint;\r\n\t}\r\n\tbasePlayer.health = 0f;\r\n\tbasePlayer.lifestate = BaseCombatEntity.LifeState.Dead;\r\n//---\r\n"
+      "CodeAfterInjection": "public BasePlayer SpawnNewPlayer(Connection connection)\r\n{\r\n\tRelationshipManager.PlayerTeam playerTeam = RelationshipManager.ServerInstance.FindPlayersTeam(connection.userid);\r\n\tBasePlayer.SpawnPoint spawnPoint = FindSpawnPoint(null, playerTeam?.teamID ?? 0);\r\n\tBasePlayer basePlayer = GameManager.server.CreateEntity(\"assets/prefabs/player/player.prefab\", spawnPoint.pos, spawnPoint.rot).ToPlayer();\r\n\tif (Interface.CallHook(\"OnPlayerSpawn\", basePlayer, connection) != null)\r\n\t{\r\n\t\treturn basePlayer;\r\n\t}\r\n\tbasePlayer.health = 0f;\r\n\tbasePlayer.lifestate = BaseCombatEntity.LifeState.Dead;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -10138,7 +10140,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "private void CollectWater()\r\n{\r\n\tif (base.inventory != null && !IsFull() && Interface.CallHook(\"OnWaterCollect\", this) == null)\r\n\t{\r\n\t\tfloat baseRate = collectionRates.baseRate;\r\n\t\tbaseRate += Climate.GetFog(base.transform.position) * collectionRates.fogRate;\r\n\t\tif (TestIsOutside(base.transform, rainTestPosition, rainTestSize, 256f))\r\n\t\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tfloat num = ((overrideCollectInterval > 0f) ? overrideCollectInterval : 60f);\r\n\tnextCollect = num + UnityEngine.Random.Range(0f, num * 0.1f);\r\n\tif (base.inventory == null || IsFull() || Interface.CallHook(\"OnWaterCollect\", this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tfloat num2 = collectionRates.baseRate;\r\n\tif (requireOutside)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -12454,7 +12456,8 @@
       "HookParameters": {
         "instance": "PlayerInventory",
         "itemid": "int",
-        "includeBackpack": "bool"
+        "includeBackpack": "bool",
+        "redirectAllowed": "bool"
       },
       "ReturnTypeOverwrite": "int",
       "ReturnBehavior": 1,
@@ -12465,10 +12468,11 @@
         "ReturnType": "int",
         "Arguments": {
           "itemid": "int",
-          "includeBackpack": "bool"
+          "includeBackpack": "bool",
+          "redirectAllowed": "bool"
         }
       },
-      "CodeAfterInjection": "//---\r\n{\r\n\tif (itemid == 0)\r\n\t{\r\n\t\treturn 0;\r\n\t}\r\n\tobject obj = Interface.CallHook(\"OnInventoryItemsCount\", this, itemid, includeBackpack);\r\n\tif (obj is int)\r\n\t{\r\n\t\treturn (int)obj;\r\n\t}\r\n\tint num = 0;\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n{\r\n\tif (itemid == 0)\r\n\t{\r\n\t\treturn 0;\r\n\t}\r\n\tobject obj = Interface.CallHook(\"OnInventoryItemsCount\", this, itemid, includeBackpack, redirectAllowed);\r\n\tif (obj is int)\r\n\t{\r\n\t\treturn (int)obj;\r\n\t}\r\n\tint num = 0;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -15490,7 +15494,7 @@
         "reportType": "Facepunch.Models.ReportType"
       },
       "ReturnBehavior": 0,
-      "TargetType": "BasePlayer/<OnFeedbackReport>d__775",
+      "TargetType": "BasePlayer/<OnFeedbackReport>d__764",
       "Category": "Player",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -15504,7 +15508,7 @@
       "Name": "OnFeedbackReported [patch]",
       "HookName": "OnFeedbackReported",
       "ReturnBehavior": 0,
-      "TargetType": "BasePlayer/<OnFeedbackReport>d__775",
+      "TargetType": "BasePlayer/<OnFeedbackReport>d__764",
       "Category": "_Patches",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -15526,7 +15530,7 @@
         "text3": "string"
       },
       "ReturnBehavior": 0,
-      "TargetType": "BasePlayer/<OnPlayerReported>d__774",
+      "TargetType": "BasePlayer/<OnPlayerReported>d__763",
       "Category": "Player",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -15563,14 +15567,14 @@
         "steamInventory": "SteamInventory"
       },
       "ReturnBehavior": 0,
-      "TargetType": "SteamInventory/<UpdateSteamInventory>d__3",
+      "TargetType": "SteamInventory/<UpdateSteamInventory>d__9",
       "Category": "Player",
       "MethodData": {
         "MethodName": "MoveNext",
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\t\tDebug.LogWarning($\"UpdateSteamPlayer: inventory belongs to someone else (userID={steamInventory.baseEntity.userID.Get()})\");\r\n\t\t}\r\n\t\telse if ((bool)steamInventory.gameObject)\r\n\t\t{\r\n\t\t\tsteamInventory.Items = result.Items.ToArray();\r\n\t\t\tInterface.CallHook(\"OnSteamInventoryUpdated\", steamInventory);\r\n\t\t\tresult.Dispose();\r\n\t\t}\r\n\t\tend_IL_000e:;\r\n\t}\r\n\tcatch (Exception exception)\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\tDebug.LogWarning($\"UpdateSteamPlayer: inventory belongs to someone else (userID={steamInventory.baseEntity.userID.Get()})\");\r\n\t\t}\r\n\t\telse if ((bool)steamInventory.gameObject)\r\n\t\t{\r\n\t\t\tsteamInventory.SetItems(result.Items.ToArray());\r\n\t\t\tInterface.CallHook(\"OnSteamInventoryUpdated\", steamInventory);\r\n\t\t\tresult.Dispose();\r\n\t\t}\r\n\t\tend_IL_000e:;\r\n\t}\r\n\tcatch (Exception exception)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -15826,10 +15830,11 @@
         "Arguments": {
           "connection": "Network.Connection",
           "write": "Network.NetWrite",
+          "time": "BaseNetworkable.ThreadSafeTime",
           "ordered": "bool"
         }
       },
-      "CodeAfterInjection": "public void SendAsSnapshot(Connection connection, NetWrite write, bool ordered = true)\r\n{\r\n\tuint val = (ordered ? (++connection.validate.entityUpdates) : uint.MaxValue);\r\n\tif (Interface.CallHook(\"OnEntitySnapshot\", this, connection) == null)\r\n\t{\r\n\t\tSaveInfo saveInfo = new SaveInfo\r\n\t\t{\r\n\t\t\tforConnection = connection,\r\n\t\t\tforDisk = false\r\n//---\r\n"
+      "CodeAfterInjection": "public void SendAsSnapshot(Connection connection, NetWrite write, in ThreadSafeTime time, bool ordered = true)\r\n{\r\n\tuint val = (ordered ? (++connection.validate.entityUpdates) : uint.MaxValue);\r\n\tif (Interface.CallHook(\"OnEntitySnapshot\", this, connection) == null)\r\n\t{\r\n\t\tSaveInfo saveInfo = new SaveInfo\r\n\t\t{\r\n\t\t\tforConnection = connection,\r\n\t\t\tforDisk = false,\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -15987,7 +15992,7 @@
         "deepSeaManager": "DeepSeaManager"
       },
       "ReturnBehavior": 0,
-      "TargetType": "DeepSeaManager/<OpenDeepSeaAsync>d__75",
+      "TargetType": "DeepSeaManager/<OpenDeepSeaAsync>d__73",
       "Category": "Naval",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -16004,7 +16009,7 @@
         "deepSeaManager": "DeepSeaManager"
       },
       "ReturnBehavior": 0,
-      "TargetType": "DeepSeaManager/<CloseDeepSeaAsync>d__77",
+      "TargetType": "DeepSeaManager/<CloseDeepSeaAsync>d__75",
       "Category": "Naval",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -16074,7 +16079,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "private void DelayFill()\r\n{\r\n\tif (StorageContainer == null || Interface.CallHook(\"OnLootSpawn\", this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (LootSpawnSlots.Length != 0)\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "private void DelayFill()\r\n{\r\n\tif (!(StorageContainer == null) && Interface.CallHook(\"OnLootSpawn\", this) == null)\r\n\t{\r\n\t\tLootContainer.FillLoot(StorageContainer.inventory, LootDefinition, MaxDefinitionsToSpawn, LootSpawnSlots);\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -16274,7 +16279,7 @@
           "byPlayer": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tbyPlayer.inventory.containerMain.UseAmount(ScrapDef, ref amount);\r\n\tbyPlayer.inventory.containerBelt.UseAmount(ScrapDef, ref amount);\r\n\tbyPlayer.inventory.containerWear.UseAmount(ScrapDef, ref amount);\r\n\tint amount2 = Mathf.RoundToInt((float)ScrapPerHourRent * 12f * CurrentRentMultiplier);\r\n\tbyPlayer.inventory.MoveItemsIntoContainer(ScrapDef, amount2, invisibleVendingMachine.inventory);\r\n\tInterface.CallHook(\"OnRentableShopOpened\", this, byPlayer);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\tbyPlayer.inventory.containerBelt.UseAmount(ScrapDef, ref amount);\r\n\tbyPlayer.inventory.containerWear.UseAmount(ScrapDef, ref amount);\r\n\tint num = Mathf.RoundToInt((float)ScrapPerHourRent * 12f * CurrentRentMultiplier);\r\n\tbyPlayer.inventory.MoveItemsIntoContainer(ScrapDef, num, invisibleVendingMachine.inventory);\r\n\tFacepunch.Rust.Analytics.Azure.OnShopOpened(this, openScrapCost, num);\r\n\tInterface.CallHook(\"OnRentableShopOpened\", this, byPlayer);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -16374,7 +16379,7 @@
           "player": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tif (GetPlayerApartmentSize(player) == ApartmentSize.None)\r\n\t{\r\n\t\treturn false;\r\n\t}\r\n\tApartmentRoom playerApartment = GetPlayerApartment(player);\r\n\tobject obj = Interface.CallHook(\"OnApartmentRoomCheckout\", player, playerApartment, this);\r\n\tif (obj != null)\r\n\t{\r\n\t\treturn false;\r\n\t}\r\n\tCheckout(playerApartment);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tif (GetPlayerApartmentSize(player) == ApartmentSize.None)\r\n\t{\r\n\t\treturn false;\r\n\t}\r\n\tApartmentRoom playerApartment = GetPlayerApartment(player);\r\n\tobject obj = Interface.CallHook(\"OnApartmentRoomCheckout\", player, playerApartment, this);\r\n\tif (obj != null)\r\n\t{\r\n\t\treturn false;\r\n\t}\r\n\tFacepunch.Rust.Analytics.Azure.OnApartmentCheckOut(player, playerApartment);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -16395,7 +16400,7 @@
           "player": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tif (obj != null)\r\n\t{\r\n\t\treturn false;\r\n\t}\r\n\tCheckout(playerApartment);\r\n\tInterface.CallHook(\"OnApartmentRoomCheckedout\", player, playerApartment, this);\r\n\treturn true;\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\treturn false;\r\n\t}\r\n\tFacepunch.Rust.Analytics.Azure.OnApartmentCheckOut(player, playerApartment);\r\n\tCheckout(playerApartment);\r\n\tInterface.CallHook(\"OnApartmentRoomCheckedout\", player, playerApartment, this);\r\n\treturn true;\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -16418,7 +16423,7 @@
           "size": "ApartmentSize"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tApartmentRoom apartmentRoom = FetchClosestUnoccupiedRoom(size);\r\n\tif (apartmentRoom == null)\r\n\t{\r\n\t\tDebug.LogError($\"Player tried to purchase an apartment of size {size} but no unoccupied rooms were found!\");\r\n\t}\r\n\telse if (Interface.CallHook(\"OnApartmentRoomPurchase\", apartmentRoom, player, size, this) == null)\r\n\t{\r\n\t\tint purchaseScrapCost = GetPurchaseScrapCost(size);\r\n\t\tplayer.inventory.Take(null, ItemManager.Items.Scrap.itemid, purchaseScrapCost);\r\n\t\tGiveRoomToPlayer(player, apartmentRoom);\r\n\t\tif (player.Connection != null)\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tApartmentRoom apartmentRoom = FetchClosestUnoccupiedRoom(size);\r\n\tif (apartmentRoom == null)\r\n\t{\r\n\t\tDebug.LogError($\"Player tried to purchase an apartment of size {size} but no unoccupied rooms were found!\");\r\n\t}\r\n\telse if (Interface.CallHook(\"OnApartmentRoomPurchase\", apartmentRoom, player, size, this) == null)\r\n\t{\r\n\t\tint purchaseScrapCost = GetPurchaseScrapCost(size);\r\n\t\tplayer.inventory.Take(null, ItemManager.Items.Scrap.itemid, purchaseScrapCost);\r\n\t\tGiveRoomToPlayer(player, apartmentRoom);\r\n\t\tFacepunch.Rust.Analytics.Azure.OnApartmentCheckIn(player, apartmentRoom, purchaseScrapCost);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -16441,7 +16446,7 @@
           "size": "ApartmentSize"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\tNotifyRoomChanged(player.userID);\r\n\t\tif (player.Connection != null)\r\n\t\t{\r\n\t\t\tplayer.ChatMessage(\"You have upgraded to room \" + apartmentRoom.RoomNumber);\r\n\t\t}\r\n\t\tInterface.CallHook(\"OnApartmentRoomUpgraded\", apartmentRoom, player, size, this);\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tif (player.Connection != null)\r\n\t\t{\r\n\t\t\tplayer.ChatMessage(\"You have upgraded to room \" + apartmentRoom.RoomNumber);\r\n\t\t}\r\n\t\tFacepunch.Rust.Analytics.Azure.OnApartmentUpgrade(player, playerApartment, apartmentRoom, upgradeCost);\r\n\t\tInterface.CallHook(\"OnApartmentRoomUpgraded\", apartmentRoom, player, size, this);\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -16464,7 +16469,7 @@
           "size": "ApartmentSize"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\tGiveRoomToPlayer(player, apartmentRoom);\r\n\t\tif (player.Connection != null)\r\n\t\t{\r\n\t\t\tplayer.ChatMessage(\"You have rented room \" + apartmentRoom.RoomNumber);\r\n\t\t}\r\n\t\tInterface.CallHook(\"OnApartmentRoomPurchased\", apartmentRoom, player, size, this);\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tint purchaseScrapCost = GetPurchaseScrapCost(size);\r\n\t\tplayer.inventory.Take(null, ItemManager.Items.Scrap.itemid, purchaseScrapCost);\r\n\t\tGiveRoomToPlayer(player, apartmentRoom);\r\n\t\tFacepunch.Rust.Analytics.Azure.OnApartmentCheckIn(player, apartmentRoom, purchaseScrapCost);\r\n\t\tInterface.CallHook(\"OnApartmentRoomPurchased\", apartmentRoom, player, size, this);\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -16485,7 +16490,7 @@
           "player": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tif (activeItem != null && !(activeItem.info != MasterKeyDef) && activeItem.amount >= 1)\r\n\t{\r\n\t\tactiveItem.UseItem();\r\n\t\tapartmentRoom.StartBreakIn();\r\n\t\tplayer.ShowToast(GameTip.Styles.Blue_Long, Phrase_BreakInSuccess, false);\r\n\t\tInterface.CallHook(\"OnApartmentRoomBreakInCompleted\", apartmentRoom, player, this);\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tactiveItem.UseItem();\r\n\t\tapartmentRoom.StartBreakIn();\r\n\t\tplayer.ShowToast(GameTip.Styles.Blue_Long, Phrase_BreakInSuccess, false);\r\n\t\tStopBreakInSound();\r\n\t\tFacepunch.Rust.Analytics.Azure.OnApartmentBreakIn(player, apartmentRoom);\r\n\t\tInterface.CallHook(\"OnApartmentRoomBreakInCompleted\", apartmentRoom, player, this);\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -16505,7 +16510,7 @@
           "player": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tif (activeItem != null && !(activeItem.info != ApartmentDoor.MasterKeyDef) && activeItem.amount >= 1)\r\n\t{\r\n\t\tactiveItem.UseItem();\r\n\t\tAddIntruder(player.userID);\r\n\t\tplayer.ShowToast(GameTip.Styles.Blue_Long, Phrase_BreakInSuccess, false);\r\n\t\tInterface.CallHook(\"OnRentableShopBreakInCompleted\", this, player);\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tactiveItem.UseItem();\r\n\t\tAddIntruder(player.userID);\r\n\t\tplayer.ShowToast(GameTip.Styles.Blue_Long, Phrase_BreakInSuccess, false);\r\n\t\tFacepunch.Rust.Analytics.Azure.OnShopBreakIn(player, this);\r\n\t\tInterface.CallHook(\"OnRentableShopBreakInCompleted\", this, player);\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -16587,7 +16592,7 @@
           "position": "UnityEngine.Vector3"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\tItem item = ItemManager.Create(masterKeyDef, 1, 0uL, isServerSide: true, 0uL);\r\n\t\tif (item != null)\r\n\t\t{\r\n\t\t\titem.AddItemOwnership(player, ItemOwnershipPhrases.VendorSale);\r\n\t\t\tplayer.GiveItem(item, GiveItemReason.PickedUp);\r\n\t\t\tInterface.CallHook(\"OnApartmentMasterKeyPurchased\", player, item);\r\n\t\t}\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tItem item = ItemManager.Create(masterKey, 1, 0uL, isServerSide: true, 0uL);\r\n\t\tif (item != null)\r\n\t\t{\r\n\t\t\titem.AddItemOwnership(player, ItemOwnershipPhrases.VendorSale);\r\n\t\t\tplayer.GiveItem(item, GiveItemReason.PickedUp);\r\n\t\t\tInterface.CallHook(\"OnApartmentMasterKeyPurchased\", player, item);\r\n\t\t}\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 1,
