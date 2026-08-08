@@ -17,7 +17,7 @@
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview",
-    "prepare": "husky install",
+    "prepare": "husky",
     "format": "prettier --write .",
     "lint": "prettier --check .",
     "check": "prettier --check ."
