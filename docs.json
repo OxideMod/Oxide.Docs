@@ -2700,7 +2700,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tif (!canBePublic || !msg.player.CanInteract() || (deployerUserID != (ulong)msg.player.userID && !msg.player.CanBuild()))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tbool flag = msg.read.Bit();\r\n\tif (flag == IsPublic() || Interface.CallHook(\"CanSetBedPublic\", msg.player, this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tSetPublic(flag);\r\n\tif (!IsPublic())\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tif (!canBePublic || !CanAccessBed(msg.player) || (deployerUserID != (ulong)msg.player.userID && !msg.player.CanBuild()))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tbool flag = msg.read.Bit();\r\n\tif (flag == IsPublic() || Interface.CallHook(\"CanSetBedPublic\", msg.player, this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tSetPublic(flag);\r\n\tif (!IsPublic())\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -4212,7 +4212,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tif (!msg.player.CanInteract())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tstring text = msg.read.String();\r\n\tif (Interface.CallHook(\"CanRenameBed\", msg.player, this, text) == null)\r\n\t{\r\n\t\ttext = WordFilter.Filter(text);\r\n\t\tif (string.IsNullOrEmpty(text))\r\n\t\t{\r\n\t\t\ttext = \"Unnamed Sleeping Bag\";\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tif (!CanAccessBed(msg.player))\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tstring text = msg.read.String();\r\n\tif (Interface.CallHook(\"CanRenameBed\", msg.player, this, text) == null)\r\n\t{\r\n\t\ttext = WordFilter.Filter(text);\r\n\t\tif (string.IsNullOrEmpty(text))\r\n\t\t{\r\n\t\t\ttext = \"Unnamed Sleeping Bag\";\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -5192,7 +5192,7 @@
           "packet": "Network.Message"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tusing (ClientReady clientReady = packet.read.Proto<ClientReady>())\r\n\t{\r\n\t\tforeach (ClientReady.ClientInfo item in clientReady.clientInfo)\r\n\t\t{\r\n\t\t\tInterface.CallHook(\"OnPlayerSetInfo\", packet.connection, item.name, item.value);\r\n\t\t\tpacket.connection.info.Set(item.name, item.value);\r\n\t\t}\r\n\t\tpacket.connection.globalNetworking = clientReady.globalNetworking;\r\n\t\tpacket.connection.state = Network.Connection.State.Connected;\r\n\t\tconnectionQueue.JoinedGame(packet.connection);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tusing (ClientReady clientReady = packet.read.Proto<ClientReady>())\r\n\t\t{\r\n\t\t\tforeach (ClientReady.ClientInfo item in clientReady.clientInfo)\r\n\t\t\t{\r\n\t\t\t\tInterface.CallHook(\"OnPlayerSetInfo\", packet.connection, item.name, item.value);\r\n\t\t\t\tpacket.connection.info.Set(item.name, item.value);\r\n\t\t\t}\r\n\t\t\tpacket.connection.globalNetworking = clientReady.globalNetworking;\r\n\t\t\tpacket.connection.state = Network.Connection.State.Connected;\r\n\t\t\tconnectionQueue.JoinedGame(packet.connection);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -12376,7 +12376,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "public void RPC_Equip(RPCMessage msg)\r\n{\r\n\tint num = msg.read.Int32();\r\n\tif (num < 0 || num >= maxGearSets || Interface.CallHook(\"OnLockerSwap\", this, num, msg.player) != null || IsEquipping())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tBasePlayer player = msg.player;\r\n\tif (player.IsDead())\r\n//---\r\n"
+      "CodeAfterInjection": "public void RPC_Equip(RPCMessage msg)\r\n{\r\n\tint num = msg.read.Int32();\r\n\tif (num < 0 || num >= maxGearSets || Interface.CallHook(\"OnLockerSwap\", this, num, msg.player) != null || IsEquipping())\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tBasePlayer player = msg.player;\r\n\tif (player.IsDead() || !CanBeLooted(player))\r\n//---\r\n"
     },
     {
       "Type": 0,
