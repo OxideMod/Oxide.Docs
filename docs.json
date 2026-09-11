@@ -3248,7 +3248,7 @@
           "rpc": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "private void RPC_UseLift(RPCMessage rpc)\r\n{\r\n\tif (rpc.player.CanInteract() && Interface.CallHook(\"OnLiftUse\", this, rpc.player) == null)\r\n\t{\r\n\t\tMoveUp();\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "private void RPC_UseLift(RPCMessage rpc)\r\n{\r\n\tif (rpc.player.CanInteract() && Interface.CallHook(\"OnLiftUse\", this, rpc.player) == null && PlayerIsAtCabin(rpc.player))\r\n\t{\r\n\t\tMoveUp();\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
