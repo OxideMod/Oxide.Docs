@@ -6362,7 +6362,7 @@
           "oldBuilding": "BuildingManager.Building"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tBuilding largestSplit = null;\r\n\twhile (oldBuilding.HasBuildingBlocks())\r\n\t{\r\n\t\tBuildingBlock buildingBlock = oldBuilding.buildingBlocks[0];\r\n\t\tuint num = BuildingManager.server.NewBuildingID();\r\n\t\tInterface.CallHook(\"OnBuildingSplit\", oldBuilding, num);\r\n\t\tbuildingBlock.EntityLinkBroadcast(_AttachToBuildingCallback, num);\r\n\t\tBuilding building = BuildingManager.server.GetBuilding(num);\r\n\t\tif (building != null)\r\n\t\t{\r\n\t\t\tobj.Add(building);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tBuilding largestSplit = null;\r\n\twhile (oldBuilding.HasBuildingBlocks())\r\n\t{\r\n\t\tBuildingBlock buildingBlock = oldBuilding.buildingBlocks[0];\r\n\t\tuint num = BuildingManager.server.NewBuildingID();\r\n\t\tInterface.CallHook(\"OnBuildingSplit\", oldBuilding, num);\r\n\t\tbuildingBlock.EntityLinkBroadcast(_AttachToBuildingCallback, num, onlyBuildingConnections: true);\r\n\t\tBuilding building = BuildingManager.server.GetBuilding(num);\r\n\t\tif (building != null)\r\n\t\t{\r\n\t\t\tobj.Add(building);\r\n//---\r\n"
     },
     {
       "Type": 0,
