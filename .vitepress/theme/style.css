@@ -147,7 +147,7 @@
 .VPHome {
   position: relative;
   overflow: hidden;
-  background-image: url('../public/bg.svg') !important;
+  /*background-image: url('../public/bg.svg') !important;*/
   background-size: cover !important;
   min-height: 100vh !important;
   display: flex !important;
