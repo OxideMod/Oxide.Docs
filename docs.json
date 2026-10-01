@@ -42,7 +42,8 @@
       "HookName": "OnItemRemovedFromContainer",
       "HookParameters": {
         "instance": "ItemContainer",
-        "item": "Item"
+        "item": "Item",
+        "sourcePlayer": "BasePlayer"
       },
       "ReturnBehavior": 0,
       "TargetType": "ItemContainer",
@@ -51,10 +52,11 @@
         "MethodName": "Remove",
         "ReturnType": "bool",
         "Arguments": {
-          "item": "Item"
+          "item": "Item",
+          "sourcePlayer": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tif (itemContainer != null && itemContainer.onItemContentsChanged != null)\r\n\t{\r\n\t\titemContainer.onItemContentsChanged(item, arg2: false);\r\n\t}\r\n\tMarkDirty();\r\n\tInterface.CallHook(\"OnItemRemovedFromContainer\", this, item);\r\n\treturn true;\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\tif (itemContainer != null && itemContainer.onItemContentsChanged != null)\r\n\t{\r\n\t\titemContainer.onItemContentsChanged(item, arg2: false, sourcePlayer);\r\n\t}\r\n\tMarkDirty();\r\n\tInterface.CallHook(\"OnItemRemovedFromContainer\", this, item, sourcePlayer);\r\n\treturn true;\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -62,7 +64,8 @@
       "HookName": "OnItemAddedToContainer",
       "HookParameters": {
         "instance": "ItemContainer",
-        "item": "Item"
+        "item": "Item",
+        "sourcePlayer": "BasePlayer"
       },
       "ReturnBehavior": 0,
       "TargetType": "ItemContainer",
@@ -71,10 +74,11 @@
         "MethodName": "Insert",
         "ReturnType": "bool",
         "Arguments": {
-          "item": "Item"
+          "item": "Item",
+          "sourcePlayer": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tItemContainer itemContainer = parent?.parent;\r\n\tif (itemContainer != null && itemContainer.onItemContentsChanged != null)\r\n\t{\r\n\t\titemContainer.onItemContentsChanged(item, arg2: true);\r\n\t}\r\n\tInterface.CallHook(\"OnItemAddedToContainer\", this, item);\r\n\treturn true;\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\tItemContainer itemContainer = parent?.parent;\r\n\tif (itemContainer != null && itemContainer.onItemContentsChanged != null)\r\n\t{\r\n\t\titemContainer.onItemContentsChanged(item, arg2: true, sourcePlayer);\r\n\t}\r\n\tInterface.CallHook(\"OnItemAddedToContainer\", this, item, sourcePlayer);\r\n\treturn true;\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -415,7 +419,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t}\r\n\t\tif (flag6)\r\n\t\t{\r\n\t\t\tstats.Add(firedProjectile.itemMod.category + \"_hit_\" + hitEntity.Categorize(), 1);\r\n\t\t}\r\n\t\tif (Interface.CallHook(\"OnPlayerAttack\", this, hitInfo) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tif (firedProjectile.integrity <= 0f)\r\n\t\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\tfiredProjectile.integrity = Mathf.Clamp01(firedProjectile.integrity - num26);\r\n\t\t}\r\n\t\tif (flag6)\r\n\t\t{\r\n\t\t\tstats.Add(firedProjectile.itemMod.category + \"_hit_\" + hitEntity.Categorize(), 1);\r\n\t\t\tif (Interface.CallHook(\"OnPlayerAttack\", this, hitInfo) != null)\r\n\t\t\t{\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\tif (firedProjectile.weaponPrefab is Food && firedProjectile.weaponPrefab.ShortPrefabName.Contains(\"pie\") && flag && hitPlayer != this && !hitPlayer.IsNpc)\r\n\t\t\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -437,7 +441,7 @@
           "delta": "float"
         }
       },
-      "CodeAfterInjection": "protected override void RunMetabolism(BaseCombatEntity ownerEntity, float delta)\r\n{\r\n\tif (Interface.CallHook(\"OnRunPlayerMetabolism\", this, ownerEntity, delta) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tif (owner.IsConnected)\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "protected override void RunMetabolism(BaseCombatEntity ownerEntity, float delta)\r\n{\r\n\tif (Interface.CallHook(\"OnRunPlayerMetabolism\", this, ownerEntity, delta) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tRefreshCalorieCapacity();\r\n\tif (owner.IsConnected)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -649,7 +653,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t}\r\n\t\ttextureIDs[num] = FileStorage.server.Store(array, FileStorage.Type.png, net.ID, (uint)num);\r\n\t}\r\n\tLogEdit(msg.player);\r\n\tSendNetworkUpdate();\r\n\tInterface.CallHook(\"OnSignUpdated\", this, msg.player, num);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\ttextureIDs[num] = FileStorage.server.Store(array, FileStorage.Type.png, net.ID, (uint)num);\r\n\t\tFacepunch.Rust.Analytics.Azure.OnUGCCreated(msg.player, this, \"sign\", array.Length, num);\r\n\t}\r\n\tLogEdit(msg.player);\r\n\tSendNetworkUpdate();\r\n\tInterface.CallHook(\"OnSignUpdated\", this, msg.player, num);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -826,7 +830,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\tVector3 normalized = msg.read.Vector3().normalized;\r\n\t\tfloat throwScale = Mathf.Clamp01(msg.read.Float());\r\n\t\tif (DoValidationChecks(ref eyePos, normalized, msg.player, throwScale))\r\n\t\t{\r\n\t\t\tDoThrowImpl(eyePos, normalized, msg.player, out var thrownEntity, throwScale);\r\n\t\t\tInterface.CallHook(\"OnExplosiveThrown\", msg.player, thrownEntity, this);\r\n\t\t\tUseItemAmount(1, reduceItemOwnership: false);\r\n\t\t}\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tVector3 eyePos2 = eyePos;\r\n\tBasePlayer player = msg.player;\r\n\tuint throwID = num;\r\n\tDoThrowImpl(eyePos2, normalized, player, out var thrownEntity, throwScale, default(Vector3), null, throwID);\r\n\tInterface.CallHook(\"OnExplosiveThrown\", msg.player, thrownEntity, this);\r\n\tif (thrownEntity == null)\r\n\t{\r\n\t\tSendThrowResult(msg.player, num, null);\r\n\t}\r\n\telse\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -2214,7 +2218,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tbaseEntity.creatorEntity = msg.player;\r\n\tbaseEntity.skinID = skinID;\r\n\tbaseEntity.Spawn();\r\n\tSetUpThrownWeapon(baseEntity, GetOwnerItem());\r\n\tStartAttackCooldown(repeatDelay);\r\n\tInterface.CallHook(\"OnExplosiveDropped\", msg.player, baseEntity, this);\r\n\tUseItemAmount(1);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\tbaseEntity.creatorEntity = msg.player;\r\n\tbaseEntity.skinID = skinID;\r\n\tSpawnThrownEntity(baseEntity, msg.player, throwID);\r\n\tSetUpThrownWeapon(baseEntity, GetOwnerItem());\r\n\tStartAttackCooldown(repeatDelay);\r\n\tInterface.CallHook(\"OnExplosiveDropped\", msg.player, baseEntity, this);\r\n\tUseItemAmount(1);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -2648,7 +2652,7 @@
         "ReturnType": "bool",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\tfor (int i = 0; i < 6; i++)\r\n\t{\r\n\t\tItem slot = base.inventory.GetSlot(i);\r\n\t\tif (slot != null)\r\n\t\t{\r\n\t\t\tobject obj = Interface.CallHook(\"CanRecycle\", this, slot);\r\n\t\t\tif (obj is bool)\r\n\t\t\t{\r\n\t\t\t\treturn (bool)obj;\r\n\t\t\t}\r\n\t\t\tif (slot.info.Blueprint != null)\r\n//---\r\n"
+      "CodeAfterInjection": "public bool HasRecyclable()\r\n{\r\n\tfor (int i = 0; i < 6; i++)\r\n\t{\r\n\t\tItem slot = base.inventory.GetSlot(i);\r\n\t\tobject obj = Interface.CallHook(\"CanRecycle\", this, slot);\r\n\t\tif (obj is bool)\r\n\t\t{\r\n\t\t\treturn (bool)obj;\r\n\t\t}\r\n\t\tif (CanBeRecycled(slot))\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -3310,7 +3314,7 @@
           "ent": "BaseEntity"
         }
       },
-      "CodeAfterInjection": "//---\r\n\telse\r\n\t{\r\n\t\tDebug.LogWarning(\"Standard vis test!\");\r\n\t\tflag = IsVisible(ent.CenterPoint());\r\n\t}\r\n\tobject obj = Interface.CallHook(\"CanBradleyApcTarget\", this, ent);\r\n\tif (obj is bool)\r\n\t{\r\n\t\treturn (bool)obj;\r\n\t}\r\n\treturn flag;\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\telse\r\n\t{\r\n\t\tflag = IsVisible(ent.CenterPoint());\r\n\t}\r\n\tobject obj = Interface.CallHook(\"CanBradleyApcTarget\", this, ent);\r\n\tif (obj is bool)\r\n\t{\r\n\t\treturn (bool)obj;\r\n\t}\r\n\treturn flag;\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -3872,7 +3876,7 @@
           "component": "Construction"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t}\r\n\t\tConstructionErrors.Log(ownerPlayer, Construction.lastPlacementErrorDebug);\r\n\t}\r\n\tif (gameObject != null)\r\n\t{\r\n\t\tInterface.CallHook(\"OnEntityBuilt\", this, gameObject);\r\n\t\tDeployable deployable = GetDeployable();\r\n\t\tBaseEntity baseEntity = GameObjectEx.ToBaseEntity(gameObject);\r\n\t\tif (baseEntity != null && deployable != null)\r\n\t\t{\r\n\t\t\tif (ShouldParent(target.entity, deployable))\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t}\r\n\t\tConstructionErrors.Log(ownerPlayer, Construction.lastPlacementErrorDebug);\r\n\t}\r\n\tif (gameObject != null)\r\n\t{\r\n\t\tInterface.CallHook(\"OnEntityBuilt\", this, gameObject);\r\n\t\tDeployable deployable = GetDeployable();\r\n\t\tBaseEntity baseEntity = GameObjectEx.ToBaseEntity(gameObject);\r\n\t\tif (baseEntity != null && deployable != null && ShouldParent(target.entity, deployable))\r\n\t\t{\r\n\t\t\tif (target.socket is Socket_Specific_Female socket_Specific_Female)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -4951,7 +4955,28 @@
           "player": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "private void TakeClones(BasePlayer player)\r\n{\r\n\tif (player == null || !CanClone(player) || Interface.CallHook(\"CanTakeCutting\", player, this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tint num = Properties.BaseCloneCount + Genes.GetGeneTypeCount(GrowableGenetics.GeneType.Yield) / 2;\r\n\tif (num > 0)\r\n//---\r\n"
+      "CodeAfterInjection": "private void TakeClones(BasePlayer player)\r\n{\r\n\tif (player == null || !CanClone(player) || Interface.CallHook(\"CanTakeCutting\", player, this) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tint num = Properties.BaseCloneCount + Genes.GetGeneTypeCount(GrowableGenetics.GeneType.Yield) / 2;\r\n\tif (num <= 0)\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnCuttingTake",
+      "HookName": "OnCuttingTake",
+      "HookParameters": {
+        "instance": "GrowableEntity",
+        "player": "BasePlayer",
+        "item": "Item"
+      },
+      "ReturnBehavior": 4,
+      "TargetType": "GrowableEntity",
+      "Category": "Player",
+      "MethodData": {
+        "MethodName": "TakeClones",
+        "ReturnType": "void",
+        "Arguments": {
+          "player": "BasePlayer"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t\treturn;\r\n\t}\r\n\tItem item = ItemManager.Create(Properties.CloneItem, num, 0uL, isServerSide: true, 0uL);\r\n\titem.SetItemOwnership(player, ItemOwnershipPhrases.Cloned);\r\n\tGrowableGeneEncoding.EncodeGenesToItem(this, item);\r\n\tif (Interface.CallHook(\"OnCuttingTake\", this, player, item) != null)\r\n\t{\r\n\t\titem.Remove();\r\n\t\treturn;\r\n\t}\r\n\tFacepunch.Rust.Analytics.Azure.OnGatherItem(item.info.shortname, item.amount, this, player);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -5026,7 +5051,7 @@
       "HookName": "OnVendingShopRename",
       "HookParameters": {
         "instance": "VendingMachine",
-        "obj": "string",
+        "text": "string",
         "player": "BasePlayer"
       },
       "ReturnBehavior": 1,
@@ -5039,7 +5064,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n{\r\n\tBasePlayer player = msg.player;\r\n\tstring obj = msg.read.String(32);\r\n\tif (CanPlayerAdmin(player))\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnVendingShopRename\", this, obj, player) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tshopName = obj;\r\n\t\tnameLastEditedBy = player.userID.Get();\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n{\r\n\tBasePlayer player = msg.player;\r\n\tstring text = msg.read.String(32);\r\n\tif (CanPlayerAdmin(player))\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnVendingShopRename\", this, text, player) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tshopName = text;\r\n\t\tnameLastEditedBy = player.userID.Get();\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -6729,10 +6754,11 @@
         "ReturnType": "void",
         "Arguments": {
           "item": "Item",
-          "bAdded": "bool"
+          "bAdded": "bool",
+          "sourcePlayer": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t}\r\n\t\tInvoke(_updatedVisibleHolsteredItemsCallback, 0.1f);\r\n\t\titem?.contents?.onItemAddedRemoved?.Invoke(item, bAdded);\r\n\t}\r\n\tbase.baseEntity.ProcessMissionEvent(BaseMission.MissionEventType.CLOTHINGCHANGED, 0, 0f);\r\n\tInterface.CallHook(\"OnClothingItemChanged\", this, item, bAdded);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t}\r\n\t\tInvoke(_updatedVisibleHolsteredItemsCallback, 0.1f);\r\n\t\titem?.contents?.onItemAddedRemoved?.Invoke(item, bAdded, sourcePlayer);\r\n\t}\r\n\tbase.baseEntity.ProcessMissionEvent(BaseMission.MissionEventType.CLOTHINGCHANGED, 0, 0f);\r\n\tInterface.CallHook(\"OnClothingItemChanged\", this, item, bAdded);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -7074,7 +7100,7 @@
         "deepSeaManager": "DeepSeaManager"
       },
       "ReturnBehavior": 0,
-      "TargetType": "DeepSeaManager/<CloseDeepSeaAsync>d__75",
+      "TargetType": "DeepSeaManager/<CloseDeepSeaAsync>d__78",
       "Category": "Naval",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -7091,7 +7117,7 @@
         "deepSeaManager": "DeepSeaManager"
       },
       "ReturnBehavior": 0,
-      "TargetType": "DeepSeaManager/<OpenDeepSeaAsync>d__73",
+      "TargetType": "DeepSeaManager/<OpenDeepSeaAsync>d__76",
       "Category": "Naval",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -7224,7 +7250,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t{\r\n\t\t\tFileStorage.server.RemoveAllByEntity(net.ID);\r\n\t\t\t_overlayTextureCrc = FileStorage.server.Store(array, FileStorage.Type.png, net.ID);\r\n\t\t\tLogEdit(msg.player);\r\n\t\t\tSendNetworkUpdate();\r\n\t\t\tInterface.CallHook(\"OnSignUpdated\", this, msg.player);\r\n\t\t}\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\tFileStorage.server.RemoveAllByEntity(net.ID);\r\n\t\t\t_overlayTextureCrc = FileStorage.server.Store(array, FileStorage.Type.png, net.ID);\r\n\t\t\tFacepunch.Rust.Analytics.Azure.OnUGCCreated(msg.player, this, \"photo_frame\", array.Length);\r\n\t\t\tLogEdit(msg.player);\r\n\t\t\tSendNetworkUpdate();\r\n\t\t\tInterface.CallHook(\"OnSignUpdated\", this, msg.player);\r\n\t\t}\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -7461,7 +7487,7 @@
           "container": "ItemContainer"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t}\r\n\tbasePlayer.modifiers.SetVariableValue(Modifier.ModifierType.Scrap_Yield, variableValue);\r\n\tif (num3 > 0)\r\n\t{\r\n\t\tItem item = ItemManager.Create(scrapDef, num3, 0uL, isServerSide: true, 0uL);\r\n\t\tif (item != null && Interface.CallHook(\"OnBonusItemDrop\", item, basePlayer, container) == null)\r\n\t\t{\r\n\t\t\t(item.Drop(GetDropPosition() + new Vector3(0f, 0.5f, 0f), GetInheritedDropVelocity()) as DroppedItem).DropReason = DroppedItem.DropReasonEnum.Loot;\r\n\t\t\tInterface.CallHook(\"OnBonusItemDropped\", item, basePlayer, container);\r\n\t\t}\r\n\t}\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tbasePlayer.modifiers.SetVariableValue(Modifier.ModifierType.Scrap_Yield, variableValue);\r\n\tif (num3 > 0)\r\n\t{\r\n\t\tItem item = ItemManager.Create(ItemManager.Items.Scrap, num3, 0uL, isServerSide: true, 0uL);\r\n\t\tif (item != null && Interface.CallHook(\"OnBonusItemDrop\", item, basePlayer, container) == null)\r\n\t\t{\r\n\t\t\t(item.Drop(GetDropPosition() + new Vector3(0f, 0.5f, 0f), GetInheritedDropVelocity()) as DroppedItem).DropReason = DroppedItem.DropReasonEnum.Loot;\r\n\t\t\tInterface.CallHook(\"OnBonusItemDropped\", item, basePlayer, container);\r\n\t\t}\r\n\t}\r\n//---\r\n"
     },
     {
       "Type": 1,
@@ -7887,7 +7913,7 @@
           "container": "ItemContainer"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tItem item = ItemManager.Create(scrapDef, num3, 0uL, isServerSide: true, 0uL);\r\n\t\tif (item != null && Interface.CallHook(\"OnBonusItemDrop\", item, basePlayer, container) == null)\r\n\t\t{\r\n\t\t\t(item.Drop(GetDropPosition() + new Vector3(0f, 0.5f, 0f), GetInheritedDropVelocity()) as DroppedItem).DropReason = DroppedItem.DropReasonEnum.Loot;\r\n\t\t\tInterface.CallHook(\"OnBonusItemDropped\", item, basePlayer, container);\r\n\t\t}\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tItem item = ItemManager.Create(ItemManager.Items.Scrap, num3, 0uL, isServerSide: true, 0uL);\r\n\t\tif (item != null && Interface.CallHook(\"OnBonusItemDrop\", item, basePlayer, container) == null)\r\n\t\t{\r\n\t\t\t(item.Drop(GetDropPosition() + new Vector3(0f, 0.5f, 0f), GetInheritedDropVelocity()) as DroppedItem).DropReason = DroppedItem.DropReasonEnum.Loot;\r\n\t\t\tInterface.CallHook(\"OnBonusItemDropped\", item, basePlayer, container);\r\n\t\t}\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -7962,7 +7988,7 @@
           "component": "Construction"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tnum2 = ((buildingBlock != null) ? buildingBlock.currentGrade.maxHealth : baseCombatEntity.startHealth);\r\n\t\tbaseCombatEntity.ResetLifeStateOnSpawn = false;\r\n\t\tbaseCombatEntity.InitializeHealth(num2 * num, baseCombatEntity.StartMaxHealth());\r\n\t}\r\n\tif (Interface.CallHook(\"OnConstructionPlace\", baseEntity, component, placement, ownerPlayer) != null)\r\n\t{\r\n\t\tif (baseEntity.IsValid())\r\n\t\t{\r\n\t\t\tbaseEntity.KillMessage();\r\n\t\t}\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tBaseEntity baseEntity = component.CreateConstruction(placement, bNeedsValidPlacement: true);\r\n\tif (!baseEntity)\r\n\t{\r\n\t\treturn null;\r\n\t}\r\n\tif (Interface.CallHook(\"OnConstructionPlace\", baseEntity, component, placement, ownerPlayer) != null)\r\n\t{\r\n\t\tif (baseEntity.IsValid())\r\n\t\t{\r\n\t\t\tbaseEntity.KillMessage();\r\n\t\t}\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -9459,7 +9485,7 @@
           "mode": "PlayerInventory.NetworkInventoryMode"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\tupdateItemContainer.container = Facepunch.Pool.Get<List<ProtoBuf.ItemContainer>>();\r\n\t\tbool bIncludeContainer = type != Type.Wear || mode == NetworkInventoryMode.LocalPlayer;\r\n\t\tbool stripBelt = type == Type.Belt && mode == NetworkInventoryMode.EveryoneButLocal && ConVar.AntiHack.hotbar_network_mode == 1;\r\n\t\tupdateItemContainer.container.Add(container.Save(bIncludeContainer, stripBelt));\r\n\t}\r\n\tif (Interface.CallHook(\"OnInventoryNetworkUpdate\", this, container, updateItemContainer, type, mode) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tswitch (mode)\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tcontainer.dirty = false;\r\n\t\tupdateItemContainer.container = Facepunch.Pool.Get<List<ProtoBuf.ItemContainer>>();\r\n\t\tbool bIncludeContainer = type != Type.Wear || mode == NetworkInventoryMode.LocalPlayer;\r\n\t\tupdateItemContainer.container.Add(container.Save(bIncludeContainer, flag));\r\n\t}\r\n\tif (Interface.CallHook(\"OnInventoryNetworkUpdate\", this, container, updateItemContainer, type, mode) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tswitch (mode)\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -9863,7 +9889,7 @@
           "allowSwap": "bool"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\t\t\tslot2.instanceData.dataFloat = Mathf.Min(slot2.instanceData.dataFloat, instanceData.dataFloat);\r\n\t\t\t\t\t}\r\n\t\t\t\t\tnewcontainer.onItemAddedToStack?.Invoke(slot2, num2);\r\n\t\t\t\t\tamount -= num2;\r\n\t\t\t\t\tslot2.MarkDirty();\r\n\t\t\t\t\tInterface.CallHook(\"OnItemStacked\", slot2, this, newcontainer, num2);\r\n\t\t\t\t\tMarkDirty();\r\n\t\t\t\t\tMigrateItemOwnership(slot2, num2);\r\n\t\t\t\t\tif (amount <= 0)\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\tRemoveFromWorld();\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\t\t\tslot2.instanceData.refrigeratedSeconds = Mathf.Min(slot2.instanceData.refrigeratedSeconds, instanceData.refrigeratedSeconds);\r\n\t\t\t\t\t}\r\n\t\t\t\t\tnewcontainer.onItemAddedToStack?.Invoke(slot2, num2, sourcePlayer);\r\n\t\t\t\t\tamount -= num2;\r\n\t\t\t\t\tslot2.MarkDirty();\r\n\t\t\t\t\tInterface.CallHook(\"OnItemStacked\", slot2, this, newcontainer, num2);\r\n\t\t\t\t\tMarkDirty();\r\n\t\t\t\t\tMigrateItemOwnership(slot2, num2);\r\n\t\t\t\t\tif (amount <= 0)\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\tRemoveFromWorld();\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -10512,7 +10538,7 @@
           "item": "Item"
         }
       },
-      "CodeAfterInjection": "private bool CanBeRecycled(Item item)\r\n{\r\n\tobject obj = Interface.CallHook(\"CanBeRecycled\", item, this);\r\n\tif (obj is bool)\r\n\t{\r\n\t\treturn (bool)obj;\r\n\t}\r\n\tif (item != null)\r\n//---\r\n"
+      "CodeAfterInjection": "private bool CanBeRecycled(Item item)\r\n{\r\n\tobject obj = Interface.CallHook(\"CanBeRecycled\", item, this);\r\n\tif (obj is bool)\r\n\t{\r\n\t\treturn (bool)obj;\r\n\t}\r\n\tif (item != null && item.info.Blueprint != null)\r\n//---\r\n"
     },
     {
       "Type": 1,
@@ -11594,7 +11620,7 @@
           "rpc": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t}\r\n\t\tdesign.editedBy = rpc.player.userID;\r\n\t}\r\n\tDesign?.Dispose();\r\n\tDesign = design;\r\n\tInterface.CallHook(\"OnFireworkDesignChanged\", this, design, rpc.player);\r\n\tSendNetworkUpdateImmediate();\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tdesign.editedBy = rpc.player.userID;\r\n\t\tFacepunch.Rust.Analytics.Azure.OnUGCCreated(rpc.player, this, \"firework_pattern\", design.stars.Count);\r\n\t}\r\n\tDesign?.Dispose();\r\n\tDesign = design;\r\n\tInterface.CallHook(\"OnFireworkDesignChanged\", this, design, rpc.player);\r\n\tSendNetworkUpdateImmediate();\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -11609,7 +11635,7 @@
         "ReturnType": "void",
         "Arguments": {}
       },
-      "CodeAfterInjection": "//---\r\n\t\tSteamServer.SetKey(\"fps\", Performance.report.frameRate.ToString());\r\n\t\tSteamServer.SetKey(\"fps_avg\", Performance.report.frameRateAverage.ToString(\"0.00\"));\r\n\t\tSteamServer.SetKey(\"ent_cnt\", BaseNetworkable.serverEntities.Count.ToString());\r\n\t\tSteamServer.SetKey(\"build\", BuildInfo.Current.Scm.ChangeId);\r\n\t}\r\n\tInterface.CallHook(\"OnServerInformationUpdated\");\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tSteamServer.SetKey(\"fps\", Performance.report.frameRate.ToString());\r\n\t\tSteamServer.SetKey(\"fps_avg\", Performance.report.frameRateAverage.ToString(\"0.00\"));\r\n\t\tSteamServer.SetKey(\"ent_cnt\", BaseNetworkable.serverEntities.Count.ToString());\r\n\t\tSteamServer.SetKey(\"build\", BuildInfo.Current.Scm.ChangeId);\r\n\t}\r\n\tInterface.CallHook(\"OnServerInformationUpdated\");\r\n\tCrashSessionMarker.RefreshFromServerTags();\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -11629,7 +11655,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t}\r\n\t\ttextureIDs[num] = FileStorage.server.Store(array, FileStorage.Type.png, net.ID, (uint)num);\r\n\t}\r\n\tLogEdit(msg.player);\r\n\tSendNetworkUpdate();\r\n\tInterface.CallHook(\"OnSignUpdated\", this, msg.player);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\ttextureIDs[num] = FileStorage.server.Store(array, FileStorage.Type.png, net.ID, (uint)num);\r\n\t\tFacepunch.Rust.Analytics.Azure.OnUGCCreated(msg.player, this, \"pumpkin\", array.Length, num);\r\n\t}\r\n\tLogEdit(msg.player);\r\n\tSendNetworkUpdate();\r\n\tInterface.CallHook(\"OnSignUpdated\", this, msg.player);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -11814,7 +11840,7 @@
           "allowSwap": "bool"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\t\t\t\tslot2.instanceData.dataFloat = Mathf.Min(slot2.instanceData.dataFloat, instanceData.dataFloat);\r\n\t\t\t\t\t}\r\n\t\t\t\t\tnewcontainer.onItemAddedToStack?.Invoke(slot2, num2);\r\n\t\t\t\t\tamount -= num2;\r\n\t\t\t\t\tslot2.MarkDirty();\r\n\t\t\t\t\tInterface.CallHook(\"OnItemStacked\", slot2, this, newcontainer, num2);\r\n\t\t\t\t\tMarkDirty();\r\n\t\t\t\t\tMigrateItemOwnership(slot2, num2);\r\n\t\t\t\t\tif (amount <= 0)\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\tRemoveFromWorld();\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\t\t\t\tslot2.instanceData.refrigeratedSeconds = Mathf.Min(slot2.instanceData.refrigeratedSeconds, instanceData.refrigeratedSeconds);\r\n\t\t\t\t\t}\r\n\t\t\t\t\tnewcontainer.onItemAddedToStack?.Invoke(slot2, num2, sourcePlayer);\r\n\t\t\t\t\tamount -= num2;\r\n\t\t\t\t\tslot2.MarkDirty();\r\n\t\t\t\t\tInterface.CallHook(\"OnItemStacked\", slot2, this, newcontainer, num2);\r\n\t\t\t\t\tMarkDirty();\r\n\t\t\t\t\tMigrateItemOwnership(slot2, num2);\r\n\t\t\t\t\tif (amount <= 0)\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\tRemoveFromWorld();\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -12017,7 +12043,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\titem2.Remove();\r\n\t\tDebug.LogError(\"Sub-entity is not a photo\");\r\n\t}\r\n\telse\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnPhotoCapture\", photoEntity, item, player, array) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tphotoEntity.SetImageData(player.userID, array);\r\n\t\tif (!player.inventory.GiveItem(item2))\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\titem2.Remove();\r\n\t\tDebug.LogError(\"Sub-entity is not a photo\");\r\n\t}\r\n\telse\r\n\t{\r\n\t\tif (Interface.CallHook(\"OnPhotoCapture\", photoEntity, item, player, array) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tphotoEntity.SetImageData(player.userID, array);\r\n\t\tFacepunch.Rust.Analytics.Azure.OnUGCCreated(player, photoEntity, \"photo\", array.Length);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -12726,7 +12752,7 @@
           "building2": "BuildingManager.Building"
         }
       },
-      "CodeAfterInjection": "private void Merge(Building building1, Building building2)\r\n{\r\n\tInterface.CallHook(\"OnBuildingMerge\", this, building1, building2);\r\n\twhile (building2.HasDecayEntities())\r\n\t{\r\n\t\tbuilding2.decayEntities[0].AttachToBuilding(building1.ID);\r\n\t}\r\n\tif (AI.nav_carve_use_building_optimization)\r\n//---\r\n"
+      "CodeAfterInjection": "private void Merge(Building building1, Building building2)\r\n{\r\n\tInterface.CallHook(\"OnBuildingMerge\", this, building1, building2);\r\n\twhile (building2.HasDecayEntities())\r\n\t{\r\n\t\tbuilding2.decayEntities[0].AttachToBuilding(building1.ID);\r\n\t}\r\n\tif (AI.useUnityNavmesh && AI.nav_carve_use_building_optimization)\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -15104,7 +15130,7 @@
           "entity": "BaseEntity"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\tif (SimpleAIMemory.PlayerIgnoreList.Contains(item))\r\n\t\t{\r\n\t\t\treturn false;\r\n\t\t}\r\n\t}\r\n\tobject obj = Interface.CallHook(\"IOnNpcTarget\", this, entity);\r\n\tif (obj is bool)\r\n\t{\r\n\t\treturn (bool)obj;\r\n\t}\r\n\treturn true;\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tif (SimpleAIMemory.PlayerIgnoreList.Contains(item))\r\n\t\t{\r\n\t\t\treturn false;\r\n\t\t}\r\n\t}\r\n\tobject obj = Interface.CallHook(\"IOnNpcTarget\", this, entity);\r\n\tif (obj is bool)\r\n\t{\r\n\t\treturn (bool)obj;\r\n\t}\r\n\tif (Observer != null && Observer.RefusesToTarget(entity))\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -15530,7 +15556,7 @@
         "reportType": "Facepunch.Models.ReportType"
       },
       "ReturnBehavior": 0,
-      "TargetType": "BasePlayer/<OnFeedbackReport>d__772",
+      "TargetType": "BasePlayer/<OnFeedbackReport>d__777",
       "Category": "Player",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -15544,7 +15570,7 @@
       "Name": "OnFeedbackReported [patch]",
       "HookName": "OnFeedbackReported",
       "ReturnBehavior": 0,
-      "TargetType": "BasePlayer/<OnFeedbackReport>d__772",
+      "TargetType": "BasePlayer/<OnFeedbackReport>d__777",
       "Category": "_Patches",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -15566,7 +15592,7 @@
         "text3": "string"
       },
       "ReturnBehavior": 0,
-      "TargetType": "BasePlayer/<OnPlayerReported>d__771",
+      "TargetType": "BasePlayer/<OnPlayerReported>d__776",
       "Category": "Player",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -16028,7 +16054,7 @@
         "deepSeaManager": "DeepSeaManager"
       },
       "ReturnBehavior": 0,
-      "TargetType": "DeepSeaManager/<OpenDeepSeaAsync>d__73",
+      "TargetType": "DeepSeaManager/<OpenDeepSeaAsync>d__76",
       "Category": "Naval",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -16045,7 +16071,7 @@
         "deepSeaManager": "DeepSeaManager"
       },
       "ReturnBehavior": 0,
-      "TargetType": "DeepSeaManager/<CloseDeepSeaAsync>d__75",
+      "TargetType": "DeepSeaManager/<CloseDeepSeaAsync>d__78",
       "Category": "Naval",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -16210,7 +16236,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t}\r\n\t\tif (flag6)\r\n\t\t{\r\n\t\t\tstats.Add(firedProjectile.itemMod.category + \"_hit_\" + hitEntity.Categorize(), 1);\r\n\t\t}\r\n\t\tif (Interface.CallHook(\"OnPlayerAttack\", this, hitInfo) != null)\r\n\t\t{\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tif (firedProjectile.integrity <= 0f)\r\n\t\t{\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\tfiredProjectile.integrity = Mathf.Clamp01(firedProjectile.integrity - num26);\r\n\t\t}\r\n\t\tif (flag6)\r\n\t\t{\r\n\t\t\tstats.Add(firedProjectile.itemMod.category + \"_hit_\" + hitEntity.Categorize(), 1);\r\n\t\t\tif (Interface.CallHook(\"OnPlayerAttack\", this, hitInfo) != null)\r\n\t\t\t{\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t\tif (firedProjectile.weaponPrefab is Food && firedProjectile.weaponPrefab.ShortPrefabName.Contains(\"pie\") && flag && hitPlayer != this && !hitPlayer.IsNpc)\r\n\t\t\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -16315,7 +16341,7 @@
           "byPlayer": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tbyPlayer.inventory.containerBelt.UseAmount(ScrapDef, ref amount);\r\n\tbyPlayer.inventory.containerWear.UseAmount(ScrapDef, ref amount);\r\n\tint num = Mathf.RoundToInt((float)ScrapPerHourRent * 12f * CurrentRentMultiplier);\r\n\tbyPlayer.inventory.MoveItemsIntoContainer(ScrapDef, num, invisibleVendingMachine.inventory);\r\n\tFacepunch.Rust.Analytics.Azure.OnShopOpened(this, openScrapCost, num);\r\n\tInterface.CallHook(\"OnRentableShopOpened\", this, byPlayer);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\tint openScrapCost = num;\r\n\tbyPlayer.inventory.UseAmount(ItemManager.Items.Scrap, num);\r\n\tint num2 = Mathf.RoundToInt((float)ScrapPerHourRent * 12f * CurrentRentMultiplier);\r\n\tbyPlayer.inventory.MoveItemsIntoContainer(ItemManager.Items.Scrap, num2, invisibleVendingMachine.inventory);\r\n\tFacepunch.Rust.Analytics.Azure.OnShopOpened(this, openScrapCost, num2);\r\n\tInterface.CallHook(\"OnRentableShopOpened\", this, byPlayer);\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -16459,7 +16485,7 @@
           "size": "ApartmentSize"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tApartmentRoom apartmentRoom = FetchClosestUnoccupiedRoom(size);\r\n\tif (apartmentRoom == null)\r\n\t{\r\n\t\tDebug.LogError($\"Player tried to purchase an apartment of size {size} but no unoccupied rooms were found!\");\r\n\t}\r\n\telse if (Interface.CallHook(\"OnApartmentRoomPurchase\", apartmentRoom, player, size, this) == null)\r\n\t{\r\n\t\tint purchaseScrapCost = GetPurchaseScrapCost(size);\r\n\t\tplayer.inventory.Take(null, ItemManager.Items.Scrap.itemid, purchaseScrapCost);\r\n\t\tGiveRoomToPlayer(player, apartmentRoom);\r\n\t\tFacepunch.Rust.Analytics.Azure.OnApartmentCheckIn(player, apartmentRoom, purchaseScrapCost);\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tApartmentRoom apartmentRoom = FetchClosestUnoccupiedRoom(size);\r\n\tif (apartmentRoom == null)\r\n\t{\r\n\t\tDebug.LogError($\"Player tried to purchase an apartment of size {size} but no unoccupied rooms were found!\");\r\n\t}\r\n\telse if (Interface.CallHook(\"OnApartmentRoomPurchase\", apartmentRoom, player, size, this) == null)\r\n\t{\r\n\t\tint purchaseScrapCost = GetPurchaseScrapCost(size);\r\n\t\tplayer.inventory.Take(null, ItemManager.Items.Scrap.itemid, purchaseScrapCost);\r\n\t\tGiveRoomToPlayer(player, apartmentRoom);\r\n\t\tplayer.GiveAchievement(\"RENT_APARTMENT\");\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -16505,7 +16531,7 @@
           "size": "ApartmentSize"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tint purchaseScrapCost = GetPurchaseScrapCost(size);\r\n\t\tplayer.inventory.Take(null, ItemManager.Items.Scrap.itemid, purchaseScrapCost);\r\n\t\tGiveRoomToPlayer(player, apartmentRoom);\r\n\t\tFacepunch.Rust.Analytics.Azure.OnApartmentCheckIn(player, apartmentRoom, purchaseScrapCost);\r\n\t\tInterface.CallHook(\"OnApartmentRoomPurchased\", apartmentRoom, player, size, this);\r\n\t}\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tint purchaseScrapCost = GetPurchaseScrapCost(size);\r\n\t\tplayer.inventory.Take(null, ItemManager.Items.Scrap.itemid, purchaseScrapCost);\r\n\t\tGiveRoomToPlayer(player, apartmentRoom);\r\n\t\tplayer.GiveAchievement(\"RENT_APARTMENT\");\r\n\t\tFacepunch.Rust.Analytics.Azure.OnApartmentCheckIn(player, apartmentRoom, purchaseScrapCost);\r\n\t\tInterface.CallHook(\"OnApartmentRoomPurchased\", apartmentRoom, player, size, this);\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -16697,6 +16723,132 @@
       "CodeAfterInjection": "//---\r\n\t\t{\r\n\t\t\tpreviousInsertedFusesCount = num;\r\n\t\t\tint num2 = CalculateCurrentStage();\r\n\t\t\tif (CurrentStage != num2 || !hasTickedOnce)\r\n\t\t\t{\r\n\t\t\t\tif (Interface.CallHook(\"OnPowergridStageChange\", this, num2) != null)\r\n\t\t\t\t{\r\n\t\t\t\t\treturn;\r\n\t\t\t\t}\r\n\t\t\t\tFacepunch.Rust.Analytics.Azure.OnPowerGridStageChanged(CurrentStage, num2);\r\n\t\t\t\tCurrentStage = num2;\r\n//---\r\n"
     },
     {
+      "Type": 1,
+      "Name": "OnCuttingTake [Patch]",
+      "HookName": "OnCuttingTake",
+      "ReturnBehavior": 0,
+      "TargetType": "GrowableEntity",
+      "Category": "Player",
+      "MethodData": {
+        "MethodName": "TakeClones",
+        "ReturnType": "void",
+        "Arguments": {
+          "player": "BasePlayer"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t\treturn;\r\n\t}\r\n\tItem item = ItemManager.Create(Properties.CloneItem, num, 0uL, isServerSide: true, 0uL);\r\n\titem.SetItemOwnership(player, ItemOwnershipPhrases.Cloned);\r\n\tGrowableGeneEncoding.EncodeGenesToItem(this, item);\r\n\tif (Interface.CallHook(\"OnCuttingTake\", this, player, item) != null)\r\n\t{\r\n\t\titem.Remove();\r\n\t\treturn;\r\n\t}\r\n\tFacepunch.Rust.Analytics.Azure.OnGatherItem(item.info.shortname, item.amount, this, player);\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnCuttingTaken",
+      "HookName": "OnCuttingTaken",
+      "HookParameters": {
+        "instance": "GrowableEntity",
+        "player": "BasePlayer",
+        "item": "Item"
+      },
+      "ReturnBehavior": 0,
+      "TargetType": "GrowableEntity",
+      "Category": "Player",
+      "MethodData": {
+        "MethodName": "TakeClones",
+        "ReturnType": "void",
+        "Arguments": {
+          "player": "BasePlayer"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t{\r\n\t\tEffect.server.Run(Properties.pickEffect.resourcePath, base.transform.position, Vector3.up);\r\n\t}\r\n\tTellPlanter();\r\n\tDie();\r\n\tInterface.CallHook(\"OnCuttingTaken\", this, player, item);\r\n}\r\n\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnEntityTakeDamage [LivestockAnimal]",
+      "HookName": "OnEntityTakeDamage",
+      "HookParameters": {
+        "instance": "Rust.Ai.Gen2.LivestockAnimal",
+        "info": "HitInfo"
+      },
+      "ReturnBehavior": 4,
+      "TargetType": "Rust.Ai.Gen2.LivestockAnimal",
+      "Category": "Entity",
+      "MethodData": {
+        "MethodName": "Hurt",
+        "ReturnType": "void",
+        "Arguments": {
+          "info": "HitInfo"
+        }
+      },
+      "CodeAfterInjection": "public override void Hurt(HitInfo info)\r\n{\r\n\tif (Interface.CallHook(\"OnEntityTakeDamage\", this, info) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tbase.Hurt(info);\r\n\tif (!InSafeZone())\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnLivestockAnimalFamiliarityAdd",
+      "HookName": "OnLivestockAnimalFamiliarityAdd",
+      "HookParameters": {
+        "instance": "Rust.Ai.Gen2.LivestockAnimal",
+        "userId": "ulong",
+        "seconds": "float",
+        "reason": "Rust.Ai.Gen2.LivestockAnimal.FamiliarityReason"
+      },
+      "ReturnBehavior": 4,
+      "TargetType": "Rust.Ai.Gen2.LivestockAnimal",
+      "Category": "Animal",
+      "MethodData": {
+        "MethodName": "AddFamiliarity",
+        "ReturnType": "void",
+        "Arguments": {
+          "userId": "ulong",
+          "seconds": "float",
+          "reason": "Rust.Ai.Gen2.LivestockAnimal.FamiliarityReason"
+        }
+      },
+      "CodeAfterInjection": "public void AddFamiliarity(ulong userId, float seconds, FamiliarityReason reason = FamiliarityReason.Handled)\r\n{\r\n\tif (Interface.CallHook(\"OnLivestockAnimalFamiliarityAdd\", this, userId, seconds, reason) == null)\r\n\t{\r\n\t\tbool isTame = IsTame;\r\n\t\tCreditFamiliarity(userId, seconds);\r\n\t\tRefreshHusbandryClocks();\r\n\t\tInterface.CallHook(\"OnLivestockAnimalFamiliarityAdded\", this, userId, seconds, reason);\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnLivestockAnimalFamiliarityAdded",
+      "HookName": "OnLivestockAnimalFamiliarityAdded",
+      "HookParameters": {
+        "instance": "Rust.Ai.Gen2.LivestockAnimal",
+        "userId": "ulong",
+        "seconds": "float",
+        "reason": "Rust.Ai.Gen2.LivestockAnimal.FamiliarityReason"
+      },
+      "ReturnBehavior": 0,
+      "TargetType": "Rust.Ai.Gen2.LivestockAnimal",
+      "Category": "Animal",
+      "MethodData": {
+        "MethodName": "AddFamiliarity",
+        "ReturnType": "void",
+        "Arguments": {
+          "userId": "ulong",
+          "seconds": "float",
+          "reason": "Rust.Ai.Gen2.LivestockAnimal.FamiliarityReason"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\tif (Interface.CallHook(\"OnLivestockAnimalFamiliarityAdd\", this, userId, seconds, reason) == null)\r\n\t{\r\n\t\tbool isTame = IsTame;\r\n\t\tCreditFamiliarity(userId, seconds);\r\n\t\tRefreshHusbandryClocks();\r\n\t\tInterface.CallHook(\"OnLivestockAnimalFamiliarityAdded\", this, userId, seconds, reason);\r\n\t\tif (!isTame && IsTame && (reason == FamiliarityReason.Handled || reason == FamiliarityReason.Purchased))\r\n\t\t{\r\n\t\t\tFacepunch.Rust.Analytics.Azure.OnLivestockAcquired(userId, this, reason);\r\n\t\t}\r\n\t}\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "CanLivestockAnimalRefuseTarget",
+      "HookName": "CanLivestockAnimalRefuseTarget",
+      "HookParameters": {
+        "instance": "Rust.Ai.Gen2.LivestockAnimal",
+        "basePlayer": "BasePlayer"
+      },
+      "ReturnTypeOverwrite": "bool",
+      "ReturnBehavior": 1,
+      "TargetType": "Rust.Ai.Gen2.LivestockAnimal",
+      "Category": "Animal",
+      "MethodData": {
+        "MethodName": "RefusesToTarget",
+        "ReturnType": "bool",
+        "Arguments": {
+          "entity": "BaseEntity"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n{\r\n\tif (!(entity is BasePlayer basePlayer))\r\n\t{\r\n\t\treturn !IsSoreAt(entity);\r\n\t}\r\n\tobject obj = Interface.CallHook(\"CanLivestockAnimalRefuseTarget\", this, basePlayer);\r\n\tif (obj is bool)\r\n\t{\r\n\t\treturn (bool)obj;\r\n\t}\r\n\tif (!IsMale || !IsAdult())\r\n//---\r\n"
+    },
+    {
       "Type": 0,
       "Name": "IOnServerCommand",
       "HookName": "IOnServerCommand",
@@ -16739,32 +16891,32 @@
         "ClientIpAddress": "System.Net.IPAddress"
       },
       "ReturnBehavior": 1,
-      "TargetType": "Facepunch.Rcon.Listener/<>c__DisplayClass27_0",
+      "TargetType": "Facepunch.Rcon.Listener",
       "Category": "Server",
       "MethodData": {
-        "MethodName": "<Start>b__0",
+        "MethodName": "OnConnection",
         "ReturnType": "void",
         "Arguments": {
           "socket": "Fleck.IWebSocketConnection"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\tDebug.Log($\"RCON: CRITICAL - Banned IP {CS$<>8__locals53.address} supplied the correct password. Access was still denied.\");\r\n\t\t}\r\n\t\tCS$<>8__locals53.socket.Close();\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnRconConnection\", socket.ConnectionInfo.ClientIpAddress) == null)\r\n\t{\r\n\t\tif (!(CS$<>8__locals53.socket.ConnectionInfo.Path != requiredPath))\r\n\t\t{\r\n\t\t\tCS$<>8__locals53.id = Interlocked.Increment(ref <>4__this.nextClientId);\r\n\t\t\tCS$<>8__locals53.ipString = CS$<>8__locals53.address.ToString();\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\tDebug.Log($\"RCON: CRITICAL - Banned IP {address} supplied the correct password. Access was still denied.\");\r\n\t\t}\r\n\t\tsocket2.Close();\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnRconConnection\", socket.ConnectionInfo.ClientIpAddress) == null)\r\n\t{\r\n\t\tif (!(socket2.ConnectionInfo.Path != text))\r\n\t\t{\r\n\t\t\tint id = Interlocked.Increment(ref nextClientId);\r\n\t\t\tstring ipString = address.ToString();\r\n//---\r\n"
     },
     {
       "Type": 1,
       "Name": "OnRconConnection [web, patch]",
       "HookName": "OnRconConnection",
       "ReturnBehavior": 0,
-      "TargetType": "Facepunch.Rcon.Listener/<>c__DisplayClass27_0",
+      "TargetType": "Facepunch.Rcon.Listener",
       "Category": "_Patches",
       "MethodData": {
-        "MethodName": "<Start>b__0",
+        "MethodName": "OnConnection",
         "ReturnType": "void",
         "Arguments": {
           "socket": "Fleck.IWebSocketConnection"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t\tDebug.Log($\"RCON: CRITICAL - Banned IP {CS$<>8__locals53.address} supplied the correct password. Access was still denied.\");\r\n\t\t}\r\n\t\tCS$<>8__locals53.socket.Close();\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnRconConnection\", socket.ConnectionInfo.ClientIpAddress) == null)\r\n\t{\r\n\t\tif (!(CS$<>8__locals53.socket.ConnectionInfo.Path != requiredPath))\r\n\t\t{\r\n\t\t\tCS$<>8__locals53.id = Interlocked.Increment(ref <>4__this.nextClientId);\r\n\t\t\tCS$<>8__locals53.ipString = CS$<>8__locals53.address.ToString();\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t\tDebug.Log($\"RCON: CRITICAL - Banned IP {address} supplied the correct password. Access was still denied.\");\r\n\t\t}\r\n\t\tsocket2.Close();\r\n\t\treturn;\r\n\t}\r\n\tif (Interface.CallHook(\"OnRconConnection\", socket.ConnectionInfo.ClientIpAddress) == null)\r\n\t{\r\n\t\tif (!(socket2.ConnectionInfo.Path != text))\r\n\t\t{\r\n\t\t\tint id = Interlocked.Increment(ref nextClientId);\r\n\t\t\tstring ipString = address.ToString();\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -16775,16 +16927,16 @@
         "s": "string"
       },
       "ReturnBehavior": 1,
-      "TargetType": "Facepunch.Rcon.Listener/<>c__DisplayClass27_1",
+      "TargetType": "Facepunch.Rcon.Listener/<>c__DisplayClass27_0",
       "Category": "Server",
       "MethodData": {
-        "MethodName": "<Start>b__3",
+        "MethodName": "<OnConnection>b__2",
         "ReturnType": "void",
         "Arguments": {
           "s": "string"
         }
       },
-      "CodeAfterInjection": "internal void <Start>b__3(string s)\r\n{\r\n\tif (Interface.CallHook(\"IOnRconMessage\", socket.ConnectionInfo.ClientIpAddress, s) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tlock (CS$<>8__locals1.<>4__this.clients)\r\n\t{\r\n//---\r\n"
+      "CodeAfterInjection": "internal void <OnConnection>b__2(string s)\r\n{\r\n\tif (Interface.CallHook(\"IOnRconMessage\", socket.ConnectionInfo.ClientIpAddress, s) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tlock (<>4__this.clients)\r\n\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
