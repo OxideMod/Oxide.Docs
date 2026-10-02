@@ -15134,6 +15134,48 @@
     },
     {
       "Type": 0,
+      "Name": "IOnNpcTarget [WildlifeHazard]",
+      "HookName": "IOnNpcTarget",
+      "HookParameters": {
+        "instance": "WildlifeHazard",
+        "player": "BasePlayer"
+      },
+      "ReturnTypeOverwrite": "bool",
+      "ReturnBehavior": 1,
+      "TargetType": "WildlifeHazard",
+      "Category": "NPC",
+      "MethodData": {
+        "MethodName": "ShouldStartHazard",
+        "ReturnType": "bool",
+        "Arguments": {
+          "player": "BasePlayer"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (SingularInteraction && SingularInteractionPlayer != null)\r\n\t{\r\n\t\treturn false;\r\n\t}\r\n\tobject obj = Interface.CallHook(\"IOnNpcTarget\", this, player);\r\n\tif (obj is bool)\r\n\t{\r\n\t\treturn (bool)obj;\r\n\t}\r\n\tif (!CanSeeTarget(player.transform))\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "IOnNpcTarget [BoatAI]",
+      "HookName": "IOnNpcTarget",
+      "HookParameters": {
+        "instance": "BoatAI",
+        "ply": "BasePlayer"
+      },
+      "ReturnTypeOverwrite": "bool",
+      "ReturnBehavior": 1,
+      "TargetType": "BoatAI",
+      "Category": "NPC",
+      "MethodData": {
+        "MethodName": "IsPlayerTargetValid",
+        "ReturnType": "bool",
+        "Arguments": {
+          "ply": "BasePlayer"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t\t{\r\n\t\t\tDebug.LogWarning(\"[BoatAI] Invalid target: \" + ply.displayName + \" not valid attack target\");\r\n\t\t}\r\n\t\treturn false;\r\n\t}\r\n\tobject obj = Interface.CallHook(\"IOnNpcTarget\", this, ply);\r\n\tif (obj is bool)\r\n\t{\r\n\t\treturn (bool)obj;\r\n\t}\r\n\tif (Check.SimplyOnTerrainAt(ply.transform.position))\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
       "Name": "OnPlayerVanish",
       "HookName": "OnPlayerVanish",
       "HookParameters": {
@@ -16801,7 +16843,7 @@
           "reason": "Rust.Ai.Gen2.LivestockAnimal.FamiliarityReason"
         }
       },
-      "CodeAfterInjection": "public void AddFamiliarity(ulong userId, float seconds, FamiliarityReason reason = FamiliarityReason.Handled)\r\n{\r\n\tif (Interface.CallHook(\"OnLivestockAnimalFamiliarityAdd\", this, userId, seconds, reason) == null)\r\n\t{\r\n\t\tbool isTame = IsTame;\r\n\t\tCreditFamiliarity(userId, seconds);\r\n\t\tRefreshHusbandryClocks();\r\n\t\tInterface.CallHook(\"OnLivestockAnimalFamiliarityAdded\", this, userId, seconds, reason);\r\n//---\r\n"
+      "CodeAfterInjection": "public void AddFamiliarity(ulong userId, float seconds, FamiliarityReason reason = FamiliarityReason.Handled)\r\n{\r\n\tif (Interface.CallHook(\"OnLivestockAnimalFamiliarityAdd\", this, userId, seconds, reason) == null)\r\n\t{\r\n\t\tbool isLeadable = IsLeadable;\r\n\t\tCreditFamiliarity(userId, seconds);\r\n\t\tRefreshHusbandryClocks();\r\n\t\tInterface.CallHook(\"OnLivestockAnimalFamiliarityAdded\", this, userId, seconds, reason);\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -16825,7 +16867,7 @@
           "reason": "Rust.Ai.Gen2.LivestockAnimal.FamiliarityReason"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tif (Interface.CallHook(\"OnLivestockAnimalFamiliarityAdd\", this, userId, seconds, reason) == null)\r\n\t{\r\n\t\tbool isTame = IsTame;\r\n\t\tCreditFamiliarity(userId, seconds);\r\n\t\tRefreshHusbandryClocks();\r\n\t\tInterface.CallHook(\"OnLivestockAnimalFamiliarityAdded\", this, userId, seconds, reason);\r\n\t\tif (!isTame && IsTame && (reason == FamiliarityReason.Handled || reason == FamiliarityReason.Purchased))\r\n\t\t{\r\n\t\t\tFacepunch.Rust.Analytics.Azure.OnLivestockAcquired(userId, this, reason);\r\n\t\t}\r\n\t}\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tif (Interface.CallHook(\"OnLivestockAnimalFamiliarityAdd\", this, userId, seconds, reason) == null)\r\n\t{\r\n\t\tbool isLeadable = IsLeadable;\r\n\t\tCreditFamiliarity(userId, seconds);\r\n\t\tRefreshHusbandryClocks();\r\n\t\tInterface.CallHook(\"OnLivestockAnimalFamiliarityAdded\", this, userId, seconds, reason);\r\n\t\tif (!isLeadable && IsLeadable && (reason == FamiliarityReason.Handled || reason == FamiliarityReason.Purchased))\r\n\t\t{\r\n\t\t\tFacepunch.Rust.Analytics.Azure.OnLivestockAcquired(userId, this, reason);\r\n\t\t}\r\n\t}\r\n//---\r\n"
     },
     {
       "Type": 0,
