@@ -1860,7 +1860,7 @@
           "packet": "Network.Message"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tstring branch = ConVar.Server.branch;\r\n\tif (packet.read.Unread >= 4)\r\n\t{\r\n\t\ttext = packet.read.String(128);\r\n\t}\r\n\tInterface.CallHook(\"OnClientAuth\", packet.connection);\r\n\tif (branch != string.Empty && branch != text)\r\n\t{\r\n\t\tDebugEx.Log(\"Kicking \" + packet.connection?.ToString() + \" - their branch is '\" + text + \"' not '\" + branch + \"'\");\r\n\t\tNetwork.Net.sv.Kick(packet.connection, \"Wrong Steam Beta: Requires '\" + branch + \"' branch!\");\r\n\t}\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\tstring text2 = BuildInfo.Current?.Scm?.Branch ?? string.Empty;\r\n\tif (packet.read.Unread >= 4)\r\n\t{\r\n\t\ttext = packet.read.String(128);\r\n\t}\r\n\tInterface.CallHook(\"OnClientAuth\", packet.connection);\r\n\tif (!IsClientBranchAllowed(text2, text))\r\n\t{\r\n\t\tif (!DeveloperList.Contains(packet.connection.userid))\r\n\t\t{\r\n\t\t\tDebugEx.Log(\"Kicking \" + packet.connection?.ToString() + \" - their branch is '\" + text + \"' not '\" + text2 + \"'\");\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -15598,7 +15598,7 @@
         "reportType": "Facepunch.Models.ReportType"
       },
       "ReturnBehavior": 0,
-      "TargetType": "BasePlayer/<OnFeedbackReport>d__777",
+      "TargetType": "BasePlayer/<OnFeedbackReport>d__779",
       "Category": "Player",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -15612,7 +15612,7 @@
       "Name": "OnFeedbackReported [patch]",
       "HookName": "OnFeedbackReported",
       "ReturnBehavior": 0,
-      "TargetType": "BasePlayer/<OnFeedbackReport>d__777",
+      "TargetType": "BasePlayer/<OnFeedbackReport>d__779",
       "Category": "_Patches",
       "MethodData": {
         "MethodName": "MoveNext",
@@ -15634,7 +15634,7 @@
         "text3": "string"
       },
       "ReturnBehavior": 0,
-      "TargetType": "BasePlayer/<OnPlayerReported>d__776",
+      "TargetType": "BasePlayer/<OnPlayerReported>d__778",
       "Category": "Player",
       "MethodData": {
         "MethodName": "MoveNext",
