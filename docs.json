@@ -4390,7 +4390,7 @@
           "score": "int"
         }
       },
-      "CodeAfterInjection": "//---\r\n\tscoreEntry.playerID = player.userID;\r\n\tscores.Add(scoreEntry);\r\n\tscores.Sort((ScoreEntry a, ScoreEntry b) => b.score.CompareTo(a.score));\r\n\tscores.TrimExcess();\r\n\tSendNetworkUpdate();\r\n\tInterface.CallHook(\"OnArcadeScoreAdded\", this, player, score);\r\n}\r\n\r\n"
+      "CodeAfterInjection": "//---\r\n\t\tif (scores.Count > 5)\r\n\t\t{\r\n\t\t\tscores.RemoveRange(5, scores.Count - 5);\r\n\t\t}\r\n\t\tSendNetworkUpdate();\r\n\t\tInterface.CallHook(\"OnArcadeScoreAdded\", this, player, score);\r\n\t}\r\n}\r\n\r\n"
     },
     {
       "Type": 0,
@@ -5043,7 +5043,7 @@
           "args": "object[]"
         }
       },
-      "CodeAfterInjection": "public static void BroadcastToAllClients(string strCommand, params object[] args)\r\n{\r\n\tif (Net.sv.IsConnected() && Interface.CallHook(\"OnBroadcastCommand\", strCommand, args) == null)\r\n\t{\r\n\t\tNetWrite netWrite = Net.sv.StartWrite();\r\n\t\tnetWrite.PacketID(Message.Type.ConsoleCommand);\r\n\t\tnetWrite.String(ConsoleSystem.BuildCommand(strCommand, args));\r\n\t\tNetProfileCapture.Annotate(netWrite, strCommand);\r\n//---\r\n"
+      "CodeAfterInjection": "public static void BroadcastToAllClients(string strCommand, params object[] args)\r\n{\r\n\tif (!Net.sv.IsConnected() || Interface.CallHook(\"OnBroadcastCommand\", strCommand, args) != null)\r\n\t{\r\n\t\treturn;\r\n\t}\r\n\tList<Connection> obj = Pool.Get<List<Connection>>();\r\n\tforeach (Connection connection in Net.sv.connections)\r\n//---\r\n"
     },
     {
       "Type": 0,
