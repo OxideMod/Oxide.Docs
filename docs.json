@@ -4004,7 +4004,7 @@
           "msg": "BaseEntity.RPCMessage"
         }
       },
-      "CodeAfterInjection": "public void RPC_Hack(RPCMessage msg)\r\n{\r\n\tif (!IsBeingHacked() && Interface.CallHook(\"CanHackCrate\", msg.player, this) == null)\r\n\t{\r\n\t\tFacepunch.Rust.Analytics.Azure.OnLockedCrateStarted(msg.player, this);\r\n\t\toriginalHackerPlayerId = msg.player.userID;\r\n\t\tif (!string.IsNullOrEmpty(achievementStartHacking))\r\n\t\t{\r\n//---\r\n"
+      "CodeAfterInjection": "public void RPC_Hack(RPCMessage msg)\r\n{\r\n\tif (!IsBeingHacked() && !IsFullyHacked() && Interface.CallHook(\"CanHackCrate\", msg.player, this) == null)\r\n\t{\r\n\t\tFacepunch.Rust.Analytics.Azure.OnLockedCrateStarted(msg.player, this);\r\n\t\toriginalHackerPlayerId = msg.player.userID;\r\n\t\tif (!string.IsNullOrEmpty(achievementStartHacking))\r\n\t\t{\r\n//---\r\n"
     },
     {
       "Type": 0,
@@ -5460,7 +5460,10 @@
       "Type": 1,
       "Name": "OnExplosiveDud",
       "HookName": "OnExplosiveDud",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "instance": "DudTimedExplosive"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "DudTimedExplosive",
       "Category": "Weapon",
       "MethodData": {
@@ -6529,7 +6532,11 @@
       "Type": 1,
       "Name": "OnSamSiteTarget",
       "HookName": "OnSamSiteTarget",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "instance": "SamSite",
+        "item": "SamSite.ISamSiteTarget"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "SamSite",
       "Category": "Entity",
       "MethodData": {
@@ -6543,7 +6550,11 @@
       "Type": 1,
       "Name": "CanLootEntity [StorageContainer]",
       "HookName": "CanLootEntity",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "player": "BasePlayer",
+        "instance": "StorageContainer"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "StorageContainer",
       "Category": "Player",
       "MethodData": {
@@ -6641,7 +6652,11 @@
       "Type": 1,
       "Name": "OnQuarryGather",
       "HookName": "OnQuarryGather",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "instance": "MiningQuarry",
+        "item": "Item"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "MiningQuarry",
       "Category": "Resource",
       "MethodData": {
@@ -6690,7 +6705,11 @@
       "Type": 1,
       "Name": "OnMapMarkerAdd",
       "HookName": "OnMapMarkerAdd",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "instance": "BasePlayer",
+        "mapNote": "ProtoBuf.MapNote"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "BasePlayer",
       "Category": "Player",
       "MethodData": {
@@ -6828,7 +6847,11 @@
       "Type": 1,
       "Name": "CanLootEntity [ContainerIOEntity]",
       "HookName": "CanLootEntity",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "player": "BasePlayer",
+        "instance": "ContainerIOEntity"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "ContainerIOEntity",
       "Category": "Player",
       "MethodData": {
@@ -7455,7 +7478,11 @@
       "Type": 1,
       "Name": "OnPlayerSpawn",
       "HookName": "OnPlayerSpawn",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "basePlayer": "BasePlayer",
+        "connection": "Network.Connection"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "ServerMgr",
       "Category": "Player",
       "MethodData": {
@@ -7493,7 +7520,10 @@
       "Type": 1,
       "Name": "OnPlayerCorpseSpawn",
       "HookName": "OnPlayerCorpseSpawn",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "instance": "BasePlayer"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "BasePlayer",
       "Category": "Player",
       "MethodData": {
@@ -7939,7 +7969,11 @@
       "Type": 1,
       "Name": "OnSleepingBagDestroy",
       "HookName": "OnSleepingBagDestroy",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "sleepingBag2": "SleepingBag",
+        "userID": "ulong"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "SleepingBag",
       "Category": "Entity",
       "MethodData": {
@@ -7977,7 +8011,13 @@
       "Type": 1,
       "Name": "OnConstructionPlace",
       "HookName": "OnConstructionPlace",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "baseEntity": "BaseEntity",
+        "component": "Construction",
+        "placement": "Construction.Target",
+        "ownerPlayer": "BasePlayer"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "Planner",
       "Category": "Structure",
       "MethodData": {
@@ -8156,7 +8196,10 @@
       "Type": 1,
       "Name": "OnItemLock",
       "HookName": "OnItemLock",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "instance": "Item"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "Item",
       "Category": "Item",
       "MethodData": {
@@ -8172,7 +8215,10 @@
       "Type": 1,
       "Name": "OnItemUnlock",
       "HookName": "OnItemUnlock",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "instance": "Item"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "Item",
       "Category": "Item",
       "MethodData": {
@@ -8208,7 +8254,12 @@
       "Type": 1,
       "Name": "OnCounterTargetChange",
       "HookName": "OnCounterTargetChange",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "instance": "PowerCounter",
+        "player": "BasePlayer",
+        "num": "int"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "PowerCounter",
       "Category": "Electronic",
       "MethodData": {
@@ -8239,7 +8290,12 @@
       "Type": 1,
       "Name": "OnCounterModeToggle",
       "HookName": "OnCounterModeToggle",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "instance": "PowerCounter",
+        "player": "BasePlayer",
+        "flag": "bool"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "PowerCounter",
       "Category": "Electronic",
       "MethodData": {
@@ -8310,7 +8366,11 @@
       "Type": 1,
       "Name": "OnEngineStart [MotorRowboat]",
       "HookName": "OnEngineStart",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "instance": "MotorRowboat",
+        "driver": "BasePlayer"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "MotorRowboat",
       "Category": "Vehicle",
       "MethodData": {
@@ -8561,7 +8621,11 @@
       "Type": 1,
       "Name": "OnElevatorMove",
       "HookName": "OnElevatorMove",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "instance": "Elevator",
+        "targetFloor": "int"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "Elevator",
       "Category": "Elevator",
       "MethodData": {
@@ -9660,7 +9724,12 @@
       "Type": 1,
       "Name": "OnPlayerAddModifiers",
       "HookName": "OnPlayerAddModifiers",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "player": "BasePlayer",
+        "item": "Item",
+        "consumable": "ItemModConsumable"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "ItemModConsume",
       "Category": "Player",
       "MethodData": {
@@ -10040,7 +10109,10 @@
       "Type": 1,
       "Name": "OnCentralizedBanCheck",
       "HookName": "OnCentralizedBanCheck",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "connection": "Connection"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "Auth_CentralizedBans/<Run>d__0",
       "Category": "Player",
       "MethodData": {
@@ -10118,7 +10190,11 @@
       "Type": 1,
       "Name": "OnNpcTarget [AIBrainSenses]",
       "HookName": "OnNpcTarget",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "owner": "BaseEntity",
+        "entity": "BaseEntity"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "AIBrainSenses",
       "Category": "NPC",
       "MethodData": {
@@ -10544,7 +10620,12 @@
       "Type": 1,
       "Name": "OnBigWheelLoss",
       "HookName": "OnBigWheelLoss",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "instance": "BigWheelGame",
+        "slot2": "Item",
+        "terminal": "BigWheelBettingTerminal"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "BigWheelGame",
       "Category": "Entity",
       "MethodData": {
@@ -10558,7 +10639,13 @@
       "Type": 1,
       "Name": "OnBigWheelWin",
       "HookName": "OnBigWheelWin",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "instance": "BigWheelGame",
+        "slot": "Item",
+        "terminal": "BigWheelBettingTerminal",
+        "num": "int"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "BigWheelGame",
       "Category": "Entity",
       "MethodData": {
@@ -10710,7 +10797,13 @@
       "Type": 1,
       "Name": "CanCastFishingRod",
       "HookName": "CanCastFishingRod",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "ownerPlayer": "BasePlayer",
+        "instance": "BaseFishingRod",
+        "currentLure": "Item",
+        "pos": "Vector3"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "BaseFishingRod",
       "Category": "Fishing",
       "MethodData": {
@@ -10726,7 +10819,12 @@
       "Type": 1,
       "Name": "CanCatchFish",
       "HookName": "CanCatchFish",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "ownerPlayer": "BasePlayer",
+        "instance": "BaseFishingRod",
+        "item": "Item"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "BaseFishingRod",
       "Category": "Fishing",
       "MethodData": {
@@ -10781,7 +10879,12 @@
       "Type": 1,
       "Name": "OnFishCatch",
       "HookName": "OnFishCatch",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "item": "Item",
+        "instance": "BaseFishingRod",
+        "ownerPlayer": "BasePlayer"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "BaseFishingRod",
       "Category": "Fishing",
       "MethodData": {
@@ -11190,7 +11293,11 @@
       "Type": 1,
       "Name": "OnSamSiteTargetScan",
       "HookName": "OnSamSiteTargetScan",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "instance": "SamSite",
+        "obj": "List<SamSite.ISamSiteTarget>"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "SamSite",
       "Category": "Entity",
       "MethodData": {
@@ -11227,7 +11334,10 @@
       "Type": 1,
       "Name": "OnSendModelState",
       "HookName": "OnSendModelState",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "instance": "BasePlayer"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "BasePlayer",
       "Category": "Player",
       "MethodData": {
@@ -11243,7 +11353,11 @@
       "Type": 1,
       "Name": "OnEngineStart",
       "HookName": "OnEngineStart",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "owner": "BaseMountable",
+        "player": "BasePlayer"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "VehicleEngineController",
       "Category": "Vehicle",
       "MethodData": {
@@ -11259,6 +11373,10 @@
       "Type": 1,
       "Name": "OnEngineStarted",
       "HookName": "OnEngineStarted",
+      "HookParameters": {
+        "owner": "BaseMountable",
+        "player": "BasePlayer"
+      },
       "ReturnBehavior": 0,
       "TargetType": "VehicleEngineController",
       "Category": "Vehicle",
@@ -11275,7 +11393,10 @@
       "Type": 1,
       "Name": "OnEngineStop",
       "HookName": "OnEngineStop",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "owner": "BaseMountable"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "VehicleEngineController",
       "Category": "Vehicle",
       "MethodData": {
@@ -11289,6 +11410,9 @@
       "Type": 1,
       "Name": "OnEngineStopped",
       "HookName": "OnEngineStopped",
+      "HookParameters": {
+        "owner": "BaseMountable"
+      },
       "ReturnBehavior": 0,
       "TargetType": "VehicleEngineController",
       "Category": "Vehicle",
@@ -11303,7 +11427,11 @@
       "Type": 1,
       "Name": "OnNpcTarget [HumanNPC]",
       "HookName": "OnNpcTarget",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "instance": "HumanNPC",
+        "player": "BaseEntity"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "HumanNPC",
       "Category": "NPC",
       "MethodData": {
@@ -11351,7 +11479,11 @@
       "Type": 1,
       "Name": "OnXmasGiftsDistribute",
       "HookName": "OnXmasGiftsDistribute",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "instance": "XMasRefill",
+        "player": "BasePlayer"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "XMasRefill",
       "Category": "Seasonal",
       "MethodData": {
@@ -12135,6 +12267,9 @@
       "Type": 1,
       "Name": "OnEngineStartFinished",
       "HookName": "OnEngineStartFinished",
+      "HookParameters": {
+        "owner": "BaseMountable"
+      },
       "ReturnBehavior": 0,
       "TargetType": "VehicleEngineController",
       "Category": "Vehicle",
@@ -12254,7 +12389,11 @@
       "Type": 1,
       "Name": "CanBeAwardedAdventGift",
       "HookName": "CanBeAwardedAdventGift",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "instance": "AdventCalendar",
+        "player": "BasePlayer"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "AdventCalendar",
       "Category": "Seasonal",
       "MethodData": {
@@ -12602,7 +12741,13 @@
       "Type": 1,
       "Name": "OnRandomItemAward",
       "HookName": "OnRandomItemAward",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "instance": "RandomItemDispenser",
+        "itemChance": "RandomItemDispenser.RandomItemChance",
+        "forPlayer": "BasePlayer",
+        "distributorPosition": "Vector3"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "RandomItemDispenser",
       "Category": "Resource",
       "MethodData": {
@@ -12859,7 +13004,11 @@
       "Type": 1,
       "Name": "CanLootEntity [IndustrialCrafter]",
       "HookName": "CanLootEntity",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "player": "BasePlayer",
+        "instance": "IndustrialCrafter"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "IndustrialCrafter",
       "Category": "Player",
       "MethodData": {
@@ -13835,7 +13984,11 @@
       "Type": 1,
       "Name": "OnCoalingTowerGather",
       "HookName": "OnCoalingTowerGather",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "instance": "CoalingTower",
+        "item": "Item"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "CoalingTower",
       "Category": "Resource",
       "MethodData": {
@@ -13973,7 +14126,11 @@
       "Type": 1,
       "Name": "OnNearbyTurretsScan",
       "HookName": "OnNearbyTurretsScan",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "instance": "AutoTurret",
+        "obj": "List<AutoTurret>"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "AutoTurret",
       "Category": "Turret",
       "MethodData": {
@@ -15706,7 +15863,13 @@
       "Type": 1,
       "Name": "OnTeamMemberInvite [sendinvite]",
       "HookName": "OnTeamMemberInvite",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "playerTeam": "RelationshipManager.PlayerTeam",
+        "basePlayer": "BasePlayer",
+        "userID": "ulong",
+        "condition": "bool"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "RelationshipManager",
       "Category": "Team",
       "MethodData": {
@@ -16254,7 +16417,11 @@
       "Type": 1,
       "Name": "OnSensorDetect",
       "HookName": "OnSensorDetect",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "instance": "HBHFSensor",
+        "basePlayer": "BasePlayer"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "HBHFSensor",
       "Category": "Electronic",
       "MethodData": {
@@ -16473,7 +16640,12 @@
       "Type": 1,
       "Name": "OnApartmentRoomCheckout",
       "HookName": "OnApartmentRoomCheckout",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "player": "BasePlayer",
+        "playerApartment": "ApartmentRoom",
+        "instance": "ApartmentBuilding"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "ApartmentBuilding",
       "Category": "Apartments",
       "MethodData": {
@@ -16891,6 +17063,81 @@
       "CodeAfterInjection": "//---\r\n{\r\n\tif (!(entity is BasePlayer basePlayer))\r\n\t{\r\n\t\treturn !IsSoreAt(entity);\r\n\t}\r\n\tobject obj = Interface.CallHook(\"CanLivestockAnimalRefuseTarget\", this, basePlayer);\r\n\tif (obj is bool)\r\n\t{\r\n\t\treturn (bool)obj;\r\n\t}\r\n\tif (!IsMale || !IsAdult())\r\n//---\r\n"
     },
     {
+      "Type": 1,
+      "Name": "OnCowMilk [patch 1]",
+      "HookName": "OnCowMilk",
+      "ReturnBehavior": 0,
+      "TargetType": "Rust.Ai.Gen2.Cow",
+      "Category": "Animal",
+      "MethodData": {
+        "MethodName": "TryMilk",
+        "ReturnType": "bool",
+        "Arguments": {
+          "player": "BasePlayer"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (MilkDef != null)\r\n\t{\r\n\t\tint num = MilkedAmount();\r\n\t\tItem item = ItemManager.Create(MilkDef, num, 0uL, isServerSide: true, 0uL);\r\n\t\tobject obj = Interface.CallHook(\"OnCowMilk\", this, player, item);\r\n\t\tif (obj != null)\r\n\t\t{\r\n\t\t\titem.Remove();\r\n\t\t\tif (!(obj is bool))\r\n\t\t\t{\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnCowMilk",
+      "HookName": "OnCowMilk",
+      "HookParameters": {
+        "instance": "Rust.Ai.Gen2.Cow",
+        "player": "BasePlayer",
+        "item": "Item"
+      },
+      "ReturnTypeOverwrite": "bool",
+      "ReturnBehavior": 4,
+      "TargetType": "Rust.Ai.Gen2.Cow",
+      "Category": "Animal",
+      "MethodData": {
+        "MethodName": "TryMilk",
+        "ReturnType": "bool",
+        "Arguments": {
+          "player": "BasePlayer"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (MilkDef != null)\r\n\t{\r\n\t\tint num = MilkedAmount();\r\n\t\tItem item = ItemManager.Create(MilkDef, num, 0uL, isServerSide: true, 0uL);\r\n\t\tobject obj = Interface.CallHook(\"OnCowMilk\", this, player, item);\r\n\t\tif (obj != null)\r\n\t\t{\r\n\t\t\titem.Remove();\r\n\t\t\tif (!(obj is bool))\r\n\t\t\t{\r\n//---\r\n"
+    },
+    {
+      "Type": 1,
+      "Name": "OnCowMilk [patch 2]",
+      "HookName": "OnCowMilk",
+      "ReturnBehavior": 0,
+      "TargetType": "Rust.Ai.Gen2.Cow",
+      "Category": "Animal",
+      "MethodData": {
+        "MethodName": "TryMilk",
+        "ReturnType": "bool",
+        "Arguments": {
+          "player": "BasePlayer"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t}\r\n\tif (MilkDef != null)\r\n\t{\r\n\t\tint num = MilkedAmount();\r\n\t\tItem item = ItemManager.Create(MilkDef, num, 0uL, isServerSide: true, 0uL);\r\n\t\tobject obj = Interface.CallHook(\"OnCowMilk\", this, player, item);\r\n\t\tif (obj != null)\r\n\t\t{\r\n\t\t\titem.Remove();\r\n\t\t\tif (!(obj is bool))\r\n\t\t\t{\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
+      "Name": "OnCowMilked",
+      "HookName": "OnCowMilked",
+      "HookParameters": {
+        "instance": "Rust.Ai.Gen2.Cow",
+        "player": "BasePlayer",
+        "item": "Item"
+      },
+      "ReturnBehavior": 0,
+      "TargetType": "Rust.Ai.Gen2.Cow",
+      "Category": "Animal",
+      "MethodData": {
+        "MethodName": "TryMilk",
+        "ReturnType": "bool",
+        "Arguments": {
+          "player": "BasePlayer"
+        }
+      },
+      "CodeAfterInjection": "//---\r\n\t\tplayer.GiveItem(item);\r\n\t\tif (MilkEffect != null && MilkEffect.isValid)\r\n\t\t{\r\n\t\t\tEffect.server.Run(MilkEffect.resourcePath, this, 0u, Vector3.zero, Vector3.zero);\r\n\t\t}\r\n\t\tInterface.CallHook(\"OnCowMilked\", this, player, item);\r\n\t\tFacepunch.Rust.Analytics.Azure.OnLivestockCowMilked(player, this, num);\r\n\t}\r\n\tmilkTimer.Start(MilkCooldown / GeneScale(LivestockGene.Yield));\r\n\treturn true;\r\n}\r\n"
+    },
+    {
       "Type": 0,
       "Name": "IOnServerCommand",
       "HookName": "IOnServerCommand",
@@ -17005,7 +17252,12 @@
       "Type": 1,
       "Name": "OnNetworkSubscriptionsUpdate",
       "HookName": "OnNetworkSubscriptionsUpdate",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "instance": "Network.Networkable",
+        "obj": "List<Network.Visibility.Group>",
+        "obj2": "List<Network.Visibility.Group>"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "Network.Networkable",
       "Category": "Network",
       "MethodData": {
@@ -17022,7 +17274,11 @@
       "Type": 1,
       "Name": "OnNetworkSubscriptionsUpdate [2]",
       "HookName": "OnNetworkSubscriptionsUpdate",
-      "ReturnBehavior": 0,
+      "HookParameters": {
+        "instance": "Network.Networkable",
+        "obj": "List<Network.Visibility.Group>"
+      },
+      "ReturnBehavior": 4,
       "TargetType": "Network.Networkable",
       "Category": "Network",
       "MethodData": {
