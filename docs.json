@@ -6025,12 +6025,14 @@
       "Type": 0,
       "Name": "OnBuildingPrivilege",
       "HookName": "OnBuildingPrivilege",
+      "HookDescription": "",
       "HookParameters": {
         "instance": "BaseEntity",
         "obb": "OBB",
         "cached": "bool",
         "cacheDuration": "float",
-        "exclude": "BuildingPrivlidge"
+        "exclude": "BuildingPrivlidge",
+        "ignorePosition": "bool"
       },
       "ReturnTypeOverwrite": "BuildingPrivlidge",
       "ReturnBehavior": 1,
@@ -6043,10 +6045,11 @@
           "obb": "OBB",
           "cached": "bool",
           "cacheDuration": "float",
-          "exclude": "BuildingPrivlidge"
+          "exclude": "BuildingPrivlidge",
+          "ignorePosition": "bool"
         }
       },
-      "CodeAfterInjection": "public BuildingPrivlidge GetBuildingPrivilege(OBB obb, bool cached, float cacheDuration = 1f, BuildingPrivlidge exclude = null)\r\n{\r\n\tobject obj = Interface.CallHook(\"OnBuildingPrivilege\", this, obb, cached, cacheDuration, exclude);\r\n\tif (obj is BuildingPrivlidge)\r\n\t{\r\n\t\treturn (BuildingPrivlidge)obj;\r\n\t}\r\n\tif (cached && IsCacheValid(cachedBuildingPrivilegeTime, cacheDuration, cachedBuildingPrivilegePosition, obb.position))\r\n//---\r\n"
+      "CodeAfterInjection": "public BuildingPrivlidge GetBuildingPrivilege(OBB obb, bool cached, float cacheDuration = 1f, BuildingPrivlidge exclude = null, bool ignorePosition = false)\r\n{\r\n\tobject obj = Interface.CallHook(\"OnBuildingPrivilege\", this, obb, cached, cacheDuration, exclude, ignorePosition);\r\n\tif (obj is BuildingPrivlidge)\r\n\t{\r\n\t\treturn (BuildingPrivlidge)obj;\r\n\t}\r\n\tif (cached && IsCacheValid(cachedBuildingPrivilegeTime, cacheDuration, cachedBuildingPrivilegePosition, obb.position, ignorePosition))\r\n//---\r\n"
     },
     {
       "Type": 0,
