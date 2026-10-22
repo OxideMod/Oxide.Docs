@@ -15432,7 +15432,7 @@
           "owner": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "private void SleepFrankenstein(BasePlayer owner)\r\n{\r\n\tif (IsInventoryEmpty() && !(owner == null) && !(owner.PetEntity == null))\r\n\t{\r\n\t\tFrankensteinPet frankensteinPet = owner.PetEntity as FrankensteinPet;\r\n\t\tif (!(frankensteinPet == null) && !(Vector3.Distance(base.transform.position, frankensteinPet.transform.position) >= 5f) && Interface.CallHook(\"OnFrankensteinPetSleep\", frankensteinPet, this, owner) == null)\r\n\t\t{\r\n\t\t\tReturnFrankensteinItems(frankensteinPet);\r\n\t\t\tItemManager.DoRemoves();\r\n\t\t\tSendNetworkUpdateImmediate();\r\n\t\t\tfrankensteinPet.Kill();\r\n//---\r\n"
+      "CodeAfterInjection": "private void SleepFrankenstein(BasePlayer owner)\r\n{\r\n\tif (IsInventoryEmpty() && !(owner == null) && (!needsBuildingPrivilegeToUse || owner.CanBuild()) && !(owner.PetEntity == null))\r\n\t{\r\n\t\tFrankensteinPet frankensteinPet = owner.PetEntity as FrankensteinPet;\r\n\t\tif (!(frankensteinPet == null) && !(Vector3.Distance(base.transform.position, frankensteinPet.transform.position) >= 5f) && Interface.CallHook(\"OnFrankensteinPetSleep\", frankensteinPet, this, owner) == null)\r\n\t\t{\r\n\t\t\tReturnFrankensteinItems(frankensteinPet);\r\n\t\t\tItemManager.DoRemoves();\r\n\t\t\tSendNetworkUpdateImmediate();\r\n\t\t\tfrankensteinPet.Kill();\r\n//---\r\n"
     },
     {
       "Type": 0,
