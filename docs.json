@@ -15329,7 +15329,7 @@
           "ply": "BasePlayer"
         }
       },
-      "CodeAfterInjection": "//---\r\n\t\t{\r\n\t\t\tDebug.LogWarning(\"[BoatAI] Invalid target: \" + ply.displayName + \" not valid attack target\");\r\n\t\t}\r\n\t\treturn false;\r\n\t}\r\n\tobject obj = Interface.CallHook(\"IOnNpcTarget\", this, ply);\r\n\tif (obj is bool)\r\n\t{\r\n\t\treturn (bool)obj;\r\n\t}\r\n\tif (Check.IsOnTerrainSimple(ply.transform.position))\r\n//---\r\n"
+      "CodeAfterInjection": "//---\r\n\t\t{\r\n\t\t\tDebug.LogWarning(\"[BoatAI] Invalid target: \" + ply.displayName + \" not valid attack target\");\r\n\t\t}\r\n\t\treturn false;\r\n\t}\r\n\tobject obj = Interface.CallHook(\"IOnNpcTarget\", this, ply);\r\n\tif (obj is bool)\r\n\t{\r\n\t\treturn (bool)obj;\r\n\t}\r\n\tbool flag = Roaming && TerrainTexturing.Instance.GetCoarseDistanceToShore(ply.transform.position) > -50f;\r\n//---\r\n"
     },
     {
       "Type": 0,
