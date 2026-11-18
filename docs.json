@@ -12099,6 +12099,29 @@
     },
     {
       "Type": 0,
+      "Name": "CanBeSplashed",
+      "HookName": "CanBeSplashed",
+      "HookParameters": {
+        "instance": "BasePlayer",
+        "splashType": "ItemDefinition",
+        "amount": "int"
+      },
+      "ReturnTypeOverwrite": "bool",
+      "ReturnBehavior": 1,
+      "TargetType": "BasePlayer",
+      "Category": "Player",
+      "MethodData": {
+        "MethodName": "WantsSplash",
+        "ReturnType": "bool",
+        "Arguments": {
+          "splashType": "ItemDefinition",
+          "amount": "int"
+        }
+      },
+      "CodeAfterInjection": "public bool WantsSplash(ItemDefinition splashType, int amount)\r\n{\r\n\tobject obj = Interface.CallHook(\"CanBeSplashed\", this, splashType, amount);\r\n\tif (obj is bool)\r\n\t{\r\n\t\treturn (bool)obj;\r\n\t}\r\n\tif (IsSleeping())\r\n//---\r\n"
+    },
+    {
+      "Type": 0,
       "Name": "CanFireLiquidWeapon",
       "HookName": "CanFireLiquidWeapon",
       "HookParameters": {
